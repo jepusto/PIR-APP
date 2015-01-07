@@ -1,0 +1,29 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Rogosa%
+\ \BBA {} Ghandour%
+}{%
+Rogosa%
+\ \BBA {} Ghandour%
+}{%
+{\protect \APACyear {1991}}%
+}]{%
+Rogosa1991statistical}
+\APACinsertmetastar {%
+Rogosa1991statistical}%
+\begin{APACrefauthors}%
+Rogosa, D.%
+\BCBT {}\ \BBA {} Ghandour, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1991}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Statistical models for behavioral observations}}
+  {{Statistical models for behavioral observations}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Educational Statistics}{16}{3}{157--252}.
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

@@ -1,0 +1,36 @@
+An Alternating Poisson Process model for estimating prevalence and incidence from interval recording data
+
+1. Introduction
+- Measures of directly observed behavior are used in many areas of psychological research, behavioral time series data.
+- Systematic observation procedures
+- Systematic bias of usual summaries of interval recording data
+- Related work
+  - Brown, Solomon, & Stephens (1977)
+  - Suen & Ary
+  - penalized likelihood
+
+2. Alternating Poisson Process
+- Behavior stream model
+- MTS observation filter
+- PIR observation filter
+- WIR observation filter
+
+3. Momentary Time Sampling
+- Likelihood (BSS)
+- Penalized likelihood estimators
+- Simulation evidence
+
+4. Interval Recording
+- Likelihood
+- Penalized likelihood estimators
+- Simulation evidence
+- Whole interval recording
+
+5. Application
+- Johnson data?
+
+6. Discussion
+- Need to extend to regression models
+- Limitation to state-behaviors where prevalence is relevant. Need for further methods for estimating incidence of instant-behaviors from PIR.
+- Model does not explicitly account for observer errors in scoring. Need for methods of assessing the extent of such error.
+- Potential for new recording procedures that combine MTS, PIR, and WIR

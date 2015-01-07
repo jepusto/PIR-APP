@@ -1,0 +1,115 @@
+\documentclass[man, noextraspace, floatsintext]{apa6}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\newcommand{\bibfile}{C:/Users/jep2963/Documents/Bibliography/Behavioral_observation-APP}  
+
+\usepackage[natbibapa]{apacite}
+\newcommand{\citetal}[1]{\shortcites{#1}\citet{#1}}
+
+\raggedbottom
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\usepackage{fixltx2e}
+\usepackage{subcaption}
+\usepackage{float}
+
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{rotating}
+\setlength{\rotFPtop}{0pt plus 1fil}
+\usepackage[draft]{changes}
+
+%\geometry{top=1in, bottom=1in, left=1in, right=1.3in}
+\usepackage[textwidth=1.2in]{todonotes}
+
+\newcommand{\Prob}{\text{Pr}}
+\newcommand{\E}{\text{E}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\corr}{\text{corr}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\iid}{\stackrel{\text{iid}}{\sim}}
+\newcommand{\logit}{\text{logit}}
+\newcommand{\cll}{\text{cll}}
+
+
+\title{A Markov chain model for estimating prevalence and incidence from interval recording data}
+\shorttitle{MARKOV CHAIN FOR INTERVAL RECORDING}
+\author{James E. Pustejovsky}
+\leftheader{Pustejovsky}
+\affiliation{The University of Texas at Austin}
+ 
+\abstract{}
+
+\keywords{behavioral observation; interval recording; alternating Poisson process; Markov chain}
+
+\authornote{James E. Pustejovsky, Department of Educational Psychology, University of Texas at Austin. Daniel M. Swan, Department of Educational Psychology, University of Texas at Austin.
+
+Address correspondence to James E. Pustejovsky, Department of Educational Psychology, University of Texas at Austin, 1 University Station D5800, Austin, TX 78712. Email: pusto@austin.utexas.edu.}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+\maketitle
+
+Measurements derived from systematic, direct observation of human behavior are used in many areas of psychological research. For example, ... 
+
+Prevalence and incidence
+
+Several commonly used systems for collecting behavioral data do not capture a complete record of the behavior during an observation session, but rather involve making observations intermittently, typically at fixed intervals in time. Three main interval recording systems are momentary time sampling, partial interval recording, and whole interval recording. In all three methods, an observation session is divided into a fixed number of equally spaced intervals, of perhaps 10 or 15 s in length, and a binary data-point is recorded for each interval. The systems differ only in the rule for scoring each interval. Using momentary time sampling (MTS), an interval is scored as a one if a behavioral event is happening during the final moment of the interval (and is otherwise scored as a zero). Using partial interval recording (PIR), an interval is scored as a one if the behavior occurs at any point during the interval. Using whole interval recording (WIR), an interval is scored as a one only if the behavior occurs for the entire duration of the interval. In some PIR and WIR systems, a small length of time is left between each interval so that the observer does not have to maintain continuous attention. 
+
+In many contexts, the interval-by-interval data generated by these recording systems is summarized by the proportion of intervals scored as a one. Often, only this summary proportion is used for later analysis, where it is commonly interpretted as a measure of prevalence. If the investigator's interest is solely in the prevalence of the behavior, using the MTS summary proportion may be quite reasonable because, under quite general modeling assumptions, it is an unbiased estimate of prevalence \citep{Rogosa1991statistical}. 
+
+\bibliographystyle{apacite}
+\bibliography{\bibfile}
+ 
+\end{document}
