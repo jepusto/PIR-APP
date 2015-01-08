@@ -11,16 +11,15 @@ An Alternating Poisson Process model for estimating prevalence and incidence fro
 
 2. Alternating Poisson Process
 - Behavior stream model
-- MTS observation filter
-- PIR observation filter
-- WIR observation filter
 
 3. Momentary Time Sampling
+- MTS observation filter
 - Likelihood (BSS)
 - Penalized likelihood estimators
 - Simulation evidence
 
 4. Interval Recording
+- PIR observation filter
 - Likelihood
 - Penalized likelihood estimators
 - Simulation evidence

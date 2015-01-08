@@ -1,6 +1,230 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
+Altmann%
+}{%
+Altmann%
+}{%
+{\protect \APACyear {1974}}%
+}]{%
+Altmann1974observational}
+\APACinsertmetastar {%
+Altmann1974observational}%
+\begin{APACrefauthors}%
+Altmann, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1974}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Observational study of behavior: Sampling methods}}
+  {{Observational study of behavior: Sampling methods}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Behaviour}{49}{3/4}{227--267}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Brown%
+, Solomon%
+\BCBL {}\ \BBA {} Stephens%
+}{%
+Brown%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1977}}%
+}]{%
+Brown1977estimation}
+\APACinsertmetastar {%
+Brown1977estimation}%
+\begin{APACrefauthors}%
+Brown, M.%
+, Solomon, H.%
+\BCBL {}\ \BBA {} Stephens, M\BPBI A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1977}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Estimation of Parameters of Zero-One Processes by
+  Interval Sampling}} {{Estimation of Parameters of Zero-One Processes by
+  Interval Sampling}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Operations Research}{25}{3}{493--505}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Griffin%
+\ \BBA {} Adams%
+}{%
+Griffin%
+\ \BBA {} Adams%
+}{%
+{\protect \APACyear {1983}}%
+}]{%
+Griffin1983parametric}
+\APACinsertmetastar {%
+Griffin1983parametric}%
+\begin{APACrefauthors}%
+Griffin, B.%
+\BCBT {}\ \BBA {} Adams, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1983}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{A parametric model for estimating prevalence,
+  incidence, and mean bout duration from point sampling}} {{A parametric model
+  for estimating prevalence, incidence, and mean bout duration from point
+  sampling}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{American Journal of Primatology}{4}{3}{261--271}.
+\newblock
+\begin{APACrefDOI} \doi{10.1002/ajp.1350040305} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Kraemer%
+}{%
+Kraemer%
+}{%
+{\protect \APACyear {1979}}%
+}]{%
+Kraemer1979one}
+\APACinsertmetastar {%
+Kraemer1979one}%
+\begin{APACrefauthors}%
+Kraemer, H\BPBI C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1979}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{One-zero sampling in the study of primate behavior}}
+  {{One-zero sampling in the study of primate behavior}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Primates}{20}{2}{237--244}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Lane%
+\ \BBA {} Ledford%
+}{%
+Lane%
+\ \BBA {} Ledford%
+}{%
+{\protect \APACyear {2014}}%
+}]{%
+Lane2014using}
+\APACinsertmetastar {%
+Lane2014using}%
+\begin{APACrefauthors}%
+Lane, J\BPBI D.%
+\BCBT {}\ \BBA {} Ledford, J\BPBI R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Using interval-based systems to measure behavior in
+  early childhood special education and early intervention}} {{Using
+  interval-based systems to measure behavior in early childhood special
+  education and early intervention}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Topics in Early Childhood Special Education}{}{}{}.
+\newblock
+\begin{APACrefDOI} \doi{10.1177/0271121414524063} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Mann%
+, {Ten Have}%
+, Plunkett%
+\BCBL {}\ \BBA {} Meisels%
+}{%
+Mann%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1991}}%
+}]{%
+Mann1991time}
+\APACinsertmetastar {%
+Mann1991time}%
+\begin{APACrefauthors}%
+Mann, J.%
+, {Ten Have}, T\BPBI R.%
+, Plunkett, J\BPBI W.%
+\BCBL {}\ \BBA {} Meisels, S\BPBI J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1991}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Time sampling: A methodological critique}} {{Time
+  sampling: A methodological critique}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Child Development}{62}{2}{227--241}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Mudford%
+, Taylor%
+\BCBL {}\ \BBA {} Martin%
+}{%
+Mudford%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2009}}%
+}]{%
+Mudford2009continuous}
+\APACinsertmetastar {%
+Mudford2009continuous}%
+\begin{APACrefauthors}%
+Mudford, O\BPBI C.%
+, Taylor, S\BPBI A.%
+\BCBL {}\ \BBA {} Martin, N\BPBI T.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Continuous recording and interobserver agreement
+  algorithms reported in the Journal of Applied Behavior Analysis
+  (1995-2005).}} {{Continuous recording and interobserver agreement algorithms
+  reported in the Journal of Applied Behavior Analysis (1995-2005).}}{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Applied Behavior Analysis}{42}{1}{165--169}.
+\newblock
+\begin{APACrefDOI} \doi{10.1901/jaba.2009.42-165} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Rapp%
+\ \protect \BOthers {.}}{%
+Rapp%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2007}}%
+}]{%
+Rapp2007interval}
+\APACinsertmetastar {%
+Rapp2007interval}%
+\begin{APACrefauthors}%
+Rapp, J\BPBI T.%
+, Colby-Dirksen, A\BPBI M.%
+, Vollmer, T\BPBI R.%
+, Roane, H\BPBI S.%
+, Lomas, J.%
+, Britton, L\BPBI N.%
+\BCBL {}\ \BBA {} Colby, A\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2007}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Interval recording for duration events: A
+  re-evaluation}} {{Interval recording for duration events: A
+  re-evaluation}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Behavioral Interventions}{22}{}{319--345}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Rogosa%
 \ \BBA {} Ghandour%
 }{%
@@ -24,6 +248,62 @@ Rogosa, D.%
   {{Statistical models for behavioral observations}}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Journal of Educational Statistics}{16}{3}{157--252}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Suen%
+\ \BBA {} Ary%
+}{%
+Suen%
+\ \BBA {} Ary%
+}{%
+{\protect \APACyear {1986}}%
+}]{%
+Suen1986post}
+\APACinsertmetastar {%
+Suen1986post}%
+\begin{APACrefauthors}%
+Suen, H\BPBI K.%
+\BCBT {}\ \BBA {} Ary, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1986}{{\APACmonth{03}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{A post hoc correction procedure for systematic errors
+  in time-sampling duration estimates}} {{A post hoc correction procedure for
+  systematic errors in time-sampling duration estimates}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Psychopathology and Behavioral
+  Assessment}{8}{1}{31--38}.
+\newblock
+\begin{APACrefDOI} \doi{10.1007/BF00960870} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Suen%
+\ \BBA {} Ary%
+}{%
+Suen%
+\ \BBA {} Ary%
+}{%
+{\protect \APACyear {1989}}%
+}]{%
+Suen1989analyzing}
+\APACinsertmetastar {%
+Suen1989analyzing}%
+\begin{APACrefauthors}%
+Suen, H\BPBI K.%
+\BCBT {}\ \BBA {} Ary, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{1989}.
+\newblock
+\APACrefbtitle {{Analyzing Quantitative Behavioral Observation Data}}
+  {{Analyzing Quantitative Behavioral Observation Data}}.
+\newblock
+\APACaddressPublisher{Hillsdale, NJ}{Lawrence Erlbaum Associates}.
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}

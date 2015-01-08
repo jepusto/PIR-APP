@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  7 JAN 2015 16:15
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  8 JAN 2015 14:59
 entering extended mode
 **PIR-APP.tex
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.tex
@@ -869,16 +869,16 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * paper: <default>
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: twoside 
-* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 455.30124pt, 86.72377pt)
 * v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=469.75502pt
+* \textwidth=455.30124pt
 * \textheight=650.43001pt
 * \oddsidemargin=0.0pt
 * \evensidemargin=0.0pt
-* \topmargin=-37.0pt
+* \topmargin=-40.2pt
 * \headheight=15.2pt
 * \headsep=25.0pt
 * \topskip=12.0pt
@@ -891,8 +891,8 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * \voffset=0.0pt
 * \mag=1000
 * \@twocolumnfalse
-* \@twosidetrue
-* \@mparswitchtrue
+* \@twosidefalse
+* \@mparswitchfalse
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
@@ -923,32 +923,93 @@ File: english.apc 2013/07/21 v6.03 apacite language file
 LaTeX Info: Redefining \BPBI on input line 129.
 LaTeX Info: Redefining \BHBI on input line 130.
 )
-ABD: EveryShipout initializing macros [1{C:/Users/jep2963/AppData/Local/MiKTeX/
-2.9/pdftex/config/pdftex.map}
+ABD: EveryShipout initializing macros
 
-] [2]
-(C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.bbl [3])
-AED endfloat: Processing end Figures and Tables [4
+Package Fancyhdr Warning: \headheight is too small (15.2pt): 
+ Make it at least 27.11652pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[1{C:/Users/jep2963/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 ]
+[2] [3]
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 116.
+
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 116.
+
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 116
+.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 116
+.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 116.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 116.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 116.
+LaTeX Font Info:    Try loading font information for U+msa on input line 116.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 116.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 116.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 116.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 116.
+ [4] [5]
+(C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.bbl [6] [7
+
+])
+AED endfloat: Processing end Figures and Tables [8]
 \Changes@OutFile=\write6
 
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.aux) ) 
 Here is how much of TeX's memory you used:
- 17082 strings out of 493921
- 314790 string characters out of 3144871
- 354396 words of memory out of 3000000
- 20019 multiletter control sequences out of 15000+200000
- 15067 words of font info for 20 fonts, out of 3000000 for 9000
+ 17373 strings out of 493921
+ 320708 string characters out of 3144871
+ 362372 words of memory out of 3000000
+ 20252 multiletter control sequences out of 15000+200000
+ 72911 words of font info for 73 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 62i,11n,56p,1227b,265s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,11n,80p,1447b,705s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiK
-TeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program Files (x86)/MiKTeX 2.9/fonts/t
-ype1/public/lm/lmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
-lm/lmri12.pfb>
-Output written on PIR-APP.pdf (4 pages, 55568 bytes).
+TeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/e
+nc/dvips/lm/lm-mathit.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm
+/lm-mathsy.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files (x86
+)/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/lm/lmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
+/public/lm/lmr6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lm
+r7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb>
+Output written on PIR-APP.pdf (8 pages, 209330 bytes).
 PDF statistics:
- 27 PDF objects out of 1000 (max. 8388607)
+ 74 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
