@@ -122,17 +122,76 @@ The remainder of the paper is organized as follows. In the next section, we intr
 \section{The Alternating Poisson Process}
 \label{sec:APP}
 
-The Alternating Poisson Process is a simple stochastic model that can be used to describe a stream of behavior, as it is perceived in time. The model applies to patterns of behavior where each episode has a non-negligible duration, or what \citet{Altmann1974observational} termed ``state'' behaviors.\footnote{In contrast, ``event'' behaviors are those where the duration of individual episodes is negligible or not salient \citep{Altmann1974observational}. The Alternating Poisson Process is a less useful model for such behaviors.} It is assumed that the behavior is either occurring or not occurring at any given point in time, so that the perceived behavior stream can be described in terms of two components: sequentially ordered, non-overlapping episodes of behavior, which we will call \textit{event durations}, and spans of time in between episodes, which we will call \textit{interim times}. Let $\{Y(t), 0 \leq t\}$ denote the state of the behavior stream over the course of an observation session, where $Y(t) = 1$ indicates that an event is occurring at time $t$ and $Y(t) = 0$ otherwise.
+The Alternating Poisson Process is a stochastic model that can be used to describe a stream of behavior, as it is perceived in time. The model applies to patterns of behavior where each episode has a non-negligible duration, or what \citet{Altmann1974observational} termed ``state'' behaviors.\footnote{In contrast, ``event'' behaviors are those where the duration of individual episodes is negligible or not salient \citep{Altmann1974observational}. The Alternating Poisson Process is a less useful model for such behaviors.} It is assumed that the behavior is either occurring or not occurring at any given point in time, so that the perceived behavior stream can be described in terms of two components: sequentially ordered, non-overlapping episodes of behavior, which we will call \textit{event durations}, and spans of time in between episodes, which we will call \textit{interim times}. Let $\{Y(t), 0 \leq t\}$ denote the state of the behavior stream over the course of an observation session, where $Y(t) = 1$ indicates that an event is occurring at time $t$ and $Y(t) = 0$ otherwise.
 
-In the Alternating Poisson Process, it is assumed that event durations and interim times are mutually independent, random quantities, that the event durations follow an exponential distribution with mean $\mu$, and that the interim times follow an exponential distribution with mean $\lambda$.  Under the model, the prevalence of the behavior is equal to the ratio of $\mu$ to the sum of $\mu$ and $\lambda$ and the incidence of the behavior is equal to the reciprocal of the sum of $\mu$ and $\lambda$. In what follows, we denote prevalence and incidence by $\phi$ and $\zeta$, respectively.
+In the Alternating Poisson Process, it is assumed that event durations and interim times are mutually independent, random quantities, that the event durations follow an exponential distribution with mean $\mu$, and that the interim times follow an exponential distribution with mean $\lambda$.  Under the model, the prevalence of the behavior is equal to the ratio of $\mu$ to the sum of $\mu$ and $\lambda$ and the incidence of the behavior is equal to the reciprocal of the sum of $\mu$ and $\lambda$. In what follows, we denote prevalence and incidence by $\phi$ and $\zeta$, respectively. We further assume that the process is in equilibrium, with $\Pr\left(Y(0) = 1\right) = \phi$. This assumption implies that there is a constant marginal probability of observing an event at any given point in time\todo{Expand further--when would this not apply/be inappropriate?}.
 
-We further assume that the process is in equilibrium, with $\Pr\left(Y(0) = 1\right) = \phi$. This assumption implies that there is a constant marginal probability of observing an event at any given point in time\todo{Expand further--when would this not apply/be inappropriate?}.
+The Alternating Poisson Process is a special case of a continuous time Markov Chain, and thus has the Markov property that the the future state of the behavior depends only on the current state, but not on the past history of the behavior. More precisely, the probability that a behavior will be occurring $t$ seconds into the future is independent of the state of the behavior for $0 \leq r < s$: 
+\begin{equation}
+\label{eq:Markov}
+\Pr\left[Y(s + t) = 1 \left| Y(s) = a, Y(r): 0 \leq r < s \right.\right] = \Pr\left[ Y(s + t) = 1 \left| Y(s) = a \right.\right]
+\end{equation}
+for $a = 0,1$ and $s,t \geq 0$ \citep[Thm. 6.1]{Kulkarni2010modeling}. The assumption that the process is in equilibrium further implies that the probability that a behavior will be occurring $t$ seconds into the future does not depend on the current time, i.e.,  
+\begin{equation}
+\label{eq:equilibrium}
+\Pr\left[Y(s + t) = 1 \left| Y(s) = a\right.\right] = \Pr\left[ Y(t) = 1 \left| Y(0) = a \right.\right].
+\end{equation}
+Let $p_0(t)$ denote the conditional probability that an event will be occurring $t$ seconds into the future, given that no event is currently occurring. Let $p_1(t)$ denote the conditional probability that an event will be occurring $t$ seconds into the future, given that an event is currently occurring. These conditional probabilities can be expressed as:
+\begin{equation}
+\begin{aligned}
+p_0(t) &= \Pr(Y(t) = 1 | Y(0) = 0) = \phi \left[1 - \exp\left(\frac{- t \zeta}{\phi (1 - \phi)}\right)\right] \\
+p_1(t) &= \Pr(Y(t) = 1 | Y(0) = 1) = \phi + (1 - \phi) \exp\left(\frac{- t \zeta}{\phi (1 - \phi)}\right)
+\end{aligned}
+\end{equation}
+\citep[Eq. 6.17]{Kulkarni2010modeling}.
+
+
 
 \section{Momentary Time Sampling}
 \label{sec:MTS}
 
 \section{Partial Interval Recording}
 \label{sec:PIR}
+
+Now suppose that an observer uses partial interval recording to measure the behavior, using a total of $K$ intervals, each of which has $c$ seconds of active observation time and $d$ seconds of recording time. Let time $t_k = (k-1)(c + d)$ denote the beginning of interval $k$. Let $U_k$ indicate the partial interval record from interval $k$, corresponding to the time from $t_k$ to $t_k + c$, so that $U_k = 1$ if is the behavior occurs at any point during the interval and $U_k = 0$ if the behavior does not occur at all during that interval. Note that $Y(t_k) = 1$ implies that $U_k = 1$ with certainty, while $\Pr\left(U_k = 1\left| Y(t_k) = 0\right.\right) = 1 - \exp\left[ -\zeta c / (1 - \phi)\right]$.
+
+Let $\psi_k$ denote the probability than an event is occurring at time $t_k = (k-1)(c + d)$, given the partial interval record up to that time, 
+\begin{equation}
+\psi_k = \Pr\left[Y(t_k) = 1 \left| U_1,...,U_{k-1}\right.\right]
+\end{equation}
+for $k = 2,...,K$ (for ease of notation, set $\psi_1 = \phi$). It follows from (\ref{eq:Markov}) that 
+\begin{align*}
+\Pr\left(U_k = 1 \left| U_1,...,U_{k-1}\right.\right) &= \psi_k \Pr\left(U_k = 1 \left| Y(t_k) = 1)\right.\right)  + (1 - \psi_k)\Pr\left(U_k = 1 \left| Y(t_k) = 0)\right.\right) \\
+&= 1 - (1 - \psi_k)\exp\left( \frac{-\zeta c}{1 - \phi}\right).
+\end{align*}
+The joint distribution of $U_1,...,U_K$ can then be expressed as 
+\begin{align}
+\Pr\left(U_1=u_1,...,U_K = u_K\right) &= \Pr\left(U_1=u_1\right) \prod_{k=2}^K \Pr\left(U_k=u_k \left| U_1,...,U_{k-1}\right.\right) \nonumber \\
+&= \prod_{k=1}^K \left[1 - (1 - \psi_k)\exp\left( \frac{-\zeta c}{1 - \phi}\right) \right]^{u_k} \left[(1 - \psi_k)\exp\left( \frac{-\zeta c}{1 - \phi}\right)\right]^{(1 - u_k)}.
+\end{align}
+The log-likelihood of $\phi, \zeta$ is therefore 
+\begin{align}
+\label{eq:log_lik}
+l\left(\phi,\zeta\right) = \sum_{k=1}^K & u_k \ln\left[1 - (1 - \psi_k)\exp\left( \frac{-\zeta c}{1 - \phi}\right)\right]  + (1 - u_k)\left[\ln\left(1 - \psi_k \right) - \frac{\zeta c}{1 - \phi}\right].
+\end{align}
+
+It remains to find $\psi_2,...,\psi_K$. Note that $U_{k-1} = 0$ implies that $Y(t_k + c) = 0$, from which it follows that \[
+\Pr\left(Y(t_k) = 1 \left| U_1 = u_1,...,U_{k-2} = u_{k-2}, U_{k-1} = 0 \right.\right) = \Pr\left(Y(t_k) = 1 \left|Y(t_{k-1} + c) = 0 \right.\right) = p_0(d). \]
+Next, observe that \[
+\Pr\left(Y(t_k) = 1, U_{k-1} = 1 \left| Y(t_{k-1}) = 1 \right.\right) = \Pr\left(Y(t_k) = 1 \left| Y(t_{k-1}) = 1 \right.\right) = p_1(c + d) \]
+and \begin{align*}
+\Pr\left(Y(t_k) = 1, U_{k-1} = 1 \left| Y(t_{k-1}) = 0 \right.\right) &= \int_0^c p_1(c - t) \frac{ \zeta \exp(-t \zeta / (1 - \phi))}{(1 - \phi)} dt \\
+& = \phi \left[ 1 - \exp\left(\frac{- \zeta (c + d)}{\phi(1 - \phi)}\right) - \exp\left(\frac{- \zeta c}{1 - \phi}\right) + \exp\left(\frac{- \zeta (\phi c + d)}{\phi(1 - \phi)}\right)\right] \\
+&= p_0(c + d) - p_0(d) \exp\left(\frac{- \zeta c}{1 - \phi}\right)
+\end{align*}
+It follows that \begin{align*}
+\Pr\left(Y(t_k) = 1, U_{k-1} = 1 \left| U_1,...,U_{k-2}\right.\right) &= \psi_{k-1} p_1(c + d) + (1 - \psi_{k-1}) \left[p_0(c + d) - p_0(d) \exp\left(\frac{- \zeta c}{1 - \phi}\right)\right] \\
+\Pr\left(Y(t_k) = 1 \left| U_1 = u_1,...,U_{k-2} = u_{k-2}, U_{k-1} = 1 \right.\right) &= \frac{\psi_{k-1} p_1(c + d) + (1 - \psi_{k-1}) \left[p_0(c + d) - p_0(d) \exp\left(\frac{- \zeta c}{1 - \phi}\right)\right]}{1 - (1 - \psi_k)\exp\left( \frac{-\zeta c}{1 - \phi}\right)}.
+\end{align*}
+Thus, $\psi_k$ can be written as a function of $\psi_{k-1}$ and $u_{k-1}$:
+\begin{equation}
+\psi_k = \left[\frac{\psi_{k-1} p_1(c + d) + (1 - \psi_{k-1}) \left[p_0(c + d) - p_0(d) \exp\left(\frac{- \zeta c}{1 - \phi}\right)\right]}{1 - (1 - \psi_{k-1})\exp\left( \frac{-\zeta c}{1 - \phi}\right)}\right]^{u_{k-1}} \left[p_0(d)\right]^{(1 - u_{k-1})}.
+\end{equation}
 
 \section{Whole Interval Recording}
 \label{sec:WIR}

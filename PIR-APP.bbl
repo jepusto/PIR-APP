@@ -105,6 +105,29 @@ Kraemer, H\BPBI C.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Kulkarni%
+}{%
+Kulkarni%
+}{%
+{\protect \APACyear {2010}}%
+}]{%
+Kulkarni2010modeling}
+\APACinsertmetastar {%
+Kulkarni2010modeling}%
+\begin{APACrefauthors}%
+Kulkarni, V\BPBI G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2010}.
+\newblock
+\APACrefbtitle {{Modeling and Analysis of Stochastic Systems}} {{Modeling and
+  Analysis of Stochastic Systems}}.
+\newblock
+\APACaddressPublisher{Boca Raton, FL}{Chapman \& Hall/CRC}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Lane%
 \ \BBA {} Ledford%
 }{%
