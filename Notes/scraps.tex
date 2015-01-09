@@ -1,0 +1,14 @@
+\citet{Shadish2011characteristics} used systematic research synthesis methods to compile a database of single-case studies published in 2008. Based on their database, I found that 87\% of single-case studies used at least one outcome measure based on direct observation of behavior.
+
+ \citep[for surveys concerning the use of different methods, see][]{Mann1991, Rapp2007interval, Mudford2009}
+
+ Modified forms of interval recording have been proposed to better estimate behavioral incidence \citep{Powell1984}. 
+
+Many studies have used empirical data to examine the sensitivity of inferences to whether observations are recorded via continuous, interval, or MTS methods, with mixed results \citep[e.g.,][]{Powell1975, Murphy1980, Bornstein2002, Gunter2003, Gardenier2004, Rapp2007interval, Meany-Daboul2007, Alvero2007}. Other studies have used Monte Carlo simulation methods to compare the accuracy and precision of different recording methods \citep[e.g.,][]{Repp1976, Harrop1986, Harrop1990, Rapp2008detecting, Carroll2009detecting, Devine2011detecting}. 
+
+\footnote{Derivation of the transition probabilities is omitted due to space constraints.}
+
+The likelihood of the Markov chain is a function of the two-by-two table counting the number of observations with $(X_{k-1} = a, X_k = b)$ for $a,b = 0,1$ and $k = 1,...,K$ . Letting $K_{ab}^m = \sum_{k=1}^K I(X_{k-1} = a, X_k = b)$ and conditioning on $X_0$, the likelihood of momentary time sampling data is \begin{equation}
+L^m(\mu, \lambda) = \left[ p_0(L)\right]^{K_{01}^m} \left[1 - p_0(L)\right]^{K_{00}^m} \left[ p_1(L)\right]^{K_{11}^m} \left[1 - p_1(L)\right]^{K_{10}^m}.
+\end{equation}
+\citet{Brown1977estimation} provided closed-form expressions for the maximum likelihood estimates of $\mu$ and $\lambda$, from which estimates for $\phi$ and $\gamma$ can be derived.

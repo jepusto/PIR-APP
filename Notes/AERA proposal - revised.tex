@@ -1,0 +1,185 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[natbibapa]{apacite}
+
+
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{array}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bf}
+\titleformat*{\subsection}{\normalsize\bf}
+
+\newcommand{\E}{\text{E}}
+\newcommand{\logit}{\text{logit}}
+\newcommand{\cll}{\text{cll}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\converge}[1]{\stackrel{\mathcal{{#1}}}{\rightarrow}}
+
+
+\title{\Large\textbf{Observational Procedures and Markov Chain Models for Estimating the Prevalence and Incidence of a Behavior}}
+\author{\normalsize{James E. Pustejovsky}}
+
+\begin{document}
+\begin{center}
+\Large
+\textbf{Observational Procedures and Markov Chain Models for Estimating the Prevalence and Incidence of a Behavior} \\
+\vspace{5mm}\normalsize
+James E. Pustejovsky \\
+Northwestern University \\
+\today
+\end{center}
+
+\section*{Abstract}
+
+Data based on direct observation of behavior are used extensively in certain areas of educational and psychological research. A number of different procedures are used to record data during direct observation, including continuous recording, momentary time sampling (MTS), and partial interval recording (PIR). Among these, PIR has long been recognized as problematic because the mean of such data measures neither the prevalence nor the incidence of a behavior. However, little research has examined methods of analyzing PIR data other than simply summarizing it by the mean. In this research brief, I show that data collected using PIR can be represented using a discrete-time Markov chain derived from an alternating Poisson process model, which then permits estimation of both prevalence and incidence via likelihood methods. Furthermore, I show that combining interval recording procedures with MTS considerably simplifies the Markov chain representation, leading to improvements in estimator precision with only marginal increase in procedural complexity. Further work will provide guidance regarding the operating characteristics of maximum likelihood estimators based on PIR data and on combined data, and will address questions of model fit for the underlying alternating Poisson process.
+
+\section{Background}
+
+Direct observation of human behavior is used extensively in certain areas of educational and psychological research, particularly in special education, school psychology, social work, and applied behavior analysis. Data based on observation are used in randomized field trials both as primary outcome measures \citep[e.g.,][]{Mahar2006} and to assess the fidelity with which an intervention is implemented \citep[e.g.,][]{Landa2011}. Direct observation is also a crucial tool for investigators conducting single-case research, where the predominance of studies involve repeated measurements of behaviors \citep{Hartmann1990observational, Horner2005use}.
+
+Conceiving of behavior as a ``stream'' of events that occur sequentially over time \citep{Rogosa1991statistical}, an investigator might be interested in measuring several aspects of a subject's behavior, including average duration, average inter-response time, prevalence, or incidence. Terminology varies somewhat across authors, but in what follows I use the following definitions: duration is the length of a behavioral event; inter-response time is the length of time between the end of one event and the beginning of the next; prevalence is the proportion of time that the behavior occurs; and incidence is the rate at which new events begin. 
+
+There are several different procedures for recording data during direct observation, varying in ease of implementation, the level of detail in the resulting data, and the aspect of behavior to which the resulting measurement corresponds \citep[for surveys of major recording procedures, see][]{Altmann1974observational, Hartmann1990observational, Primavera1996measurement}. The most intensive procedure is continuous recording (sometimes called duration recording or real-time recording), in which the observer records the time at which each event begins and ends. Data from continuous recording is very rich, in that it permits direct estimation of prevalence, incidence, and other basic aspects of the behavior stream; it can also be subjected to more sophisticated forms of modeling \citep[e.g.,][]{Bakeman2011, Haccou1992}. However, less effort-intensive data collection methods are often required, particularly for use in clinical and applied research settings. 
+
+Among procedures that do not involve continuous observation, two of the most common are interval recording and momentary time sampling. In interval recording procedures (also known as one-zero sampling, modified frequency sampling, or Hansen sampling), an observation session is divided into many short time intervals and an observer scores each interval as a zero or a one. The most common approach to scoring is partial interval recording (PIR),  in which an interval is scored as a one if the behavior occurs at any point during the interval (and zero otherwise). In the less frequent variant of whole interval recording (WIR), the interval is scored as a one if the behavior occurs for the entire length of the interval (and zero otherwise). PIR data and WIR data are nearly always summarized by calculating the proportion of intervals scored as ones (i.e., the mean). It has long been recognized that this summary statistic measures neither prevalence nor incidence, but rather a combination of the two that is very difficult to interpret \citep{Altmann1974observational, Kraemer1979one, Rogosa1991statistical}. Despite this flaw, PIR remains in wide use. 
+
+Momentary time sampling (MTS) produces data similar to that generated by interval recording, in that the observer scores each of many short time-intervals as a zero or a one. However, in using MTS, the observer notes whether the target behavior is in process at the start (or end) of each interval--at a given moment in time, rather than over an interval of time. The data from MTS is typically summarized by calculating the proportion of moments scored as ones, but in contrast to interval recording, this sample proportion produces an unbiased estimate of prevalence \citep{Rogosa1991statistical}. Still, some have criticized the method for being insensitive to small changes in a behavior that has short average duration, arguing that PIR is preferable in this case \citep{Harrop1986, Harrop1990use}.
+
+The relative merits of the different recording methods remain open to debate, despite considerable research on the topic. Many studies have used empirical data to examine the sensitivity of inferences to whether observations are recorded via continuous, interval, or MTS methods, with mixed results \citep[e.g.,][]{Powell1975, Murphy1980, Bornstein2002, Gunter2003, Gardenier2004, Rapp2007interval, Alvero2007}. Other studies have used Monte Carlo simulation methods to compare the accuracy and precision of different recording methods \citep[e.g.,][]{Harrop1986, Rapp2008detecting}. The conclusions of these studies are limited in two fundamental ways. First, their generality is limited to the empirical or simulated settings that were examined. Second, all of the studies considered interval recording and MTS data that were analyzed only by taking sample proportions.
+
+Compared to empirical or simulation approaches, less previous research has used statistical modeling to study the properties of different recording methods. \citet{Altmann1970estimating} briefly described a method for estimating incidence from PIR data, assuming that behavioral events have negligible duration and follow a Poisson process; their approach is very sensitive to violations of the latter assumption \citep{Fienberg1972on}. \citet{Brown1977estimation} and \citet{Griffin1983parametric} used an alternating Poisson process model to study methods for estimating duration and incidence from MTS data.  \citet{Suen1986post} proposed procedures for calculating corrected estimates of prevalence from PIR data, but these procedures lack an articulated, model-based motivation; moreover, their empirical performance been called into question \citep{Rogosa1991statistical}. Finally, \citet{Rogosa1991statistical} studied the accuracy and reliability of many behavioral observation procedures, using the general class of alternating renewal process models; however, their analysis of MTS and PIR data considered only sample proportions. To my knowledge, no previous research has considered using an alternating Poisson process to model PIR data or combinations of interval recording and MTS data.
+
+\section{Goals, conceptual framework, and specific research questions}
+
+Broadly, the goals of this project are to develop improved statistical methods for estimating behavioral characteristics (particularly prevalence and incidence) from interval recording data; to develop new, easily implemented observational procedures that provide improved measurements of behavioral characteristics; and, after studying the performance of the various analytic methods, to develop general guidelines regarding the use of these observation procedures. To address these goals, I will use a parametric model known as the alternating Poisson process to describe the underlying behavior stream to be observed. Based on this parametric model, I will then derive the likelihood of the data recorded by each specific observation procedure. \citet{Brown1977estimation} and \citet{Griffin1983parametric} used a similar approach to model MTS data. This approach also generalizes the simple Poisson process used by \citet{Altmann1970estimating} and \citet{Fienberg1972on} to model PIR data, in that it allows behavioral events to have positive duration. 
+
+I will address the following specific research questions:
+\begin{enumerate}
+\item What is the likelihood of interval recording data under the alternating Poisson process model? 
+\item How can momentary time sampling and interval recording procedures be combined?
+\item What is the likelihood (under the alternating Poisson process model) of the data generated by such combined procedures? 
+\item How accurate and reliable are maximum likelihood estimators of the model parameters (prevalence and incidence) based on data from these procedures? In particular, how do combined procedures compare to PIR or MTS alone?
+\end{enumerate}
+This research brief will describe my progress on addressing the first three of these questions. Future work will address question 4 in detail and will expand upon questions 2 and 3. 
+
+\section{Parametric Model}
+\label{sec:model}
+
+In this section, I begin by describing the assumptions of the alternating Poisson process model. I then use this model to derive discrete-time Markov chain (DTMC) representations of MTS, PIR, WIR, and the combination of all three. Finally, I comment briefly on estimation strategies. 
+
+\subsection{Alternating Poisson Process}
+\label{sec:APP}
+
+The alternating Poisson process model describes a sequence of behavioral events that occur over a continuous span of time. I assume that the start and end of each event can be clearly delineated and that events can be indexed $j = 1,2,3,...$. Let $D_j$ denote the duration of event $j$; let $D_0 = 0$; let $E_j$ denote the length of time between the end of event $j$ and the beginning of event $j+1$ (the $j^{th}$ inter-event time); let $E_0$ denote the length of time until the first event, with $E_0 = 0$ if event 1 is occurring at the beginning of the observation period. Based on the underlying data describing the behavior stream (i.e., $\{D_0,E_0,D_1,E_1,D_2,E_2,...\}$), the recorded data are derived according to one of the observation procedures, as illustrated in the following sub-sections. 
+
+I model the behavior stream using an equilibrium alternating Poisson process. The model assumes that (1) event durations $D_1,D_2,D_3,...$ are exponentially distributed with mean $\mu > 0$; (2) inter-event times $E_1,E_2,E_3,...$ are exponentially distributed with mean $\lambda > 0$; (3) event durations and inter-event times are all mutually independent; (4) the probability that an event is occurring at the beginning of the observation period is $\mu / (\mu + \lambda)$, so that the process is in equilibrium; and (5), conditional on an event not occurring at the beginning of the session, the time to the initial event is exponentially distributed with mean $\lambda$. 
+
+The main parameters of the model are the average event duration $\mu = \E(D_1)$ and the average inter-event time $\lambda = \E(E_1)$. Based on these two quantities, two other derived parameters are also of interest: the rate at which new events occur, known as the incidence $\gamma = \frac{1}{\lambda + \mu}$, and the event prevalence $\phi = \frac{\mu}{\lambda + \mu}$. The incidence is the inverse of the average time between successive events. Event prevalence is both the overall proportion of time that a behavior occurs and the probability that an event is occurring at any specific moment in time  \citep{Kulkarni2010modeling, Rogosa1991statistical}. 
+
+To express the recorded data from each procedure, some additional notation is necessary. Define \[
+Y(t) = \sum_{j=1}^{\infty} I \left[ 0 \leq t - \sum_{i=0}^{j-1} (D_i + E_i) < D_j \right]
+\]
+so that $Y(t)$ indicates whether the behavioral event is occurring at time $t$; note that $Y(t)$ is a stationary continuous time Markov chain \citep[Theorem 6.1, p. 192]{Kulkarni2010modeling}. Also define the transition probabilities \begin{align*}
+p_0(t) &= Pr(Y(t) = 1 | Y(0) = 0) = \frac{\mu}{\mu + \lambda} \left[1 - \exp\left(-\frac{t(\mu + \lambda)}{\mu \lambda}\right)\right] \\
+p_1(t) &= Pr(Y(t) = 1 | Y(0) = 1) = \frac{\lambda}{\mu + \lambda} \exp\left(-\frac{t(\mu + \lambda)}{\mu \lambda}\right) + \frac{\mu}{\mu + \lambda}
+\end{align*}
+(\textit{ibid}., Equation 6.17, p. 207). 
+
+\subsection{Momentary time sampling}
+\label{sec:MTS}
+
+Suppose that one uses momentary time sampling to record observations, where the presence or absence of a behavior is noted at each of $K+1$ times within the observation period, equally spaced at intervals of length $L$. The recorded data can then be described by the sequence of binary indicator variables $X_0,X_1,...,X_K$, where $X_k = Y(kL)$ for $k = 0,...,K$. 
+
+\citet{Brown1977estimation} demonstrated that MTS data form a simple, two-state DTMC with transition probabilities $Pr(X_k = 1 | X_{k-1} = a) = p_a(L)$ and $Pr(X_k = 0 | X_{k-1} = a) = 1 - p_a(L)$ for $a = 0,1$. Figure \ref{fig:MTS} depicts the transition graph of this DTMC \citep[on the interpretation of transition graphs, see][p. 12]{Kulkarni2010modeling}. \citet{Brown1977estimation} studied the likelihood corresponding to this DTMC and provided closed-form expressions for the maximum likelihood estimates of $\mu$ and $\lambda$, from which estimates for $\phi$ and $\gamma$ can be derived.
+
+\begin{figure}[htbp]
+\centering{
+\subfloat[Momentary time sampling]{\label{fig:MTS}\includegraphics[page=1, clip=true, trim= 0 390 0 00, width=0.8\linewidth]{DTMC_graphs.pdf}} \\ \subfloat[Partial interval recording]{\label{fig:PIR}\includegraphics[page=2, clip=true, trim= 0 320 0 0, width=0.8\linewidth]{DTMC_graphs.pdf}}
+\caption{Discrete-time Markov chain transition graphs}}
+\end{figure}	
+
+\subsection{Partial interval recording}
+\label{sec:PIR}
+
+Suppose that one uses partial interval recording to measure a behavior during an observation period, with $K$ intervals each of equal length $P$. The behavior is counted as present if it occurs at any point during an interval, and the record of the presence or absence of behavior during each of the $K$ intervals constitutes the observed data. Let $U_k = 1$ if the behavior occurs at any point during the $k^{th}$ interval, $U_k = 0$ otherwise; formally, \[
+U_k = I \left[0 < \int_{[0,L)} Y\left((k-1)L + t\right) dt\right]. \]
+The recorded data is then the sequence $U_1,...,U_K$. 
+
+Suppose that $Y(0) = 0$, and let $U_0 = 0$. Let $V_0 = 0$ and define $V_k = k - \max \{j \in 0,...,k: U_j = 0\}$ for $k=1,...,K$, where $V_k$ is the number of consecutive observations up through interval $k$ in which the behavior is present. I can show that the sequence $V_1,...,V_K$ forms a DTMC on the space $\{0,1,2,3,...\}$, as depicted in Figure \ref{fig:PIR}. The transition probabilities are given by \[
+\pi_j = Pr(V_k = j + 1 |V_{k-1} = j) = 1 - \exp(- L / \lambda) \left[1 - \stackrel{(j)}{\circ}f \left(0 \right) \right], \]
+for $j = 0,1,2,3,...$, where \[
+f(q) = \frac{\frac{\mu}{\mu + \lambda} - \left(\frac{\mu}{\mu + \lambda} - q \right) \exp \left(-\frac{L(\mu + \lambda)}{\mu \lambda} \right)}{1 - (1 - q) \exp(-L / \lambda)} \]
+and $\stackrel{(j)}{\circ}f$ denotes $j$-fold recursion of $f$. Because $(V_1,...,V_K)$ is a one-to-one mapping of $(U_1,...,U_k)$, the likelihood of PIR data can be written in terms of the former. 
+
+\subsection{Whole interval recording}
+\label{sec:WIR}
+
+Suppose that one uses whole interval recording to measure a behavior during an observation period, again with $K$ intervals of equal length $P$. The behavior is counted as present only if it occurs for the entire duration of the interval; formally, let \[
+W_k = I \left[\int_{[0,L)} Y\left((k-1)L + t\right) dt = L \right]. \]
+The recorded data are then the sequence $W_1,...,W_K$. Whole interval recording is equivalent to partial interval recording applied to the absence of a behavior rather than its presence. Thus, the model described for PIR can be used for either interval recording method, with appropriate interpretation of parameters. 
+
+\subsection{Augmented interval recording}
+\label{sec:AIR}
+
+I now consider a procedure that combines momentary time sampling, partial interval recording, and whole interval recording; I refer to this procedure as augmented interval recording (AIR). As before, suppose that the observation period is divided into $K$ intervals, each of length $P$. During each interval, one must record sufficient data so that the values of the momentary time sampling, partial interval recording, and whole interval recording variables ($X_{k-1},U_k,W_k$) can be determined. Figure \ref{fig:questions} depicts the sequence of questions to be answered during the $k^{th}$ interval in order to completely determine these values. One begins by noting the presence or absence of the behavior at the start of the interval. If the behavior is present at the start of the interval ($X_{k-1} = 1$), then the partial interval record is also determined ($U_k = 1$), and it only remains to determine whether the behavior occurs for the duration of the interval ($W_k = 1$) or ends before the start of the next interval ($W_k = 0$). Similarly, if the behavior is absent at the start of the interval ($X_{k-1} = 0$), then the whole interval record is also determined ($W_k = 0$), and it only remains to determine whether a behavioral event begins before the start of the next interval ($U_k = 1$) or is absent for the entire interval ($U_k = 0$).
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[page=3, clip=true, trim= 0 240 150 00, width=.75\linewidth]{DTMC_graphs.pdf}
+\caption{Procedure for combining MTS and interval recording}
+\label{fig:questions}
+\end{figure}	 
+
+It may be that the AIR procedure requires only marginally more effort on the part of the observer than an interval recording method used alone. One measure of effort is the level of sustained attention required on the part of the observer. Because the sustained attention needed for the interval recording methods also entails the attention needed for momentary time sampling, the additional effort is minimal in this respect. Another measure of effort is the amount of data that must be recorded during the observation period. Because $W_k$ is implied when $X_{k-1} = 0$ and $V_k$ is implied when $X_{k-1} = 1$, AIR requires twice as much data as one of the single methods (rather than three times as much, might be supposed). Thus, for a fixed interval length, simultaneous use of all three methods entails at most twice as much effort as interval recording alone. Furthermore, using longer time-intervals, with fewer intervals per observation period, would mitigate the effort required.
+
+Having described the AIR procedure, I now consider how to model the resulting data. The sample space of $(U_k,W_k, X_k)$ contains four unique outcomes. For ease of notation, define the variables $Z_k = U_k + W_k + X_k$ for $k=1,...,K$; note that this is a unique mapping. The complete record of observed data is then $(X_0,Z_1,...,Z_K)$. I can show that, conditional on $X_0$, this sequence forms a DTMC on the space $\{0,1,2,3\}$, as depicted in Figure \ref{fig:combined}. From the Markov property of the underlying alternating Poisson process, the transition probabilities in this DTMC depend only on the previous MTS observation, that is: $Pr(Z_k = b | X_{k-1} = a, Z_{k-1},...,Z_1) = Pr(Z_k = b | X_{k-1} = a) = \pi_{ab}$ for $a = 0,1$ and $b = 0,1,2,3$. The transition probabilities are given by the following functions of $\mu$ and $\lambda$: \begin{align*}
+\pi_{00} &= e^{-L/\lambda}  & \pi_{01} &= 1 - e^{-L / \lambda} - p_0(L)  & \pi_{02} &= p_0(L) & \pi_{03} &= 0 \\
+\pi_{10} &= 0  & \pi_{11} &= \frac{\lambda}{\mu} p_0(L) & \pi_{12} &= 1 - e^{-L / \mu} - \frac{\lambda}{\mu} p_0(L)  & \pi_{13} &=  e^{-L / \mu}.
+\end{align*}
+This DTMC has a considerably simpler structure than that for PIR data, in that the sample space is finite and the transition probabilities are simpler functions of the target parameters. 
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[page=4, clip=true, trim= 0 255 330 0, width=.5\linewidth]{DTMC_graphs.pdf}
+\caption{Transition graph for data from combined procedure}
+\label{fig:combined}
+\end{figure}	
+
+\subsection{Estimation}
+
+Based on the DTMC representations described in \ref{sec:MTS}-\ref{sec:AIR}, standard methods can be used to write the likelihood of the recorded data \citep{Billingsley1961a}. Unlike the MTS case studied by \citet{Brown1977estimation}, no simple, closed-form expressions exist for the maximizing values of the PIR likelihood or the AIR likelihood. However, numerical techniques such as Fisher scoring can be used to calculate maximum likelihood estimators. I am currently verifying the consistency of such maximum likelihood estimators and exploring numerical algorithms appropriate for each model. Future work might also consider the use of penalized likelihood methods \citep[e.g.,][]{Hjort2008}.
+
+\section{Impact}
+
+One of the main goals of this research is to provide general guidance to applied researchers regarding the circumstances under which the various recording methods are most appropriate. Such guidance will help researchers make more informed choices in designing measurement plans, and likewise might help grant reviewers assess whether proposed research designs are sound. The advantage of the approach taken here is that it is based not on limited simulation evidence or on experience-based heuristics, but rather on a clear statistical model with explicitly articulated assumptions. 
+
+The other main goals of this research have to do with developing new tools for extracting more information from data based on direct observations. The likelihood-based method of analyzing PIR data will provide estimates of both prevalence and incidences, rather than a difficult-to-interpret combination of both dimensions. Thus, the method addresses the primary shortcoming of PIR data, and could be particularly useful to researchers wishing to re-analyze PIR data that they have collected in previous studies. Also, I anticipate that the proposed AIR procedure, which combines interval recording with MTS, will produce estimates of prevalence and incidence that have improved accuracy and precision compared to extant procedures. Together, these new tools will allow researchers to collect higher-quality behavioral observation data. 
+
+\section{Limitations and future research}
+
+The methods considered here have two main limitations, having to do with practical feasibility and sensitivity to modeling assumptions. Regarding feasibility, I have argued that the AIR procedure requires only marginally more effort than interval recording alone. Of course, this has yet to be verified in the field. Furthermore, estimation of model parameters based on PIR or AIR data requires computations that are considerably more complex than simply taking the mean. Thus, it will be vital to create easy-to-use programs that efficiently automate the required calculations, in order to make the proposed estimation techniques accessible and attractive for researchers in the field.  
+
+Regarding sensitivity, the DTMCs described in Section \ref{sec:model} are based on an alternating Poisson process model. I use the assumptions of this parametric model due to the mathematical tractability they provide, rather than out of any conviction that they are empirically appropriate. In future research, I will need to study the sensitivity of the proposed methods to violations of the underlying modeling assumptions. I suspect that such violations may be rather difficult to assess, even from the comparatively rich data generated by AIR. 
+
+Other recording procedures may provide better data for modeling checking. Certainly, continuous recording procedures would be ideal for this purpose, but other, less effort-intensive methods might be useful too. For instance, one could combine MTS with a continuous measurement of time from the start of the interval to the first transition to a new behavioral state (i.e., the end of the current event if $X_k = 1$ or the start of a new event if $X_k = 0$). This procedure, which I refer to as intermittent transition recording, requires the same level of sustained attention as AIR, and may permit more sensitive tests of model fit. The data it generates may also permit estimation of model parameters using semi-parametric methods that are valid under much more general models than the alternating Poisson process; this intuition will be explored in future research. 
+
+\section{Timeline}
+
+As noted previously, I am currently verifying the consistency of maximum likelihood estimators based on PIR and AIR data. Once this is addressed, the next step will be to derive the Fisher information corresponding to the likelihood of each type of recorded data. These expressions will be used to make initial comparisons of the asymptotic precision (as $P \to \infty$) of the recording procedures for varying combinations of parameters $(\mu,\lambda)$ and interval lengths $L$. I expect to have some initial comparisons completed by mid-April, 2013. Further work on this project will be delayed by the necessity of completing my dissertation work. 
+
+\pagebreak
+\renewcommand\refname{\begin{centering}References\end{centering}}
+\bibliographystyle{apacite}
+\bibliography{C:/Users/James/Dropbox/Library/Bibliography/AERA_proposal}
+%\bibliography{C:/Users/jep701/Dropbox/Library/Bibliography/AERA_proposal}
+
+
+\end{document}
+

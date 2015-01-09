@@ -1,0 +1,132 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[natbibapa]{apacite}
+
+
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{array}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bf}
+\titleformat*{\subsection}{\normalsize\bf}
+
+\newcommand{\E}{\text{E}}
+\newcommand{\logit}{\text{logit}}
+\newcommand{\cll}{\text{cll}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\converge}[1]{\stackrel{\mathcal{{#1}}}{\rightarrow}}
+
+\newcommand{\diag}{\text{diag}}
+\newcommand{\tr}{\text{tr}}
+
+\newcommand{\Info}{\mathcal{I}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\bm}{\mathbf}
+
+\begin{document}
+Let $y_0,y_1,y_2,y_3,...,y_K$ be a sample from an equilibrium DTMC on an $(R+1)$-dimensional space with observed frequency counts $k_{qr} = \sum_{i=1}^K I(y_{i-1} = q, y_i = r)$ and transition probabilities $\pi_{qr} (\bs\theta) = \Pr(y_1 = r | y_0 = q)$ that are functions of a $p\times 1$ parameter vector $\bs\theta$. The equilibrium distribution of the DTMC has the properties that
+\begin{equation}
+\label{eq:balancing_normalizing}
+ \Pr(y_0 = r) = \tilde{\pi}_r = \sum_{q=0}^R \tilde{\pi}_q \pi_{qr} \qquad \text{and} \qquad \sum_{r=0}^R \tilde{\pi}_r = 1.
+\end{equation}
+The log-likelihood is given by 
+\begin{equation}
+\label{eq:log_lik}
+l(\bs\theta | y_0,...,y_K) = \sum_{q=0}^R I(y_0 = q) \log \tilde{\pi}_q + \sum_{q=0}^R \sum_{r=0}^R k_{qr} \log \pi_{qr}.
+\end{equation}
+The $i^{th}$ entry of the score function is therefore given by
+\begin{equation}
+\label{eq:score}
+\frac{\partial l}{\partial \theta_i} = \sum_{q=0}^R \frac{I(y_0 = q)}{\tilde{\pi}_q} \frac{\partial \tilde{\pi}_q}{\partial \theta_i} +  \sum_{q=0}^R \sum_{r=0}^R \frac{k_{qr}}{\pi_{qr}} \frac{\partial \pi_{qr}}{\partial \theta_i}
+\end{equation}
+and the $(i,j)^{th}$ entry in the Hessian of the likelihood by
+\begin{multline}
+\label{eq:info_observed}
+\frac{\partial^2 l}{\partial \theta_i \partial \theta_j} = \sum_{q=0}^R \left(\frac{I(y_0 = q)}{\tilde{\pi}_q} \frac{\partial^2 \tilde{\pi}_q}{\partial \theta_i \partial \theta_j} - \frac{I(y_0 = q)}{\tilde{\pi}_q^2} \frac{\partial \tilde{\pi}_q}{\partial \theta_i} \frac{\partial \tilde{\pi}_q}{\partial \theta_j}\right) \\
+ +  \sum_{q=0}^R \sum_{r=0}^R \left(\frac{k_{qr}}{\pi_{qr}} \frac{\partial^2 \pi_{qr}}{\partial \theta_i \partial \theta_j} - \frac{k_{qr}}{\pi_{qr}^2} \frac{\partial \pi_{qr}}{\partial \theta_i}  \frac{\partial \pi_{qr}}{\partial \theta_j} \right).
+\end{multline}
+Because the DTMC is in equilibrium, $E(I(y_0 = q)) = \Pr(y_0 = q) = \tilde{\pi}_q$ and \[
+E(k_{qr}) = K \Pr(y_0 = q, y_1 = r) = K \Pr(y_0 = q) \Pr(y_1 = r | y_0 = q) = K \tilde{\pi}_q \pi_{qr}. \]
+Furthermore, from the property of transition matrices that $\sum_{r=1}^R \pi_{qr} = 1$, it follows that \[
+\sum_{r=0}^R \frac{\partial \pi_{qr}}{\partial \theta_i} = 0 \qquad \text{and} \qquad \sum_{r=0}^R \frac{\partial^2 \pi_{qr}}{\partial \theta_i \partial \theta_j} = 0; \]
+similarly, \[
+\sum_{r=0}^R \frac{\partial \tilde{\pi}_r}{\partial \theta_i} = 0 \qquad \text{and} \qquad \sum_{r=0}^R \frac{\partial^2 \tilde{\pi}_r}{\partial \theta_i \partial \theta_j} = 0. \]
+The expected information matrix therefore has $(i,j)^{th}$ entry
+\begin{equation}
+\label{eq:info_expected_full}
+-\E\left(\frac{\partial^2 l}{\partial \theta_i \partial \theta_j} \right) =  \sum_{q=0}^R \frac{1}{\tilde{\pi}_q} \frac{\partial \tilde{\pi}_q}{\partial \theta_i} \frac{\partial \tilde{\pi}_q}{\partial \theta_j} +  K \sum_{q=0}^R \sum_{r=0}^R \frac{\tilde{\pi}_q}{\pi_{qr}} \frac{\partial \pi_{qr}}{\partial \theta_i}  \frac{\partial \pi_{qr}}{\partial \theta_j}.
+\end{equation}
+For purposes of comparing the efficiency of different recording procedures, the first term in (\ref{eq:info_expected_full}) can be ignored as $K$ grows large. Thus I use 
+\begin{equation}
+\label{eq:info_expected}
+\Info^E_{ij} = K \sum_{q=0}^R \sum_{r=0}^R \frac{\tilde{\pi}_q}{\pi_{qr}} \frac{\partial \pi_{qr}}{\partial \theta_i}  \frac{\partial \pi_{qr}}{\partial \theta_j}.
+\end{equation}
+
+\section{Momentary time sampling}
+
+The transition matrix corresponding to momentary time sampling with intervals of length $L$ is given by 
+\begin{equation}
+\bs\Pi^M = \left[\begin{array}{cc} 1 - p_0(L) & p_0(L) \\ 1 - p_1(L) & p_1(L) \end{array}\right],
+\end{equation}
+where $p_0(t) = \phi \left(1 - e^{- \rho l} \right)$ and $p_1(t) = (1 - \phi) e^{- \rho t} + \phi$. The equilibrium distribution of this DTMC is given by $\tilde{\pi}_0 = 1 - \phi$, $\tilde{\pi}_1 = \phi$. The first derivatives of the transition probabilities with respect to $\phi$ and $\rho$ are given by \begin{align*}
+\frac{\partial \bs\Pi^M}{\partial \phi} &= \left[\begin{array}{cc} - (1 - e^{- \rho L}) & (1 - e^{- \rho L}) \\  - (1 - e^{- \rho L}) & (1 - e^{- \rho L}) \end{array}\right], \\
+\frac{\partial \bs\Pi^M}{\partial \rho} &= \left[\begin{array}{cc} - \phi L  e^{- \rho L} & \phi L e^{- \rho L} \\  (1 - \phi) L e^{- \rho L} & -(1 - \phi) L e^{- \rho L} \end{array}\right].
+\end{align*}
+The expected information matrix corresponding to the momentary time sampling procedure can then be evaluated directly from (\ref{eq:info_expected}). 
+
+\section{Partial interval recording}
+
+The transition probabilities corresponding to partial interval recording with intervals of length $L$ are given by 
+\begin{equation}
+\pi_{j,j+1} = 1 - e^{-\phi \rho L} \left[1 - \stackrel{(j)}{\circ}f \left(0 \right) \right], \qquad \pi_{j,0} = 1 - \pi_{j,j+1}
+\end{equation}
+for $j = 0,1,2,3,...$, where \[
+f(q) = \frac{\phi - \left(\phi - q \right) e^{-\rho L}}{1 - (1 - q) e^{-\phi \rho L}} \]
+and $\stackrel{(j)}{\circ}f$ denotes $j$-fold recursion of $f$: \[
+\stackrel{(0)}{\circ}f(q) = q, \qquad \stackrel{(j)}{\circ}f(q) = f\left(\stackrel{(j-1)}{\circ}f(q) \right). \]
+The equilibrium distribution of this DTMC is given by \[
+\tilde{\pi}_0 = 1 - E(U_k) = (1 - \phi) e^{-\phi \rho L}, \]
+and from (\ref{eq:balancing_normalizing}), \[
+\tilde{\pi}_j = \tilde{\pi}_{j-1} \pi_{j-1,j} = \tilde{\pi}_0 \prod_{i=1}^j \pi_{i-1,i} \]
+for $j=1,2,3,...$. The derivatives of $\pi_{j,j+1}$ are given by \begin{align*}
+\frac{\partial \pi_{j,j+1}}{\partial \phi} &= \rho L \left(1 - \pi_{j,j+1}\right) +  e^{-\phi \rho L} \left(\stackrel{(j)}{\circ}g_\phi(0,0) \right), \\
+\frac{\partial \pi_{j,j+1}}{\partial \rho} &= \phi L \left(1 - \pi_{j,j+1}\right) +  e^{-\phi \rho L} \left(\stackrel{(j)}{\circ}g_\rho(0,0) \right), 
+\end{align*}
+for $j = 0,1,2,...$. Here, $g_\phi$ and $g_\rho$ are two-dimensional functions defined by $g_\theta(q,r) = \left(f(q), f_\theta'(q,r) \right)$ with \begin{align*}
+f'_{\phi}(q,r) &= \frac{\partial f(q)}{\partial \phi} = \frac{1 - e^{-\rho L}\left(1 - r \right) - f(q) e^{-\phi \rho L} \left[\rho L(1 - q) + r \right]}{1 - (1 - q) e^{-\phi \rho L}} \\
+f'_{\rho}(q,r) &= \frac{\partial f(q)}{\partial \rho} = \frac{e^{-\rho L}\left[L(\phi - q) + r\right] - f(q) e^{-\phi \rho L} \left[\phi L(1 - q) + r \right]}{1 - (1 - q) e^{-\phi \rho L}},
+\end{align*}
+where I write $r$ for $\frac{\partial q}{\partial \theta}$. 
+
+The expected information matrix for this DTMC can then be evaluated as
+\begin{equation}
+\Info_E^P = K \sum_{q=0}^\infty \frac{\tilde{\pi}_q}{\pi_{q,q+1}(1 - \pi_{q,q+1})} \frac{\partial \pi_{q,q+1}}{\partial \theta_i}  \frac{\partial \pi_{q,q+1}}{\partial \theta_j}.
+\end{equation}
+
+\section{Augmented interval recording}
+
+The transition matrix corresponding to augmented interval recording with intervals of length $L$ is given by 
+\begin{equation}
+\bs\Pi^A = \left[\begin{array}{cccc} e^{-\phi \rho L} & 1 - e^{-\phi \rho L} - p_0(L) & p_0(L) & 0 \\ 0 & \frac{1 - \phi}{\phi}p_0(L) & 1 - e^{-(1 - \phi) \rho L} - \frac{1 - \phi}{\phi}p_0(L)& e^{-(1 - \phi) \rho L}  \end{array}\right].
+\end{equation}
+The equilibrium distribution of this DTMC is given by $\tilde{\pi}_0 = 1 - \phi$, $\tilde{\pi}_1 = \phi$. The first derivatives of the transition probabilities with respect to $\phi$ and $\rho$ are given by \begin{align*}
+\frac{\partial \bs\Pi^A}{\partial \phi} &= \left[\begin{array}{cccc}
+-\rho L e^{-\phi \rho L} & \rho L e^{-\phi \rho L} - (1 - e^{-\rho L}) & (1 - e^{-\rho L}) & 0 \\
+0 & - (1 - e^{-\rho L})  &  1 - e^{-\rho L}  - \rho L e^{-(1 - \phi) \rho L} & \rho L e^{-(1 - \phi) \rho L}
+\end{array}\right], \\
+\frac{\partial \bs\Pi^A}{\partial \rho} &= \left[\begin{array}{cccc} 
+-\phi L e^{-\phi \rho L} &\phi L \left( e^{-\phi \rho L} - e^{-\rho L}\right) & \phi L e^{-\rho L} & 0 \\ 
+0 & (1 - \phi) L e^{-\rho L} & (1 - \phi) L \left(e^{-(1-\phi) \rho L} - e^{-\rho L}\right) & - (1 - \phi) L e^{- (1 - \phi) \rho L} 
+\end{array}\right].
+\end{align*}
+The expected information matrix corresponding to the momentary time sampling procedure can then be evaluated directly from (\ref{eq:info_expected}). 
+
+
+
+\end{document}
