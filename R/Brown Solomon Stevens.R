@@ -60,17 +60,16 @@ MTSmle_CI <- function(U, c, p = .05) {
   ests <- MTSmle(U = U, c = c)
   
   if (is.na(ests[2])) {
-    return(list(phi = ests[1], phi_CI = c(NA,NA), 
-                zeta = ests[2], zeta_CI = c(NA,NA)))
+    sd_logparms <- c(1 / sqrt(length(U) * ests[1] * (1 - ests[1])), NA) 
+  } else {
+    V_logparms <- MTSmle_cov(phi = ests[1], zeta = ests[2], c = c, intervals = length(U))
+    sd_logparms <- sqrt(diag(V_logparms))
   }
-  
-  V_logparms <- MTSmle_cov(phi = ests[1], zeta = ests[2], c = c, intervals = length(U))
-  sd_logparms <- sqrt(diag(V_logparms))
   
   zconf <- qnorm(c(p/2, 1-p/2))
   
   lphiCI <- logit(ests[1]) + zconf * sd_logparms[1]
-  lzetaCI <- log(ests[2]) + zconf * sd_logparms[2]
+  lzetaCI <- log(ests[2]) + zconf * sd_logparms[2]    
   
   phi_CI <- expit(lphiCI)
   zeta_CI <- exp(lzetaCI)
