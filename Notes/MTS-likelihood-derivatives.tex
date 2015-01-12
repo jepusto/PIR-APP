@@ -1,0 +1,52 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[natbibapa]{apacite}
+
+
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{array}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bf}
+\titleformat*{\subsection}{\normalsize\bf}
+
+\newcommand{\E}{\text{E}}
+\newcommand{\logit}{\text{logit}}
+\newcommand{\cll}{\text{cll}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\converge}[1]{\stackrel{\mathcal{{#1}}}{\rightarrow}}
+
+\newcommand{\diag}{\text{diag}}
+\newcommand{\tr}{\text{tr}}
+
+\newcommand{\Info}{\mathcal{I}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\bm}{\mathbf}
+
+\begin{document}
+Conditioning on $X_0$, the log-likelihood of MTS data is then given by \begin{equation}
+\begin{aligned}
+\label{eq:MTS_loglik}
+l_{MTS}(\phi, \rho) &= n_{01} \log \phi + n_{10} \log\left(1 - \phi\right) + \left(n_{01} + n_{10}\right) \log \left(1 - e^{-\rho}\right) \\
+& \qquad \qquad \qquad \qquad + n_{00} \log\left(1 - \phi + \phi e^{-\rho}\right) + n_{11}\log\left[\phi + (1 - \phi) e^{-\rho}\right].
+\end{aligned}
+\end{equation}
+The score function is given by 
+\begin{align*}
+\frac{\partial l_{MTS}}{\partial \phi} &= \frac{n_{01}}{\phi} - \frac{n_{10}}{1 - \phi} - \frac{n_{00}}{\frac{1}{1 - e^{-\rho}} - \phi} + \frac{n_{11}}{\frac{e^{-\rho}}{1 - e^{-\rho}} + \phi} \\
+\frac{\partial l_{MTS}}{\partial \rho} &= e^{-\rho}\left[\frac{n_{01} + n_{10}}{1 - e^{-\rho}} - \frac{n_{00}}{\frac{1 - \phi}{\phi} + e^{-\rho}} - \frac{n_{11}}{\frac{\phi}{1 - \phi} + e^{-\rho}} \right] 
+\end{align*}
+and the elements of the Hessian are
+\begin{align*}
+\frac{\partial^2 l_{MTS}}{\partial \phi^2} &= -\frac{n_{01}}{\phi^2} - \frac{n_{10}}{(1 - \phi)^2} - \frac{n_{00}}{\left(\frac{1}{1 - e^{-\rho}} - \phi\right)^2} - \frac{n_{11}}{\left(\frac{e^{-\rho}}{1 - e^{-\rho}} + \phi\right)^2} \\
+\frac{\partial^2 l_{MTS}}{\partial \rho^2} &= -e^{-\rho}\left[\frac{n_{01} + n_{10}}{\left(1 - e^{-\rho}\right)^2} - \frac{\frac{1 - \phi}{\phi}n_{00}}{\left(\frac{1 - \phi}{\phi} + e^{-\rho}\right)^2} - \frac{\frac{\phi}{1 - \phi}n_{11}}{\left(\frac{\phi}{1 - \phi} + e^{-\rho}\right)^2} \right] \\
+\frac{\partial^2 l_{MTS}}{\partial \phi \partial \rho} &= -e^{-\rho}\left[\frac{n_{00}}{\left(1 - \phi + \phi e^{-\rho}\right)^2} - \frac{n_{11}}{\left(\phi + (1 - \phi) e^{-\rho}\right)^2} \right]. \\
+\end{align*}
+
+\end{document}

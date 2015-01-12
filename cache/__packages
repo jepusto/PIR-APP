@@ -1,0 +1,9 @@
+ARPobservation
+base
+doParallel
+foreach
+iterators
+knitr
+plyr
+reshape2
+xtable
