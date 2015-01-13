@@ -1,6 +1,3 @@
-library(ARPobservation)
-library(plyr)
-
 #---------------------------
 # transformation functions 
 #---------------------------
@@ -50,66 +47,85 @@ p_1 <- function(x,phi,zeta) phi + (1 - phi) * exp(-1 * x * zeta / (phi * (1- phi
 # log-likelihood functions 
 #---------------------------------------
 
-# calculate interval probabilities
+# calculate conditional probabilities
 
 PIRpsi <- function(phi, zeta, U, c, d) {
   
-  psi <- vector(mode = "numeric", length = length(U))
+  K <- length(U)
+  p1_cd <- p_1(c + d, phi, zeta)
+  p0_cd <- p_0(c + d, phi, zeta)
+  p0_d <- p_0(d, phi, zeta)
+  e_neg_lambda <- exp(-1 * zeta * c / (1 - phi))
+  
+  psi <- vector(mode = "numeric", length = K)
   psi[1] <- phi
-  for(i in 2:length(U)){
-    psi[i] <- ((psi[i-1] * p_1(c + d,phi,zeta) + (1 - psi[i-1]) * (p_0(c + d,phi,zeta) - p_0(d, phi, zeta) * exp(-1 * zeta * c / (1-phi)))) / (1 - (1-psi[i-1]) * exp(-1 * zeta * c/(1-phi))))^U[i-1] * p_0(d,phi,zeta)^(1-U[i-1]) 
+  for(i in 1:(K - 1)) {
+    psi_lag <- psi[i]
+    u <- U[i]
+    psi[i + 1] <- ((psi_lag * p1_cd + (1 - psi_lag) * (p0_cd - p0_d * e_neg_lambda)) / (1 - (1-psi_lag) * e_neg_lambda))^u * p0_d^(1-u)
   }
   return(psi)
 }
 
 
-# log-likelihood of a particular U
+# log-likelihood for PIR
 
-PIR_loglik <- function(phi, zeta, U, c, d) {
+PIR_loglik <- function(param, U, c, d) {
+  phi <- expit(param[1])
+  zeta <- exp(param[2])
   psi <- PIRpsi(phi, zeta, U, c, d)
-  loglik <- sum(U * log(1 - (1 - psi) * exp(-1 * zeta * c / (1-phi))) + 
-                  (1 - U) * (log(1 - psi) - zeta * c / (1-phi)))
+  loglik <- sum(U * log(1 - (1 - psi) * exp(-1 * zeta * c / (1 - phi))) + (1 - U) * (log(1 - psi) - zeta * c / (1-phi)))
   return(loglik)
 }
 
-# penalized log-likelihood
 
-PIR_pll <- function(phi, zeta, U, c, d, mu_hyp, lambda_hyp, theta_hyp) {
-  log_lik <- PIR_loglik(phi = phi, zeta = zeta, U = U, c = c, d = d)
-  sigma_sq <- log(theta_hyp + 1)
-  penalty <- dnorm(log(phi / zeta), mean = log(mu_hyp), sd = sqrt(sigma_sq), log = TRUE) + 
-    dnorm(log((1 - phi) / zeta), mean = log(lambda_hyp), sd = sqrt(sigma_sq), log = TRUE)
-  c(log_lik = log_lik, penalty = penalty, pll = log_lik + penalty)
+#---------------------------------------------------
+# penalty functions and penalized log-likelihood
+#---------------------------------------------------
+
+# Note that priors are on (phi, 1 / zeta) when const = 1
+# For inverse-gamma prior on zeta, use const = -1
+# For priors on (mu, lambda), use const = 2
+
+Beta_Gamma <- function(k_mu, k_lambda, theta, const = 1) {
+  function(param) {
+    -(k_mu - 1) * log(1 + exp(-param[1])) - (k_lambda - 1) * (param[1] + log(1 + exp(-param[1]))) - (k_mu + k_lambda - const) * param[2] - exp(-param[2]) / theta
+  }  
 }
+  
+
+Normal_Normal <- function(k_mu, k_lambda, theta)
+  function(param) {
+    
+  }
+        
+PIR_loglik_pen <- function(param, U, c, d, penalty_func)
+  PIR_loglik(param, U, c, d) + penalty_func(param)
+
+#-------------------------------------------------------------------
+# maximum likelihood estimation, with optional penalty function
+#-------------------------------------------------------------------
 
 
+# maximum likelihood estimates for a single response string
 
-# function to be maximized - optim requires all maximized values to be contained in a single vector
-
-ll2 <- function(pars, U, c, d, ...)  
-  PIR_loglik(phi = expit(pars[1]), zeta = exp(pars[2]), U = U, c = c, d = d)
-
-pll2 <- function(pars, U, c, d, mu_hyp, lambda_hyp, theta_hyp, ...) {
-  PIR_pll(phi = expit(pars[1]), zeta = exp(pars[2]), U = U, c = c, d = d,
-      mu_hyp = mu_hyp, lambda_hyp = lambda_hyp, theta_hyp = theta_hyp)["pll"]
-} 
-
-
-#---------------------------------------
-# maximum likelihood estimation
-#---------------------------------------
-
-# get maxmimum likelihood estimates for a single response string
-
-PIRmle <- function(U, c, d, coding = "PIR", objective = ll2,
-                   phi_start = .50, zeta_start = .10, transform = "none", ...) {
+PIRmle <- function(U, c, d, coding = "PIR", penalty_func = NULL,
+                   phi_start = mean(U) / 2, zeta_start = .10, transform = "none", ...) {
   
   if(sum(is.na(U)) > 0) return(c(phi = NA, zeta = NA))
   
-  if(coding == "WIR") U <- 1 - U
+  if(coding == "WIR") {
+    U <- 1 - U
+    phi_start <- 1 - phi_start
+  }
   
+  if (is.null(penalty_func)) {
+    objective <- function(par) PIR_loglik(par, U = U, c = c, d = d)
+  } else {
+    objective <- function(par) PIR_loglik_pen(par, U = U, c = c, d = d, penalty_func) 
+  }
+    
   results <- optim(par = c(logit(phi_start), log(zeta_start)), fn = objective, 
-                   U = U, c = c, d = d, 
                    control = list(fnscale = -1), ...)
   
   if(coding == "WIR") results$par[1] <- -results$par[1]

@@ -163,7 +163,7 @@ source_func <- ls()
 phi <- c(0.1, 0.2, 0.3, 0.4, 0.5)
 zeta <- c(0.02, 0.05, 0.10, 0.20, 0.25, 0.40, 0.50)
 K <- 60
-iterations <- 2000
+iterations <- 20
 params <- expand.grid(phi = phi, zeta = zeta)
 
 cluster <- start_parallel(source_func)
@@ -195,7 +195,6 @@ The probability that the maximum likelihood estimators are undefined or fall out
 
 Potential priors:
 \begin{itemize}
-\item Dirichlet priors on $p_{01}$ and $p_{10}$. Do these yield closed-form solutions? Do they yield well-behaved estimates? How do the priors translate to $\mu,\lambda$ and $\phi,\zeta$ parameterizations? 
 \item Independent $\Gamma(k, \theta)$ priors on $\mu,\lambda$ scale, which translates to $\phi \sim Beta(k_\mu, k_\lambda)$ and $1 / \zeta \sim \Gamma(k_\mu + k_\theta, \theta)$. Need to have $k_\mu, k_\lambda > 1$ in order for estimates to remain within parameter space. 
 \item Independent normal priors on $\logit \phi, \log \zeta$.
 \end{itemize}
@@ -269,7 +268,7 @@ source_func <- ls()
 phi <- seq(0.1, 0.9, 0.1)
 zeta <- c(0.02, 0.05, 0.10, 0.20, 0.25, 0.40, 0.50)
 K <- 60
-iterations <- 50
+iterations <- 20
 threshold <- 8
 params <- expand.grid(phi = phi, zeta = zeta)
 

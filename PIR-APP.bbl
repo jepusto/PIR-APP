@@ -1,9 +1,9 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
-J.~Altmann%
+Altmann%
 }{%
-J.~Altmann%
+Altmann%
 }{%
 {\protect \APACyear {1974}}%
 }]{%
@@ -21,34 +21,6 @@ Altmann, J.%
   {{Observational study of behavior: Sampling methods}}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Behaviour}{49}{3/4}{227--267}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-S\BPBI A.~Altmann%
-\ \BBA {} Wagner%
-}{%
-S\BPBI A.~Altmann%
-\ \BBA {} Wagner%
-}{%
-{\protect \APACyear {1970}}%
-}]{%
-Altmann1970estimating}
-\APACinsertmetastar {%
-Altmann1970estimating}%
-\begin{APACrefauthors}%
-Altmann, S\BPBI A.%
-\BCBT {}\ \BBA {} Wagner, S\BPBI S.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{1970}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Estimating rates of behavior from Hansen frequencies}}
-  {{Estimating rates of behavior from Hansen frequencies}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Primates}{11}{2}{181--183}.
-\newblock
-\begin{APACrefDOI} \doi{10.1007/BF01731143} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -243,34 +215,6 @@ Mudford, O\BPBI C.%
 \APACjournalVolNumPages{Journal of Applied Behavior Analysis}{42}{1}{165--169}.
 \newblock
 \begin{APACrefDOI} \doi{10.1901/jaba.2009.42-165} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Pustejovsky%
-\ \BBA {} Swan%
-}{%
-Pustejovsky%
-\ \BBA {} Swan%
-}{%
-{\protect \APACyear {2014}}%
-}]{%
-Pustejovsky2014four}
-\APACinsertmetastar {%
-Pustejovsky2014four}%
-\begin{APACrefauthors}%
-Pustejovsky, J\BPBI E.%
-\BCBT {}\ \BBA {} Swan, D\BPBI M.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2014}{}{}.
-\newblock
-\APACrefbtitle {{Four methods for analyzing partial interval recording data,
-  with application to single-case research}.} {{Four methods for analyzing
-  partial interval recording data, with application to single-case research}.}
-\newblock
-Paper presented at the annual meeting of the American Educational Research
-  Association, Philadelphia, PA.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
