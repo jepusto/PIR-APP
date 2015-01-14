@@ -45,7 +45,7 @@ source_func <- ls()
 phi <- seq(0.1, 0.9, 0.1)
 zeta <- c(0.02, 0.05, 0.10, 0.20, 0.25, 0.40, 0.50)
 K <- 40
-iterations <- 100
+iterations <- 2000
 threshold <- 8
 params <- expand.grid(phi = phi, zeta = zeta)
 

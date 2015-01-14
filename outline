@@ -9,26 +9,22 @@ An Alternating Poisson Process model for estimating prevalence and incidence fro
   - Suen & Ary
   - penalized likelihood
 
-2. Alternating Poisson Process
+
+2. Likelihood models and maximum likelihood estimation
 - Behavior stream model
-
-3. Momentary Time Sampling
-- MTS observation filter
-- Likelihood (BSS)
-- Penalized likelihood estimators
-- Simulation evidence
-
-4. Interval Recording
-- PIR observation filter
-- Likelihood
-- Penalized likelihood estimators
-- Simulation evidence
+- Alternating Poisson Process
+- Momentary Time Sampling
+- Partial interval recording
 - Whole interval recording
 
-5. Application
+3. Penalized likelihood estimators
+- Penalized likelihood estimators
+- Simulation evidence
+
+4. Application
 - Johnson data?
 
-6. Discussion
+5. Discussion
 - Need to extend to regression models
 - Limitation to state-behaviors where prevalence is relevant. Need for further methods for estimating incidence of instant-behaviors from PIR.
 - Model does not explicitly account for observer errors in scoring. Need for methods of assessing the extent of such error.
