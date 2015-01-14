@@ -89,14 +89,18 @@ PIR_loglik <- function(param, U, c, d) {
 
 Beta_Gamma <- function(k_mu, k_lambda, theta, const = 1) {
   function(param) {
-    -(k_mu - 1) * log(1 + exp(-param[1])) - (k_lambda - 1) * (param[1] + log(1 + exp(-param[1]))) - (k_mu + k_lambda - const) * param[2] - exp(-param[2]) / theta
+    -(k_mu - 1) * log(1 + exp(-param[1])) - 
+      (k_lambda - 1) * (param[1] + log(1 + exp(-param[1]))) - 
+      (k_mu + k_lambda - const) * param[2] - exp(-param[2]) / theta
   }  
 }
-  
 
-Normal_Normal <- function(k_mu, k_lambda, theta)
+# Normal-normal priors on log(mu), log(lambda)
+
+Normal_Normal <- function(mu_hyp, lambda_hyp, sigma_hyp)
   function(param) {
-    
+    ((log(param[1]) - log(param[2]) - log(mu_hyp))^2 
+      + (log(1 - param[1]) - log(param[2]) - log(lambda_hyp))^2 ) / (2 * sigma_hyp^2)
   }
         
 PIR_loglik_pen <- function(param, U, c, d, penalty_func)
@@ -106,11 +110,11 @@ PIR_loglik_pen <- function(param, U, c, d, penalty_func)
 # maximum likelihood estimation, with optional penalty function
 #-------------------------------------------------------------------
 
-
 # maximum likelihood estimates for a single response string
 
 PIRmle <- function(U, c, d, coding = "PIR", penalty_func = NULL,
-                   phi_start = mean(U) / 2, zeta_start = .10, transform = "none", ...) {
+                   phi_start = max(mean(U) / 2, expit(-10)),
+                   zeta_start = .10, transform = "none") {
   
   if(sum(is.na(U)) > 0) return(c(phi = NA, zeta = NA))
   
@@ -126,7 +130,7 @@ PIRmle <- function(U, c, d, coding = "PIR", penalty_func = NULL,
   }
     
   results <- optim(par = c(logit(phi_start), log(zeta_start)), fn = objective, 
-                   control = list(fnscale = -1), ...)
+                   control = list(fnscale = -1))
   
   if(coding == "WIR") results$par[1] <- -results$par[1]
   
@@ -173,16 +177,14 @@ generateSamples <- function(phi, zeta, c, d, intervals, coding, iterations) {
 # bootstrap a confidence interval for a given phi/zeta
 
 PIRbootstrap <- function(phi, zeta, c, d, intervals, 
-                         coding = "PIR", objective = ll2,
-                         phi_start = .50, zeta_start = .10, 
-                         iterations = 2000, p = .05, ...) {
+                         coding = "PIR", penalty_func = NULL,
+                         iterations = 2000, p = .05) {
   
   U <- generateSamples(phi = phi, zeta = zeta, c = c, d = d, 
                        intervals = intervals, coding = coding, iterations = iterations)
   
   ests <- t(apply(X = U, MARGIN = 1, FUN = PIRmle, c = c, d = d, 
-                  phi_start = phi_start, zeta_start = zeta_start, 
-                  coding = coding, objective = objective, ...))
+                  coding = coding, penalty_func = penalty_func))
   
   phi_CI <- quantile(ests[,1], probs = c(p/2, 1-p/2))
   zeta_CI <- quantile(ests[,2], probs = c(p/2, 1-p/2))
@@ -192,17 +194,17 @@ PIRbootstrap <- function(phi, zeta, c, d, intervals,
 
 # get both the maximum likelihood estimates and CIs for a given response string
 
-PIRmleCI <- function(U, c, d, coding = "PIR", objective = ll2,
-                     phi_start = .50, zeta_start = .10, 
-                     transform = "none", iterations = 2000, p = .05, ...){
+PIRmleCI <- function(U, c, d, coding = "PIR", penalty_func = NULL,
+                     phi_start = max(mean(U) / 2, expit(-10)), zeta_start = .10, 
+                     transform = "none", iterations = 2000, p = .05){
   
-  ests <- PIRmle(U = U, c = c, d = d, coding = coding, objective = objective,
-                 phi_start = phi_start, zeta_start = zeta_start, ...)
+  ests <- PIRmle(U = U, c = c, d = d, coding = coding, penalty_func = penalty_func,
+                 phi_start = phi_start, zeta_start = zeta_start)
   
   CI <- PIRbootstrap(phi = expit(ests[1]), zeta = exp(ests[2]), 
                      c = c, d = d, intervals = length(U), 
-                     coding = coding, objective = objective, 
-                     iterations = iterations, p = p, ...)
+                     coding = coding, penalty_func = penalty_func, 
+                     iterations = iterations, p = p)
   
   if(transform == "none"){ 
     return(list(phi = ests[1], phi_CI = CI$phi_CI, 

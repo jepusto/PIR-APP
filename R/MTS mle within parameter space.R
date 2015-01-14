@@ -37,11 +37,3 @@ iterations <- 50
 
 params <- expand.grid(phi = phi, zeta = zeta)
 system.time(results <- maply(params, proportion_valid, K = 60, iterations = iterations))
-
-rownames(results) <- paste0("$\\phi = ", rownames(results),"$")
-colnames(results) <- paste0("\\zeta = ", colnames(results),"$")
-xtable(results, 
-       caption = paste0("Proportion of ",iterations,
-                        " Simulated MTS samples (K = ", K,
-                        ") in which $0 < \\hat\\phi < 1$ and $0 < \\hat\\zeta < \\infty$."),
-       label = "tab:MTS_zeta_valid")
