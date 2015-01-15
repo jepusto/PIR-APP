@@ -1,0 +1,130 @@
+\documentclass[11pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[natbibapa]{apacite}
+
+
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{array}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bf}
+\titleformat*{\subsection}{\normalsize\bf}
+
+\newcommand{\E}{\text{E}}
+\newcommand{\logit}{\text{logit}}
+\newcommand{\cll}{\text{cll}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\converge}[1]{\stackrel{\mathcal{{#1}}}{\rightarrow}}
+
+\newcommand{\diag}{\text{diag}}
+\newcommand{\tr}{\text{tr}}
+
+\newcommand{\Info}{\mathcal{I}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\bm}{\mathbf}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\section{Possible priors}
+
+We consider several different possible priors for the parameters of the behavior stream. Depending on the context, it may be more appropriate to express these in terms of $(\mu, \lambda)$ or in terms of $(\phi, \zeta)$; we therefore consider the implications of different parameterizations. The goal is to identify distributional families that can be used to express ``vague'' priors, which regularize the posterior but are dominated by the likelihood for reasonable sample sizes, and that have a sensible substantive interpretation, thus providing a convenient means for expressing stronger prior information when available. We consider several possibilities and parameterizations.
+
+\subsection{Gamma priors on $(\mu, \lambda)$}
+
+One obvious candidate for priors on $(\mu, \lambda)$ is the gamma distributions, which has the useful property that the implied priors on $\phi$ and $\zeta$ have a familiar distributional form. Consider the priors \[
+\mu \sim Gamma\left(\kappa_\mu, \theta_\mu\right), \qquad \lambda \sim Gamma\left(\kappa_\lambda, \theta_\lambda\right), \]
+with $\mu$ and $\lambda$ taken to be independent. The penalty function, written in terms of $\phi$ and $\zeta$, is \[
+f_{G}\left(\phi, \zeta\right) = \left(\kappa_\mu - 1\right) \log \phi + \left(\kappa_\lambda - 1\right) \log(1 - \phi) - \left(\kappa_\mu + \kappa_\lambda - a\right) \log(\zeta) - \frac{\frac{\phi}{\theta_\mu} + \frac{1 - \phi}{\theta_\lambda}}{\zeta}, \]
+with $a = 2$. 
+
+If we take $\theta_\mu = \theta_\lambda = \theta$, then \[
+\phi \sim Beta\left(\kappa_\mu, \kappa_\theta\right), \qquad \zeta \sim \Gamma^{-1}\left(\kappa_\mu + \kappa_\lambda, 1 / \theta\right), \]
+where $\Gamma^{-1}$ denotes the inverse-gamma distribution. Parameterizing the prior in terms of $\left(\phi, \zeta\right)$ leads to the same penalty function as above, but with $a = -1$; parameterizing in terms of $\left(\phi, \zeta^{-1}\right)$ has $a = 1$. Note that we must take $\kappa_\mu, \kappa_\lambda > 1$ for the penalty function to regularize the likelihood.
+
+\subsection{Log-normal priors on $(\mu, \lambda)$}
+
+Another possibility would be to log-normal priors: \[
+\log\mu \sim N\left(\gamma_\mu, \sigma_\mu^2\right), \qquad \log\lambda \sim N\left(\gamma_\lambda, \sigma_\lambda^2\right), \]
+with $\mu$ and $\lambda$ again taken to be independent. These priors imply that $\logit \ \phi \sim N\left(\gamma_\mu - \gamma_\lambda, \sigma_\mu^2 + \sigma_\lambda^2\right)$, although they do not lead to a tractable form for the prior on $\zeta$. Parameterizing the prior in terms of $\mu, \lambda$, the penalty function is \[
+f_{LN1}\left(\phi, \zeta\right) = -\frac{1}{2}\left[\left(\frac{\log(\phi) - \log(\zeta) - \gamma_\mu}{\sigma_\mu}\right)^2 + \left(\frac{\log(1 - \phi) - \log(\zeta) - \gamma_\lambda}{\sigma_\lambda}\right)^2\right] - \log \phi - \log(1 - \phi) + 2 \log \zeta.
+\]
+
+Alternately, parameterizing the prior in terms of $\log \mu, \log \lambda$ leads to the final three terms dropping out: \[
+f_{LN2}\left(\phi, \zeta\right) = -\frac{1}{2}\left[\left(\frac{\log(\phi) - \log(\zeta) - \gamma_\mu}{\sigma_\mu}\right)^2 + \left(\frac{\log(1 - \phi) - \log(\zeta) - \gamma_\lambda}{\sigma_\lambda}\right)^2\right]. \]
+A disadvantage of this penalty function is that it is not obvious which choices for the hyperparameters will regularize the likelihood, because the limits (approaching the boundaries of the parameter space) of the derivatives with respect to $\phi$ and $\zeta$ do not always have a constant sign.
+
+\subsection{Normal priors on $\left(\logit \ \phi, \log \zeta\right)$}
+
+A further possibility would be to put normal priors on transformations of $\phi$ and $\zeta$ that have unbounded supports. This would be reasonable, for example, if one were constructing a generalized linear model with a logistic link for $\phi$ and a log link for $\zeta$. Thus, we might assume \[
+\logit \ \phi \sim N\left(\gamma_\phi, \sigma_\phi^2\right), \qquad \log \zeta \sim N\left(\gamma_\zeta, \sigma_\zeta^2\right), \]
+with $\phi$ and $\zeta$ independent. The implied priors on $\mu, \lambda$ are not familiar distributions. The corresponding penalty function is \[
+f_{N}\left(\phi, \zeta\right) = -\frac{1}{2}\left[\left(\frac{\logit(\phi) - \gamma_\phi}{\sigma_\phi}\right)^2 + \left(\frac{\log(\zeta) - \gamma_\zeta}{\sigma_\zeta}\right)^2\right]. \]
+
+\subsection{Dirichlet prior on $p_0(c + d), p_1(c + d)$}
+
+A final alternative would be to put priors on $p_0(c + d), p_1(c + d)$, rather than directly on the parameters of the behavior stream. This approach is computationally convenient for the MTS estimators, in that it leads to closed-form expressions for the posterior mode of $l_{MTS}(\phi, \zeta)$. Specifically, one could assume that \[
+p_0(c + d), 1 - p_1(c + d) \sim Dirichlet\left(\alpha_0, \alpha_1, \alpha_2 \right). \]
+From the fact that $\phi = p_0 / \left(p_0 + 1 - p_1\right)$, the implied prior for prevalence $\phi \sim Beta(\alpha_0, \alpha_1)$. However, the implied prior for incidence does not have a convenient form, though the marginal distribution of $\zeta$ appears to be quite similar to a gamma distribution. Neither do the implied priors on $(\mu, \lambda)$ have a tractable form, which makes it rather difficult to choose sensible hyperparameters.
+
+The penalty function corresponding to the Dirichlet prior distribution is \[
+f_{Dir}(\phi, \zeta) = (\alpha_0 - 1)\log \phi + (\alpha_1 - 1) \log(1 - \phi) + (\alpha_0 + \alpha_1 - 2) \log\left[1 - \exp\left(\frac{- c \zeta}{\phi (1 - \phi)}\right)\right] - \frac{(\alpha_2 - 1) c \zeta}{\phi (1 - \phi)}. \]
+We must take $\alpha_0, \alpha_1, \alpha_2 > 1$ in order for the penalty function to regularize the likelihood.
+
+
+
+\end{document}

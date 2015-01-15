@@ -1,7 +1,7 @@
 logit <- function(x) log(x) - log(1 - x)
 expit <- function(x) 1 / (1 + exp(-x))
 
-MTSmle <- function(U, c) {
+MTS_mle <- function(U, c) {
 
   if (sum(is.na(U)) > 0) return(c(phi = NA, zeta = NA))
   
@@ -26,7 +26,7 @@ MTSmle <- function(U, c) {
   return(c(phi = phi, zeta = zeta))    
 }
 
-MTSmle_cov <- function(phi, zeta, c, intervals) {
+MTS_mle_cov <- function(phi, zeta, c, intervals) {
   
   muI <- zeta / phi
   lambdaI <- zeta / (1 - phi)
@@ -56,7 +56,7 @@ MTSmle_cov <- function(phi, zeta, c, intervals) {
   J %*% G %*% S %*% t(G) %*% t(J) / intervals
 }
 
-MTSmle_CI <- function(U, c, p = .05) {
+MTS_mle_CI <- function(U, c, p = .05) {
   ests <- MTSmle(U = U, c = c)
   
   if (is.na(ests[2])) {

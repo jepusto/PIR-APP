@@ -126,18 +126,18 @@ l_{MTS}(\phi, \zeta) &= n_{01} \log \phi + n_{10} \log\left(1 - \phi\right) \\
 & \qquad \qquad \qquad \qquad \qquad \qquad + n_{11}\log\left[\phi + \left(1 - \phi\right)\exp\left(\frac{-\zeta c}{\phi (1 - \phi)}\right)\right].
 \end{aligned}
 \end{equation}
-Let $\hat{p}_{01} = n_{01}/ \left(n_{00} + n_{01}\right)$ and $\hat{p}_{10} = n_{10} / \left(n_{10} + n_{11}\right)$. \citet{Brown1977estimation} showed that the maximum likelihood estimate of $\zeta$ exists only when $\hat{p}_{01} + \hat{p}_{10} < 1$. Under the condition that $\hat{p}_{01} + \hat{p}_{10} < 1$, the maximum likelihood estimates of $\phi$ and $\zeta$ are given by 
+Let $\hat{p}_0 = n_{01}/ \left(n_{00} + n_{01}\right)$ and $\hat{p}_1 = n_{11} / \left(n_{10} + n_{11}\right)$. \citet{Brown1977estimation} showed that the maximum likelihood estimate of $\zeta$ exists only when $\hat{p}_0 < \hat{p}_1$. When this condition holds, the maximum likelihood estimates of $\phi$ and $\zeta$ are given by 
 \begin{equation}
 \label{eq:MTS_mle}
-\hat\phi = \frac{\hat{p}_{01}}{\hat{p}_{01} + \hat{p}_{10}} \qquad \text{and} \qquad
-\hat\zeta = \frac{-\hat{p}_{01} \hat{p}_{10} \log(1 - \hat{p}_{01} - \hat{p}_{10})}{c \left(\hat{p}_{01} + \hat{p}_{10}\right)^2}.
+\hat\phi_{MTS} = \frac{\hat{p}_0}{\hat{p}_0 + 1 - \hat{p}_1} \qquad \text{and} \qquad
+\hat\zeta_{MTS} = \frac{-\hat{p}_0 \left(1 - \hat{p}_1\right) \log(\hat{p}_1 - \hat{p}_0)}{c \left(\hat{p}_0 + 1 - \hat{p}_1\right)^2}.
 \end{equation}
-If $\hat{p}_{01} + \hat{p}_{10} \geq 1$, then the maximum likelihood estimator of $\phi$ is still well-defined and equal to $\hat\phi = \left(n_{01} + n_{11}\right) / K$. 
+If $\hat{p}_0 \geq \hat{p}_1$, then the maximum likelihood estimator of $\phi$ is still well-defined and equal to $\hat\phi_{MTS} = \left(n_{01} + n_{11}\right) / K$. 
 
 <<MTS_valid_sim, cache = TRUE, include=FALSE, warning=FALSE>>=
 rm(list=ls())
 source("R/parallel setup.R")
-source("R/Brown Solomon Stevens.R")
+source("R/PIR-APP.R")
 
 MTS_proportion_valid <- function(iterations, phi, zeta, K) {
   mu <- phi / zeta
@@ -153,8 +153,8 @@ MTS_proportion_valid <- function(iterations, phi, zeta, K) {
   
   MTS_mle <- data.frame(t(replicate(iterations, f(mu, lambda, K))))
   
-  phi_finite <- is.finite(logit(MTS_mle$phi))
-  zeta_finite <- is.finite(log(MTS_mle$zeta))
+  phi_finite <- is.finite(MTS_mle$logit_phi)
+  zeta_finite <- is.finite(MTS_mle$log_zeta)
   mean(phi_finite * zeta_finite)
 }
 
@@ -181,7 +181,7 @@ colnames(MTS_results)[1] <- paste0("$\\zeta = ", zeta[1], "$")
 print(xtable(MTS_results, 
               caption = paste0("Proportion of ",iterations,
                         " simulated MTS samples (K = ", K,
-                        ") in which $0 < \\hat\\phi < 1$ and $0 < \\hat\\zeta < \\infty$."),
+                        ") in which $0 < \\hat\\phi_{MTS} < 1$ and $0 < \\hat\\zeta_{MTS} < \\infty$."),
               label = "tab:MTS_zeta_valid"),
       table.placement = "b",
       caption.placement = "top",
@@ -189,7 +189,7 @@ print(xtable(MTS_results,
       sanitize.colnames.function = identity)
 @
 
-The probability that the maximum likelihood estimators are undefined or fall outside of the parameter space is not trivial, even when $K$ is relatively large. Note that in order for the estimates to fall strictly within the parameter space, both a 0-1 transition and a 1-0 transition must be observed, so that $\hat{p}_{01} > 0$, $\hat{p}_{10} > 0$. Table \ref{tab:MTS_zeta_valid} reports the proportion of \Sexpr{iterations} simulated samples in which $0 < \hat\phi < 1$ and $0 < \hat\zeta < \infty$, with $K = \Sexpr{K}$ and $\zeta$ scaled in terms of the interval length. Values of $\phi > 0.5$ are omitted because the behavior of the MTS estimators is symmetric about $\phi = 0.5$. The proportion of estimates falling within in the parameter space decreases as prevalence becomes more extreme and as incidence becomes very infrequent or very frequent. The high proportion of samples in which the estimators are undefined is a substantial drawback to the use of maximum likelihood.
+The probability that the maximum likelihood estimators are undefined or fall outside of the parameter space is not trivial, even when $K$ is relatively large. Note that in order for the estimates to fall strictly within the parameter space, both a 0-1 transition and a 1-0 transition must be observed, so that $\hat{p}_0 > 0$, $\hat{p}_1 < 1$. Table \ref{tab:MTS_zeta_valid} reports the proportion of \Sexpr{iterations} simulated samples in which $0 < \hat\phi_{MTS} < 1$ and $0 < \hat\zeta_{MTS} < \infty$, with $K = \Sexpr{K}$ and $\zeta$ scaled in terms of the interval length. Values of $\phi > 0.5$ are omitted because the behavior of the MTS estimators is symmetric about $\phi = 0.5$. The proportion of estimates falling within in the parameter space decreases as prevalence becomes more extreme and as incidence becomes very infrequent or very frequent. The high proportion of samples in which the estimators are undefined is a substantial drawback to the use of maximum likelihood.
 
 \subsection{Partial Interval Recording}
 \label{subsec:PIR}
