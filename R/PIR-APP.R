@@ -40,7 +40,8 @@ p_1 <- function(x,phi,zeta) phi + (1 - phi) * exp(-1 * x * zeta / (phi * (1- phi
 # For priors on (mu, lambda), use const = 2
 
 Beta_Gamma <- function(k_mu, k_lambda, theta_mu, theta_lambda, const = 1) {
-  function(param) {
+  function(param, coding) {
+    if (coding == "WIR") param[1] <- -param[1]
     -(k_mu - 1) * log(1 + exp(-param[1])) - 
       (k_lambda - 1) * log(exp(param[1]) + 1) - 
         (k_mu + k_lambda - const) * param[2] - 
@@ -52,7 +53,8 @@ Beta_Gamma <- function(k_mu, k_lambda, theta_mu, theta_lambda, const = 1) {
 # Normal-normal priors on log(mu), log(lambda)
 
 Norm_mu_lambda <- function(g_mu, g_lambda, sigma_mu, sigma_lambda)
-  function(param) {
+  function(param, coding) {
+    if (coding == "WIR") param[1] <- -param[1]
     ((-log(1 + exp(-param[1])) - param[2] - g_mu)^2 / sigma_mu^2
      + (-log(exp(param[1]) + 1) - param[2] - g_lambda)^2 / sigma_lambda^2) / 2
   }
@@ -61,7 +63,8 @@ Norm_mu_lambda <- function(g_mu, g_lambda, sigma_mu, sigma_lambda)
 # Normal-normal priors on logit(phi), log(zeta)
 
 Norm_phi_zeta <- function(g_phi, sigma_phi, g_zeta, sigma_zeta)
-  function(param) {
+  function(param, coding) {
+    if (coding == "WIR") param[1] <- -param[1]
     ((param[1] - g_phi)^2 / sigma_phi^2 + (param[2] - g_zeta)^2 / sigma_zeta^2) / 2
   }
 
@@ -75,13 +78,13 @@ MTS_loglik <- function(param, Tmat, c) {
   zeta <- exp(param[2])
   p0 <- p_0(c, phi, zeta)
   p1 <- p_1(c, phi, zeta)
-  Tmat[1,1] * log(1 - p0) + Tmat[1,2] * log(p0) + Tmat[2,1] * log(1 - p1) + Tmat[2,2] * p1
+  Tmat[1,1] * log(1 - p0) + Tmat[1,2] * log(p0) + Tmat[2,1] * log(1 - p1) + Tmat[2,2] * log(p1)
 }
 
 # penalized log-likelihood for MTS
 
 MTS_loglik_pen <- function(param, Tmat, c, penalty_func)
-  MTS_loglik(param, Tmat, c) + penalty_func(param)
+  MTS_loglik(param, Tmat, c) + penalty_func(param, coding = "MTS")
 
 
 #----------------------------------------------
@@ -120,7 +123,7 @@ MTSmle <- function(X, c, penalty_func = NULL,
                    phi_start = pmin(pmax(mean(X), 1 / length(X)), 1 - 1 / length(X)), zeta_start = .10, 
                    transform = "none") {
   
-  if(sum(is.na(X)) > 0) return(c(phi = NA, zeta = NA))
+  if (sum(is.na(X)) > 0) return(c(phi = NA, zeta = NA))
   
   N <- length(X)
   
@@ -178,8 +181,8 @@ PIR_loglik <- function(param, U, c, d) {
 
 # penalized log-likelihood for PIR
 
-PIR_loglik_pen <- function(param, U, c, d, penalty_func)
-  PIR_loglik(param, U, c, d) + penalty_func(param)
+PIR_loglik_pen <- function(param, U, c, d, penalty_func, coding)
+  PIR_loglik(param, U, c, d) + penalty_func(param, coding)
 
 
 #----------------------------------------------
@@ -203,7 +206,9 @@ PIRmle <- function(U, c, d, coding = "PIR", penalty_func = NULL,
   if (is.null(penalty_func)) {
     objective <- function(par) PIR_loglik(par, U = U, c = c, d = d)
   } else {
-    objective <- function(par) PIR_loglik_pen(par, U = U, c = c, d = d, penalty_func) 
+    objective <- function(par) {
+      PIR_loglik_pen(par, U = U, c = c, d = d, penalty_func, coding = coding)       
+    }
   }
     
   results <- optim(par = c(logit(phi_start), log(zeta_start)), fn = objective, 
