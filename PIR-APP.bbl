@@ -52,32 +52,6 @@ Altmann, S\BPBI A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Bornstein%
-}{%
-Bornstein%
-}{%
-{\protect \APACyear {2002}}%
-}]{%
-Bornstein2002measurement}
-\APACinsertmetastar {%
-Bornstein2002measurement}%
-\begin{APACrefauthors}%
-Bornstein, M\BPBI H.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2002}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Measurement variability in infant and maternal
-  behavioral assessment}} {{Measurement variability in infant and maternal
-  behavioral assessment}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Infant Behavior and Development}{25}{4}{413--432}.
-\newblock
-\begin{APACrefDOI} \doi{10.1016/S0163-6383(02)00143-1} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
 Brown%
 , Solomon%
 \BCBL {}\ \BBA {} Stephens%
@@ -103,42 +77,6 @@ Brown, M.%
   Interval Sampling}}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Operations Research}{25}{3}{493--505}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Durand%
-, Hieneman%
-, Clarke%
-, Wang%
-\BCBL {}\ \BBA {} Rinaldi%
-}{%
-Durand%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2012}}%
-}]{%
-Durand2012positive}
-\APACinsertmetastar {%
-Durand2012positive}%
-\begin{APACrefauthors}%
-Durand, V\BPBI M.%
-, Hieneman, M.%
-, Clarke, S.%
-, Wang, M.%
-\BCBL {}\ \BBA {} Rinaldi, M\BPBI L.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2012}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Positive Family Intervention for Severe Challenging
-  Behavior I: A Multisite Randomized Clinical Trial}} {{Positive Family
-  Intervention for Severe Challenging Behavior I: A Multisite Randomized
-  Clinical Trial}}.{\BBCQ}
-\newblock
-\APACjournalVolNumPages{Journal of Positive Behavior
-  Interventions}{15}{3}{133--143}.
-\newblock
-\begin{APACrefDOI} \doi{10.1177/1098300712458324} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -169,30 +107,6 @@ Griffin, B.%
 \APACjournalVolNumPages{American Journal of Primatology}{4}{3}{261--271}.
 \newblock
 \begin{APACrefDOI} \doi{10.1002/ajp.1350040305} \end{APACrefDOI}
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Kazdin%
-}{%
-Kazdin%
-}{%
-{\protect \APACyear {2011}}%
-}]{%
-Kazdin2011single}
-\APACinsertmetastar {%
-Kazdin2011single}%
-\begin{APACrefauthors}%
-Kazdin, A\BPBI E.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYear{2011}.
-\newblock
-\APACrefbtitle {{Single-Case Research Designs: Methods for Clinical and Applied
-  Settings}} {{Single-Case Research Designs: Methods for Clinical and Applied
-  Settings}}.
-\newblock
-\APACaddressPublisher{New York, NY}{Oxford University Press}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -469,36 +383,6 @@ Suen, H\BPBI K.%
   {{Analyzing Quantitative Behavioral Observation Data}}.
 \newblock
 \APACaddressPublisher{Hillsdale, NJ}{Lawrence Erlbaum Associates}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Volpe%
-, DiPerna%
-, Hintze%
-\BCBL {}\ \BBA {} Shapiro%
-}{%
-Volpe%
-\ \protect \BOthers {.}}{%
-{\protect \APACyear {2005}}%
-}]{%
-Volpe2005observing}
-\APACinsertmetastar {%
-Volpe2005observing}%
-\begin{APACrefauthors}%
-Volpe, R.%
-, DiPerna, J.%
-, Hintze, J.%
-\BCBL {}\ \BBA {} Shapiro, E.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{2005}{}{}.
-\newblock
-{\BBOQ}\APACrefatitle {{Observing students in classroom settings: A review of
-  seven coding schemes.}} {{Observing students in classroom settings: A review
-  of seven coding schemes.}}{\BBCQ}
-\newblock
-\APACjournalVolNumPages{School Psychology Review}{34}{4}{454--474}.
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
