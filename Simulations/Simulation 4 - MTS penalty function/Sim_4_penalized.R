@@ -3,22 +3,6 @@ library(plyr)
 library(ARPobservation)
 source("R/PIR-APP.R")
 
-
-#-------------------------------------
-# Design parameters
-#-------------------------------------
-
-K_intervals <- c(30, 90)
-phi <- c(.05, .10, .20, .30, .40, .50)
-zeta <- c(.05, .10, .20, .30, .40, .50)
-k_priors <- c(1.01, 1.05, 1.1)
-theta <- c(10, 20)
-set.seed(8473695)
-
-
-params <- expand.grid(phi = phi, zeta = zeta, K_intervals = K_intervals, k_priors = k_priors, theta = theta)
-params$seed <- round(runif(nrow(params)) * 2^30)
-
 #-------------------------------------
 #Data Generating Model
 #-------------------------------------
@@ -71,8 +55,7 @@ performance <- function(true_phi, true_zeta, ests){
   results[4,1] <- mean(zeta, na.rm = TRUE) - true_zeta
   results[4,2] <- median(zeta, na.rm = TRUE) - true_zeta
   results[4,3] <- var(zeta, na.rm = TRUE)
-
-  
+ 
   results[5,1] <- mean(logmu, na.rm = TRUE) - true_logmu
   results[5,2] <- median(logmu, na.rm = TRUE) - true_logmu
   results[5,3] <- var(logmu, na.rm = TRUE)
@@ -97,6 +80,13 @@ performance <- function(true_phi, true_zeta, ests){
 #-------------------------------------
 #Simulation Driver
 #-------------------------------------
+# phi <- .20
+# zeta <- .20
+# K_intervals <- 90
+# c <- 1
+# k_priors <- 1.01
+# theta <- 20
+# iterations <- 4000
 
 runSim <- function(phi, zeta, K_intervals, c, k_priors, theta, iterations, seed = NULL) {
   if (!is.null(seed)) set.seed(seed)
@@ -113,6 +103,21 @@ runSim <- function(phi, zeta, K_intervals, c, k_priors, theta, iterations, seed 
   
   performance(true_phi = phi, true_zeta = zeta, ests = ests)
 }
+
+#-------------------------------------
+# Design parameters
+#-------------------------------------
+
+K_intervals <- c(30, 90)
+phi <- c(.05, .10, .20, .30, .40, .50)
+zeta <- c(.05, .10, .20, .30, .40, .50)
+k_priors <- c(1.01, 1.05, 1.1)
+theta <- c(10, 20)
+set.seed(8473695)
+
+
+params <- expand.grid(phi = phi, zeta = zeta, K_intervals = K_intervals, k_priors = k_priors, theta = theta)
+params$seed <- round(runif(nrow(params)) * 2^30)
 
 system.time(results <- mdply(params, .fun = runSim, iterations = 100, c = 1))
 results$stat <- c("logit_phi", "log_zeta", "phi", "zeta", "log_mu", "log_lambda", "mu", "lambda")
