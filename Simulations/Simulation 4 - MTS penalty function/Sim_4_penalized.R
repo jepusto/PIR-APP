@@ -16,63 +16,20 @@ logit <- function(x) log(x) - log(1 - x)
 
 expit <- function(x) 1 / (1 + exp(-x))
 
-performance <- function(true_phi, true_zeta, ests){
-
-  phi <- expit(ests[,1])
-  zeta <- exp(ests[,2])
+performance <- function(true_phi, true_zeta, true_mu, true_lambda, ests){
   
-  means <- colMeans(ests, na.rm = TRUE)
+  all_trans <- cbind(ests[,1], ests[,2], logit(ests[,1]), log(ests[,2]), 
+                     ests[,1]/ests[,2], (1-ests[,1])/ests[,2], 
+                     log(ests[,1]/ests[,2]), log((1-ests[,1])/ests[2]))
   
-  mu <- phi/zeta
-  lambda <- (1-phi)/zeta
-  true_mu <- true_phi/true_zeta
-  true_lambda <- (1-true_phi)/true_zeta
+  true_parms <- c(true_phi, true_zeta, logit(true_phi), log(true_zeta), 
+                  true_mu, true_lambda, log(true_mu), log(true_lambda))
   
-  logmu <- log(mu)
-  loglambda <- log(lambda)
-  true_logmu <- log(true_mu)
-  true_loglambda <- log(true_lambda)
-  
-  results <- matrix(NA, nrow = 8, ncol = 5, 
-                    dimnames = list(c("logit_phi", "log_zeta", "phi", "zeta", "log_mu", "log_lambda", "mu", "lambda"), 
-                                    c("bias", "median_bias", "var",  "phi_nas", "zeta_nas")))
-  
-  results[1,1] <- means[1] - logit(true_phi)
-  results[1,2] <- median(ests[,1]) - logit(true_phi)
-  results[1,3] <- var(ests[,1], na.rm = TRUE)
-  results[,4]  <- mean(is.na(ests[,1]))
-  results[,5]  <- mean(is.na(ests[,2]))
-  
-  results[2,1] <- means[2] - log(true_zeta)
-  results[2,2] <- median(ests[,2], na.rm = TRUE) - logit(true_phi)
-  results[2,3] <- var(ests[,2], na.rm = TRUE)
-
-  
-  results[3,1] <- mean(phi, na.rm = TRUE) - true_phi
-  results[3,2] <- median(phi, na.rm = TRUE) - true_phi
-  results[3,3] <- var(phi, na.rm = TRUE)
-
-  results[4,1] <- mean(zeta, na.rm = TRUE) - true_zeta
-  results[4,2] <- median(zeta, na.rm = TRUE) - true_zeta
-  results[4,3] <- var(zeta, na.rm = TRUE)
- 
-  results[5,1] <- mean(logmu, na.rm = TRUE) - true_logmu
-  results[5,2] <- median(logmu, na.rm = TRUE) - true_logmu
-  results[5,3] <- var(logmu, na.rm = TRUE)
-
-  
-  results[6,1] <- mean(loglambda, na.rm = TRUE) - true_loglambda
-  results[6,2] <- median(loglambda, na.rm = TRUE) - true_loglambda
-  results[6,3] <- var(loglambda, na.rm = TRUE)
-  
-  results[7,1] <- mean(mu, na.rm = TRUE) - true_mu
-  results[7,2] <- median(mu, na.rm = TRUE) - true_mu
-  results[7,3] <- var(mu, na.rm = TRUE)
-  
-  results[8,1] <- mean(lambda, na.rm = TRUE) - true_lambda
-  results[8,2] <- median(lambda, na.rm = TRUE) - true_lambda
-  results[8,3] <- var(lambda, na.rm = TRUE)
-  
+  results <- data.frame(stat = c("phi", "zeta", "logit phi", "log zeta", "mu", "lambda", "log mu", "log lambda"))
+  results$bias <- colMeans(all_trans, na.rm = TRUE) - true_parms
+  results$median_bias <- apply(all_trans, 2, median) - true_parms
+  results$var <- apply(all_trans, 2, var)
+  results$missing <- apply(all_trans, 2, function(x) sum(is.na(x)))
   results
 }
 
@@ -99,9 +56,10 @@ runSim <- function(phi, zeta, K_intervals, c, k_priors, theta, iterations, seed 
   
   ests <- adply(X, .margins = 1, .fun = MTSmle, c = 1, 
                 penalty_func = Beta_Gamma(k_mu = k_priors, k_lambda = k_priors, 
-                                          theta_mu = theta, theta_lambda = theta))[,-1]
+                                          theta_mu = theta, theta_lambda = theta), 
+                                          transform = "exp")[,-1]
   
-  performance(true_phi = phi, true_zeta = zeta, ests = ests)
+  performance(true_phi = phi, true_zeta = zeta, true_mu = mu, true_lambda = lambda, ests = ests)
 }
 
 #-------------------------------------
@@ -119,5 +77,33 @@ set.seed(8473695)
 params <- expand.grid(phi = phi, zeta = zeta, K_intervals = K_intervals, k_priors = k_priors, theta = theta)
 params$seed <- round(runif(nrow(params)) * 2^30)
 
-system.time(results <- mdply(params, .fun = runSim, iterations = 100, c = 1))
-results$stat <- c("logit_phi", "log_zeta", "phi", "zeta", "log_mu", "log_lambda", "mu", "lambda")
+# #single core run
+# system.time(results_single <- mdply(params, .fun = runSim, iterations = 100, c = 1, .inform = TRUE))
+
+
+#multi-core run
+
+source_func <- ls()
+
+start_parallel <- function(source_func) {
+  require(parallel)
+  require(foreach)
+  require(iterators)
+  require(doParallel)
+  if (!is.na(pmatch("Windows", Sys.getenv("OS")))) {
+    cluster <- makeCluster(detectCores() -1, type = "SOCK")
+    registerDoParallel(cluster)
+    clusterEvalQ(cluster, library(plyr))
+    clusterEvalQ(cluster, library(ARPobservation))
+    clusterEvalQ(cluster, library(compiler))
+    clusterEvalQ(cluster, enableJIT(3))
+    clusterExport(cluster, source_func) 
+  } else {
+    registerDoParallel(cores=detectCores() - 1)
+  }
+  cluster
+}
+
+start_parallel(source_func)
+system.time(results <- mdply(params, .fun = runSim, iterations = 5000, c = 1, .parallel = TRUE))
+save(results, file = "Simulations/Simulation 4 - MTS penalty function/sim4MTSpenalized.Rdata")
