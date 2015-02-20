@@ -1,13 +1,13 @@
 rm(list = ls())
 library(ggplot2)
 setwd("Simulations/Simulation 4 - MTS penalty function")
-load("sim4MTS_unp.Rdata")
-load("sim4MTSpenalized.Rdata")
-results_unp$theta <- 10
-results_unp$k_priors <- 0
-results_all <- rbind(results, results_unp)
-results_unp$theta <- 20
-results_all <- rbind(results_all, results_unp)
+load("sim4MTS_unp2.Rdata")
+load("sim4MTSpenalized2.Rdata")
+results_unp2$theta <- 10
+results_unp2$k_priors <- 0
+results_all <- rbind(results2, results_unp2)
+results_unp2$theta <- 20
+results_all <- rbind(results_all, results_unp2)
 
 # results_all$k_pretty <- as.factor(with(results_all, ifelse(k_priors == 0, "Unpenalized", paste("k prior = ", k_priors))))
 # 
