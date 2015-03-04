@@ -37,6 +37,7 @@ simulation_plot <- function(data, statistic, graph = "bias",
 
 simulation_plot(data = results_all, statistic = "logit phi")
 simulation_plot(data = results_all, statistic = "logit phi", graph = "median_bias")
+simulation_plot(data = results_all, statistic = "logit phi", graph = "var", breaks = c(-.01, .5, 1, 1.5, 2, 10, 100, 200, 300, 4000, labels = NULL)
 
 simulation_plot(data = results_all, statistic = "log zeta")
 simulation_plot(data = results_all, statistic = "log zeta", graph = "median_bias")

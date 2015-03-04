@@ -1,0 +1,117 @@
+---
+title: "MTS Preliminary Simulation Results"
+author: "Daniel M. Swan"
+date: "Tuesday, March 03, 2015"
+output: pdf_document
+---
+```{r, echo = FALSE}
+#Setup
+library(plyr)
+library(reshape2)
+load("sim4MTS_unp2.Rdata")
+load("sim4MTSpenalized2.Rdata")
+
+results_unp2$theta <- 0
+results_unp2$k_priors <- 0
+results_all <- rbind(results2, results_unp2)
+
+stats <- c("phi", "logit phi", "zeta", "log zeta")
+
+results_sub <- subset(results_all, stat %in% stats)
+
+mcerror <- ddply(results_sub, .(K_intervals, k_priors, theta, phi, zeta, stat), 
+                 summarize, error = var/5000)
+
+final_errors <- ddply(mcerror, .(K_intervals, stat, theta), summarize, max_error = max(error))
+
+MC_error <- dcast(final_errors, stat +theta ~K_intervals, value.var = "max_error")
+
+
+# median/max absolute bias
+# median/max RMSE across phi/zeta, for a given level of K, by priors
+
+rmse <- ddply(results_sub, .(K_intervals, k_priors, theta, phi, zeta, stat), summarize,
+              RMSE = sqrt(var + bias^2))
+
+rmse_summary <- ddply(rmse, .(K_intervals, k_priors, theta, stat), summarize,
+                      max_rmse = max(RMSE), median_rmse = median(RMSE))
+bias_summary <- ddply(results_sub, .(K_intervals, k_priors, theta, stat), summarize,
+                      max_bias = max(abs(bias)), median_bias = median(abs(bias)))
+
+summarized <- merge(bias_summary, rmse_summary, id.vars = c("K_intervals", "k_priors", "theta", "stat"))
+
+max_bias <- dlply(summarized, .(K_intervals, stat), dcast, formula = k_priors + stat ~ theta, value.var = "max_bias")[1:8]
+median_bias <- dlply(summarized, .(K_intervals, stat), dcast, formula = k_priors ~ theta, value.var = "median_bias")[1:8]
+max_rmse <- dlply(summarized, .(K_intervals, stat), dcast, formula = k_priors ~ theta, value.var = "max_rmse")[1:8]
+median_rmse <- dlply(summarized, .(K_intervals, stat), dcast, formula = k_priors ~ theta, value.var = "median_rmse")[1:8]
+```
+
+This document provides a summary of the preliminary simulation of the momentary time sampling (MTS) estimator using both the regular and the penalized log likelihood function. I will summarize the results of the simulation by characterizing:
+
+* The Monte Carlo error for phi and zeta in both their natural parameterizations and the logit of phi and log of zeta
+* The error in the estimates of logit phi in terms of the median and maximum bias and RMSE
+* The error in the estimates of log zeta in terms of the median and maximum bisa and RMSE
+
+#Monte Carlo error
+
+```{r}
+MC_error
+```
+The maximum Monte Carlo error is quite small in all cases except for zeta in the unpenalized estimates for the natural parameterization of zeta are highly unstable. Given these results, the sample sizes chosen are sufficient in all cases but zeta. In the case of zeta the magnitude of the bias and the fact that unpenalized MTS estimator sometimes produces very large or infinite estimates of zeta, it may be that there is no reasonable sample size large enough to provide adequately small Monte Carlo error.
+
+\newpage
+
+#Logit phi results
+
+```{r}
+median_bias[c(2,6)]
+```
+The median absolute bias for logit phi suggests that, on average, the estimator performs worse when the penalized log likelihood is used. For both values of K, larger values for the scale increase the median absolute bias.  When K = 30, increasing the value of the shape slightly decreases the median absolute bias of the estimates. However, the median bias when K = 30 is simply too large for the estimates to be trusted. The bias changes considerably when K = 90. The median absolute bias for the unpenalized estimates is 2.7% and the bias of the penalized estimates range from approximately 3.4% to 5%, with the best estimates at shape = 1.10 and scale = 10. Increasing values for shape may have an impact on the estimates, but the impact does not appear to be uniformly better or worse. Given the very small magnitude, the differences might simply be attributed to Monte Carlo error.
+
+```{r}
+max_bias[c(2,6)]
+```
+The maximum absolute bias is slightly different. At the absolute worst, the unpenalized MTS estimates are considerably more biased than the penalized estimates. In all cases, the absolute maximum bias is quite large. Increasing the value of K decreases the maximum absolute bias. Unlike with the median bias, at both levels of K increasing the shape reduces the maximum absolute bias. As with the median absolute bias, increasing the values of the scale increases the maximum absolute bias at both levels of K.
+
+```{r}
+median_rmse[c(2,6)]
+```
+In terms of the median RMSE, when K = 30 the unpenalized estimates perform worse than the penalized estimates. Increasing values of the shape slightly decrease the median RMSE, and increasing values of the scale slightly increase the median RMSE. However at K = 90, the median RMSE is fairly stable across all both the unpenalized estimates and the penalized estimates across all levels of the priors.
+
+```{r}
+max_rmse[c(2,6)]
+````
+In terms of the maximum RMSE, the unpenalized estimates perform worse than the penalized estimates at both levels of K. Much like with the median RMSE,  increasing values of the shape slightly decrease the median RMSE, and increasing values of the scale slightly increase the median RMSE. The differences in magnitude may be indicative of a practical difference.
+
+Taken together, this suggests that the estimator may produce approximately unbiased estimates in some cases, the estimates of prevalence are not approximately unbiased across the entire parameter space whether the unpenalized log likelihood or the penalized log likelihood with any of the tested combinations of priors are used.
+
+\newpage
+
+#Logit zeta resuts
+
+```{r}
+median_bias[c(1,5)]
+```
+The median absolute bias for log zeta suggests that, on average, the estimator performs considerably better when the penalized log likelihood is used. When K = 30, values for the median absolute bias are once again too large for the estimates to be trusted. As with logit phi, increasing the value of the scale increases the median absolute bias at both levels of K. However, unlike logit phi, increase the value of the shape increases the median absolute bias across both levels of K. At K = 90, the absolute bias might be considered adequate at approximately 5.3% when the shape = 1.01 and the scale = 10, but otherwise the median absolute bias is probably too large for the estimates to be considered approximately unbiased.
+
+```{r}
+max_bias[c(1,5)]
+```
+The maximum absolute bias is somewhat different. At K = 30, the the maximum absolute bias of the unpenalized estimates is considerably larger than the penalized estimates. However, at K = 90, the maximum absolute bias for the unpenalized estimates are better than the penalized ones, although only to a moderate degree. As with the median absolute bias, at both levels of K, increasing the shape and the scale increases the maximum absolute bias.
+
+\newpage
+```{r}
+median_rmse[c(1,5)]
+```
+The median RMSE for log zeta is somewhat analogous to the median RMSE for logit phi. When K = 30, the unpenalized estimates perform worse than the penalized estimates. Increasing the shape and the scale increases the median RMSE. When K = 90, the unpenalized estimates perform worse than the penalized estimates, however the median RMSE is relatively stable across all the levels of the priors.
+
+```{r}
+max_rmse[c(1,5)]
+```
+The maximum RMSE for log zeta is approximately the same as median absolute bias. Increasing the value K decreases the maximum RMSE The unpenalized estimates perform worse than the penalized estimates at both levels of K. Increasing the shape and the scale both increase the maximum RMSE.
+
+Taken together, this suggests that approximately unbiased estimates of zeta might be produced when the penalized log likelihood is used with shape = 1.01 and scale = 10, however unbiased estimates are not produced across the entire parameter space of phi and zeta.
+
+#Further investigation
+
+These results suggest two possible directions for more investigation via simulation. It definitely seems as though it would be valuable to investage smaller values for the scale, given that the smaller of the two tested scale values produced better estimates of both phi and zeta. It also might be worth examining the odd relationship between logit phi's median bias the varying levels of the shape parameter at K = 90. However, given the RMSE when K = 90, it's possible that the error for phi is on average relatively stable at larger values of K.

@@ -9,56 +9,32 @@ results_unp2$theta <- 0
 results_unp2$k_priors <- 0
 results_all <- rbind(results2, results_unp2)
 
-mc_error <- function(data, statistic){
+stats <- c("phi", "logit phi", "zeta", "log zeta")
 
-  data_sub <- subset(data, stat == statistic)
-  
-  mcerror <- ddply(data_sub, .(K_intervals, k_priors, theta, phi, zeta), summarize, 
-                   error = var/5000)
+results_sub <- subset(results_all, stat %in% stats)
 
-  final_errors <- ddply(mcerror, .(K_intervals), summarize, max_error = max(error))
-  final_errors
-}
+mcerror <- ddply(results_sub, .(K_intervals, k_priors, theta, phi, zeta, stat), 
+                 summarize, error = var/5000)
 
-lphi <- cbind(stat = "logit phi", mc_error(data = results_all, statistic = "logit phi"))
-phi <- cbind(stat = "phi", mc_error(data = results_all, statistic = "phi"))
-lzeta <- cbind(stat = "log zeta", mc_error(data = results_all, statistic = "log zeta"))
-zeta <- cbind(stat = "zeta", mc_error(data = results_all, statistic = "zeta"))
+final_errors <- ddply(mcerror, .(K_intervals, stat, theta), summarize, max_error = max(error))
 
-dcast(rbind(lphi, phi, lzeta, zeta), stat~K_intervals, value.var = "max_error")
+final_errors <- dcast(final_errors, stat +theta ~K_intervals, value.var = "max_error")
 
 
 # median/max absolute bias
 # median/max RMSE across phi/zeta, for a given level of K, by priors
 
-sim_summary <- function(data, statistic){
-  
-  data_sub <- subset(data, stat == statistic)
-  
-  rmse <- ddply(data_sub, .(K_intervals, k_priors, theta, phi, zeta), summarize,
-        RMSE = sqrt(var + bias^2))
-  
-  rmse_summary <- ddply(rmse, .(K_intervals, k_priors, theta), summarize,
-                        max_rmse = max(RMSE), median_rmse = median(RMSE))
-  bias_summary <- ddply(data_sub, .(K_intervals, k_priors, theta), summarize,
-                       max_bias = max(bias), median_bias = median(bias))
-  
-  summarized <- merge(bias_summary, rmse_summary, id.vars = c("K_intervals", "k_priors", "theta"))
-  summarized
-  
-}
+rmse <- ddply(results_sub, .(K_intervals, k_priors, theta, phi, zeta, stat), summarize,
+              RMSE = sqrt(var + bias^2))
 
-phi_sum <- sim_summary(data = results_all, stat = "phi")
-zeta_sum <- sim_summary(data = results_all, stat = "zeta")
+rmse_summary <- ddply(rmse, .(K_intervals, k_priors, theta, stat), summarize,
+                      max_rmse = max(RMSE), median_rmse = median(RMSE))
+bias_summary <- ddply(results_sub, .(K_intervals, k_priors, theta, stat), summarize,
+                      max_bias = max(abs(bias)), median_bias = median(abs(bias)))
 
-#phi max bias, median bias, max RMSE and median RMSE in order
-dlply(phi_sum, .(K_intervals), dcast, formula = k_priors ~ theta, value.var = "max_bias")[1:2]
-dlply(phi_sum, .(K_intervals), dcast, formula = k_priors ~ theta, value.var = "median_bias")[1:2]
-dlply(phi_sum, .(K_intervals), dcast, formula = k_priors ~ theta, value.var = "max_rmse")[1:2]
-dlply(phi_sum, .(K_intervals), dcast, formula = k_priors ~ theta, value.var = "median_rmse")[1:2]
+summarized <- merge(bias_summary, rmse_summary, id.vars = c("K_intervals", "k_priors", "theta", "stat"))
 
-#zeta max bias, median bias, max RMSE and median RMSE in order
-dlply(zeta_sum, .(K_intervals), dcast, formula = k_priors ~ theta, value.var = "max_bias")[1:2]
-dlply(zeta_sum, .(K_intervals), dcast, formula = k_priors ~ theta, value.var = "median_bias")[1:2]
-dlply(zeta_sum, .(K_intervals), dcast, formula = k_priors ~ theta, value.var = "max_rmse")[1:2]
-dlply(zeta_sum, .(K_intervals), dcast, formula = k_priors ~ theta, value.var = "median_rmse")[1:2]
+max_bias <- dlply(summarized, .(K_intervals, stat), dcast, formula = k_priors + stat ~ theta, value.var = "max_bias")[1:8]
+median_bias <- dlply(summarized, .(K_intervals, stat), dcast, formula = k_priors ~ theta, value.var = "median_bias")[1:8]
+max_rmse <- dlply(summarized, .(K_intervals, stat), dcast, formula = k_priors ~ theta, value.var = "max_rmse")[1:8]
+median_rmse <- dlply(summarized, .(K_intervals, stat), dcast, formula = k_priors ~ theta, value.var = "median_rmse")[1:8]
