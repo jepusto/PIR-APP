@@ -52,6 +52,63 @@ Altmann, S\BPBI A.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Ayres%
+\ \BBA {} Gast%
+}{%
+Ayres%
+\ \BBA {} Gast%
+}{%
+{\protect \APACyear {2010}}%
+}]{%
+Ayres2010dependent}
+\APACinsertmetastar {%
+Ayres2010dependent}%
+\begin{APACrefauthors}%
+Ayres, K.%
+\BCBT {}\ \BBA {} Gast, D\BPBI L.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2010}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Dependent measures and measurement procedures}}
+  {{Dependent measures and measurement procedures}}.{\BBCQ}
+\newblock
+\BIn{} D\BPBI L.~Gast\ (\BED), \APACrefbtitle {Single Subject Research
+  Methodology in Behavioral Sciences} {Single subject research methodology in
+  behavioral sciences}\ (\BPGS\ 129--165).
+\newblock
+\APACaddressPublisher{New York, NY}{Routledge}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Bakeman%
+\ \BBA {} Quera%
+}{%
+Bakeman%
+\ \BBA {} Quera%
+}{%
+{\protect \APACyear {2011}}%
+}]{%
+Bakeman2011sequential}
+\APACinsertmetastar {%
+Bakeman2011sequential}%
+\begin{APACrefauthors}%
+Bakeman, R.%
+\BCBT {}\ \BBA {} Quera, V.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2011}.
+\newblock
+\APACrefbtitle {{Sequential Analysis and Observational Methods for the
+  Behavioral Sciences}} {{Sequential Analysis and Observational Methods for the
+  Behavioral Sciences}}.
+\newblock
+\APACaddressPublisher{New York, NY}{Cambridge University Press}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Bornstein%
 }{%
 Bornstein%
@@ -106,6 +163,40 @@ Brown, M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Chung%
+, Rabe-Hesketh%
+, Dorie%
+, Gelman%
+\BCBL {}\ \BBA {} Liu%
+}{%
+Chung%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2013}}%
+}]{%
+Chung2012non-degenerate}
+\APACinsertmetastar {%
+Chung2012non-degenerate}%
+\begin{APACrefauthors}%
+Chung, Y.%
+, Rabe-Hesketh, S.%
+, Dorie, V.%
+, Gelman, A.%
+\BCBL {}\ \BBA {} Liu, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{A nondegenerate penalized likelihood estimator for
+  variance parameters in multilevel models.}} {{A nondegenerate penalized
+  likelihood estimator for variance parameters in multilevel models.}}{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Psychometrika}{78}{4}{685--709}.
+\newblock
+\begin{APACrefDOI} \doi{10.1007/s11336-013-9328-2} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Durand%
 , Hieneman%
 , Clarke%
@@ -142,6 +233,38 @@ Durand, V\BPBI M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Gelman%
+, Jakulin%
+, Pittau%
+\BCBL {}\ \BBA {} Su%
+}{%
+Gelman%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2008}}%
+}]{%
+Gelman2008weakly}
+\APACinsertmetastar {%
+Gelman2008weakly}%
+\begin{APACrefauthors}%
+Gelman, A.%
+, Jakulin, A.%
+, Pittau, M\BPBI G.%
+\BCBL {}\ \BBA {} Su, Y\BPBI S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2008}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{A weakly informative default prior distribution for
+  logistic and other regression models}} {{A weakly informative default prior
+  distribution for logistic and other regression models}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Annals of Applied Statistics}{2}{4}{1360--1383}.
+\newblock
+\begin{APACrefDOI} \doi{10.1214/08-AOAS191} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Griffin%
 \ \BBA {} Adams%
 }{%
@@ -169,6 +292,63 @@ Griffin, B.%
 \APACjournalVolNumPages{American Journal of Primatology}{4}{3}{261--271}.
 \newblock
 \begin{APACrefDOI} \doi{10.1002/ajp.1350040305} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Haccou%
+\ \BBA {} Meelis%
+}{%
+Haccou%
+\ \BBA {} Meelis%
+}{%
+{\protect \APACyear {1992}}%
+}]{%
+Haccou1992statistical}
+\APACinsertmetastar {%
+Haccou1992statistical}%
+\begin{APACrefauthors}%
+Haccou, P.%
+\BCBT {}\ \BBA {} Meelis, E.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{1992}.
+\newblock
+\APACrefbtitle {{Statistical Analysis of Behavioural Data}} {{Statistical
+  Analysis of Behavioural Data}}.
+\newblock
+\APACaddressPublisher{New York, NY}{Oxford University Press}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Hartmann%
+\ \BBA {} Wood%
+}{%
+Hartmann%
+\ \BBA {} Wood%
+}{%
+{\protect \APACyear {1990}}%
+}]{%
+Hartmann1990observational}
+\APACinsertmetastar {%
+Hartmann1990observational}%
+\begin{APACrefauthors}%
+Hartmann, D\BPBI P.%
+\BCBT {}\ \BBA {} Wood, D\BPBI D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1990}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Observational methods}} {{Observational
+  methods}}.{\BBCQ}
+\newblock
+\BIn{} A\BPBI S.~Bellack, M.~Hersen\BCBL {}\ \BBA {} A\BPBI E.~Kazdin\ (\BEDS),
+  \APACrefbtitle {International Handbook of Behavior Modification and Therapy}
+  {International handbook of behavior modification and therapy}\
+  (\PrintOrdinal{2nd}\ \BEd, \BPGS\ 107--138).
+\newblock
+\APACaddressPublisher{New York, NY}{Plenum Press}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -329,6 +509,37 @@ Mudford, O\BPBI C.%
 \APACjournalVolNumPages{Journal of Applied Behavior Analysis}{42}{1}{165--169}.
 \newblock
 \begin{APACrefDOI} \doi{10.1901/jaba.2009.42-165} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Primavera%
+, Allison%
+\BCBL {}\ \BBA {} Alfonso%
+}{%
+Primavera%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1996}}%
+}]{%
+Primavera1996measurement}
+\APACinsertmetastar {%
+Primavera1996measurement}%
+\begin{APACrefauthors}%
+Primavera, L\BPBI H.%
+, Allison, D\BPBI B.%
+\BCBL {}\ \BBA {} Alfonso, V\BPBI C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1996}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Measurement of dependent variables}} {{Measurement of
+  dependent variables}}.{\BBCQ}
+\newblock
+\BIn{} R\BPBI D.~Franklin, D\BPBI B.~Allison\BCBL {}\ \BBA {} B\BPBI S.~Gorman\
+  (\BEDS), \APACrefbtitle {Design and Analysis of Single-Case Research} {Design
+  and analysis of single-case research}\ (\BPGS\ 41--89).
+\newblock
+\APACaddressPublisher{Mahwah, NJ}{Lawrence Erlbaum}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

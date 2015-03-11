@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  9 FEB 2015 13:54
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  11 MAR 2015 16:14
 entering extended mode
 **PIR-APP.tex
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.tex
@@ -923,20 +923,14 @@ File: english.apc 2013/07/21 v6.03 apacite language file
 LaTeX Info: Redefining \BPBI on input line 129.
 LaTeX Info: Redefining \BHBI on input line 130.
 )
-ABD: EveryShipout initializing macros
+ABD: EveryShipout initializing macros [1{C:/Users/jep2963/AppData/Local/MiKTeX/
+2.9/pdftex/config/pdftex.map}
 
-Package Fancyhdr Warning: \headheight is too small (15.2pt): 
- Make it at least 27.11652pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[1{C:/Users/jep2963/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
-
-]
-[2] [3] [4] [5]
+] [2] [3] [4] [5] [6]
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 131.
 
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Try loading font information for OML+lmm on input line 131.
@@ -972,35 +966,46 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 131.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [6] [7]
-[8] [9]
-Overfull \hbox (17.85037pt too wide) in paragraph at lines 230--230
+) [7] [8]
+[9] [10]
+Overfull \hbox (17.85037pt too wide) in paragraph at lines 228--228
 []  
  []
 
-[10] [11] [12]
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 288.
+[11] [12]
+
+Package natbib Warning: Citation `Galindo-Garre2004bayesian' on page 13 undefin
+ed on input line 284.
+
+
+Package natbib Warning: Citation `Warton2008penalized' on page 13 undefined on 
+input line 284.
+
+[13]
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 291.
 
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-(C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.bbl [13] [14
+(C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.bbl [14] [15] [16
 
-]) [15]
-AED endfloat: Processing end Figures and Tables [16
+] [17]) [18]
+AED endfloat: Processing end Figures and Tables [19
 
 ]
-\Changes@OutFile=\write6
 
+Package natbib Warning: There were undefined citations.
+
+\Changes@OutFile=\write6
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.aux) ) 
 Here is how much of TeX's memory you used:
- 17417 strings out of 493921
- 322375 string characters out of 3144871
- 369949 words of memory out of 3000000
- 20307 multiletter control sequences out of 15000+200000
+ 17437 strings out of 493921
+ 322939 string characters out of 3144871
+ 371467 words of memory out of 3000000
+ 20327 multiletter control sequences out of 15000+200000
  53016 words of font info for 50 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 62i,12n,80p,1223b,705s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,12n,76p,1450b,705s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiK
 TeX 2.9/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/
 enc/dvips/lm/lm-rm.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm
@@ -1017,9 +1022,9 @@ eX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
 type1/public/lm/lmri12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
 c/lm/lmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb>
-Output written on PIR-APP.pdf (16 pages, 220867 bytes).
+Output written on PIR-APP.pdf (19 pages, 222860 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
+ 127 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
