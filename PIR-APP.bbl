@@ -233,6 +233,36 @@ Durand, V\BPBI M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Galindo-Garre%
+, Vermunt%
+\BCBL {}\ \BBA {} Bergsma%
+}{%
+Galindo-Garre%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2004}}%
+}]{%
+Galindo-Garre2004bayesian}
+\APACinsertmetastar {%
+Galindo-Garre2004bayesian}%
+\begin{APACrefauthors}%
+Galindo-Garre, F.%
+, Vermunt, J\BPBI K.%
+\BCBL {}\ \BBA {} Bergsma, W\BPBI P.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2004}{{\APACmonth{08}}}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Bayesian Posterior Estimation of Logit Parameters with
+  Small Samples}} {{Bayesian Posterior Estimation of Logit Parameters with
+  Small Samples}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Sociological Methods \& Research}{33}{1}{88--117}.
+\newblock
+\begin{APACrefDOI} \doi{10.1177/0049124104265997} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Gelman%
 , Jakulin%
 , Pittau%
@@ -710,6 +740,33 @@ Volpe, R.%
   of seven coding schemes.}}{\BBCQ}
 \newblock
 \APACjournalVolNumPages{School Psychology Review}{34}{4}{454--474}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Warton%
+}{%
+Warton%
+}{%
+{\protect \APACyear {2008}}%
+}]{%
+Warton2008penalized}
+\APACinsertmetastar {%
+Warton2008penalized}%
+\begin{APACrefauthors}%
+Warton, D\BPBI I.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2008}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Penalized Normal Likelihood and Ridge Regularization of
+  Correlation and Covariance Matrices}} {{Penalized Normal Likelihood and Ridge
+  Regularization of Correlation and Covariance Matrices}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of the American Statistical
+  Association}{103}{481}{340--349}.
+\newblock
+\begin{APACrefDOI} \doi{10.1198/016214508000000021} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
