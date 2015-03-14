@@ -1,13 +1,7 @@
 rm(list = ls())
 library(ggplot2)
 setwd("Simulations/Simulation 4 - MTS penalty function")
-load("sim4MTS_unp2.Rdata")
-load("sim4MTSpenalized2.Rdata")
-results_unp2$theta <- 10
-results_unp2$k_priors <- 0
-results_all <- rbind(results2, results_unp2)
-results_unp2$theta <- 20
-results_all <- rbind(results_all, results_unp2)
+load("Sim4MTScombined.Rdata")
 
 # results_all$k_pretty <- as.factor(with(results_all, ifelse(k_priors == 0, "Unpenalized", paste("k prior = ", k_priors))))
 # 
@@ -35,27 +29,27 @@ simulation_plot <- function(data, statistic, graph = "bias",
     theme(axis.text.x = element_text(angle=45, hjust = 1))
 }
 
-simulation_plot(data = results_all, statistic = "logit phi")
-simulation_plot(data = results_all, statistic = "logit phi", graph = "median_bias")
-simulation_plot(data = results_all, statistic = "logit phi", graph = "var", breaks = c(-.01, .5, 1, 1.5, 2, 10, 100, 200, 300, 4000, labels = NULL)
+simulation_plot(data = results, statistic = "logit phi")
+simulation_plot(data = results, statistic = "logit phi", graph = "median_bias")
+simulation_plot(data = results, statistic = "logit phi", graph = "var", breaks = c(-.01, .5, 1, 1.5, 2, 10, 100, 200, 300, 4000, labels = NULL)
 
-simulation_plot(data = results_all, statistic = "log zeta")
-simulation_plot(data = results_all, statistic = "log zeta", graph = "median_bias")
+simulation_plot(data = results, statistic = "log zeta")
+simulation_plot(data = results, statistic = "log zeta", graph = "median_bias")
 
-simulation_plot(data = results_all, statistic = "phi", labels = NULL)
-simulation_plot(data = results_all, statistic = "phi", graph = "median_bias", labels = NULL)
+simulation_plot(data = results, statistic = "phi", labels = NULL)
+simulation_plot(data = results, statistic = "phi", graph = "median_bias", labels = NULL)
 
-simulation_plot(data = results_all, statistic = "zeta", labels = NULL)
-simulation_plot(data = results_all, statistic = "zeta", graph = "median_bias", labels = NULL)
+simulation_plot(data = results, statistic = "zeta", labels = NULL)
+simulation_plot(data = results, statistic = "zeta", graph = "median_bias", labels = NULL)
 
-simulation_plot(data = results_all, statistic = "mu", labels = NULL)
-simulation_plot(data = results_all, statistic = "mu", graph = "median_bias", labels = NULL)
+simulation_plot(data = results, statistic = "mu", labels = NULL)
+simulation_plot(data = results, statistic = "mu", graph = "median_bias", labels = NULL)
 
-simulation_plot(data = results_all, statistic = "lambda", labels = NULL)
-simulation_plot(data = results_all, statistic = "lambda", graph = "median_bias", labels = NULL)
+simulation_plot(data = results, statistic = "lambda", labels = NULL)
+simulation_plot(data = results, statistic = "lambda", graph = "median_bias", labels = NULL)
 
-simulation_plot(data = results_all, statistic = "log mu")
-simulation_plot(data = results_all, statistic = "log mu", graph = "median_bias")
+simulation_plot(data = results, statistic = "log mu")
+simulation_plot(data = results, statistic = "log mu", graph = "median_bias")
 
-simulation_plot(data = results_all, statistic = "log lambda")
-simulation_plot(data = results_all, statistic = "log lambda", graph = "median_bias")
+simulation_plot(data = results, statistic = "log lambda")
+simulation_plot(data = results, statistic = "log lambda", graph = "median_bias")
