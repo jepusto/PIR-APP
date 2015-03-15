@@ -5,3 +5,4 @@ It is interesting to note that, under the Alternating Poisson Process, PIR obser
 \]
 
 
+For comparable recording session lengths, each of these methods has an advantage for estimation of either prevalence or incidence: MTS provides unbiased and relatively precise estimates of prevalence, but less precise estimates of incidence; PIR and WIR provide relatively more precise estimates of incidence, but less precise estimates of prevalence. 
