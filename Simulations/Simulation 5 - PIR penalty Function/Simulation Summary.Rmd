@@ -1,0 +1,135 @@
+---
+title: "PIR Preliminary Simulation Results"
+author: "Daniel M. Swan"
+date: "Monday, March 16, 2015"
+output: pdf_document
+---
+```{r setup, echo = FALSE}
+library(knitr)
+opts_chunk$set(echo=FALSE, warning=FALSE)
+library(plyr)
+library(reshape2)
+library(ggplot2)
+```
+
+```{r munge}
+load("s5results_pen.Rdata")
+
+
+stats <- c("phi", "logit phi", "zeta", "log zeta")
+
+results_sub <- subset(s5results_pen, stat %in% stats & K_intervals >= 90)
+
+results_sub$MCerror <- results_sub$var / 5000
+
+MC_error <- dcast(results_sub, stat ~ K_intervals, 
+                  fun.aggregate = max, value.var = "MCerror")
+
+
+# median/max absolute bias
+# median/max RMSE across phi/zeta, for a given level of K, by priors
+
+results_sub$RMSE <- with(results_sub, sqrt(var + bias^2))
+
+summarized <- ddply(results_sub, .(K_intervals, k_priors, theta, stat), summarize,
+                      max_bias = max(abs(bias)), median_bias = median(abs(bias)),
+                      max_rmse = max(RMSE), median_rmse = median(RMSE))
+
+max_bias <- dcast(summarized, stat + K_intervals + k_priors ~ theta, 
+                  value.var = "max_bias")
+median_bias <- dcast(summarized, stat + K_intervals + k_priors ~ theta, 
+                     value.var = "median_bias")
+max_rmse <- dcast(summarized, stat + K_intervals + k_priors ~ theta, 
+                  value.var = "max_rmse")
+median_rmse <- dcast(summarized, stat + K_intervals + k_priors ~ theta, 
+                     value.var = "median_rmse")
+```
+
+This document provides a summary of the preliminary simulation of the partial interval recording (PIR) estimator using the penalized log likelihood function. I will summarize the results of the simulation by characterizing:
+
+* The Monte Carlo error for phi and zeta in both their natural parameterizations and the logit of phi and log of zeta
+* The error in the estimates of logit phi in terms of the median and maximum bias and RMSE
+* The error in the estimates of log zeta in terms of the median and maximum bias and RMSE
+
+Initial examination of plots of the bias of the parameters indicates that intervals of K < 90 are insufficient for unbiased estimates even in a restricted range of the parameter space of phi and zeta.
+
+#Monte Carlo error
+
+```{r}
+print(MC_error, digits = 3)
+```
+The maximum Monte Carlo error is quite small in all cases. 
+
+\newpage
+
+# Logit phi results
+
+## Median bias
+
+```{r}
+subset(median_bias, stat=="logit phi", select = -stat)
+```
+The median absolute bias for logit phi suggests that in general, increasing the value of shape parameter decreases the bias and increasing the value of the scale parameter increases the bias. Higher values of K are also better.
+
+## Maximum bias
+
+```{r}
+subset(max_bias, stat=="logit phi", select = -stat)
+```
+The values for maximum absolute bias are all quite large, more than 100% maximum absolute bias in all cases. The same general relationship between shape, scale, number of intervals, and the magnitude of the absolute bias is observed here as above. 
+
+\newpage
+
+## Median RMSE
+```{r}
+subset(median_rmse, stat=="logit phi", select = -stat)
+```
+The relationship between RMSE and shape, scale, and number of intervals is the same as above. Increasing K and increasing the shape parameter decreases the median RMSE. Increasing the value of the shape parameter increases median RMSE.
+
+## Maximum RMSE
+```{r}
+subset(max_rmse, stat=="logit phi", select = -stat)
+````
+The same relationship is observed here except that when scale = 1.001, the lowest values of the maximum RMSE occur at shape = 10 or 20, rather than 5. 
+
+Take together, this suggests that "good" estimates might be found when K = 120, shape >= 1.01, and scale <= 10.
+
+\newpage
+
+# Log zeta resuts
+
+## Median bias
+```{r}
+subset(median_bias, stat=="log zeta", select = -stat)
+```
+For log zeta, the median absolute bias increases as both shape and scale increase, while increasing the number of intervals decreases the median absolute bias.
+
+## Maximum bias
+
+```{r}
+subset(max_bias, stat=="log zeta", select = -stat)
+```
+As with logit phi, the values for maximum absolute bias are all quite large. The relationship between bias and shape, scale, and intervals is the same as with median absolute bias.
+\newpage
+
+## Median RMSE
+
+```{r}
+subset(median_rmse, stat=="log zeta", select = -stat)
+```
+As the number of intervals increases, the median RMSE decreases. Increasing the value of the sahe causes the RMSE to decrease very slightly, although the magnitude of the differences is very small. In some, but not all, cases the difference might be attributed to Monte Carlo error. Here the relationship between the value of the scale and the median RMSE is not monotonic. The smallest values occur when scale = 10, and increase when the scale increases or decreases. 
+
+## Maximum RMSE
+
+```{r}
+subset(max_rmse, stat=="log zeta", select = -stat)
+```
+The monotonic relationship seen in earlier tables reasserts itself here. Increasing the number of intervals and the value of the shape decreases the maximum RMSE. Increasing the scale increases the value of the maximum RMSE.
+
+Taken together, this suggests that "good" estimates might be found when K = 120, shape = 1.001 or 1.01 and scale = 5.
+
+
+#Further investigation
+I had originally intended to include exploratory plots, however because I cannot control the orientation of plots in simple R-markdown and need latex to do that I decided to leave it out in the interest of time. Please take a look at 'bias plots.R' in the simulation 5 folder - they are part of the reasoning for the investigation outlined here.
+
+Between the plots and tables of summary statistics, it's possible that a more granular view of the space beween scale = 5 and scale = 10 might be worth investigating. Phi is "ok" when the scale is higher than 10, but when scale = 20 zete is has considerable bias so future PIR simulations should probably stick to smaller values of scale. 
