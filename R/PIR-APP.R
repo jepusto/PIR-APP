@@ -40,12 +40,12 @@ p_1 <- function(x,phi,zeta) phi + (1 - phi) * exp(-1 * x * zeta / (phi * (1- phi
 # For priors on (mu, lambda), use const = 2
 
 Beta_Gamma <- function(k_mu, k_lambda, theta_mu, theta_lambda, const = 1) {
-  function(param, coding) {
+  function(param, c, coding) {
     if (coding == "WIR") param[1] <- -param[1]
     -(k_mu - 1) * log(1 + exp(-param[1])) - 
       (k_lambda - 1) * log(exp(param[1]) + 1) - 
         (k_mu + k_lambda - const) * param[2] - 
-          exp(-param[2]) * (expit(param[1]) / theta_mu + (1 - expit(param[1])) / theta_lambda)
+          (expit(param[1]) / theta_mu + (1 - expit(param[1])) / theta_lambda) * exp(-param[2]) / c
   } 
 }
 
@@ -53,19 +53,19 @@ Beta_Gamma <- function(k_mu, k_lambda, theta_mu, theta_lambda, const = 1) {
 # Normal-normal priors on log(mu), log(lambda)
 
 Norm_mu_lambda <- function(g_mu, g_lambda, sigma_mu, sigma_lambda)
-  function(param, coding) {
+  function(param, c, coding) {
     if (coding == "WIR") param[1] <- -param[1]
-    ((-log(1 + exp(-param[1])) - param[2] - g_mu)^2 / sigma_mu^2
-     + (-log(exp(param[1]) + 1) - param[2] - g_lambda)^2 / sigma_lambda^2) / 2
+    ((-log(1 + exp(-param[1])) - param[2] - g_mu - log(c))^2 / sigma_mu^2
+     + (-log(exp(param[1]) + 1) - param[2] - g_lambda - log(c))^2 / sigma_lambda^2) / 2
   }
 
 
 # Normal-normal priors on logit(phi), log(zeta)
 
 Norm_phi_zeta <- function(g_phi, sigma_phi, g_zeta, sigma_zeta)
-  function(param, coding) {
+  function(param, c, coding) {
     if (coding == "WIR") param[1] <- -param[1]
-    ((param[1] - g_phi)^2 / sigma_phi^2 + (param[2] - g_zeta)^2 / sigma_zeta^2) / 2
+    ((param[1] - g_phi)^2 / sigma_phi^2 + (param[2] - g_zeta - log(c))^2 / sigma_zeta^2) / 2
   }
 
 
@@ -84,7 +84,7 @@ MTS_loglik <- function(param, Tmat, c) {
 # penalized log-likelihood for MTS
 
 MTS_loglik_pen <- function(param, Tmat, c, penalty_func)
-  MTS_loglik(param, Tmat, c) + penalty_func(param, coding = "MTS")
+  MTS_loglik(param, Tmat, c) + penalty_func(param, c, coding = "MTS")
 
 
 #----------------------------------------------
@@ -182,7 +182,7 @@ PIR_loglik <- function(param, U, c, d) {
 # penalized log-likelihood for PIR
 
 PIR_loglik_pen <- function(param, U, c, d, penalty_func, coding)
-  PIR_loglik(param, U, c, d) + penalty_func(param, coding)
+  PIR_loglik(param, U, c, d) + penalty_func(param, c, coding)
 
 
 #----------------------------------------------
@@ -257,7 +257,7 @@ AIR_loglik <- function(param, Tmat, c, d) {
 # penalized log-likelihood for AIR
 
 AIR_loglik_pen <- function(param, Tmat, c, d, penalty_func)
-  PIR_loglik(param, U, c, d) + penalty_func(param, coding = "AIR")
+  PIR_loglik(param, U, c, d) + penalty_func(param, c, coding = "AIR")
 
 
 #----------------------------------------------

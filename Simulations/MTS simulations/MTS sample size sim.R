@@ -66,23 +66,21 @@ runSim <- function(phi, zeta, K_intervals, c, k_priors, theta, iterations, seed 
 #-------------------------------------
 library(plyr)
 
-K_intervals <- c(30, 60, 90)
+K_intervals <- seq(10, 150, 10)
 phi <- seq(.05, .50, .05)
 zeta <- seq(.05, .50, .05)
-k_priors <- c(1, 1.01, 1.05, 1.1, 1.2, 1.5, 2)
-theta <- c(5, 10, 20, 40, Inf)
-set.seed(8473695)
+k_priors <- c(1, 1.5)
+theta <- c(10, Inf)
+set.seed(20150316)
 
 # check that penalty function zeros out when k_priors = 1, theta = Inf
-priors <- expand.grid(k_priors = k_priors, theta = theta)
-priors$pen <- with(priors, Beta_Gamma(k_mu = k_priors, k_lambda = k_priors, 
-                                      theta_mu = theta, theta_lambda = theta, const = 2)(c(0.01, 0.01), coding = "MTS"))
-
 params <- expand.grid(phi = phi, zeta = zeta, K_intervals = K_intervals, k_priors = k_priors, theta = theta)
+params <- subset(params, (k_priors == 1 & theta == Inf) | (k_priors == 1.5 & theta == 10))
 params$seed <- round(runif(nrow(params)) * 2^30)
+nrow(params)
 
 # # single core run
-# system.time(results_single <- mdply(params, .fun = runSim, iterations = 10, c = 1, .inform = TRUE))
+# system.time(results_single <- mdply(params, .fun = runSim, iterations = 5000, c = 1, .inform = TRUE))
 
 
 # multi-core run
@@ -95,7 +93,7 @@ start_parallel <- function(source_func) {
   require(iterators)
   require(doParallel)
   if (!is.na(pmatch("Windows", Sys.getenv("OS")))) {
-    cluster <- makeCluster(detectCores(), type = "SOCK")
+    cluster <- makeCluster(detectCores() - 1, type = "SOCK")
     registerDoParallel(cluster)
     clusterEvalQ(cluster, library(plyr))
     clusterEvalQ(cluster, library(ARPobservation))
@@ -112,16 +110,16 @@ cluster <- start_parallel(source_func)
 system.time(results <- mdply(params, .fun = runSim, iterations = 5000, c = 1, .parallel = TRUE))
 stopCluster(cluster)
 
-save(results, file = "Simulations/Simulation 4 - MTS penalty function/sim4MTScombined.Rdata")
+save(results, file = "Simulations/MTS simulations/MTS_sample_size_sim.Rdata")
 
-library(mailR)
-send.mail(from = "jepusto@gmail.com",
-          to = "pusto@austin.utexas.edu",
-          subject = "Simulation is done",
-          body = "All set!",
-          smtp = list(host.name = "smtp.gmail.com", 
-                      port = 465, 
-                      user.name = "jepusto", 
-                      passwd = "xiqzdlacycwuksdf", 
-                      ssl = TRUE),
-          authenticate = TRUE)
+# library(mailR)
+# send.mail(from = "jepusto@gmail.com",
+#           to = "pusto@austin.utexas.edu",
+#           subject = "Simulation is done",
+#           body = "All set!",
+#           smtp = list(host.name = "smtp.gmail.com", 
+#                       port = 465, 
+#                       user.name = "jepusto", 
+#                       passwd = "xiqzdlacycwuksdf", 
+#                       ssl = TRUE),
+#           authenticate = TRUE)

@@ -66,7 +66,7 @@ runSim <- function(phi, zeta, K_intervals, c, k_priors, theta, iterations, seed 
 #-------------------------------------
 library(plyr)
 
-K_intervals <- c(30, 60, 90)
+K_intervals <- c(30, 60, 90, 120)
 phi <- seq(.05, .50, .05)
 zeta <- seq(.05, .50, .05)
 k_priors <- c(1, 1.01, 1.05, 1.1, 1.2, 1.5, 2)
