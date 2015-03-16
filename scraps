@@ -6,3 +6,9 @@ It is interesting to note that, under the Alternating Poisson Process, PIR obser
 
 
 For comparable recording session lengths, each of these methods has an advantage for estimation of either prevalence or incidence: MTS provides unbiased and relatively precise estimates of prevalence, but less precise estimates of incidence; PIR and WIR provide relatively more precise estimates of incidence, but less precise estimates of prevalence. 
+
+
+In order to characterize the implications of using the proposed priors, it is useful to consider the values of the PLEs that result from extreme configurations of the data. For example, the PLEs from an observation session in which the entire MTS record is equal to zero (i.e., $X_0 = X_1 = \cdots = X_K = 0$) will be approximately equal to \[
+\tilde\zeta_{MTS} = \frac{1}{\theta_\lambda \left(\alpha_\mu + \alpha_\lambda - 2\right)}, \quad \tilde\phi_{MTS} = \frac{\alpha_\mu - 1}{\alpha_\mu + \alpha_\lambda - 2 + K}. \]
+Using PIR with $d = 0$, the PLEs from an observation session in which the entire PIR record is equal to zero ($U_1 = U_2 = \cdots = U_K = 0$) will be approximately equal to \[
+\tilde\zeta_{PIR} = \frac{1}{2K}\left[\sqrt{(\alpha_\mu + \alpha_\lambda - 2)^2 + \frac{4K}{\theta_\lambda}} - \left(\alpha_\mu + \alpha_\lambda - 2\right)\right], \quad \tilde\phi_{PIR} = \frac{\alpha_\mu - 1}{\alpha_\mu - 1 + \alpha_\lambda + K\hat\zeta}.\]

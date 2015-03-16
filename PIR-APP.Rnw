@@ -293,7 +293,7 @@ The log-likelihood of $\phi$ and $\zeta$, given observed PIR data $u_1,...,u_K$,
 \label{eq:PIR_loglik}
 l_{PIR}\left(\phi,\zeta\right) = \sum_{k=1}^K & u_k \ln\left[1 - (1 - \psi_k)\exp\left( \frac{-\zeta c}{1 - \phi}\right)\right]  + (1 - u_k)\left[\ln\left(1 - \psi_k \right) - \frac{\zeta c}{1 - \phi}\right].
 \end{align}
-Maximum likelihood estimates are obtained by maximizing $l_{PIR}$ using a numerical algorithm. 
+Maximum likelihood estimators $\hat\phi_{PIR}, \hat\zeta_{PIR}$ are obtained by maximizing $l_{PIR}$ using a numerical algorithm. 
 Because the conditional probabilities $\psi_1,...,\psi_K$ are defined recursively, it is cumbersome and computationally expensive to evaluate the score function corresponding to this likelihood. 
 The simulation study reported in the next section therefore uses the Nelder-Mead algorithm, which does not require evaluation of the score function, with the likelihood expressed in terms of the unbounded parameters $\logit(\phi)$ and $\log(\zeta)$.
 
@@ -347,8 +347,8 @@ colnames(PIR_results)[1] <- paste0("$\\zeta = ", zeta[1], "$")
 print(xtable(PIR_results, 
               caption = paste0("Proportion of ",iterations,
                         " simulated PIR samples (K = ", K,
-                        ") in which  $|\\text{logit}(\\hat\\phi)| < ",threshold,
-                        "$ and $|\\text{log}(\\hat\\zeta)| < ",threshold,"$."),
+                        ") in which  $|\\text{logit}(\\hat\\phi_{PIR})| < ",threshold,
+                        "$ and $|\\text{log}(\\hat\\zeta_{PIR})| < ",threshold,"$."),
               label = "tab:PIR_ests_valid"),
       table.placement = "b",
       caption.placement = "top",
@@ -359,7 +359,7 @@ print(xtable(PIR_results,
 Just as with MTS data, maximum likelihood estimates based on PIR data do not always fall within the parameter space. 
 Table \ref{tab:PIR_ests_valid} reports the proportion of \Sexpr{iterations} simulated samples in which the MLEs based on PIR data are within the parameter space, with $K = \Sexpr{K}$, $d = 0$, and $\zeta$ scaled in terms of the interval length.
 Because we use numerical maximization, the results of the maximization routine are never precisely on the borders of the parameter space. 
-We therefore use boundaries of $|\logit \ \hat\phi| < \Sexpr{threshold}$ and $|\log \hat\zeta| < \Sexpr{threshold}$ to define the edges of the parameter space. 
+We therefore use boundaries of $|\logit \ \hat\phi_{PIR}| < \Sexpr{threshold}$ and $|\log \hat\zeta_{PIR}| < \Sexpr{threshold}$ to define the edges of the parameter space. 
 The proportion of estimates falling within the parameter space is highest for moderate values of prevalence and incidence ($0.2 \leq \phi \leq 0.5$ and $0.1 \leq \zeta \leq 0.25$), decreases as prevalence becomes more extreme, and decreases as incidence becomes either less frequent (less than once per ten intervals) or more frequent (more than once per four intervals).  
 Unlike the MTS estimators, the pattern of boundary estimates is asymmetric because PIR tends to reach ceiling levels when prevalence is large. 
 
@@ -403,23 +403,41 @@ In this situation, PLEs provide a convenient and coherent way to incorporate suc
 
 In most research contexts, we expect that prior knowledge about characteristics of the behavior will be more readily expressed in terms of the average event duration ($\mu$) and average interim time ($\lambda$). 
 We therefore consider a class of priors in which $\mu$ and $\lambda$ follow independent gamma distributions, with \[
-\mu \sim Gamma\left(\alpha_\mu, \theta_\mu\right), \qquad \lambda \sim Gamma\left(\alpha_\lambda, \theta_\lambda\right), \]
-with $\alpha_\mu, \alpha_\lambda > 1$ and $\theta_\mu, \theta_\lambda > 0$. 
+\mu \sim Gamma\left(\alpha_\mu, c \theta_\mu\right), \qquad \lambda \sim Gamma\left(\alpha_\lambda, c \theta_\lambda\right), \]
+with hyperparameters $\alpha_\mu, \alpha_\lambda > 1$ and $\theta_\mu, \theta_\lambda > 0$. 
+Note that the priors on $\mu$ and $\lambda$ are scaled in terms of the active interval length, so that they do not depend on the time unit in which the parameters and interval length are measured. 
 This class of priors has the useful property that the implied priors on prevalence ($\phi$) and incidence ($\zeta$) have familiar distributional forms. 
 Specifically, when $\theta_\mu = \theta_\lambda = \theta$, it follows that \[
-\phi \sim Beta\left(\alpha_\mu, \alpha_\lambda \right), \qquad \zeta \sim Gamma^{-1}\left(\alpha_\mu + \alpha_\lambda, 1 / \theta \right) \]
+\phi \sim Beta\left(\alpha_\mu, \alpha_\lambda \right), \qquad \zeta \sim Gamma^{-1}\left(\alpha_\mu + \alpha_\lambda, \frac{1}{c\theta} \right) \]
 and that $\phi$ is independent of $\zeta$. 
 
 The penalty function implied by these priors depends on how they are parameterized (i.e., based on priors for $\mu, \lambda$ or priors for $\phi, \zeta$). We recommend using the $\mu-\lambda$ parameterization because it reduces to zero when $\alpha_\mu = \alpha_\lambda = 1$ and $\theta_\mu = \theta_\lambda = \infty$, making the PLEs equivalent to the maximum likelihood estimators.
 With this parameterization, the penalty function has the form 
 \begin{equation}
-p\left(\phi, \zeta\right) = \left(\alpha_\mu - 1\right) \log \left(\phi\right) + \left(\alpha_\lambda - 1\right) \log \left(1 - \phi\right) - \left(\alpha_\mu + \alpha_\lambda - 2\right) \log\left(\zeta\right) - \frac{\frac{\phi}{\theta_\mu} + \frac{1-\phi}{\theta_\lambda}}{\zeta}.
+p\left(\phi, \zeta\right) = \left(\alpha_\mu - 1\right) \log \left(\phi\right) + \left(\alpha_\lambda - 1\right) \log \left(1 - \phi\right) - \left(\alpha_\mu + \alpha_\lambda - 2\right) \log\left(\zeta\right) - \frac{\frac{\phi}{\theta_\mu} + \frac{1-\phi}{\theta_\lambda}}{c \zeta}.
 \end{equation}
-The PLEs are then defined as the maximum of $l\left(\phi, \zeta\right) + p\left(\phi, \zeta\right)$, where $l\left(\phi, \zeta\right)$ is the log-likelihood given MTS, PIR, or WIR data. 
+Given data based on recording system $s \in \{MTS, PIR, WIR\}$, the PLEs $\tilde\phi_s, \tilde\zeta_s$ are then defined as the maximum of $l_s\left(\phi, \zeta\right) + p\left(\phi, \zeta\right)$. 
 
-\todo[inline]{Choosing values for prior hyperparameters.}
+<<default_priors, include = FALSE>>=
+alpha_default <- 1.5
+theta_default <- 10
+@
 
-\todo[inline]{PLEs for edge cases: all zeros, all ones, half zeros and then half ones}
+Application of penalized likelihood estimators requires the analyst to choose values for the hyperparameters of the prior distribution. If one does not have specific prior knowledge regarding the characteristics of the behavior stream, it is prudent to choose hyperparameters that have little influence on the values of the PLEs. These weak priors imply a penalty function that is relatively flat, so that PLEs will correspond closely with the maximum likelihood estimators except when the data contain little information about the parameters. We suggest that $\alpha_\mu = \alpha_\lambda = \Sexpr{alpha_default}$ and $\theta_\mu = \theta_\lambda = \Sexpr{theta_default}$ are reasonable default choices for hyperparameters. The priors are highest at $\mu = \lambda = \Sexpr{(alpha_default - 1) * theta_default} c$, or an average event duration and an average interim time of \Sexpr{(alpha_default - 1) * theta_default} intervals; the inter-quartile ranges are from $\Sexpr{round(qgamma(0.25, shape = 1.5, scale = 10), 1)} c$ to $\Sexpr{round(qgamma(0.75, shape = 1.5, scale = 10), 1)} c$. The implied prior for prevalence is symmetric about $\phi = 0.5$; its use amounts to adding the information from observing two independent moments, one with behavior and one without behavior. We examine the empirical performance of the PLEs with these default hyperparameters in the following subsections.
+
+<<informative_priors, include = FALSE>>=
+upper <- 2
+mode <- 1/2
+threshold <- 0.99
+f <- function(x) pgamma(upper, shape = x, scale = mode / (x - 1)) - threshold
+x <- uniroot(f, lower = 1.01, upper = 10)
+shape <- x$root
+@
+
+In some research contexts, one may have fairly strong prior knowledge about certain behavioral characteristics, which can be used to inform the choice of hyperparameters. 
+For example, prior experience with a class of behavior may suggest that it is unlikely for the average event duration to be more than two intervals in length, and that the most likely value for the average event duration is $\frac{1}{2}$ an interval length. 
+This suggests choosing $\alpha_\mu = 3$ and $\theta_\mu = \frac{1}{4}$, so that the prior mode of $\mu$ is $\left(\alpha_\mu - 1\right) c \theta_\mu = \frac{c}{2}$ and $\Pr(\mu > 2c) < 0.02$.
+Absent strong prior information about $\lambda$, one might use the default hyperparameters suggested above, taking $\alpha_\lambda = 1.5, \theta_\lambda = 10$. 
 
 \subsection{Finite-sample performance: MTS}
 
@@ -488,10 +506,13 @@ See Appendix \ref{app:AIR_derivation} for the derivation of these quantities.
 \section{Discussion}
 \label{sec:discussion}
 
+Empirical evidence regarding assumptions of APP. 
+
 Robustness to violation of the APP assumptions.
 
 Measurement model, needs to be extended to regression modeling, time series, random effects settings.
 
+This model does not account for observer error.
 
 \bibliographystyle{apacite}
 \bibliography{\bibfile}
