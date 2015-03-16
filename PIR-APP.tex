@@ -85,7 +85,7 @@
 \newcommand{\cll}{\text{cll}}
 
 
-\title{Estimating the prevalence and incidence of a state behavior: Models for interval recording data and novel observation systems}
+\title{Estimating the prevalence and incidence of a state behavior: Models for interval recording data and a novel observation system}
 \shorttitle{ESTIMATING PARAMETERS OF A STATE BEHAVIOR}
 \author{James E. Pustejovsky and Daniel M. Swan}
 \leftheader{Pustejovsky & Swan}
@@ -96,7 +96,7 @@ A number of different methods are used to code or record data from direct observ
 Among these methods, PIR and WIR have long been recognized as problematic because, as typically reported, the mean of such data measures neither the prevalence nor the incidence of a behavior. 
 Though the problems with these methods have long been recognized, little research has examined methods of analyzing interval recording data other than simply taking the mean. 
 This paper proposes a Alternating Poisson Process model for interval recording data that permits estimation of both prevalence and incidence via maximum likelihood or penalized maximum likelihood methods. 
-The paper also describes some novel observation recording methods that involve combinations of MTS, PIR, and WIR, and that offer considerably more efficient estimators of prevalence and incidence.}
+The paper also describes a novel observation recording method that involve combinations of MTS, PIR, and WIR and that provides considerably more efficient estimators of prevalence and incidence.}
 
 \keywords{behavioral observation; interval recording; alternating Poisson process; Markov chain}
 
@@ -166,7 +166,7 @@ Following \citet{Brown1977estimation}, we use an Alternating Poisson Process for
 Under this model, maximum likelihood estimators for prevalence and incidence can be obtained using conventional numerical techniques (although they do not have closed-form expression). 
 To remedy some problems with the maximum likelihood estimators, we introduce penalized likelihood estimators that have better operating characteristics and that can be tailored to express prior information about the behavioral parameters.
 \todo{We use a parametric bootstrap procedure for obtaining interval estimates.} 
-The final section of the paper describes some novel procedures for intermittent recording of a behavior that entail combining MTS and interval recording methods, and which can be used to obtain more efficient estimators of behavioral characteristics.
+The final section of the paper describes a novel procedure for intermittent recording of a behavior that entails combining MTS and interval recording methods and that can be used to obtain more efficient estimators of prevalence and incidence.
 
 \section{Alternating Poisson Process models}
 \label{sec:APP}
@@ -233,7 +233,7 @@ If $\hat{p}_0 \geq \hat{p}_1$, then the maximum likelihood estimator of $\phi$ i
 
 
 % latex table generated in R 3.1.2 by xtable 1.7-3 package
-% Sun Mar 15 19:32:23 2015
+% Sun Mar 15 20:26:29 2015
 \begin{table}[b]
 \centering
 \caption{Proportion of 2000 simulated MTS samples (K = 40) in which $0 < \hat\phi_{MTS} < 1$ and $0 < \hat\zeta_{MTS} < \infty$.} 
@@ -306,7 +306,7 @@ The simulation study reported in the next section therefore uses the Nelder-Mead
 
 
 % latex table generated in R 3.1.2 by xtable 1.7-3 package
-% Sun Mar 15 19:32:23 2015
+% Sun Mar 15 20:26:29 2015
 \begin{table}[b]
 \centering
 \caption{Proportion of 2000 simulated PIR samples (K = 40) in which  $|\text{logit}(\hat\phi)| < 8$ and $|\text{log}(\hat\zeta)| < 8$.} 
@@ -392,6 +392,8 @@ The PLEs are then defined as the maximum of $l\left(\phi, \zeta\right) + p\left(
 
 \todo[inline]{Choosing values for prior hyperparameters.}
 
+\todo[inline]{PLEs for edge cases: all zeros, all ones, half zeros and then half ones}
+
 \subsection{Finite-sample performance: MTS}
 
 \subsection{Finite-sample performance: PIR}
@@ -399,12 +401,11 @@ The PLEs are then defined as the maximum of $l\left(\phi, \zeta\right) + p\left(
 \section{Application}
 \label{sec:application}
 
-\section{Novel recording procedures}
+\section{A novel recording procedure}
 
 Thus far, we have considered conventional and widely used procedures for intermittent, systematic direct observation procedures. 
-In this section, we describe two recording procedures that can be used to obtain more accurate estimates of both prevalence and incidence. 
-The first method, augmented interval recording, involves using MTS, PIR, and WIR systems on each interval; the second method, intermittent transition recording, involves using MTS in combination with continuous measurement of latency. 
-To the best of our knowledge, neither of these procedures has been previously described in the literature on systematic direct observation of behavior. 
+In this section, we describe a recording procedure that can be used to obtain more accurate estimates of both prevalence and incidence. 
+The method, which we call augmented interval recording, involves using MTS, PIR, and WIR systems on each interval. To the best of our knowledge, this procedures has not been previously described in the literature on systematic direct observation of behavior. 
 
 As in previous sections, suppose that the observation session is divided into $K$ intervals and that the first $c$ seconds of the interval are devoted to observation while the remaining $d$ seconds are devoted to recording or resting; interval $k$ therefore begins at time $t_k = (k - 1)(c + d)$. 
 
@@ -429,6 +430,8 @@ One measure of effort is the level of sustained attention required on the part o
 Another measure of effort is the amount of data that must be recorded during the observation period. Because $W_k = 0$ is implied when $X_{k-1} = 0$ and $U_k = 1$ is implied when $X_{k-1} = 1$, AIR requires twice as much data as one of the single methods (rather than three times as much, might be supposed). 
 Thus, for a fixed interval length, simultaneous use of all three methods entails at most twice as much effort as interval recording alone. 
 Furthermore, using longer time-intervals with fewer intervals per observation period would mitigate the effort required.
+
+\subsection{Likelihood of AIR data}
 
 Under the assumptions of the Alternating Poisson Process, the data generated by the AIR system can be modeled using a discrete-time Markov Chain, from which estimates of prevalence and incidence can be obtained. The Markov property of the Alternating Poisson Process implies that the joint distribution can be written as
 \begin{multline}
