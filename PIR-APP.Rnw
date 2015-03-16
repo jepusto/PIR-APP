@@ -437,7 +437,7 @@ shape <- x$root
 In some research contexts, one may have fairly strong prior knowledge about certain behavioral characteristics, which can be used to inform the choice of hyperparameters. 
 For example, prior experience with a class of behavior may suggest that it is unlikely for the average event duration to be more than two intervals in length, and that the most likely value for the average event duration is $\frac{1}{2}$ an interval length. 
 This suggests choosing $\alpha_\mu = 3$ and $\theta_\mu = \frac{1}{4}$, so that the prior mode of $\mu$ is $\left(\alpha_\mu - 1\right) c \theta_\mu = \frac{c}{2}$ and $\Pr(\mu > 2c) < 0.02$.
-Absent strong prior information about $\lambda$, one might use the default hyperparameters suggested above, taking $\alpha_\lambda = 1.5, \theta_\lambda = 10$. 
+Absent strong prior information about $\lambda$, one might use the default hyperparameters suggested above, taking $\alpha_\lambda = \Sexpr{alpha_default}, \theta_\lambda = \Sexpr{theta_default}$. 
 
 \subsection{Finite-sample performance: MTS}
 
