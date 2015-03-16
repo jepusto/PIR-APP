@@ -69,8 +69,8 @@ library(plyr)
 K_intervals <- c(30, 60, 90)
 phi <- seq(.05, .50, .05)
 zeta <- seq(.05, .50, .05)
-k_priors <- c(1, 1.01, 1.05, 1.1)
-theta <- c(5, 10, 20, Inf)
+k_priors <- c(1, 1.01, 1.05, 1.1, 1.5, 2)
+theta <- c(5, 10, 20, 40, Inf)
 set.seed(8473695)
 
 # check that penalty function zeros out when k_priors = 1, theta = Inf
@@ -108,8 +108,10 @@ start_parallel <- function(source_func) {
   cluster
 }
 
-start_parallel(source_func)
+cluster <- start_parallel(source_func)
 system.time(results <- mdply(params, .fun = runSim, iterations = 5000, c = 1, .parallel = TRUE))
+stopCluster(cluster)
+
 save(results, file = "Simulations/Simulation 4 - MTS penalty function/sim4MTScombined.Rdata")
 
 library(mailR)
