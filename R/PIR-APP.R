@@ -220,3 +220,99 @@ PIRmle <- function(U, c, d, coding = "PIR", penalty_func = NULL,
 
 }
 
+#---------------------------------------
+# log-likelihood function for AIR
+#---------------------------------------
+
+# transition probabilities for AIR data 
+
+AIR_pi <- function(phi, zeta, c, d) {
+  p0_d <- p_0(d, phi, zeta)
+  p0_cd <- p_0(c + d, phi, zeta)
+  exp_lambda <- exp(- zeta * c / (1 - phi))
+  p1_d <- p_1(d, phi, zeta)
+  p1_cd <- p_1(c + d, phi, zeta)
+  exp_mu <- exp(- zeta * c / phi)
+  c(pi_0000 = (1 - p0_d) * exp_lambda, pi_1000 = NA, 
+              pi_0100 = p0_d * exp_lambda, pi_1100 = NA,
+              pi_0010 = 1 - p0_cd - (1 - p0_d) * exp_lambda, pi_1010 = 1 - p1_cd - (1 - p1_d) * exp_mu, 
+              pi_0110 = p0_cd - p0_d * exp_lambda, pi_1110 = p1_cd - p1_d * exp_mu, 
+              pi_0001 = NA, pi_1001 = NA, 
+              pi_0101 = NA, pi_1101 = NA,
+              pi_0011 = NA, pi_1011 = (1 - p1_d) * exp_mu, 
+              pi_0111 = NA, pi_1111 = p1_d * exp_mu)
+}
+
+# log-likelihood for AIR
+
+AIR_loglik <- function(param, Tmat, c, d) {
+  phi <- expit(param[1])
+  zeta <- exp(param[2])
+  trans_prob <- AIR_pi(phi, zeta, c, d)
+  loglik <- sum(log(trans_prob) * Tmat, na.rm = TRUE)
+  return(loglik)
+}
+
+
+# penalized log-likelihood for AIR
+
+AIR_loglik_pen <- function(param, Tmat, c, d, penalty_func)
+  PIR_loglik(param, U, c, d) + penalty_func(param, coding = "AIR")
+
+
+#----------------------------------------------
+# maximum likelihood estimation for AIR, 
+# with optional penalty function
+#----------------------------------------------
+
+# maximum likelihood estimates for a single response string
+
+AIR_Tmat <- function(XUW) {
+  K <- nrow(XUW) - 1
+  MTS_lag <- XUW[1:K, 1]
+  table(MTS_lag, XUW[-1,1], XUW[-1,2], XUW[-1,3])
+}
+
+AIRmle <- function(XUW, c, d, penalty_func = NULL,
+                   phi_start = min(max(mean(XUW[,1]), expit(-10)), 1 - expit(-10)),
+                   zeta_start = .10, transform = "none") {
+  
+  if (sum(is.na(XUW[-1,])) + is.na(XUW[1,1]) > 0) return(c(phi = NA, zeta = NA))
+  
+  Tmat <- AIR_Tmat(XUW)
+    
+  if (is.null(penalty_func)) {
+    objective <- function(par) AIR_loglik(par, Tmat = Tmat, c = c, d = d)
+  } else {
+    objective <- function(par) {
+      AIR_loglik_pen(par, Tmat = Tmat, c = c, d = d, penalty_func)       
+    }
+  }
+  
+  results <- optim(par = c(logit(phi_start), log(zeta_start)), fn = objective, 
+                   control = list(fnscale = -1))
+    
+  param_trans(results$par, transform = transform)
+  
+}
+
+# mu <- 6
+# lambda <- 9
+# c <- 0.8
+# d <- 0.2
+# XUW <- r_AIR(n = 1, mu = mu, lambda = lambda, stream_length = 100000,
+#              F_event = F_exp(), F_interim = F_exp(),
+#              interval_length = c + d, rest_length = d)[,,1]
+# 
+# phi <- mu / (mu + lambda)
+# zeta <- 1 / (mu + lambda)
+# Tmat <- AIR_Tmat(XUW)
+# Tmat[1,,,] <- Tmat[1,,,] / sum(Tmat[1,,,])
+# Tmat[2,,,] <- Tmat[2,,,] / sum(Tmat[2,,,])
+# trans_prob <- AIR_pi(phi, zeta, c, d)
+# check_pi <- data.frame(pi = trans_prob, m = as.vector(Tmat))
+# with(check_pi, all(m[is.na(pi)] == 0))
+# subset(check_pi, !is.na(pi))
+# 
+# AIRmle(XUW, c, d, transform = "exp")
+# c(phi, zeta)
