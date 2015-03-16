@@ -28,11 +28,45 @@ simulation_plot <- function(data, statistic, graph = "bias",
     theme(axis.text.x = element_text(angle=45, hjust = 1)))
 }
 
+#log parameterizations
 simulation_plot(K120results, statistic = "logit phi")
 simulation_plot(K120results, statistic = "logit phi", graph = "median_bias")
 
 simulation_plot(K120results, statistic = "log zeta")
 simulation_plot(K120results, statistic = "log zeta", graph = "median_bias")
+
+#natural parameterizations
+simulation_plot(K120results, statistic = "phi", labels = c("< -1","-1 to -.50",
+                                                           "-.5 to -.10", 
+                                                           "-.10 to -.02",
+                                                           "-.02 to .02",
+                                                           ".02 to .10", 
+                                                           ".10 to .50",
+                                                           ".50 to 1", " > 1"))
+simulation_plot(K120results, statistic = "phi", graph = "median_bias",
+                labels = c("< -1","-1 to -.50",
+                           "-.5 to -.10", 
+                           "-.10 to -.02",
+                           "-.02 to .02",
+                           ".02 to .10", 
+                           ".10 to .50",
+                           ".50 to 1", " > 1"))
+
+simulation_plot(K120results, statistic = "zeta", labels = c("< -1","-1 to -.50",
+                                                                "-.5 to -.10", 
+                                                                "-.10 to -.02",
+                                                                "-.02 to .02",
+                                                                ".02 to .10", 
+                                                                ".10 to .50",
+                                                                ".50 to 1", " > 1"))
+simulation_plot(K120results, statistic = "zeta", graph = "median_bias",
+                labels = c("< -1","-1 to -.50",
+                           "-.5 to -.10", 
+                           "-.10 to -.02",
+                           "-.02 to .02",
+                           ".02 to .10", 
+                           ".10 to .50",
+                           ".50 to 1", " > 1"))
 
 # d_ply(s5results_pen, .(K_intervals), simulation_plot, statistic = "logit phi")
 # d_ply(s5results_pen, .(K_intervals), simulation_plot, statistic = "logit phi", graph = "median_bias")
