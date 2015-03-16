@@ -1,6 +1,6 @@
 rm(list = ls())
 library(ARPobservation)
-source("R/PIR-APP.R")
+source("PIR-APP.R")
 
 #-------------------------------------
 #Data Generating Model
@@ -36,13 +36,6 @@ performance <- function(true_phi, true_zeta, true_mu, true_lambda, ests){
 #-------------------------------------
 #Simulation Driver
 #-------------------------------------
-# phi <- .20
-# zeta <- .20
-# K_intervals <- 90
-# c <- 1
-# k_priors <- 1.01
-# theta <- 20
-# iterations <- 4000
 
 runSim <- function(phi, zeta, K_intervals, c, k_priors, theta, iterations, seed = NULL) {
   if (!is.null(seed)) set.seed(seed)
@@ -64,8 +57,6 @@ runSim <- function(phi, zeta, K_intervals, c, k_priors, theta, iterations, seed 
 #-------------------------------------
 # Design parameters
 #-------------------------------------
-library(plyr)
-
 K_intervals <- c(30, 60, 90, 120)
 phi <- seq(.05, .50, .05)
 zeta <- seq(.05, .50, .05)
@@ -73,55 +64,35 @@ k_priors <- c(1, 1.01, 1.05, 1.1, 1.2, 1.5, 2)
 theta <- c(5, 10, 20, 40, Inf)
 set.seed(8473695)
 
-# check that penalty function zeros out when k_priors = 1, theta = Inf
-priors <- expand.grid(k_priors = k_priors, theta = theta)
-priors$pen <- with(priors, Beta_Gamma(k_mu = k_priors, k_lambda = k_priors, 
-                                      theta_mu = theta, theta_lambda = theta, const = 2)(c(0.01, 0.01), coding = "MTS"))
-
 params <- expand.grid(phi = phi, zeta = zeta, K_intervals = K_intervals, k_priors = k_priors, theta = theta)
+nrow(params)
 params$seed <- round(runif(nrow(params)) * 2^30)
 
-# # single core run
-# system.time(results_single <- mdply(params, .fun = runSim, iterations = 10, c = 1, .inform = TRUE))
-
-
-# multi-core run
+#--------------------------------------------------------
+# run simulations in parallel
+#--------------------------------------------------------
 
 source_func <- ls()
 
-start_parallel <- function(source_func) {
-  require(parallel)
-  require(foreach)
-  require(iterators)
-  require(doParallel)
-  if (!is.na(pmatch("Windows", Sys.getenv("OS")))) {
-    cluster <- makeCluster(detectCores(), type = "SOCK")
-    registerDoParallel(cluster)
-    clusterEvalQ(cluster, library(plyr))
-    clusterEvalQ(cluster, library(ARPobservation))
-    clusterEvalQ(cluster, library(compiler))
-    clusterEvalQ(cluster, enableJIT(3))
-    clusterExport(cluster, source_func) 
-  } else {
-    registerDoParallel(cores=detectCores())
-  }
-  cluster
-}
+library(Rmpi)
+library(snow)
+library(foreach)
+library(iterators)
+library(doSNOW)
+library(rlecuyer)
+library(plyr)
 
-cluster <- start_parallel(source_func)
+# set up parallel processing
+cluster <- getMPIcluster()
+registerDoSNOW(cluster)
+
+clusterEvalQ(cluster, library(plyr))
+clusterEvalQ(cluster, library(ARPobservation))
+clusterEvalQ(cluster, library(compiler))
+clusterEvalQ(cluster, enableJIT(3))
+clusterExport(cluster, source_func) 
+
 system.time(results <- mdply(params, .fun = runSim, iterations = 5000, c = 1, .parallel = TRUE))
 stopCluster(cluster)
 
-save(results, file = "Simulations/Simulation 4 - MTS penalty function/sim4MTScombined.Rdata")
-
-library(mailR)
-send.mail(from = "jepusto@gmail.com",
-          to = "pusto@austin.utexas.edu",
-          subject = "Simulation is done",
-          body = "All set!",
-          smtp = list(host.name = "smtp.gmail.com", 
-                      port = 465, 
-                      user.name = "jepusto", 
-                      passwd = "xiqzdlacycwuksdf", 
-                      ssl = TRUE),
-          authenticate = TRUE)
+save(results, file = "MTS hyperparameter sims.Rdata")
