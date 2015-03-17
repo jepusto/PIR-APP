@@ -298,24 +298,3 @@ AIRmle <- function(XUW, c, d, penalty_func = NULL,
   param_trans(results$par, transform = transform)
   
 }
-
-# mu <- 6
-# lambda <- 9
-# c <- 0.8
-# d <- 0.2
-# XUW <- r_AIR(n = 1, mu = mu, lambda = lambda, stream_length = 100000,
-#              F_event = F_exp(), F_interim = F_exp(),
-#              interval_length = c + d, rest_length = d)[,,1]
-# 
-# phi <- mu / (mu + lambda)
-# zeta <- 1 / (mu + lambda)
-# Tmat <- AIR_Tmat(XUW)
-# Tmat[1,,,] <- Tmat[1,,,] / sum(Tmat[1,,,])
-# Tmat[2,,,] <- Tmat[2,,,] / sum(Tmat[2,,,])
-# trans_prob <- AIR_pi(phi, zeta, c, d)
-# check_pi <- data.frame(pi = trans_prob, m = as.vector(Tmat))
-# with(check_pi, all(m[is.na(pi)] == 0))
-# subset(check_pi, !is.na(pi))
-# 
-# AIRmle(XUW, c, d, transform = "exp")
-# c(phi, zeta)
