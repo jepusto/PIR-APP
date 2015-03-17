@@ -43,8 +43,8 @@
 \affiliation{The University of Texas at Austin}
  
 \abstract{Data based on direct observation of behavior are used widely in many areas of educational and psychological research, particularly in applied research areas such as the treatment of behavioral disorders. 
-A number of different methods are used to code or record data from direct observation, including continuous recording, momentary time sampling (MTS), partial interval recording (PIR, also known as one-zero sampling, modified frequency sampling, Hansen sampling, or simply time-sampling), and whole interval recording (WIR). 
-Among these methods, PIR and WIR have long been recognized as problematic because, as typically reported, the mean of such data measures neither the prevalence nor the incidence of a behavior. 
+A number of different methods are used to record data during direct observation, including continuous recording, momentary time sampling (MTS), partial interval recording (PIR), and whole interval recording (WIR). 
+Among these methods, PIR and WIR have long been recognized as problematic because, as typically reported, the mean of such data measures neither the prevalence nor the incidence of the observed behavior. 
 Though the problems with these methods have long been recognized, little research has examined methods of analyzing interval recording data other than simply taking the mean. 
 This paper proposes a Alternating Poisson Process model for interval recording data that permits estimation of both prevalence and incidence via maximum likelihood or penalized maximum likelihood methods. 
 The paper also describes a novel observation recording method that involve combinations of MTS, PIR, and WIR and that provides considerably more efficient estimators of prevalence and incidence.}
@@ -72,17 +72,16 @@ opts_chunk$set(echo = FALSE, cache = FALSE, fig.path='fig/', fig.align='center',
 
 Measurements derived from systematic, direct observation of human behavior are used in many areas of psychological and educational research. 
 For example, direct observation of student classroom behavior is a primary component of several existing instruments for screening and diagnosis of emotional and behavioral problems \citep{Volpe2005observing}; direct observation of childrens' challenging behavior in home settings has been employed to collect pre- and post-test measures in randomized trials of behavioral interventions \citep[e.g.,][]{Durand2012positive}; and direct observation of infant-parent interaction patterns is employed in studies of child development \citep{Mann1991time} and cross-cultural differences \citep{Bornstein2002measurement}. 
-Direct observation also plays a prominent role in single-case research, where it is used to measure changes in behavior over time and assess individual responses to intervention \citep{Kazdin2011single}.
+Direct observation also plays a prominent role in single-case research, where it is used to assess individual responses to intervention by measuring changes in behavior over time \citep{Kazdin2011single}.
 
 Systematic direct observation procedures require that the behavior of interest have a clear operational definition, so that its occurrence or absence can be judged at a given point in time. 
 In forming such an operationally definition, is useful to distinguish between behaviors that are \textit{events}, where each occurrence is of negligible duration, versus behaviors that are \textit{states}, where individual episodes of behavior have positive duration \citep{Altmann1974observational}. 
 The primary characteristic of an event behavior is its incidence, or frequency of occurrence per time unit. 
-In contrast, a state behavior has two primary characteristics: incidence (the frequency with which new episodes of the behavior begin, per time unit) and prevalence, or the proportion of time that the behavior occurs. Given an operationally defined behavior, measurements of its characteristics are obtained by observing the behavior (either in person, or by video-recording) for a specified length of time. 
-The pattern of behavioral episodes over the course of an observation session--that is, what a human observer actually perceives--is often called the \textit{behavior stream}. 
+In contrast, a state behavior has two primary characteristics: incidence, which is the frequency with which new episodes of the behavior begin, per time unit, and prevalence, which is the proportion of time that the behavior occurs. Given an operationally defined behavior, measurements of its characteristics are obtained by taking data while observing the behavior (either in person, or by video-recording) for a specified length of time. 
 
 There are several different procedures for recording data during direct observation, varying in ease of implementation, the level of detail in the resulting data, and the aspect of behavior to which the resulting measurement corresponds \citep[for surveys of major recording procedures, see][]{Altmann1974observational, Ayres2010dependent, Hartmann1990observational, Primavera1996measurement}. 
 The most intensive procedure is continuous recording (sometimes called duration recording or real-time recording), in which the observer records the time at which each event begins and ends.
-Data from continuous recording is very rich, in that it permits direct estimation of prevalence, incidence, and other aspects of the behavior stream; it can also be subjected to more sophisticated forms of modeling \citep[e.g.,][]{Bakeman2011sequential, Haccou1992statistical}. 
+Data from continuous recording is very rich, in that it permits direct estimation of prevalence, incidence, and other aspects of the pattern of behavior; continuous recording data can also be subjected to more sophisticated forms of modeling \citep[e.g.,][]{Bakeman2011sequential, Haccou1992statistical}. 
 However, less effort-intensive data collection methods are often required, particularly for use in clinical and applied research settings. 
 
 Other commonly used systems for collecting behavioral data do not capture a complete record of the behavior during an observation session, but rather involve making observations only intermittently. 
@@ -90,24 +89,23 @@ Among intermittent recording systems, the three main procedures are momentary ti
 In all three methods, an observation session is divided into a fixed number of equally spaced intervals, of perhaps 10 or 15 s in length, and a binary data-point is recorded for each interval. 
 The systems differ only in the rule for scoring each interval. 
 Using momentary time sampling (MTS), an interval is scored as a one if a behavioral event is happening during the final moment of the interval (and is otherwise scored as a zero). 
-Using partial interval recording (PIR), an interval is scored as a one if the behavior occurs at any point during the interval. 
+Using partial interval recording (PIR, also known as one-zero sampling, modified frequency sampling, or Hansen sampling), an interval is scored as a one if the behavior occurs at any point during the interval. 
 Using whole interval recording (WIR), an interval is scored as a one only if the behavior occurs for the entire duration of the interval. 
 In some PIR and WIR systems, a small length of time is left between each interval so that the observer does not have to maintain continuous attention. 
 
 In many applications, the interval-by-interval data generated by these recording systems is summarized by the proportion of intervals scored as a one. 
 Often, only this summary proportion is used for later analysis, where it is interpretted as a measure of prevalence. 
-However, the circumstances under which it is reasonable to reduce the data to a summary proportion depends on the recording system used to collect the data. 
+However, whether it is reasonable to reduce the data to a summary proportion depends on the recording system used to collect the data. 
 
 Under quite general modeling assumptions, the proportion of MTS intervals is an unbiased estimate of prevalence \citep{Rogosa1991statistical}. 
 Thus, reducing the data to the summary proportion may be quite reasonable if the investigator's interest is solely in the prevalence of the behavior. 
-However, simple summaries of MTS data do not provide a clear measure of the behavior's incidence. 
+However, simple summaries of MTS data do not provide any measure of the behavior's incidence. 
 Even if not of substantive interest, estimates of incidence are  are necessary for assessing the magnitude of measurement error in the prevalence estimates. 
 
-\citet{Brown1977estimation} described a method for estimating both prevalence and incidence from MTS data. 
-Their approach was to first posit a stochastic process for the underlying stream of behavior, as perceived by the observer, and then to consider the implications of observing the process intermittently via an MTS system. 
+\citet[see also \citealp{Griffin1983parametric}]{Brown1977estimation} described a method for estimating both prevalence and incidence from MTS data. 
+Their approach was to first posit a stochastic process for the underlying pattern of behavior as perceived by the observer, or what is often termed the \textit{behavior stream}. 
 The particular model they considered was an Alternating Poisson Process, which is a simple, two-state continuous time Markov chain where transitions between states follow exponential distributions. 
-The Alternating Poisson Process implies that interval-by-interval MTS scores follow a discrete-time Markov chain. 
-Under the model, \citet[see also \citealp{Griffin1983parametric}]{Brown1977estimation} provided closed-form expressions for the maximum likelihood estimators of prevalence and incidence and the associated asymptotic covariance matrix.
+Brown and colleagues showed that if the behavior stream is generated by such a process, then interval-by-interval MTS scores follow a discrete-time Markov chain, from which closed-form expressions for the maximum likelihood estimators of prevalence and incidence can be derived.
 
 Unlike MTS, PIR and WIR systems do not produce clearly interpretable summary measurements. 
 Rather, the PIR summary proportion systematically over-estimates prevalence and the WIR summary proportion systematically under-estimates prevalence; in both cases, the extent of the bias depends on the incidence of the behavior as well as operational features of the recording system \citep{Kraemer1979one, Rogosa1991statistical}, making the construct interpretation of such data quite difficult. 

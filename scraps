@@ -1,3 +1,4 @@
+
 For computational and notational purposes, it will be useful to parameterize the process using $\phi, \rho$, where $\rho = \zeta c / \phi (1 - \phi)$ and the constant $c$ is defined in what follows. 
 
 It is interesting to note that, under the Alternating Poisson Process, PIR observations follow a counting process on the space of non-negative integers. To see this, we re-express the observations in terms of the number of consecutive intervals in which behavior is observed. Let $V_k = k - \max\{1 \leq j \leq k: U_j = 0\}$ and observe that if $V_{k-1} = i$, then $V_k \in \{0, i + 1\}$ with probability one. Furthermore, \[

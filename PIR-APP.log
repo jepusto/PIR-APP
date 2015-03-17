@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  16 MAR 2015 16:40
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  17 MAR 2015 16:40
 entering extended mode
 **PIR-APP.tex
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.tex
@@ -942,48 +942,48 @@ ABD: EveryShipout initializing macros [1{C:/Users/jep2963/AppData/Local/MiKTeX/
 2.9/pdftex/config/pdftex.map}
 
 ] [2] [3] [4] [5] [6]
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 177.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 175.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 177.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 175.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 177
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 175
 .
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 177
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 175
 .
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 177.
+(Font)              <12> on input line 175.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 177.
+(Font)              <8> on input line 175.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 177.
-LaTeX Font Info:    Try loading font information for U+msa on input line 177.
+(Font)              <6> on input line 175.
+LaTeX Font Info:    Try loading font information for U+msa on input line 175.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 177.
+LaTeX Font Info:    Try loading font information for U+msb on input line 175.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [7] [8]
 [9] [10]
-Overfull \hbox (17.85037pt too wide) in paragraph at lines 295--295
+Overfull \hbox (17.85037pt too wide) in paragraph at lines 293--293
 []  
  []
 
@@ -991,7 +991,7 @@ Overfull \hbox (17.85037pt too wide) in paragraph at lines 295--295
 File: AIR_flowchart.pdf Graphic file (type pdf)
 
 <use AIR_flowchart.pdf>
-Package pdftex.def Info: AIR_flowchart.pdf used on input line 431.
+Package pdftex.def Info: AIR_flowchart.pdf used on input line 429.
 (pdftex.def)             Requested size: 364.24237pt x 191.7081pt.
  [17 <C:/Users/jep2963/Documents/R/PIR-APP/AIR_flowchart.pdf>] [18] (C:\Users\j
 ep2963\Documents\R\PIR-APP\PIR-APP.bbl [19] [20
@@ -1008,7 +1008,7 @@ ep2963\Documents\R\PIR-APP\PIR-APP.bbl [19] [20
 Here is how much of TeX's memory you used:
  17495 strings out of 493921
  323309 string characters out of 3144871
- 370818 words of memory out of 3000000
+ 370718 words of memory out of 3000000
  20384 multiletter control sequences out of 15000+200000
  52641 words of font info for 49 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -1029,7 +1029,7 @@ KTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
 nts/type1/public/lm/lmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
 ublic/lm/lmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lms
 y8.pfb>
-Output written on PIR-APP.pdf (26 pages, 411005 bytes).
+Output written on PIR-APP.pdf (26 pages, 411025 bytes).
 PDF statistics:
  159 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
