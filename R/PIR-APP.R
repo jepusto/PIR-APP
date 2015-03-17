@@ -257,7 +257,7 @@ AIR_loglik <- function(param, Tmat, c, d) {
 # penalized log-likelihood for AIR
 
 AIR_loglik_pen <- function(param, Tmat, c, d, penalty_func)
-  PIR_loglik(param, U, c, d) + penalty_func(param, c, coding = "AIR")
+  AIR_loglik(param, Tmat, c, d) + penalty_func(param, c, coding = "AIR")
 
 
 #----------------------------------------------
@@ -269,8 +269,11 @@ AIR_loglik_pen <- function(param, Tmat, c, d, penalty_func)
 
 AIR_Tmat <- function(XUW) {
   K <- nrow(XUW) - 1
-  MTS_lag <- XUW[1:K, 1]
-  table(MTS_lag, XUW[-1,1], XUW[-1,2], XUW[-1,3])
+  MTS_lag <- factor(XUW[1:K, 1], levels = 0:1)
+  table(MTS_lag, 
+        factor(XUW[-1,1], levels = 0:1),
+        factor(XUW[-1,2], levels = 0:1),
+        factor(XUW[-1,3], levels = 0:1))
 }
 
 AIRmle <- function(XUW, c, d, penalty_func = NULL,
