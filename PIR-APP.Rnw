@@ -512,6 +512,8 @@ Robustness to violation of the APP assumptions.
 
 Measurement model, needs to be extended to regression modeling, time series, random effects settings.
 
+Use model to develop guidance about choice of recording procedures, interval length, rest time, K, etc.
+
 This model does not account for observer error.
 
 \bibliographystyle{apacite}
