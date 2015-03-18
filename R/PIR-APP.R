@@ -11,6 +11,7 @@ expit <- function(x) 1 / (1 + exp(-x))
 # transform parameters from logit-phi, log-zeta to different scales
 
 param_trans <- function(param, transform) {
+  names(param) <- NULL
   switch(transform,
          none = c(logit_phi = param[1], 
                   log_zeta = param[2]),
@@ -143,6 +144,32 @@ MTSmle <- function(X, c, penalty_func = NULL,
   
 }
 
+#----------------------------------------------
+# bootstrapping for MTS
+#----------------------------------------------
+
+MTSbootstrap <- function(X, c, penalty_func = NULL,
+                         phi_start = pmin(pmax(mean(X), 1 / length(X)), 1 - 1 / length(X)), zeta_start = .10, 
+                         transform = "none", iterations = 2000, p = .05) {
+  
+  est <- MTSmle(X = X, c = c, penalty_func = penalty_func,
+                phi_start = phi_start, zeta_start = zeta_start, transform = "none")
+  
+  mu_lambda <- param_trans(est, transform = "means")
+  
+  rep_dat <- r_MTS(n = iterations, mu = mu_lambda[1], lambda = mu_lambda[2],
+                   stream_length = c * length(X), F_event = F_exp(), F_interim = F_exp(),
+                   interval_length = c)
+  rep_ests <- t(apply(rep_dat, MARGIN = 1, FUN = MTSmle, c = c, penalty_func = penalty_func,
+                      phi_start = phi_start, zeta_start = zeta_start, transform = transform))
+  
+  ests <- param_trans(est, transform = transform)
+  std_devs <- apply(rep_ests, 2, sd)
+  CIs <- apply(rep_ests, 2, quantile, probs = c(p/2, 1 - p/2))
+  
+  data.frame(parm = names(ests), est = ests, sd = std_devs, CI_L = CIs[1,], CI_U = CIs[2,], row.names = NULL)
+}
+
 #---------------------------------------
 # log-likelihood function for PIR
 #---------------------------------------
@@ -218,6 +245,34 @@ PIRmle <- function(U, c, d, coding = "PIR", penalty_func = NULL,
   
   param_trans(results$par, transform = transform)
 
+}
+
+#----------------------------------------------
+# bootstrapping for PIR
+#----------------------------------------------
+
+PIRbootstrap <- function(U, c, d, coding = "PIR", penalty_func = NULL,
+                         phi_start = max(mean(U) / 2, expit(-10)),
+                         zeta_start = .10, transform = "none", iterations = 2000, p = .05) {
+
+  est <- PIRmle(U = U, c = c, d = d, coding = coding, penalty_func = penalty_func,
+                     phi_start = phi_start, zeta_start = zeta_start, transform = "none")
+  
+  mu_lambda <- param_trans(est, transform = "means")
+
+  r_gen <- if (coding == "PIR") r_PIR else r_WIR
+  rep_dat <- r_gen(n = iterations, mu = mu_lambda[1], lambda = mu_lambda[2],
+                      stream_length = (c + d) * length(U), F_event = F_exp(), F_interim = F_exp(),
+                      interval_length = c + d, rest_length = d)
+  rep_ests <- t(apply(rep_dat, MARGIN = 1, FUN = PIRmle, c = c, d = d, 
+                  coding = coding, penalty_func = penalty_func,
+                  phi_start = phi_start, zeta_start = zeta_start, transform = transform))
+  
+  ests <- param_trans(est, transform = transform)
+  std_devs <- apply(rep_ests, 2, sd)
+  CIs <- apply(rep_ests, 2, quantile, probs = c(p/2, 1 - p/2))
+    
+  data.frame(parm = names(ests), est = ests, sd = std_devs, CI_L = CIs[1,], CI_U = CIs[2,], row.names = NULL)
 }
 
 #---------------------------------------
