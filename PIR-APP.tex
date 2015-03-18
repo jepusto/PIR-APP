@@ -230,7 +230,7 @@ When this condition holds, the MLEs for $\phi$ and $\zeta$ are given by
 
 
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Wed Mar 18 13:05:41 2015
+% Wed Mar 18 16:18:15 2015
 \begin{table}[b]
 \centering
 \caption{Proportion of 2000 simulated MTS samples (K = 40) in which $0 < \hat\phi_{MTS} < 1$ and $0 < \hat\zeta_{MTS} < \infty$.} 
@@ -303,7 +303,7 @@ The simulation study reported in the next section therefore uses the Nelder-Mead
 
 
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Wed Mar 18 13:05:41 2015
+% Wed Mar 18 16:18:15 2015
 \begin{table}[b]
 \centering
 \caption{Proportion of 2000 simulated PIR samples (K = 40) in which  $|\text{logit}(\hat\phi_{PIR})| < 8$ and $|\text{log}(\hat\zeta_{PIR})| < 8$.} 
@@ -495,7 +495,53 @@ $s$ & Recording system & 2 & \multicolumn{3}{c}{MTS, PIR} \\
 \section{Application}
 \label{sec:application}
 
+
+
+This section demonstrates the use of the PLEs with empirical behavioral observation data. The data are drawn from \citet{Johnson2014reliability}. 
+In this study, trained raters watched six scripted, pre-recorded, ten-minute videos of a classroom during a lesson. 
+The script outlined when students in the classroom were to act academically engaged or to act disruptively. 
+For each video, academic engagement behavior was coded using three different recording systems: MTS, PIR, and WIR. 
+For each of the three recording procedures, 15 s intervals were used, yielding a total of 40 intervals per scored clip.
+Each video clip was independently coded by ten different raters using each of the recording systems. 
+
+The goal of our analysis is to estimate the prevalence and incidence of the behavior observed in each video clip, using the data collected using each of the three recording systems. 
+Because each video was scored separately using each recording system, comparing the PLEs obtained from each type of data allows us to characterize the strengths and weaknesses of each recording system. The fact that each clip is scored by multiple raters also allows us to observe a source of measurement error that the Alternating Poisson Process model does capture: "inter-rater" error, due the human observers not perfectly following the scoring procedure or not perceiving the behavior stream with perfect accuracy.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[]
+
+
+{\centering \includegraphics[width=\maxwidth]{fig/summary_prop} 
+
+}
+
+\caption[MTS, PIR, and WIR summary proportions for each rater, by clip]{MTS, PIR, and WIR summary proportions for each rater, by clip. Horizontal dashed lines correspond to the average MTS summary proportions.\label{fig:summary_prop}}
+\end{figure}
+
+
+\end{knitrout}
+
+Figure \ref{fig:summary_prop} plots the overal proportion of intervals with academic engagment for each clip and each recording procedure, with separate points for each rater. The horizontal dashed lines represent the average of the MTS proportions across all ten raters, which we treat as a benchmark for the prevalence estimates based on the Alternating Poisson Process. The PIR proportions are almost all higher than the unbiased MTS proportions, while the WIR proportions are nearly always lower, which is consistent with the fact that the PIR summary proportion is an upwardly biased estimate of prevalence while the WIR proportion is a downwardly biased estimate of prevalence. Note that the benchmark prevalence of academic engagement is high---above .80---in clips A, C, and D. In these three clips, the PIR proportions are frequently at or very near to the ceiling level. The raw proportions contain a suprisingly large amount of inter-rater variability. 
+
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'Prevalence' not found}}\end{kframe}
+\end{knitrout}
+
+Figure \ref{fig:johnson_phi_est} displays the PLEs for prevalence based on the MTS, PIR, and WIR scores for each rater and each clip. 
+The prevalence estimates are plotted on the vertical axis, with the corresponding summary proportion of intervals on the horizontal axis. 
+The quality of the estimates varies substantially by both recording procedure and by clip. For MTS, the maximum likelihood estimates are all close to the raw proportions (which are unbiased estimates of prevalence). The MTS confidence intervals cover the benchmark prevalence estimate in 50 out of the 60 MTS records and are generally narrower than the confidence intervals based on the PIR and WIR data.
+
+In all but clip F, the PIR estimates are highly unstable and essentially uniformative. We suspect that this is because PIR is a poor choice for recording the behavior in these clips, as indicated by the fact that the PIR proportions are at or near ceiling in these clips. In comparison, the WIR estimates for clips A, B, C, D, and E are relatively informative (though the CIs are still quite wide in some instances, particularly in clip B) This is consistent with theory that WIR is a more appropriate method of observing the behaviors in these clips, where academic engagement occurs for the majority of the observation session. Note that most of the confidence intervals cover the benchmark estimates of prevalence, and the average of the maximum likelihood estimates appears to be quite close to the benchmark.
+
+For clip F, the situation is reversed: the PIR estimates are relatively informative while the WIR estimates are not, due to the relatively low level of academic engagement in this clip. Note that nearly all of the PIR confidence intervals cover the benchmark, and the average of the PIR point estimates is close to the benchmark estimate of prevalence.
+
 \section{A novel recording procedure}
+\label{sec:AIR}
 
 Thus far, we have considered conventional and widely used procedures for intermittent, systematic direct observation procedures. 
 In this section, we describe a recording procedure that can be used to obtain more accurate estimates of both prevalence and incidence. 

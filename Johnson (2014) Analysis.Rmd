@@ -1,0 +1,176 @@
+---
+title: "Analysis of Johnson (2014) Dissertation Data"
+author: James E. Pustejovsky & Daniel M. Swan
+output: 
+  pdf_document:
+    fig_width: 10
+    fig_height: 6
+    fig_caption: true
+fontsize: 12pt
+---
+
+```{r, include=FALSE}
+library(plyr)
+library(ggplot2)
+library(reshape2)
+library(knitr)
+library(xtable)
+
+#setwd("data/Johnson (2014) data")
+source("../../PIR-APP/Simulations/Simulation functions.R")
+source("../../PIRapp.R")
+source("../../Brown Solomon Stevens.R")
+
+johnson <- read.csv("Interval recording data from Johnson dissertation.csv")
+johnson$Clip_Name <- as.factor(johnson$Clip_Name)
+levels(johnson$Method) <- c("MTS","PIR","WIR")
+names(johnson)[4] <- "Clip"
+
+johnson <- subset(johnson, Behavior==1)
+options(warn=-1)
+
+```
+
+# Introduction
+
+This memo contains an analysis of the data from Austin Johnson's dissertation on the reliability of time sampling techniques for direct observation of behavior. In the study, ten trained raters watched six scripted, pre-recorded, ten-minute videos of a classroom during a lesson. The script outlined when students in the classroom were to act academically engaged or to act disruptively. Each rater was asked to score each video four times, while recording 1, 3, 5, or 7 behaviors simultaneously---that is, to record academic engagement in addition to 0, 2, 4, or 6 other behaviors. Each rater was also asked to record the behaviors using three different procedures: whole interval recording (WIR), partial interval recording (PIR), and momentary time sampling (MTS). Thus, each clip was scored a total of 120 times: 10 raters $\times$ 3 recording procedures $\times$ 4 levels of simultaneous behaviors. For all three recording procedures, 15 s intervals were used, yielding a total of 40 intervals per scored clip. For simplicity, the analysis is limited to the data where the rater was recording academic engagement only, without needing to score any of the other behaviors; presumably, these data should represent the most accurate record of the stream of academic engagement behavior in each video. 
+
+The goal of our analysis is to estimate two characteristics of the academic engagement behavior observed during each clip: prevalence and incidence. Prevalence is the average proportion of the time that a behavior occurs. Incidence is the average rate of new behaviors per unit time. We will measure time in units of observed intervals, so that an incidence of 0.25 means that a new behavior occurs at an average rate of once per four intervals (once per 60 seconds). 
+
+We take the perspective that prevalence and incidence are stable characteristics of the process that generates the behavior stream. That is, they are not quantities describing the behavior observed during the particular ten minute observation sessions, but rather are characteristics of a model, known as the Alternating Poisson Process, that is assumed to have generated the behavior stream in each clip. From this perspective, even prevalence and incidence estimates based on continuous recording data would contain some error, due to the fact that the behavior is observed only for a limited amount of time. In addition to the "inherent" variability that arises from the limited length of the observation session, there are two other potential sources of error in behavioral observation data. One source, which we might call "procedural" error, comes from the fact that the recording procedures are discontinuous---they contain some variability because they are based on only part of the observed behavior stream. The fact that each clip is scored by multiple raters allows us to observe one other source of error: "rater" error, which is due the human observers not perfectly following the scoring procedure or not perceiving the behavior stream with perfect accuracy.
+
+The first part of our analysis uses the MTS data to obtain unbiased estimates of the prevalence of academic engagement in each clip. We will these estimates as a benchmark, against which to compare prevalence estimates obtained using other recording procedures and estimators. The second part of the analysis examines a different approach to estimation of prevalence and incidence based on the MTS, PIR, and WIR data: maximum likelihood estimates derived under the Alternating Poisson Process model for the behavior stream. 
+
+# Unbiased estimation of prevalence
+
+Figure \ref{fig:raw_proportions} plots the overal proportion of intervals with academic engagment for each clip and each recording procedure, with separate points for each rater. The dashed lines represent the average of the MTS proportions across all ten raters. Under very general assumptions, the proportion of MTS intervals in which behavior is observed represents an unbiased estimate of the prevalence of academic engagement. We therefore use the average of the MTS proportions in each clip as a benchmark for the prevalence estimates based on the Alternating Poisson Process. 
+
+```{r raw_proportions, echo=FALSE, fig.cap="MTS, PIR, and WIR proportions for each rater, by clip\\label{fig:raw_proportions}"}
+
+MTS <- subset(johnson, Method == "MTS")
+PIR <- subset(johnson, Method == "PIR")
+WIR <- subset(johnson, Method == "WIR")
+
+MTmeans <- ddply(MTS, .variables= "Clip", summarize, Prevalence = mean(Prevalence))
+
+qplot(Method, Prevalence, color = Method,
+      data = johnson,
+      position = position_jitter(w=.10)) +
+      facet_wrap(~ Clip) +
+  coord_cartesian(ylim = c(0,1)) + 
+  labs(y = "Proportion of intervals") + 
+  geom_hline(data = MTmeans, aes(yintercept = Prevalence), linetype = "dashed") + 
+  theme_bw()
+
+```
+
+On average, the PIR proportions are always higher than the unbiased MTS proportions, while the WIR proportions are nearly always lower. This is consistent with theory as well as a a large body of empirical and simulation research, all of which indicates that the PIR proportion is an upwardly biased estimate of prevalence while the WIR proportion is a downwardly biased estimate of prevalence. Note that the benchmark prevalence of academic engagement is high---above .80---in clips A, C, and D. In these three clips, the PIR proportions are frequently at or very near to the ceiling level. As will be seen below, estimation of the Alternating Poisson Process model is very difficult under such conditions. 
+
+Note also that the raw proportions contain a large amount of inter-rater variability. Table \ref{tab:inter_rater} reports the sample standard deviation of the proportions (across raters) for each clip. The final column reports the sampling error of a binomial distribution with 40 trials and success probability equal to the benchmark prevalence for the clip. The varibility of the MTS proportion is higher than the binomial model in four out of six clips, and that of the WIR proportion is higher in five out of six clips. This suprised us, as we would not have expected there to be such a high level of inter-rater variability.
+
+```{r, echo=FALSE, results = "asis"}
+interrater_sd <- dcast(johnson, Clip ~ Method, value.var = "Prevalence", fun.aggregate = sd)
+interrater_sd$Binomial <- with(MTmeans, sqrt(Prevalence * (1 - Prevalence) / 40))
+print(xtable(interrater_sd, digits = 3,
+             caption = "Inter-rater variability in MTS, PIR, and WIR proportions, compared to a binomial model",
+             label = "tab:inter_rater"),
+      table.placement = "tbh", include.rownames = FALSE, comment = FALSE)
+```
+
+# Estimates of Prevalence and Incidence 
+
+## The Alternating Poisson Process model
+
+The Alternating Poisson Process is a stochastic model that can be used to describe the characteristics of simple behavior streams, where an episode of behavior is either occurring or not occurring at a given point in time. The model treats the durations of individual episodes of behavior and the lengths of time in between episodes of behavior (which we will call the interim times) as random quantities, drawn from certain probability distributions. Specifically, we assume that the episode durations are generated from an exponential distribution with mean $\mu$ and that the interim times are generated from an exponential distribution with mean $\lambda$. We further assume that the process is in equilibrium, so that the probability of an event occurring at any given point in time is constant across the entire behavior stream. Under these assumptions, the prevalence of the behavior is equal to $\mu / (\mu + \lambda)$ and the incidence of the behavior is equal to $1 / (\mu + \lambda)$. (Note that $\mu$ and $\lambda$ are measured in the same time units as the reciprocal of incidence---in our case, the unit is the interval length.)
+
+The Alternating Poisson Process describes the stream of behavior that a rater actually observes as they score, but it does not describe how the scores themselves are generated. We assume that the scoring procedure is essentially mechanistic, so that the score is a function of the observed stream of behavior during a given interval. For MTS, we assume that the score will be equal to one if an episode of behavior is occurring at the very end of the interval. For PIR, we assume that the score will be equal to one if any portion of the interval includes an episode of behavior. For WIR, we assume that the score will be equal to one if the an episode of behavior overlaps with the entire interval. One potential drawback of this approach to describing the observed scores is that it does not explicitly account for rater errors, but instead treats the process of translating from the observed behavior stream to the numerical scores as algorithmic---as if the observer were a robot. Still, this model could still be seen as implicitly accomodating rater error by allowing that the Alternating Poisson Process describes the observer's _perception_ of the behavior stream, rather than the true behavior stream.
+
+## Estimation Methods
+
+The assumptions of the Alternating Poisson Process for describing the behavior stream, together with the assumptions regarding mechanistic scoring process, can be used to derive estimates of the behavior's underlying prevalence and incidence. Brown, Solomon, and Stephens (1977) studied such estimators for the case of MTS observations, providing explicit formulas for the maximum likelihood estimators of prevalence and incidence along with asymptotically valid variance estimators. One potential drawback of using maximum likelihood is that the estimator for incidence is sometimes not calculable, in which case Brown, Solomon, and Stephens' variance estimates (and confidence intervals) for both prevalence and incidence cannot be calculated. When the incidence estimate is undefined, we instead use the binomial variance to calculate a standard error for the prevalence estimate.
+
+Using a modeling approach similar to the earlier work on MTS, Pustejovsky (2013) described a method of obtaining maximum likelihood estimators based on PIR and WIR data. However, unlike the MTS estimators, the estimators based on PIR and WIR data do not have an explicit algebraic form and must be obtained through numerical maximization. Confidence intervals for the estimators can be obtained using a parametric bootstrapping algorithm. Note that such confidence intervals capture both "inherent" error and "procedural error" in estimates of the behavioral parameters (though these two sources are not separated). 
+
+## Results
+
+
+```{r, echo=FALSE, fig.cap = "Prevalance estimates versus proportion of intervals with behavior for each rater, by clip\\label{fig:prevalence_mle}"}
+load("bootstraps.Rdata")
+
+PIR <- cbind(PIR[,-(9:48)], PI_est[,-1])
+WIR <- cbind(WIR[,-(9:48)], WI_est[,-1])
+
+MTSCIwrap <- function(U, c) {
+  estlist <- MTSmle_CI(U = U, c = c)
+  
+  return(c(phi = as.numeric(estlist$phi), phi_lower = estlist$phi_CI[[1]], 
+           phi_upper = estlist$phi_CI[[2]], zeta = as.numeric(estlist$zeta), 
+           zeta_lower = estlist$zeta_CI[[1]], zeta_upper = estlist$zeta_CI[[2]]))
+}
+
+MTS <- adply(MTS, 1, .fun = function(x) MTSCIwrap(U = as.numeric(x[9:48]), c = 1), .inform = TRUE)
+
+# mean(is.na(MTS$phi))
+# mean(is.na(MTS$zeta))
+
+APPmle <- rbind(PIR, WIR)
+APPmle <- rbind(APPmle, MTS[,-(9:48)])
+
+groupcolors <- c(MTS = "green", WIR = "blue", PIR = "red")
+
+qplot(Prevalence, phi, color = Method, data = APPmle) +
+  facet_wrap( ~ Clip, ncol = 3) + 
+  coord_cartesian(xlim = c(0,1), ylim = c(0,1)) + 
+  scale_x_continuous(breaks = seq(0.2, 1, 0.2)) +
+  labs(x = "Proportion of intervals", y = "Prevalence estimate") + 
+  geom_hline(data = MTmeans, aes(yintercept = Prevalence), linetype = "dashed") + 
+  geom_vline(data = MTmeans, aes(xintercept = Prevalence), linetype = "dashed") + 
+  geom_errorbar(aes(ymin = phi_lower, ymax = phi_upper)) +
+  theme_bw() +
+  scale_color_manual(values = groupcolors)
+
+```
+
+Figure \ref{fig:prevalence_mle} displays the maximum likelihood estimates of prevalence based on the MTS, PIR, and WIR scores for each rater and each clip. The prevalence estimates are plotted on the vertical axis, with the corresponding raw proportion of intervals on the horizontal axis. The vertical whisker bars correspond to 95% confidence intervals for prevalence. The "benchmark" prevalence estimate is plotted as a dashed line on both the X and Y axis. 
+
+The quality of the estimates varies substantially by both recording procedure and by clip. For MTS, the maximum likelihood estimates are all very close to the raw proportions (which are unbiased estimates of prevalence). The MTS confidence intervals typically cover the unbiased estimate of the prevalence and are narrower than the confidence intervals based on the PIR and WIR data.
+
+In all but clip F, the PIR estimates are highly unstable and essentially uniformative. We suspect that this is because PIR is a poor choice for recording the behavior in these clips, as indicated by the fact that the PIR proportions are at or near ceiling in these clips. In comparison, the WIR estimates for clips A, B, C, D, and E are relatively informative (though the CIs are still quite wide in some instances, particularly in clip B) This is consistent with theory that WIR is a more appropriate method of observing the behaviors in these clips, where academic engagement occurs for the majority of the observation session. Note that most of the confidence intervals cover the benchmark estimates of prevalence, and the average of the maximum likelihood estimates appears to be quite close to the benchmark.
+
+For clip F, the situation is reversed: the PIR estimates are relatively informative while the WIR estimates are not, due to the relatively low level of academic engagement in this clip. Note that nearly all of the PIR confidence intervals cover the benchmark, and the average of the PIR point estimates is close to the benchmark estimate of prevalence.
+
+```{r, echo = FALSE, fig.cap = "Incidence estimates versus proportion of intervals with behavior for each rater, by clip\\label{fig:incidence_mle}"}
+
+trunc_low <- .005
+trunc_high <- 2
+
+APPmle <- within(APPmle, {
+  zeta <- pmin(pmax(zeta, trunc_low), trunc_high)
+  zeta_lower <- pmin(pmax(zeta_lower, trunc_low), trunc_high)
+  zeta_upper <- pmin(pmax(zeta_upper, trunc_low), trunc_high)
+})
+
+qplot(Prevalence, zeta, color = Method, data = APPmle) +
+  facet_wrap( ~ Clip, ncol = 3) + 
+  coord_cartesian(xlim = c(0,1)) + 
+  scale_x_continuous(breaks = seq(0.2, 1,0.2)) +
+  labs(x = "Proportion of intervals", y = "Incidence estimate (per interval)") + 
+  scale_y_continuous(trans = "log", breaks = c(1/100,1/20,1/10,1/5,1/2,1)) +
+  geom_errorbar(aes(ymin = zeta_lower, ymax = zeta_upper)) +
+  theme_bw()+
+  scale_color_manual(values = groupcolors)
+
+```
+
+
+Figure \ref{fig:incidence_mle} displays the maximum likelihood estimates of incidence for each rater and each clip, again plotted against the raw proportion of intervals. Note that the vertical axis of this plot is on the log scale, and that estimates less than `r trunc_low` or greater than `r trunc_high` have been truncated. Also note that some of the MTS estimates are missing, because the maximum likelihood estimates do not always exist. 
+
+Unfortunately, we do not have any easy way to benchmark the true incidence of academic engagement in each of the clips; this would require scoring the clips using frequency counting or continuous recording. Lacking a credible point of comparison, we cannot directly evaluate the accuracy of the incidence estimates. Note though that for clips A, B, C, D, and E, the WIR estimates tend to be less than the MTS estimates, which are in turn less than the PIR estimates (the opposite is true for clip F). As with the prevalence estimates, the CIs based on PIR are uselessly wide in all but clip F. The MTS CIs are also quite variable: in some instances, the precision of the MTS estimates approaches that of the WIR estimates, while in other instances they are nearly as wide as the PIR estimates.
+
+# Discussion
+
+The estimation techniques considered in the above analysis are still in the early stages of development, and there are several pieces of further research to be done before determining whether they represent a viable approach to estimating behavioral parameters. We have done some initial simulation work examining the biases of the maximum likelihood estimates, which indicates that the estimates have reasonably small biases when based on 30 or more intervals per session. Given the number of intervals in this data, the performance of the estimators is relatively good when prevalence is below 0.45, but comparatively poor as estimates of phi approach one or when the estimate of zeta is greater than 0.30 divided by the length of each interval. That is to say, the estimates have reasonably small biases when a new behavior occurs no more frequently than approximately once every three intervals on average. We have yet to examine the accuracy of parametric bootstrap confidence intervals. 
+
+We are now focusing on tweaking the estimation procedures using penalty functions that regularize the likelihood. This penalized likelihood method is quite similar to the Bayesian approach to estiamtion, which introduces prior distributions that represent the analysts's a priori assumptions regarding the parameters of the behavior stream (in this case, prevalence and incidence), before actually collecting the data. This approach has the advantage of always returning estimates of prevalence and incidence, and may lead to more accurate results (and narrower confidence intervals) towards the edges of the parameter space. One challenge in developing good penalized likelihood estimators (as with good Bayesian estimators) will be choosing priors that are realistic and sensible given the contexts in which the different recording procedures tend to be used.
+
+Although we noted the suprisingly high level of inter-rater variability, our analysis has done little else to account for the use of multiple raters for each clip. One approach to doing so would be to synthesize the interval-by-interval scores for each clip across raters. For intance, we could create a new series of scores by taking the majority rating for each interval (though we would have to determine how to treat ties), and then analyze the resulting series of scores based on the Alternating Poisson Process model described above. Perhaps we could even find a way to take into account that we have MTS, PIR, and WIR ratings of each interval within each clip. 

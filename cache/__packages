@@ -1,7 +1,9 @@
 ARPobservation
 base
 doParallel
+dplyr
 foreach
+ggplot2
 iterators
 knitr
 plyr

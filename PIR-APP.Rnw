@@ -602,7 +602,112 @@ grid.draw(grob)
 \section{Application}
 \label{sec:application}
 
+<<Johnson_setup, include=FALSE>>=
+johnson <- subset(read.csv("data/Interval recording data from Johnson dissertation.csv"), Behavior == 1)
+names(johnson)[4] <- "Clip"
+
+johnson <- within(johnson, {
+  Clip <- as.factor(Clip)
+  levels(Method) <- c("MTS","PIR","WIR")
+  levels(Clip) <- paste("Clip", levels(Clip))
+  Prevalence <- ObsInts / TotalInts  
+})
+                              
+MTS <- subset(johnson, Method == "MTS")
+PIR <- subset(johnson, Method == "PIR")
+WIR <- subset(johnson, Method == "WIR")
+
+MTmeans <- ddply(MTS, .variables= "Clip", summarize, benchmark = mean(Prevalence))
+
+@
+
+This section demonstrates the use of the PLEs with empirical behavioral observation data. The data are drawn from \citet{Johnson2014reliability}. 
+In this study, trained raters watched six scripted, pre-recorded, ten-minute videos of a classroom during a lesson. 
+The script outlined when students in the classroom were to act academically engaged or to act disruptively. 
+For each video, academic engagement behavior was coded using three different recording systems: MTS, PIR, and WIR. 
+For each of the three recording procedures, 15 s intervals were used, yielding a total of 40 intervals per scored clip.
+Each video clip was independently coded by ten different raters using each of the recording systems. 
+
+The goal of our analysis is to estimate the prevalence and incidence of the behavior observed in each video clip, using the data collected using each of the three recording systems. 
+Because each video was scored separately using each recording system, comparing the PLEs obtained from each type of data allows us to characterize the strengths and weaknesses of each recording system. The fact that each clip is scored by multiple raters also allows us to observe a source of measurement error that the Alternating Poisson Process model does capture: "inter-rater" error, due the human observers not perfectly following the scoring procedure or not perceiving the behavior stream with perfect accuracy.
+
+<<summary_prop, fig.width = 8, fig.height = 5, fig.cap="MTS, PIR, and WIR summary proportions for each rater, by clip. Horizontal dashed lines correspond to the average MTS summary proportions.">>=
+
+ggplot(johnson, aes(x = Method, y = Prevalence, color = Method, shape = Method)) + 
+  geom_point(position = position_jitter(w=.15)) +
+  facet_wrap(~ Clip) +
+  coord_cartesian(ylim = c(-0.02,1.02)) + 
+  labs(x = "Recording system", y = "Proportion of intervals", color = "Recording system", shape = "Recording system") + 
+  geom_hline(data = MTmeans, aes(yintercept = benchmark), linetype = "dashed") + 
+  theme_bw() + theme(legend.position = "none")
+
+@
+
+Figure \ref{fig:summary_prop} plots the overal proportion of intervals with academic engagment for each clip and each recording procedure, with separate points for each rater. The horizontal dashed lines represent the average of the MTS proportions across all ten raters, which we treat as a benchmark for the prevalence estimates based on the Alternating Poisson Process. The PIR proportions are almost all higher than the unbiased MTS proportions, while the WIR proportions are nearly always lower, which is consistent with the fact that the PIR summary proportion is an upwardly biased estimate of prevalence while the WIR proportion is a downwardly biased estimate of prevalence. Note that the benchmark prevalence of academic engagement is high---above .80---in clips A, C, and D. In these three clips, the PIR proportions are frequently at or very near to the ceiling level. The raw proportions contain a suprisingly large amount of inter-rater variability. 
+
+<<johnson_PLEs, include = FALSE, cache = TRUE>>=
+source("R/parallel setup.R")
+source("R/PIR-APP.R")
+source_func <- ls()
+
+iterations <- 5000
+p <- 0.05
+penalty_func <- Beta_Gamma(k_mu = 1.5, k_lambda = 1.5, theta_mu = 10, theta_lambda = 10, const = 2)
+
+# set up parallel processing
+cluster <- start_parallel(source_func)
+clusterEvalQ(cluster, library(ARPobservation))
+
+MTS_PLEs <- adply(as.matrix(MTS[,9:48]), 1, MTSbootstrap, 
+                  c = 1, penalty_func = penalty_func, iterations = iterations, 
+                  transform = "exp", .parallel = TRUE)
+PIR_PLEs <- adply(as.matrix(PIR[,9:48]), 1, PIRbootstrap, coding = "PIR",
+                  c = 1, d = 0, penalty_func = penalty_func, iterations = iterations, 
+                  transform = "exp", .parallel = TRUE)
+WIR_PLEs <- adply(as.matrix(WIR[,9:48]), 1, PIRbootstrap, coding = "WIR",
+                  c = 1, d = 0, penalty_func = penalty_func, iterations = iterations, 
+                  transform = "exp", .parallel = TRUE)
+
+stopCluster(cluster)
+
+johnson$X1 <- rownames(johnson)
+PLEs <- merge(subset(johnson, select = c(X1, Clip, Method, Prevalence)), rbind(MTS_PLEs, PIR_PLEs, WIR_PLEs))
+save(PLEs, file = "johnson bootstraps.Rdata")
+@
+
+<<johnson_phi_est, fig.width = 8, fig.height = 4, fig.cap="PLE estimates of prevalence versus proportion of intervals with behavior, for each recording system and each rater. Vertical whisker bars correspond to 95\\% confidence intervals for prevalence, obtained using a parametric bootstrapping procedure. Horizontal dashed lines correspond to the average MTS summary proportions.">>=
+
+load("johnson bootstraps.Rdata")
+
+phi <- subset(PLEs, parm == "phi", select = -parm)
+phi <- merge(phi, MTmeans)
+phi$covered <- with(phi, CI_L <= benchmark & CI_U >= benchmark)
+
+zeta <- subset(PLEs, parm == "zeta", select = -parm)
+
+covered <- dcast(phi, Clip ~ Method, value.var = "covered", sum)
+
+ggplot(phi, aes(x = Prevalence, y = est, ymin = CI_L, ymax = CI_U, color = Method, shape = Method)) + 
+  geom_pointrange(position = position_jitter(w = 0.02)) + 
+  geom_hline(data = MTmeans, aes(yintercept = benchmark), linetype = "dashed") + 
+  facet_wrap( ~ Clip, ncol = 3) + 
+  coord_cartesian(xlim = c(-0.02,1.02), ylim = c(-0.02,1.02)) + 
+  scale_x_continuous(breaks = seq(0.2, 1, 0.2)) +
+  labs(x = "Proportion of intervals", y = "PLE prevalence estimate", 
+       color = "Recording system", shape = "Recording system") + 
+  theme_bw() 
+@
+
+Figure \ref{fig:johnson_phi_est} displays the PLEs for prevalence based on the MTS, PIR, and WIR scores for each rater and each clip. 
+The prevalence estimates are plotted on the vertical axis, with the corresponding summary proportion of intervals on the horizontal axis. 
+The quality of the estimates varies substantially by both recording procedure and by clip. For MTS, the maximum likelihood estimates are all close to the raw proportions (which are unbiased estimates of prevalence). The MTS confidence intervals cover the benchmark prevalence estimate in \Sexpr{sum(covered$MTS)} out of the 60 MTS records and are generally narrower than the confidence intervals based on the PIR and WIR data.
+
+In all but clip F, the PIR estimates are highly unstable and essentially uniformative. We suspect that this is because PIR is a poor choice for recording the behavior in these clips, as indicated by the fact that the PIR proportions are at or near ceiling in these clips. In comparison, the WIR estimates for clips A, B, C, D, and E are relatively informative (though the CIs are still quite wide in some instances, particularly in clip B) This is consistent with theory that WIR is a more appropriate method of observing the behaviors in these clips, where academic engagement occurs for the majority of the observation session. Note that most of the confidence intervals cover the benchmark estimates of prevalence, and the average of the maximum likelihood estimates appears to be quite close to the benchmark.
+
+For clip F, the situation is reversed: the PIR estimates are relatively informative while the WIR estimates are not, due to the relatively low level of academic engagement in this clip. Note that nearly all of the PIR confidence intervals cover the benchmark, and the average of the PIR point estimates is close to the benchmark estimate of prevalence.
+
 \section{A novel recording procedure}
+\label{sec:AIR}
 
 Thus far, we have considered conventional and widely used procedures for intermittent, systematic direct observation procedures. 
 In this section, we describe a recording procedure that can be used to obtain more accurate estimates of both prevalence and incidence. 
