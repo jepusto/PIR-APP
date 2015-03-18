@@ -542,6 +542,32 @@ Mudford, O\BPBI C.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Nelder%
+\ \BBA {} Mead%
+}{%
+Nelder%
+\ \BBA {} Mead%
+}{%
+{\protect \APACyear {1965}}%
+}]{%
+Nelder1965simplex}
+\APACinsertmetastar {%
+Nelder1965simplex}%
+\begin{APACrefauthors}%
+Nelder, B\BPBI J\BPBI A.%
+\BCBT {}\ \BBA {} Mead, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1965}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{A simplex method for function minimization}} {{A
+  simplex method for function minimization}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{The Computer Journal}{7}{4}{308--313}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Primavera%
 , Allison%
 \BCBL {}\ \BBA {} Alfonso%

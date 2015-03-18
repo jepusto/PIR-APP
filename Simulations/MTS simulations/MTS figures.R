@@ -25,7 +25,7 @@ with(results, table(stat, estimator))
 
 # RMSE of phi
 
-ggplot(subset(results, K %in% c(30,60,90,120) & stat == "phi"),
+ggplot(subset(results, K %in% seq(30,150,30) & stat == "phi"),
        aes(x = estimator, y = rmse_trunc, fill = estimator)) + 
   geom_boxplot(position = "dodge") + 
   facet_grid(. ~ K, scales = "free", labeller = "label_both") + 
@@ -34,12 +34,22 @@ ggplot(subset(results, K %in% c(30,60,90,120) & stat == "phi"),
 
 # Relative RMSE of zeta
 
-ggplot(subset(results, K %in% c(30,60,90,120) & stat == "zeta"),
+ggplot(subset(results, K %in% seq(30,150,30) & stat == "zeta"),
        aes(x = estimator, y = rrmse, fill = estimator)) + 
   geom_boxplot(position = "dodge") + 
   coord_cartesian(ylim = c(0,3)) + 
   facet_grid(. ~ K, scales = "free") + 
   labs(y = "Relative root mean squared error") + 
+  theme_bw() + theme(legend.position = "none")
+
+# RMSE of logit-phi, log-zeta
+
+ggplot(subset(results, K %in% seq(30,150,30) & stat %in% c("logit phi","log zeta")),
+       aes(x = estimator, y = rmse, fill = estimator)) + 
+  geom_boxplot(position = "dodge") + 
+  coord_cartesian(ylim = c(0,2)) + 
+  facet_grid(stat ~ K, scales = "free") + 
+  labs(y = "Root mean squared error") + 
   theme_bw() + theme(legend.position = "none")
 
 #--------------------------------------

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  17 MAR 2015 16:40
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  18 MAR 2015 13:05
 entering extended mode
 **PIR-APP.tex
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.tex
@@ -983,55 +983,130 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 175.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [7] [8]
 [9] [10]
-Overfull \hbox (17.85037pt too wide) in paragraph at lines 293--293
+Overfull \hbox (17.85037pt too wide) in paragraph at lines 292--292
 []  
  []
 
-[11] [12] [13] [14] [15] [16] <AIR_flowchart.pdf, id=69, 722.7pt x 542.025pt>
-File: AIR_flowchart.pdf Graphic file (type pdf)
+[11] [12] [13] [14] [15] [16]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 417.
 
-<use AIR_flowchart.pdf>
-Package pdftex.def Info: AIR_flowchart.pdf used on input line 429.
+
+Package xcolor Warning: Incompatible color definition on input line 438.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `htb') on input line 438.
+
+<fig/MTS_RMSE.pdf, id=69, 722.7pt x 505.89pt>
+File: fig/MTS_RMSE.pdf Graphic file (type pdf)
+ <use fig/MTS_RMSE.pdf>
+Package pdftex.def Info: fig/MTS_RMSE.pdf used on input line 441.
+(pdftex.def)             Requested size: 455.30124pt x 318.71237pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 452.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `htb') on input line 452.
+
+<fig/MTS_sample_size.pdf, id=70, 722.7pt x 578.16pt>
+File: fig/MTS_sample_size.pdf Graphic file (type pdf)
+
+<use fig/MTS_sample_size.pdf>
+Package pdftex.def Info: fig/MTS_sample_size.pdf used on input line 455.
+(pdftex.def)             Requested size: 455.30124pt x 364.24272pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 468.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `htb') on input line 468.
+
+<fig/PIR_RMSE.pdf, id=71, 722.7pt x 505.89pt>
+File: fig/PIR_RMSE.pdf Graphic file (type pdf)
+ <use fig/PIR_RMSE.pdf>
+Package pdftex.def Info: fig/PIR_RMSE.pdf used on input line 471.
+(pdftex.def)             Requested size: 455.30124pt x 318.71237pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 482.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `htb') on input line 482.
+
+<fig/PIR_sample_size.pdf, id=72, 722.7pt x 578.16pt>
+File: fig/PIR_sample_size.pdf Graphic file (type pdf)
+
+<use fig/PIR_sample_size.pdf>
+Package pdftex.def Info: fig/PIR_sample_size.pdf used on input line 485.
+(pdftex.def)             Requested size: 455.30124pt x 364.24272pt.
+ [17] [18 <C:/Users/jep2963/Documents/R/PIR-APP/fig/MTS_RMSE.pdf>] [19 <C:/User
+s/jep2963/Documents/R/PIR-APP/fig/MTS_sample_size.pdf>] [20 <C:/Users/jep2963/D
+ocuments/R/PIR-APP/fig/PIR_RMSE.pdf>]
+<AIR_flowchart.pdf, id=107, 722.7pt x 542.025pt>
+File: AIR_flowchart.pdf Graphic file (type pdf)
+ <use AIR_flowchart.pdf>
+Package pdftex.def Info: AIR_flowchart.pdf used on input line 517.
 (pdftex.def)             Requested size: 364.24237pt x 191.7081pt.
- [17 <C:/Users/jep2963/Documents/R/PIR-APP/AIR_flowchart.pdf>] [18] (C:\Users\j
-ep2963\Documents\R\PIR-APP\PIR-APP.bbl [19] [20
+
+[21 <C:/Users/jep2963/Documents/R/PIR-APP/fig/PIR_sample_size.pdf>] [22 <C:/Use
+rs/jep2963/Documents/R/PIR-APP/AIR_flowchart.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 556.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `htb') on input line 556.
+
+<fig/AIR_RMSE.pdf, id=135, 722.7pt x 505.89pt>
+File: fig/AIR_RMSE.pdf Graphic file (type pdf)
+ <use fig/AIR_RMSE.pdf>
+Package pdftex.def Info: fig/AIR_RMSE.pdf used on input line 559.
+(pdftex.def)             Requested size: 455.30124pt x 318.71237pt.
+
+(C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.bbl [23] [24 <C:/Users/jep2963/Do
+cuments/R/PIR-APP/fig/AIR_RMSE.pdf>] [25
+
+] [26]) [27] [28
+
+] [29] [30
 
 ]
-[21]) [22] [23
-
-] [24] [25
-
-] AED endfloat: Processing end Figures and Tables
-[26]
+AED endfloat: Processing end Figures and Tables [31]
 \Changes@OutFile=\write6
- (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.aux) ) 
+
+(C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.aux) ) 
 Here is how much of TeX's memory you used:
- 17495 strings out of 493921
- 323309 string characters out of 3144871
- 370718 words of memory out of 3000000
- 20384 multiletter control sequences out of 15000+200000
- 52641 words of font info for 49 fonts, out of 3000000 for 9000
+ 17559 strings out of 493921
+ 324468 string characters out of 3144871
+ 370881 words of memory out of 3000000
+ 20432 multiletter control sequences out of 15000+200000
+ 63207 words of font info for 58 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 62i,12n,76p,1185b,705s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (x86)/Mi
-KTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/
-enc/dvips/lm/lm-mathsy.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/l
-m/lm-mathit.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathex
-.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files (x8
-6)/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Program Files (x86)/MiKTeX 2
-.9/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
-pe1/public/lm/lmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/l
-m/lmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files (x86)/Mi
-KTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
-nts/type1/public/lm/lmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
-ublic/lm/lmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lms
-y8.pfb>
-Output written on PIR-APP.pdf (26 pages, 411025 bytes).
+ 62i,12n,80p,1166b,705s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files (x86)/MiK
+TeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/e
+nc/dvips/lm/lm-mathsy.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm
+/lm-mathit.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathex.
+enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files (x86
+)/MiKTeX 2.9/fonts/type1/public/lm/lmex10.pfb><C:/Program Files (x86)/MiKTeX 2.
+9/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/lm/lmmi6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm
+/lmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/lm/lmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
+blic/lm/lmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmsy
+8.pfb>
+Output written on PIR-APP.pdf (31 pages, 527374 bytes).
 PDF statistics:
- 159 PDF objects out of 1000 (max. 8388607)
+ 216 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 24 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 49 words of extra memory for PDF output out of 10000 (max. 10000000)
 
