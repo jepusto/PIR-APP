@@ -70,13 +70,25 @@ load("Simulations/AIR simulations/AIR sample size sims.Rdata")
 results$proc <- "AIR"
 results$K_intervals <- results$K_intervals * 2
 results_AIR <- results
+results$phi <- 1 - results$phi
+results_AIR <- rbind(results_AIR, subset(results, phi > 0.5))
+with(results_AIR, table(phi, zeta))
 
 load("Simulations/MTS simulations/MTS sample size sims.Rdata")
 results$proc <- "MTS"
 results_MTS <- subset(results, ! stat %in% c("mean","logit mean"))
+results$phi <- 1 - results$phi
+results_MTS <- rbind(results_MTS, subset(results, phi > 0.5 & ! stat %in% c("mean","logit mean")))
+with(results_MTS, table(phi, zeta))
 
-results <- rbind(results_MTS, results_AIR)
+load("Simulations/PIR simulations/PIR sample size sims.Rdata")
+results$proc <- "PIR"
+results_PIR <- subset(results, ! stat %in% c("mean","logit mean"))
+with(results_PIR, table(phi, zeta))
+
+results <- rbind(results_MTS, results_PIR, results_AIR)
 names(results)[3] <- "K"
+with(results, table(phi, zeta))
 
 results <- within(results, {
   rmse <- sqrt(bias^2 + var)
@@ -87,7 +99,7 @@ results <- within(results, {
   stat <- ordered(stat, c("phi","logit phi","zeta", "log zeta","mu","log mu","lambda","log lambda"))
 })
 
-with(results, table(stat, estimator, proc))
+with(results, table(stat, proc, estimator))
 
 
 # RMSE of phi

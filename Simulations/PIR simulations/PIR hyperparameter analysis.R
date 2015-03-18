@@ -1,9 +1,10 @@
-rm(list=ls())
 library(ggplot2)
 library(plyr)
 library(reshape2)
 
-load("Simulations/MTS simulations/MTS hyperparameter sims.Rdata")
+rm(list=ls())
+
+load("Simulations/PIR simulations/PIR hyperparameter sims.Rdata")
 
 results <- within(results, {
   abs_bias <- abs(bias)
@@ -30,7 +31,7 @@ hyper_plot("phi", "bias")
 hyper_plot("phi", "abs_bias")
 hyper_plot("phi", "rmse")
 
-hyper_plot("zeta", "bias", limits = c(-1,1))
+hyper_plot("zeta", "bias")
 hyper_plot("zeta", "rel_bias", limits = c(-1,1))
 hyper_plot("zeta", "med_rel_bias", limits = c(-1,1))
 hyper_plot("zeta", "abs_bias", limits = c(0,2))
@@ -40,6 +41,6 @@ hyper_plot("logit phi", "bias", limits = c(-1, 1))
 hyper_plot("logit phi", "abs_bias", limits = c(0, 1))
 hyper_plot("logit phi", "rmse", limits = c(0, 3))
 
-hyper_plot("log zeta","bias", limits = c(-1, 1))
-hyper_plot("log zeta","abs_bias", limits = c(0, 1))
+hyper_plot("log zeta","bias", limits = c(-2, 2))
+hyper_plot("log zeta","abs_bias", limits = c(0, 2))
 hyper_plot("log zeta", "rmse", limits = c(0, 3))
