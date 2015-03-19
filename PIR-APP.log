@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.2)  18 MAR 2015 22:02
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.2)  19 MAR 2015 11:25
 entering extended mode
 **PIR-APP.tex
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.tex
@@ -990,117 +990,126 @@ Overfull \hbox (17.85037pt too wide) in paragraph at lines 292--292
 Package natbib Warning: Citation `Nelder1965simplex' on page 11 undefined on in
 put line 301.
 
-[11] [12] [13] [14] [15] [16] [17] [18]
-
-Package xcolor Warning: Incompatible color definition on input line 453.
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `htb') on input line 453.
-
-<fig/MTS_RMSE.pdf, id=75, 722.7pt x 505.89pt>
-File: fig/MTS_RMSE.pdf Graphic file (type pdf)
- <use fig/MTS_RMSE.pdf>
-Package pdftex.def Info: fig/MTS_RMSE.pdf used on input line 456.
-(pdftex.def)             Requested size: 455.30124pt x 318.71237pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 469.
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `htb') on input line 469.
-
-<fig/MTS_sample_size.pdf, id=76, 722.7pt x 578.16pt>
-File: fig/MTS_sample_size.pdf Graphic file (type pdf)
-
-<use fig/MTS_sample_size.pdf>
-Package pdftex.def Info: fig/MTS_sample_size.pdf used on input line 472.
-(pdftex.def)             Requested size: 455.30124pt x 364.24272pt.
- [19] [20 <C:/Users/jep2963/Documents/R/PIR-APP/fig/MTS_RMSE.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 487.
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `htb') on input line 487.
-
-<fig/PIR_RMSE.pdf, id=90, 722.7pt x 505.89pt>
-File: fig/PIR_RMSE.pdf Graphic file (type pdf)
- <use fig/PIR_RMSE.pdf>
-Package pdftex.def Info: fig/PIR_RMSE.pdf used on input line 490.
-(pdftex.def)             Requested size: 455.30124pt x 318.71237pt.
- [21 <C:/Users/jep2963/Documents/R/PIR-APP/fig/MTS_sample_size.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 503.
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `htb') on input line 503.
-
-<fig/PIR_sample_size.pdf, id=103, 722.7pt x 578.16pt>
-File: fig/PIR_sample_size.pdf Graphic file (type pdf)
-
-<use fig/PIR_sample_size.pdf>
-Package pdftex.def Info: fig/PIR_sample_size.pdf used on input line 506.
-(pdftex.def)             Requested size: 455.30124pt x 364.24272pt.
-
-
-Package natbib Warning: Citation `Johnson2014reliability' on page 22 undefined 
-on input line 521.
-
-[22 <C:/Users/jep2963/Documents/R/PIR-APP/fig/PIR_RMSE.pdf>] [23 <C:/Users/jep2
-963/Documents/R/PIR-APP/fig/PIR_sample_size.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 532.
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `htb') on input line 532.
-
-<fig/summary_prop.pdf, id=125, 578.16pt x 361.35pt>
-File: fig/summary_prop.pdf Graphic file (type pdf)
- <use fig/summary_prop.pdf>
-Package pdftex.def Info: fig/summary_prop.pdf used on input line 535.
-(pdftex.def)             Requested size: 455.30124pt x 284.55911pt.
-
-[24 <C:/Users/jep2963/Documents/R/PIR-APP/fig/summary_prop.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 550.
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `htb') on input line 550.
-
-<fig/johnson_phi_est.pdf, id=134, 578.16pt x 397.485pt>
-File: fig/johnson_phi_est.pdf Graphic file (type pdf)
-
-<use fig/johnson_phi_est.pdf>
-Package pdftex.def Info: fig/johnson_phi_est.pdf used on input line 553.
-(pdftex.def)             Requested size: 455.30124pt x 313.01501pt.
- [25] [26 <C:/Users/jep2963/Documents/R/PIR-APP/fig/johnson_phi_est.pdf>] <AIR_
-flowchart.pdf, id=148, 722.7pt x 542.025pt>
+[11] [12] [13] <AIR_flowchart.pdf, id=60, 722.7pt x 542.025pt>
 File: AIR_flowchart.pdf Graphic file (type pdf)
 
 <use AIR_flowchart.pdf>
-Package pdftex.def Info: AIR_flowchart.pdf used on input line 591.
+Package pdftex.def Info: AIR_flowchart.pdf used on input line 382.
 (pdftex.def)             Requested size: 364.24237pt x 191.7081pt.
- [27] [28 <C:/Users/jep2963/Documents/R/PIR-APP/AIR_flowchart.pdf>]
+ [14] [15 <C:/Users/jep2963/Documents/R/PIR-APP/AIR_flowchart.pdf>] [16] [17] [
+18] [19] [20] [21]
 
-Package xcolor Warning: Incompatible color definition on input line 630.
+Package xcolor Warning: Incompatible color definition on input line 521.
+
+<fig/MTS_RMSE.pdf, id=98, 722.7pt x 505.89pt>
+File: fig/MTS_RMSE.pdf Graphic file (type pdf)
+ <use fig/MTS_RMSE.pdf>
+Package pdftex.def Info: fig/MTS_RMSE.pdf used on input line 524.
+(pdftex.def)             Requested size: 455.30124pt x 318.71237pt.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 540.
+ [22 <C:/Users/jep2963/Documents/R/PIR-APP/fig/MTS_RMSE.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 543.
+
+<fig/MTS_sample_size.pdf, id=108, 722.7pt x 578.16pt>
+File: fig/MTS_sample_size.pdf Graphic file (type pdf)
+
+<use fig/MTS_sample_size.pdf>
+Package pdftex.def Info: fig/MTS_sample_size.pdf used on input line 546.
+(pdftex.def)             Requested size: 455.30124pt x 364.24272pt.
+ [23 <C:/Users/jep2963/Documents/R/PIR-APP/fig/MTS_sample_size.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 565.
+
+<fig/PIR_RMSE.pdf, id=121, 722.7pt x 505.89pt>
+File: fig/PIR_RMSE.pdf Graphic file (type pdf)
+ <use fig/PIR_RMSE.pdf>
+Package pdftex.def Info: fig/PIR_RMSE.pdf used on input line 568.
+(pdftex.def)             Requested size: 455.30124pt x 318.71237pt.
+ [24]
+
+Package xcolor Warning: Incompatible color definition on input line 594.
+
+<fig/PIR_sample_size.pdf, id=125, 722.7pt x 578.16pt>
+File: fig/PIR_sample_size.pdf Graphic file (type pdf)
+
+<use fig/PIR_sample_size.pdf>
+Package pdftex.def Info: fig/PIR_sample_size.pdf used on input line 597.
+(pdftex.def)             Requested size: 455.30124pt x 364.24272pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 610.
+
+<fig/AIR_RMSE.pdf, id=126, 722.7pt x 505.89pt>
+File: fig/AIR_RMSE.pdf Graphic file (type pdf)
+ <use fig/AIR_RMSE.pdf>
+Package pdftex.def Info: fig/AIR_RMSE.pdf used on input line 613.
+(pdftex.def)             Requested size: 455.30124pt x 318.71237pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 624.
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `htb') on input line 630.
+               Default added (so using `htb') on input line 624.
 
-<fig/AIR_RMSE.pdf, id=167, 722.7pt x 505.89pt>
-File: fig/AIR_RMSE.pdf Graphic file (type pdf)
- <use fig/AIR_RMSE.pdf>
-Package pdftex.def Info: fig/AIR_RMSE.pdf used on input line 633.
+<fig/Method_RMSE.pdf, id=127, 722.7pt x 505.89pt>
+File: fig/Method_RMSE.pdf Graphic file (type pdf)
+ <use fig/Method_RMSE.pdf>
+Package pdftex.def Info: fig/Method_RMSE.pdf used on input line 627.
 (pdftex.def)             Requested size: 455.30124pt x 318.71237pt.
 
-(C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.bbl [29] [30 <C:/Users/jep2963/Do
-cuments/R/PIR-APP/fig/AIR_RMSE.pdf>] [31
+
+Package xcolor Warning: Incompatible color definition on input line 638.
+
+<fig/AIR_sample_size.pdf, id=128, 722.7pt x 578.16pt>
+File: fig/AIR_sample_size.pdf Graphic file (type pdf)
+
+<use fig/AIR_sample_size.pdf>
+Package pdftex.def Info: fig/AIR_sample_size.pdf used on input line 641.
+(pdftex.def)             Requested size: 455.30124pt x 364.24272pt.
+
+
+Package natbib Warning: Citation `Johnson2014reliability' on page 25 undefined 
+on input line 656.
+
+[25 <C:/Users/jep2963/Documents/R/PIR-APP/fig/PIR_RMSE.pdf>] [26 <C:/Users/jep2
+963/Documents/R/PIR-APP/fig/PIR_sample_size.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 667.
+
+<fig/summary_prop.pdf, id=151, 578.16pt x 361.35pt>
+File: fig/summary_prop.pdf Graphic file (type pdf)
+ <use fig/summary_prop.pdf>
+Package pdftex.def Info: fig/summary_prop.pdf used on input line 670.
+(pdftex.def)             Requested size: 455.30124pt x 284.55911pt.
+
+[27 <C:/Users/jep2963/Documents/R/PIR-APP/fig/AIR_RMSE.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 685.
+
+<fig/johnson_phi_est.pdf, id=161, 578.16pt x 397.485pt>
+File: fig/johnson_phi_est.pdf Graphic file (type pdf)
+
+<use fig/johnson_phi_est.pdf>
+Package pdftex.def Info: fig/johnson_phi_est.pdf used on input line 688.
+(pdftex.def)             Requested size: 455.30124pt x 313.01501pt.
+ [28 <C:/Users/jep2963/Documents/R/PIR-APP/fig/Method_RMSE.pdf>] [29 <C:/Users/
+jep2963/Documents/R/PIR-APP/fig/AIR_sample_size.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 710.
+
+<fig/johnson_zeta_est.pdf, id=183, 578.16pt x 397.485pt>
+File: fig/johnson_zeta_est.pdf Graphic file (type pdf)
+
+<use fig/johnson_zeta_est.pdf>
+Package pdftex.def Info: fig/johnson_zeta_est.pdf used on input line 713.
+(pdftex.def)             Requested size: 455.30124pt x 313.01501pt.
+ [30 <C:/Users/jep2963/Documents/R/PIR-APP/fig/summary_prop.pdf>] [31 <C:/Users
+/jep2963/Documents/R/PIR-APP/fig/johnson_phi_est.pdf>] (C:\Users\jep2963\Docume
+nts\R\PIR-APP\PIR-APP.bbl [32 <C:/Users/jep2963/Documents/R/PIR-APP/fig/johnson
+_zeta_est.pdf>] [33
 
 ]
 LaTeX Font Info:    Try loading font information for T1+lmtt on input line 596.
@@ -1108,25 +1117,25 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 596.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [32]) [33]
-[34
+) [34]) [35]
+[36
 
-] [35] [36
+] [37] [38
 
-] AED endfloat: Processing end Figures and Tables [37]
+] AED endfloat: Processing end Figures and Tables [39]
 
 Package natbib Warning: There were undefined citations.
 
 \Changes@OutFile=\write6
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.aux) ) 
 Here is how much of TeX's memory you used:
- 17604 strings out of 493921
- 325113 string characters out of 3144871
- 371001 words of memory out of 3000000
- 20480 multiletter control sequences out of 15000+200000
- 52959 words of font info for 50 fonts, out of 3000000 for 9000
+ 17664 strings out of 493921
+ 326417 string characters out of 3144871
+ 374434 words of memory out of 3000000
+ 20529 multiletter control sequences out of 15000+200000
+ 60544 words of font info for 58 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 62i,12n,80p,1377b,705s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,12n,80p,1157b,719s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiK
 TeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/e
 nc/dvips/lm/lm-rm.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-
@@ -1143,9 +1152,9 @@ TeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
 ts/type1/public/lm/lmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
 blic/lm/lmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmsy
 8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
-Output written on PIR-APP.pdf (37 pages, 591081 bytes).
+Output written on PIR-APP.pdf (39 pages, 643921 bytes).
 PDF statistics:
- 254 PDF objects out of 1000 (max. 8388607)
+ 284 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 59 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 74 words of extra memory for PDF output out of 10000 (max. 10000000)
 
