@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.2)  19 MAR 2015 11:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.2)  19 MAR 2015 13:53
 entering extended mode
 **PIR-APP.tex
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.tex
@@ -1107,9 +1107,62 @@ File: fig/johnson_zeta_est.pdf Graphic file (type pdf)
 Package pdftex.def Info: fig/johnson_zeta_est.pdf used on input line 713.
 (pdftex.def)             Requested size: 455.30124pt x 313.01501pt.
  [30 <C:/Users/jep2963/Documents/R/PIR-APP/fig/summary_prop.pdf>] [31 <C:/Users
-/jep2963/Documents/R/PIR-APP/fig/johnson_phi_est.pdf>] (C:\Users\jep2963\Docume
-nts\R\PIR-APP\PIR-APP.bbl [32 <C:/Users/jep2963/Documents/R/PIR-APP/fig/johnson
-_zeta_est.pdf>] [33
+/jep2963/Documents/R/PIR-APP/fig/johnson_phi_est.pdf>] [32 <C:/Users/jep2963/Do
+cuments/R/PIR-APP/fig/johnson_zeta_est.pdf>]
+
+Package natbib Warning: Citation `Johnson2014reliability' on page 33 undefined 
+on input line 742.
+
+[33]
+! Misplaced alignment tab character &.
+\@todonotes@text ->Discuss Lane &
+                                  Ledford (2014) and related work.
+l.748 ... Lane & Ledford (2014) and related work.}
+                                                   Through further mathemati...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+\@todonotes@text ->Discuss Lane &
+                                  Ledford (2014) and related work.
+l.748 ... Lane & Ledford (2014) and related work.}
+                                                   Through further mathemati...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+\@todonotes@text ->Discuss Lane &
+                                  Ledford (2014) and related work.
+l.748 ... Lane & Ledford (2014) and related work.}
+                                                   Through further mathemati...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+\@todonotes@text ->Discuss Lane &
+                                  Ledford (2014) and related work.
+l.748 ... Lane & Ledford (2014) and related work.}
+                                                   Through further mathemati...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+(C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.bbl [34] [35
 
 ]
 LaTeX Font Info:    Try loading font information for T1+lmtt on input line 596.
@@ -1117,22 +1170,22 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 596.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [34]) [35]
-[36
+) [36]) [37]
+[38
 
-] [37] [38
+] [39] [40
 
-] AED endfloat: Processing end Figures and Tables [39]
+] AED endfloat: Processing end Figures and Tables [41]
 
 Package natbib Warning: There were undefined citations.
 
 \Changes@OutFile=\write6
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.aux) ) 
 Here is how much of TeX's memory you used:
- 17664 strings out of 493921
- 326417 string characters out of 3144871
- 374434 words of memory out of 3000000
- 20529 multiletter control sequences out of 15000+200000
+ 17669 strings out of 493921
+ 326557 string characters out of 3144871
+ 374730 words of memory out of 3000000
+ 20534 multiletter control sequences out of 15000+200000
  60544 words of font info for 58 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  62i,12n,80p,1157b,719s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1152,9 +1205,9 @@ TeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
 ts/type1/public/lm/lmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
 blic/lm/lmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmsy
 8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
-Output written on PIR-APP.pdf (39 pages, 643921 bytes).
+Output written on PIR-APP.pdf (41 pages, 650488 bytes).
 PDF statistics:
- 284 PDF objects out of 1000 (max. 8388607)
+ 290 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  74 words of extra memory for PDF output out of 10000 (max. 10000000)
 
