@@ -229,8 +229,8 @@ When this condition holds, the MLEs for $\phi$ and $\zeta$ are given by
 
 
 
-% latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Wed Mar 18 16:18:15 2015
+% latex table generated in R 3.1.2 by xtable 1.7-3 package
+% Wed Mar 18 22:01:57 2015
 \begin{table}[b]
 \centering
 \caption{Proportion of 2000 simulated MTS samples (K = 40) in which $0 < \hat\phi_{MTS} < 1$ and $0 < \hat\zeta_{MTS} < \infty$.} 
@@ -302,8 +302,8 @@ The simulation study reported in the next section therefore uses the Nelder-Mead
 
 
 
-% latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Wed Mar 18 16:18:15 2015
+% latex table generated in R 3.1.2 by xtable 1.7-3 package
+% Wed Mar 18 22:01:57 2015
 \begin{table}[b]
 \centering
 \caption{Proportion of 2000 simulated PIR samples (K = 40) in which  $|\text{logit}(\hat\phi_{PIR})| < 8$ and $|\text{log}(\hat\zeta_{PIR})| < 8$.} 
@@ -411,11 +411,6 @@ However, for a fixed sample size, it remains to be seen whether likelihood-based
 
 In order to understand the operating characteristics of the MLEs and PLEs in samples with a finite number of intervals, we conducted a computer simulation study. The simulations examined two specific questions: First, for a given type of data (MTS or PIR), how does the accuracy of the PLEs compare to the accuracy of the MLEs (for both prevalence and incidence) and the accuracy of the summary proportion (for prevalence only)? Second, how large a sample is needed to obtain approximately unbiased estimates of prevalence or incidence using penalized likelihood methods?
 
-The simulation design is summarized in Table \ref{tb:simulation_design}.
-For all simulation conditions, we set $c = 1$ and $d = 0$, so that the values of incidence are scaled in terms of the length of an interval; for example, $\zeta = 0.1$ corresponds to an incidence of one new behavioral episode per ten intervals. 
-\todo[inline]{Describe and justify design.}
-\todo[inline]{Define performance measures: bias/RMSE of $\phi$, relative bias/RMSE of $\zeta$, bias/RMSE of $\logit \phi, \log \zeta$.}
-
 \begin{table}[tb]
 \centering
 \caption{Simulation design}
@@ -430,9 +425,29 @@ $s$ & Recording system & 2 & \multicolumn{3}{c}{MTS, PIR} \\
 \end{tabular}
 \end{table}
 
+Table \ref{tb:simulation_design} summarizes the simulation design
+For all simulation conditions, we set $c = 1$ and $d = 0$, so that the values of incidence are scaled in terms of the length of an interval; for example, $\zeta = 0.1$ corresponds to an incidence of one new behavioral episode per ten intervals. 
+The true prevalence of the behavior stream was varied across nearly its entire possible range. 
+Incidence was varied between $\zeta = .05$ (one new behavior per 20 intervals) and $\zeta = .50$ (one new behavior every 2 intervals) because this represents a range of behaviors where intermittent recording procedures might feasibly be applied; in particular, PIR measurements would quickly approach ceiling levels when behaviors occur more frequently than once per two intervals. 
+The number of intervals in the observation session was varied from 10 to 150. 
+This range spans a variety of situations in which intermittent behavioral observation recording might be used, from a quick observation in a classroom where the observer needs to capture the behaviors of several children to an intensive observation of a single child over the course of an entire class period. 
+Finally, the simulated recording system was either MTS or PIR; WIR was omitted because it is equivalent to using PIR for the absence of the behavior.
+
+The simulations were carried out using the ARPobservation package \citep{Pustejovsky2014ARPobservation} for the R statistical computing environment \citep{RCoreTeam2014}. 
+For each combination of parameter values ($\phi,\zeta,K$) and recording system, we generated 10000 behavior streams of length $K$ from an Alternating Poisson Process, then simulated data based on the recording system. 
+For each string of simulated data, we calculated the summary proportion of intervals and then found the MLEs and PLEs using numerical maximization. 
+For the PLEs, we used the default priors of $\alpha_\mu = \alpha_\lambda = 1.5$ and $\theta_\mu = \theta_\lambda = 10$.  
+
+We examined the performance of the estimators for four different parameterizations. We were interested in both the natural parameterizations of $\phi$ and $\zeta$, as well as the logit of $\phi$, $log\left(\phi / (1 - \phi)\right)$, and $log(\zeta)$. In the natural parameterization of $\phi$, the logit of $\phi$, and the log of $\zeta$  we examined bias, $\E\left[\hat\theta - \theta\right]$, and root mean squared error (RMSE), $\sqrt{Var(\hat\theta) + (Bias(\hat\theta))^2}$, where $\theta$ is the parameter of interest. In the natural parameterization of $\zeta$ we examined the relative bias and the relative RMSE: \[ Bias_{rel}(\zeta) = \frac{\E\left(\hat\zeta - \zeta\right)}{\zeta}, \qquad RMSE_{rel}(\zeta) = \frac{\sqrt{Var(\hat\zeta) + (Bias(\hat\zeta))^2}}{\zeta}.\] 
+
+\todo[inline, color=green!40]{I feel like probably I have made an inadvertent mistake from lack of knowledge in here and left out a hat or failed to include one so please check carefully}
+
+When describing the estimators, have set varying criteria for what we believe constitutes ``approximately unbiased.'' In the case of $\phi$ this is an absolute bias less than 0.03 and in the case of $logit(\phi)$ an absolute bias less than 0.05. Lacking other estimators for incidence, we have set rather liberal criteria in the cases of $\zeta$ and $log(\zeta)$. In the case of $\zeta$ it is a relative absolute bias of less than 0.10 and in the case of $log(\zeta)$ an absolute bias of less than 0.10. \todo[color=green!40]{Why these criteria? Is "approximately unbiased" actually what I should be saying here??} 
+
 
 
 \subsection{Results: MTS}
+Figure \ref{fig:MTS_RMSE} illustrates the distribution of RMSE of the MTS MLEs, PLEs, and proportions for each parameterization across varying levels of $K$. Given that the MTS proportions are known to be unbiased estimates of prevalence, those estimates provide a point of reference for the accuracy of the MLEs and PLEs. Across all levels of $K$, the MLEs of $\phi$ have comparable RMSEs to the MTS proportions. However, the MLEs perform notably worse in terms of $logit(\phi)$ until $K = 120$ or more, a very large number of intervals. Across all levels of $K$, the PLEs of $\phi$ and $logit(\phi)$ have RMSEs comparable to or smaller than the MTS proportions. In terms of both $\zeta$ and $log(\zeta)$, the MLEs perform considerably worse across all levels of $K$ than the PLEs and the corresponding estimates of prevalence. In contrast, the PLEs perform quite well for both $\zeta$ and $log(\zeta)$, with accuracy comparable to the accuracy of the corresponding estimates of prevalence.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[]
@@ -442,11 +457,13 @@ $s$ & Recording system & 2 & \multicolumn{3}{c}{MTS, PIR} \\
 
 }
 
-\caption[Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop]{Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop.) estimates based on MTS data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For zeta, the root mean-squared error for is relative to the true value.\label{fig:MTS_RMSE}}
+\caption[Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop]{Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop.) estimates based on MTS data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For zeta, the root mean-squared error is relative to the true value.\label{fig:MTS_RMSE}}
 \end{figure}
 
 
 \end{knitrout}
+
+Figure \ref{fig:MTS_sample_size} illustrates the minimum value of $K$ needed to meet the criteria we have set for ``approximately unbiased'' when utilizing the penalized estimators. In terms of $\phi$ and $logit(\phi)$, the estimator requires at most 40 intervals when $\zeta/c \geq 0.10$ across the entire range of $\phi$. Even when $\zeta/c$ drops to 0.05, unbiased estimates of phi can be obtained across the entire range if $K = 100$ and unbiased estimates of $logit(\phi)$ can be obtained when $K = 60$. In terms of $\zeta$, unbiased estimates can be obtained when $K$ is at least 60 for $0.30 \leq \phi \leq 0.70$ and $\zeta \geq 0.10$. Unbiased estimates can also be obtained when $K$ is at least 70 for $0.05 \leq \phi \leq 0.95$ and $0.15 \leq \zeta \leq 0.25$. In terms of $log(\zeta)$, unbiased estimates can be obtained when $K$ is at least 70 and $0.40 \leq \phi \leq 0.60$ and $\zeta \geq 0.15$. Unbiased estimates can also be obtained when $K$ is at least 60 and $0.15 \leq \phi \leq 0.85$ and $0.10 \leq \zeta \leq 0.25$.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[]
@@ -464,6 +481,8 @@ $s$ & Recording system & 2 & \multicolumn{3}{c}{MTS, PIR} \\
 
 \subsection{Results: PIR}
 
+Figure \ref{fig:PIR_RMSE} illustrates the distribution of RMSE of the PIR MLEs, PLEs, and proportions for each parameterization across varying levels of $K$. In contrast to MTS, we expect that the proportion estimates of prevalence for PIR will perform quite poorly. In fact, this is the case. In terms of the natural parameterization of $\phi$, the MLE performs notably better than the proportions when $K \geq 60$, while the PLE performs better across the entire range of $K$. In terms of $logit(\phi)$, both the MLE and the proportion perform worse than the PLE. In both parameterizations of $\phi$, the PLE performs just slightly worse for the PIR estimates than it did for the MTS estimates. In terms of the natural parameterization of $\zeta$, the PLEs once again provide more accurate estimates of incidence. However, unlike with MTS data, the relative RMSE of the MLEs are not at ceiling even if the PLEs are clearly preferable. In terms of $log(\zeta)$, the PLEs are definitely preferable and the RMSE of the MLEs once again range all the way up to the ceiling of 1.5 The mean RMSE of the PIR PLEs is similar to the MTS estimates of incidence for both parameterizations, but the spread when using PIR is larger.
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[]
 
@@ -472,11 +491,13 @@ $s$ & Recording system & 2 & \multicolumn{3}{c}{MTS, PIR} \\
 
 }
 
-\caption[Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop]{Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop.) estimates based on PIR data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For zeta, the root mean-squared error for is relative to the true value.\label{fig:PIR_RMSE}}
+\caption[Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop]{Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop.) estimates based on PIR data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For zeta, the root mean-squared error is relative to the true value.\label{fig:PIR_RMSE}}
 \end{figure}
 
 
 \end{knitrout}
+
+Figure \ref{fig:PIR_sample_size} illustrates the minimum value of $K$ needed to meet the criteria we have set for ``approximately unbiased'' when utilizing the penalized estimators. The portion of the parameter space where one can obtain approximately unbiased estimates of prevalence with a moderate number of intervals is much smaller than with the MTS estimates. In terms of the bias of $\phi$, unbiased estimates can be obtained when $K$ is at least 70 and $0.10 \leq \phi \leq 0.35$ and $\zeta/c \leq 0.4$. Unbiased estimates can also be obtained when $K$ is at least 60 and $\phi \leq 0.80$ and $\zeta/c \leq 0.25$. In terms of $logit(\phi)$, unbiased estimates can be obtained when $K$ is at least 70 and $0.15 \leq \phi \leq 0.35$ and $\zeta/c \leq 0.30$. Unbiased estimates can also be obtained when $K$ is at least 90 and $\phi \leq 0.70$ and $\zeta/c \leq 0.15$. In order to obtain unbiased estimates of incidence, much larger values of $K$ are required. In terms of $\zeta$, unbiased estimates can be obtained when $K$ is at least 130 and $0.10 \leq \phi \leq 0.35$ and $\zeta \leq 0.45$. Unbiased estimates can also be obtained when $K$ is at least 130, and $\phi \leq 0.60$ and $\zeta/c \leq 0.25$. In terms of $log(\zeta)$, unbiased estimates can be obtained when $K$ is at least 140 and $\phi \leq 0.40$ and $\zeta \leq 0.35$
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[]
@@ -526,15 +547,22 @@ Figure \ref{fig:summary_prop} plots the overal proportion of intervals with acad
 
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[]
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'Prevalence' not found}}\end{kframe}
+{\centering \includegraphics[width=\maxwidth]{fig/johnson_phi_est} 
+
+}
+
+\caption[PLE estimates of prevalence versus proportion of intervals with behavior, for each recording system and each rater]{PLE estimates of prevalence versus proportion of intervals with behavior, for each recording system and each rater. Vertical whisker bars correspond to 95\% confidence intervals for prevalence, obtained using a parametric bootstrapping procedure. Horizontal dashed lines correspond to the average MTS summary proportions.\label{fig:johnson_phi_est}}
+\end{figure}
+
+
 \end{knitrout}
 
 Figure \ref{fig:johnson_phi_est} displays the PLEs for prevalence based on the MTS, PIR, and WIR scores for each rater and each clip. 
 The prevalence estimates are plotted on the vertical axis, with the corresponding summary proportion of intervals on the horizontal axis. 
-The quality of the estimates varies substantially by both recording procedure and by clip. For MTS, the maximum likelihood estimates are all close to the raw proportions (which are unbiased estimates of prevalence). The MTS confidence intervals cover the benchmark prevalence estimate in 50 out of the 60 MTS records and are generally narrower than the confidence intervals based on the PIR and WIR data.
+The quality of the estimates varies substantially by both recording procedure and by clip. For MTS, the maximum likelihood estimates are all close to the raw proportions (which are unbiased estimates of prevalence). The MTS confidence intervals cover the benchmark prevalence estimate in 58 out of the 60 MTS records and are generally narrower than the confidence intervals based on the PIR and WIR data.
 
 In all but clip F, the PIR estimates are highly unstable and essentially uniformative. We suspect that this is because PIR is a poor choice for recording the behavior in these clips, as indicated by the fact that the PIR proportions are at or near ceiling in these clips. In comparison, the WIR estimates for clips A, B, C, D, and E are relatively informative (though the CIs are still quite wide in some instances, particularly in clip B) This is consistent with theory that WIR is a more appropriate method of observing the behaviors in these clips, where academic engagement occurs for the majority of the observation session. Note that most of the confidence intervals cover the benchmark estimates of prevalence, and the average of the maximum likelihood estimates appears to be quite close to the benchmark.
 
