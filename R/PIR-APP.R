@@ -150,7 +150,9 @@ MTSmle <- function(X, c, penalty_func = NULL,
 
 MTSbootstrap <- function(X, c, penalty_func = NULL,
                          phi_start = pmin(pmax(mean(X), 1 / length(X)), 1 - 1 / length(X)), zeta_start = .10, 
-                         transform = "none", iterations = 2000, p = .05) {
+                         transform = "none", iterations = 2000, p = .05, seed = NULL) {
+  
+  if (!is.null(seed)) set.seed(seed)
   
   est <- MTSmle(X = X, c = c, penalty_func = penalty_func,
                 phi_start = phi_start, zeta_start = zeta_start, transform = "none")
@@ -253,7 +255,9 @@ PIRmle <- function(U, c, d, coding = "PIR", penalty_func = NULL,
 
 PIRbootstrap <- function(U, c, d, coding = "PIR", penalty_func = NULL,
                          phi_start = max(mean(U) / 2, expit(-10)),
-                         zeta_start = .10, transform = "none", iterations = 2000, p = .05) {
+                         zeta_start = .10, transform = "none", iterations = 2000, p = .05, seed = NULL) {
+  
+  if (!is.null(seed)) set.seed(seed)
 
   est <- PIRmle(U = U, c = c, d = d, coding = coding, penalty_func = penalty_func,
                      phi_start = phi_start, zeta_start = zeta_start, transform = "none")

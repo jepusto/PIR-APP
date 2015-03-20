@@ -230,7 +230,7 @@ When this condition holds, the MLEs for $\phi$ and $\zeta$ are given by
 
 
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Fri Mar 20 15:46:08 2015
+% Fri Mar 20 16:32:01 2015
 \begin{table}[b]
 \centering
 \caption{Proportion of 2000 simulated MTS samples (K = 40) in which $0 < \hat\phi_{MTS} < 1$ and $0 < \hat\zeta_{MTS} < \infty$.} 
@@ -303,7 +303,7 @@ The simulation study reported in a section therefore uses the Nelder-Mead algori
 
 
 % latex table generated in R 3.1.2 by xtable 1.7-4 package
-% Fri Mar 20 15:46:08 2015
+% Fri Mar 20 16:32:01 2015
 \begin{table}[b]
 \centering
 \caption{Proportion of 2000 simulated PIR samples (K = 40) in which  $|\text{logit}(\hat\phi_{PIR})| < 8$ and $|\text{log}(\hat\zeta_{PIR})| < 8$.} 
@@ -520,11 +520,12 @@ For incidence, we used absolute relative bias in $\hat\zeta$ of less than 0.10 a
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[tb]
 
-{\centering \includegraphics[width=\maxwidth]{fig/MTS_RMSE-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/MTS_RMSE} 
 
 }
 
-\caption[Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop]{Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop.) estimates based on MTS data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For $\zeta$, the root mean-squared error is relative to the true value.}\label{fig:MTS_RMSE}
+\caption[Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop]{Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop.) estimates based on MTS data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For $\zeta$, the root mean-squared error is relative to the true value.\label{fig:MTS_RMSE}}
 \end{figure}
 
 
@@ -541,11 +542,12 @@ However, the PLEs for $\zeta$ still have rather large relative RMSE (and similar
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[tb]
 
-{\centering \includegraphics[width=\maxwidth]{fig/MTS_sample_size-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/MTS_sample_size} 
 
 }
 
-\caption[Minimum number of MTS intervals required to obtain PLEs with absolute bias less than given criteria]{Minimum number of MTS intervals required to obtain PLEs with absolute bias less than given criteria.}\label{fig:MTS_sample_size}
+\caption[Minimum number of MTS intervals required to obtain PLEs with absolute bias less than given criteria]{Minimum number of MTS intervals required to obtain PLEs with absolute bias less than given criteria.\label{fig:MTS_sample_size}}
 \end{figure}
 
 
@@ -564,11 +566,12 @@ Despite its limitations, there appears to be very little practical drawback to u
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[tb]
 
-{\centering \includegraphics[width=\maxwidth]{fig/PIR_RMSE-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/PIR_RMSE} 
 
 }
 
-\caption[Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop]{Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop.) estimates based on PIR data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For zeta, the root mean-squared error is relative to the true value.}\label{fig:PIR_RMSE}
+\caption[Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop]{Distribution of root mean-squared error of MLE, PLE, and summary proportion (Prop.) estimates based on PIR data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For zeta, the root mean-squared error is relative to the true value.\label{fig:PIR_RMSE}}
 \end{figure}
 
 
@@ -586,11 +589,12 @@ While these ranges are restrictive, returning to Figure \ref{fig:PIR_RMSE} makes
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[tb]
 
-{\centering \includegraphics[width=\maxwidth]{fig/PIR_sample_size-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/PIR_sample_size} 
 
 }
 
-\caption[Minimum number of PIR intervals required to obtain PLEs with absolute bias less than given criteria]{Minimum number of PIR intervals required to obtain PLEs with absolute bias less than given criteria.}\label{fig:PIR_sample_size}
+\caption[Minimum number of PIR intervals required to obtain PLEs with absolute bias less than given criteria]{Minimum number of PIR intervals required to obtain PLEs with absolute bias less than given criteria.\label{fig:PIR_sample_size}}
 \end{figure}
 
 
@@ -602,11 +606,12 @@ Figure \ref{fig:AIR_RMSE} displays the RMSEs for the MLEs and PLEs for AIR data 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[tb]
 
-{\centering \includegraphics[width=\maxwidth]{fig/AIR_RMSE-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/AIR_RMSE} 
 
 }
 
-\caption[Distribution of root mean-squared error of MLEs and PLEs based on AIR data, across range of ]{Distribution of root mean-squared error of MLEs and PLEs based on AIR data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For $\zeta$, the root mean-squared error is relative to the true value.}\label{fig:AIR_RMSE}
+\caption[Distribution of root mean-squared error of MLEs and PLEs based on AIR data, across range of $0]{Distribution of root mean-squared error of MLEs and PLEs based on AIR data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For $\zeta$, the root mean-squared error is relative to the true value.\label{fig:AIR_RMSE}}
 \end{figure}
 
 
@@ -614,13 +619,14 @@ Figure \ref{fig:AIR_RMSE} displays the RMSEs for the MLEs and PLEs for AIR data 
 
 Figure \ref{fig:Method_RMSE} displays the RMSEs for the PLEs for each of the recording methods and each of the parameterizations. For estimates of prevalence, both AIR and MTS are have superior accuracy to PIR. In general, the mean RMSE for MTS is slightly lower than AIR, but the range of the distributions are similar. For estimates of prevalence, AIR is superior to both MTS and PIR, and MTS is superior to PIR. Even at a large number of intervals ($K \geq 120$), the RMSE and relative RMSE can range to very near to or above 1 respectively for both MTS and PIR. In contrast, while the AIR RMSEs cannot be called small, the range of the distributions is notably lower and also much narrower.
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[]
 
-{\centering \includegraphics[width=\maxwidth]{fig/Method_RMSE-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/Method_RMSE} 
 
 }
 
-\caption[Distribution of root mean-squared error of PLE estimates based on AIR, MTS, and PIR data, across range of ]{Distribution of root mean-squared error of PLE estimates based on AIR, MTS, and PIR data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For zeta, the root mean-squared error for is relative to the true value.}\label{fig:Method_RMSE}
+\caption[Distribution of root mean-squared error of PLE estimates based on AIR, MTS, and PIR data, across range of $0]{Distribution of root mean-squared error of PLE estimates based on AIR, MTS, and PIR data, across range of $0.05 \leq \phi \leq 0.95$ and $0.05 \leq \zeta \leq 0.50$. Values above 1.5 are not displayed. For zeta, the root mean-squared error for is relative to the true value.\label{fig:Method_RMSE}}
 \end{figure}
 
 
@@ -628,15 +634,16 @@ Figure \ref{fig:Method_RMSE} displays the RMSEs for the PLEs for each of the rec
 
 Figure \ref{fig:AIR_sample_size} illustrates the minimum value of $K$ required for the PLEs based on AIR data to have low bias. For both of the natural parameterizations, as long as the incidence is not extremely low ($\zeta \geq 0.10c$) approximately unbiased estimates can be obtained at a very reasonable number of intervals ($K \geq 40$). For $logit(\phi)$, as long as prevalence is neither very low nor very high, approximately unbiased estimates can be obtained across the entire range of incidence. Even those portions of the parameter space requiring a large number of intervals ($80 \leq K \leq 100$) are relatively small for all three parameterizations. For $log(\zeta)$, only a modest number of intervals ($K \leq 40$) is required to obtain approximately unbiased estimates across the entire range of the parameter space.
 
-In general, the AIR method performs very well at a modest number of intervals. If a researcher was interested in the natural parameterization of both prevalence and incidence and a behavior they expected to see no less frequently than about once every 7 intervals on average ($\zeta \geq 0.15c), they would never need to use more than a very modest number of intervals ($K = 30$) to obtain unbiased estimates. The MTS PLEs do require a slightly smaller number of intervals to obtain unbiased estimates of prevalence in a given area of the parameter space. However, the estimates of incidence when using AIR require many fewer intervals and have such superior RMSEs that any researcher interested in estimates of incidence should stronger consider AIR. For a modest increase in effort, a researcher can see serious games in terms of good estimates of both prevalence and incidence.
+In general, the AIR method performs very well at a modest number of intervals. If a researcher was interested in the natural parameterization of both prevalence and incidence and a behavior they expected to see no less frequently than about once every 7 intervals on average ($\zeta \geq 0.15c$), they would never need to use more than a very modest number of intervals ($K = 30$) to obtain unbiased estimates. The MTS PLEs do require a slightly smaller number of intervals to obtain unbiased estimates of prevalence in a given area of the parameter space. However, the estimates of incidence when using AIR require many fewer intervals and have such superior RMSEs that any researcher interested in estimates of incidence should stronger consider AIR. For a modest increase in effort, a researcher can see serious games in terms of good estimates of both prevalence and incidence.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[tb]
 
-{\centering \includegraphics[width=\maxwidth]{fig/AIR_sample_size-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/AIR_sample_size} 
 
 }
 
-\caption[Minimum observation session length required to obtain PLEs based on AIR data with absolute bias less than given criteria]{Minimum observation session length required to obtain PLEs based on AIR data with absolute bias less than given criteria.}\label{fig:AIR_sample_size}
+\caption[Minimum observation session length required to obtain PLEs based on AIR data with absolute bias less than given criteria]{Minimum observation session length required to obtain PLEs based on AIR data with absolute bias less than given criteria.\label{fig:AIR_sample_size}}
 \end{figure}
 
 
@@ -660,11 +667,12 @@ Because each video was scored separately using each system, comparing the PLEs o
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[tb]
 
-{\centering \includegraphics[width=\maxwidth]{fig/summary_prop-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/summary_prop} 
 
 }
 
-\caption[MTS, PIR, and WIR summary proportions for each rater, by clip]{MTS, PIR, and WIR summary proportions for each rater, by clip. Horizontal dashed lines correspond to the average MTS summary proportions.}\label{fig:summary_prop}
+\caption[MTS, PIR, and WIR summary proportions for each rater, by clip]{MTS, PIR, and WIR summary proportions for each rater, by clip. Horizontal dashed lines correspond to the average MTS summary proportions.\label{fig:summary_prop}}
 \end{figure}
 
 
@@ -677,11 +685,12 @@ Figure \ref{fig:summary_prop} plots the overall proportion of intervals with aca
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[tb]
 
-{\centering \includegraphics[width=\maxwidth]{fig/johnson_phi_est-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/johnson_phi_est} 
 
 }
 
-\caption[PLE estimates of prevalence versus proportion of intervals with behavior, for each recording system and each rater]{PLE estimates of prevalence versus proportion of intervals with behavior, for each recording system and each rater. Vertical whisker bars correspond to 95\% confidence intervals for prevalence, obtained using a parametric bootstrapping procedure. Horizontal dashed lines correspond to the average MTS summary proportions.}\label{fig:johnson_phi_est}
+\caption[PLE estimates of prevalence versus proportion of intervals with behavior, for each recording system and each rater]{PLE estimates of prevalence versus proportion of intervals with behavior, for each recording system and each rater. Vertical whisker bars correspond to 95\% confidence intervals for prevalence, obtained using a parametric bootstrapping procedure. Horizontal dashed lines correspond to the average MTS summary proportions.\label{fig:johnson_phi_est}}
 \end{figure}
 
 
@@ -694,18 +703,19 @@ For MTS, the PLEs are all close to the raw proportions (which are unbiased estim
 The MTS confidence intervals cover the benchmark prevalence estimate in 58 out of the 60 MTS records and are generally narrower than the confidence intervals based on the PIR and WIR data.
 The PLEs based on PIR and WIR are in roughly in the same range as the estimates based on MTS data. 
 Thus, on a gross level, the PLEs appear to correct the over- or under-estimation of prevalence in the summary proportions. 
-The confidence intervals based on PIR data cover the benchmark prevalence estimate in 48 out of the 60 total records, with most of the discrepancies occurring in clip A, where many of the the PIR records are at ceiling. 
-Similarly, the confidence intervals based on WIR data cover the benchmark prevalence estimate in 52 out of 60 records. 
+The confidence intervals based on PIR data cover the benchmark prevalence estimate in 47 out of the 60 total records, with most of the discrepancies occurring in clip A, where many of the the PIR records are at ceiling. 
+Similarly, the confidence intervals based on WIR data cover the benchmark prevalence estimate in 54 out of 60 records. 
 However, the PIR and WIR estimates are generally considerably less precise than the MTS estimates, with much wider confidence intervals.\todo{Provide numerical comparison of CI width.}
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[tb]
 
-{\centering \includegraphics[width=\maxwidth]{fig/johnson_zeta_est-1} 
+
+{\centering \includegraphics[width=\maxwidth]{fig/johnson_zeta_est} 
 
 }
 
-\caption[PLE estimates of incidence versus proportion of intervals with behavior, for each recording system and each rater]{PLE estimates of incidence versus proportion of intervals with behavior, for each recording system and each rater. Vertical whisker bars correspond to 95\% confidence intervals for incidence, obtained using a parametric bootstrapping procedure.}\label{fig:johnson_zeta_est}
+\caption[PLE estimates of incidence versus proportion of intervals with behavior, for each recording system and each rater]{PLE estimates of incidence versus proportion of intervals with behavior, for each recording system and each rater. Vertical whisker bars correspond to 95\% confidence intervals for incidence, obtained using a parametric bootstrapping procedure.\label{fig:johnson_zeta_est}}
 \end{figure}
 
 
@@ -736,7 +746,7 @@ Another limitation of the models is that they are limited to describing measurem
 
 Despite these limitations, the models and estimation methods that we have proposed remain useful. For MTS data, penalized likelihood provides a means to estimate incidence as well as to assess the extent of measurement error in the estimate of prevalence. For PIR data, the penalized likelihood estimates of prevalence represent an improvement over the current standard approach, which is to simply ignore the bias in the summary proportion. 
 
-Though not the focus of the present paper, the models that we have described can also be applied to develop better psychometric guidance for behavioral observation data.\todo{Discuss Lane & Ledford (2014) and related work.} Through further mathematical analysis or though computer simulation, the models that we have presented could be used to study how choices regarding recording procedures, interval lengths, rest times, and observation session lengths influence the precision of behavioral measurements. Guidance regarding these aspects of study design would be useful to applied researchers designing single-case experiments or between-subjects trials.
+Though not the focus of the present paper, the models that we have described can also be applied to develop better psychometric guidance for behavioral observation data.\todo{Discuss Lane \& Ledford (2014) and related work.} Through further mathematical analysis or though computer simulation, the models that we have presented could be used to study how choices regarding recording procedures, interval lengths, rest times, and observation session lengths influence the precision of behavioral measurements. Guidance regarding these aspects of study design would be useful to applied researchers designing single-case experiments or between-subjects trials.
 
 \bibliographystyle{apacite}
 \bibliography{\bibfile}

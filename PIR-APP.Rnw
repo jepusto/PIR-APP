@@ -815,7 +815,7 @@ source("R/parallel setup.R")
 source("R/PIR-APP.R")
 source_func <- ls()
 
-iterations <- 100
+iterations <- 5000
 p <- 0.05
 penalty_func <- Beta_Gamma(k_mu = 1.5, k_lambda = 1.5, theta_mu = 10, theta_lambda = 10, const = 2)
 
@@ -914,7 +914,7 @@ Another limitation of the models is that they are limited to describing measurem
 
 Despite these limitations, the models and estimation methods that we have proposed remain useful. For MTS data, penalized likelihood provides a means to estimate incidence as well as to assess the extent of measurement error in the estimate of prevalence. For PIR data, the penalized likelihood estimates of prevalence represent an improvement over the current standard approach, which is to simply ignore the bias in the summary proportion. 
 
-Though not the focus of the present paper, the models that we have described can also be applied to develop better psychometric guidance for behavioral observation data.\todo{Discuss Lane & Ledford (2014) and related work.} Through further mathematical analysis or though computer simulation, the models that we have presented could be used to study how choices regarding recording procedures, interval lengths, rest times, and observation session lengths influence the precision of behavioral measurements. Guidance regarding these aspects of study design would be useful to applied researchers designing single-case experiments or between-subjects trials.
+Though not the focus of the present paper, the models that we have described can also be applied to develop better psychometric guidance for behavioral observation data.\todo{Discuss Lane \& Ledford (2014) and related work.} Through further mathematical analysis or though computer simulation, the models that we have presented could be used to study how choices regarding recording procedures, interval lengths, rest times, and observation session lengths influence the precision of behavioral measurements. Guidance regarding these aspects of study design would be useful to applied researchers designing single-case experiments or between-subjects trials.
 
 \bibliographystyle{apacite}
 \bibliography{\bibfile}

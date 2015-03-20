@@ -382,33 +382,6 @@ Hartmann, D\BPBI P.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Johnson%
-}{%
-Johnson%
-}{%
-{\protect \APACyear {2014}}%
-}]{%
-Johnson2014reliability}
-\APACinsertmetastar {%
-Johnson2014reliability}%
-\begin{APACrefauthors}%
-Johnson, A\BPBI H.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYear{2014}.
-\unskip\
-\newblock
-\APACrefbtitle {{Reliability of Data Derived from Time Sampling Methods with
-  Multiple Observation Targets}} {{Reliability of Data Derived from Time
-  Sampling Methods with Multiple Observation Targets}}\ \APACtypeAddressSchool
-  {Doctoral Dissertation}{}{}.
-\unskip\
-\newblock
-\APACaddressSchool {}{University of Connecticut}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
 Kazdin%
 }{%
 Kazdin%
@@ -627,6 +600,31 @@ Primavera, L\BPBI H.%
 
 \bibitem [\protect \citeauthoryear {%
 Pustejovsky%
+}{%
+Pustejovsky%
+}{%
+{\protect \APACyear {2014}}%
+}]{%
+Pustejovsky2014ARPobservation}
+\APACinsertmetastar {%
+Pustejovsky2014ARPobservation}%
+\begin{APACrefauthors}%
+Pustejovsky, J\BPBI E.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{}{}.
+\newblock
+\APACrefbtitle {{ARPobservation: Simulating recording procedures for direct
+  observation of behavior}.} {{ARPobservation: Simulating recording procedures
+  for direct observation of behavior}.}
+\newblock
+\begin{APACrefURL} \url{http://cran.r-project.org/web/packages/ARPobservation}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Pustejovsky%
 \ \BBA {} Swan%
 }{%
 Pustejovsky%
@@ -651,6 +649,31 @@ Pustejovsky, J\BPBI E.%
 \newblock
 Paper presented at the annual meeting of the American Educational Research
   Association, Philadelphia, PA.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+{R Core Team}%
+}{%
+{R Core Team}%
+}{%
+{\protect \APACyear {2014}}%
+}]{%
+RCoreTeam2014}
+\APACinsertmetastar {%
+RCoreTeam2014}%
+\begin{APACrefauthors}%
+{R Core Team}.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{}{}.
+\newblock
+\APACrefbtitle {{R: A Language and Environment for Statistical Computing}.}
+  {{R: A Language and Environment for Statistical Computing}.}
+\newblock
+\APACaddressPublisher{Vienna, Austria}{R Foundation for Statistical Computing}.
+\newblock
+\begin{APACrefURL} \url{http://www.r-project.org/} \end{APACrefURL}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
