@@ -38,9 +38,9 @@
 
 \title{Estimating the prevalence and incidence of a state behavior: Models for interval recording data and a novel observation system}
 \shorttitle{ESTIMATING PARAMETERS OF A STATE BEHAVIOR}
-\author{James E. Pustejovsky and Daniel M. Swan}
-\leftheader{Pustejovsky & Swan}
-\affiliation{The University of Texas at Austin}
+\twoauthors{James E. Pustejovsky and Daniel M. Swan}{Austin H. Johnson}
+\twoaffiliations{The University of Texas at Austin}{University of Connecticut}
+\leftheader{Pustejovsky, Swan, & Johnson}
  
 \abstract{Data based on direct observation of behavior are used widely in many areas of educational and psychological research, particularly in applied research areas such as the treatment of behavioral disorders. 
 A number of different methods are used to record data during direct observation, including continuous recording, momentary time sampling (MTS), partial interval recording (PIR), and whole interval recording (WIR). 
@@ -51,7 +51,7 @@ The paper also describes a novel observation recording method that involve combi
 
 \keywords{behavioral observation; interval recording; alternating Poisson process; Markov chain}
 
-\authornote{James E. Pustejovsky, Department of Educational Psychology, University of Texas at Austin. Daniel M. Swan, Department of Educational Psychology, University of Texas at Austin.
+\authornote{James E. Pustejovsky, Department of Educational Psychology, University of Texas at Austin. Daniel M. Swan, Department of Educational Psychology, University of Texas at Austin. Austin H. Johnson, Department of Educational Psychology, University of Connecticut. 
 
 Address correspondence to James E. Pustejovsky, Department of Educational Psychology, University of Texas at Austin, 1 University Station D5800, Austin, TX 78712. Email: pusto@austin.utexas.edu.}
 
@@ -742,7 +742,7 @@ ggplot(subset(results, estimator == "PLE" & K %in% seq(30,150,30) & stat %in% c(
 
 Figure \ref{fig:AIR_sample_size} illustrates the minimum value of $K$ required for the PLEs based on AIR data to have low bias. For both of the natural parameterizations, as long as the incidence is not extremely low ($\zeta \geq 0.10c$) approximately unbiased estimates can be obtained at a very reasonable number of intervals ($K \geq 40$). For $logit(\phi)$, as long as prevalence is neither very low nor very high, approximately unbiased estimates can be obtained across the entire range of incidence. Even those portions of the parameter space requiring a large number of intervals ($80 \leq K \leq 100$) are relatively small for all three parameterizations. For $log(\zeta)$, only a modest number of intervals ($K \leq 40$) is required to obtain approximately unbiased estimates across the entire range of the parameter space.
 
-In general, the AIR method performs very well at a modest number of intervals. If a researcher was interested in the natural parameterization of both prevalence and incidence and a behavior they expected to see no less frequently than about once every 7 intervals on average ($\zeta \geq 0.15c), they would never need to use more than a very modest number of intervals ($K = 30$) to obtain unbiased estimates. The MTS PLEs do require a slightly smaller number of intervals to obtain unbiased estimates of prevalence in a given area of the parameter space. However, the estimates of incidence when using AIR require many fewer intervals and have such superior RMSEs that any researcher interested in estimates of incidence should stronger consider AIR. For a modest increase in effort, a researcher can see serious games in terms of good estimates of both prevalence and incidence.
+In general, the AIR method performs very well at a modest number of intervals. If a researcher was interested in the natural parameterization of both prevalence and incidence and a behavior they expected to see no less frequently than about once every 7 intervals on average ($\zeta \geq 0.15c$), they would never need to use more than a very modest number of intervals ($K = 30$) to obtain unbiased estimates. The MTS PLEs do require a slightly smaller number of intervals to obtain unbiased estimates of prevalence in a given area of the parameter space. However, the estimates of incidence when using AIR require many fewer intervals and have such superior RMSEs that any researcher interested in estimates of incidence should stronger consider AIR. For a modest increase in effort, a researcher can see serious games in terms of good estimates of both prevalence and incidence.
 <<AIR_sample_size, fig.width = 10, fig.height = 8, fig.pos = "tb", fig.cap="Minimum observation session length required to obtain PLEs based on AIR data with absolute bias less than given criteria.">>=
 
 d <- ggplot(subset(SS_min, proc == "AIR" & estimator == "PLE"),
@@ -901,15 +901,20 @@ We note only that the estimates from all three systems appear to be in rough agr
 \section{Discussion}
 \label{sec:discussion}
 
-Empirical evidence regarding assumptions of APP. 
+In this paper, we have considered how to estimate the prevalence and incidence of a state behavior from data collected using conventional intermittent observation recording systems, including momentary time sampling, partial interval recording, and whole interval recording. Following earlier work by \citet{Brown1977estimation} on MTS, we used an Alternating Poisson Process to model the behavior stream as perceived by the observer, from which models for PIR, WIR, and AIR could be derived. For estimating the model parameters, simulation evidence indicated that penalized likelihood methods with generic, weak priors generally outperformed maximum likelihood methods--often dramatically so. For PIR data, penalized likelihood estimates of prevalence provided much more accurate estimates than the naiv\"e summary proportion, which is currently widely used.
 
-Robustness to violation of the APP assumptions.
+We have also described a novel recording procedure, augmented interval recording, that involves combining MTS, PIR, and WIR. For a given period of observation, and using intervals twice the length of other procedures, AIR provides estimates of prevalence that are only slightly less accurate than estimates based on MTS, while also providing estimates of incidence that are substantially more accurate than estimates based on any other procedure. Of course, at present these advantages are only theoretical. To determine whether AIR offers any advantage in practice, its feasibility in real-life research contexts will need to be assessed.  
 
-Measurement model, needs to be extended to regression modeling, time series, random effects settings.
+Across all of the recording procedures that we have considered, the foremost limitation of the models and estimation techniques that we have studied is the strength of the assumptions entailed by the Alternating Poisson Process model for the behavior stream. The model posits that the individual episodes of behavior and spans of time in between episodes are exponentially distributed. Whether these distributional assumptions are reasonable--and for what classes of behavior--is an important question requiring further empirical research. Addressing it will likely require measuring the behavior of a large sample of participants using intensive, continuous recording techniques. 
+Another related avenue of further research is to examine the extent to which the proposed estimation techniques are robust to violations of the distributional assumptions (e.g., assuming that event durations follow a gamma distribution that has lower variance than the exponential). It may well be that the robustness of the PLEs depends on which system is used to record the data, and whether prevalence or incidence is of primary interest.
 
-Use model to develop guidance about choice of recording procedures, interval length, rest time, K, etc.
+Several other limitations of these models should also be acknowledged. Our approach has treated the recording procedures themselves as essentially mechanical procedures that can be applied without human error, yet in practice the procedures are not perfectly reliable. Indeed, the data from \citet{Johnson2014reliability} displayed a surprisingly high level of inter-rater variability. The model we have considered could be seen as implicitly accomodating rater error by allowing that the Alternating Poisson Process describes the observer's \textit{perception} of the behavior stream, rather than the true behavior stream. How to extend the model in order to more explicitly account for human error in the recording process remains an open question for further research.
 
-This model does not account for observer error.
+Another limitation of the models is that they are limited to describing measurement error from a single observation session. In practice, systematic behavioral observation data is often collected on a single participant across many sessions (as in a single-case study) or across many participants (as in a between-subjects experiment). In either setting, it would be useful to embed the measurement model that we have proposed in a generalized linear modeling framework, which could be used to describe changes in prevalence and incidence across time, or in a random-effects framework, which could be used to describe between-subjects variation in the characteristics of behavior streams.
+
+Despite these limitations, the models and estimation methods that we have proposed remain useful. For MTS data, penalized likelihood provides a means to estimate incidence as well as to assess the extent of measurement error in the estimate of prevalence. For PIR data, the penalized likelihood estimates of prevalence represent an improvement over the current standard approach, which is to simply ignore the bias in the summary proportion. 
+
+Though not the focus of the present paper, the models that we have described can also be applied to develop better psychometric guidance for behavioral observation data.\todo{Discuss Lane & Ledford (2014) and related work.} Through further mathematical analysis or though computer simulation, the models that we have presented could be used to study how choices regarding recording procedures, interval lengths, rest times, and observation session lengths influence the precision of behavioral measurements. Guidance regarding these aspects of study design would be useful to applied researchers designing single-case experiments or between-subjects trials.
 
 \bibliographystyle{apacite}
 \bibliography{\bibfile}
