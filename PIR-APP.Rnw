@@ -42,12 +42,12 @@
 \twoaffiliations{The University of Texas at Austin}{University of Connecticut}
 \leftheader{Pustejovsky, Swan, & Johnson}
  
-\abstract{Data based on direct observation of behavior are used widely in many areas of educational and psychological research, particularly in applied research areas such as the treatment of behavioral disorders. 
+\abstract{Data based on direct observation of behavior are used in many areas of educational and psychological research, particularly in applied research areas such as the treatment of behavioral disorders. 
 A number of different methods are used to record data during direct observation, including continuous recording, momentary time sampling (MTS), partial interval recording (PIR), and whole interval recording (WIR). 
 Among these methods, PIR and WIR have long been recognized as problematic because, as typically reported, the mean of such data measures neither the prevalence nor the incidence of the observed behavior. 
 Though the problems with these methods have long been recognized, little research has examined methods of analyzing interval recording data other than simply taking the mean. 
 This paper proposes a Alternating Poisson Process model for interval recording data that permits estimation of both prevalence and incidence via maximum likelihood or penalized maximum likelihood methods. 
-The paper also describes a novel observation recording method that involve combinations of MTS, PIR, and WIR and that provides considerably more efficient estimators of prevalence and incidence.}
+The paper also describes a novel observation recording method that involve combinations of MTS, PIR, and WIR and that provides considerably more efficient estimates of incidence.}
 
 \keywords{behavioral observation; interval recording; alternating Poisson process; Markov chain}
 
@@ -80,11 +80,12 @@ Direct observation also plays a prominent role in single-case research, where it
 Systematic direct observation procedures require that the behavior of interest have a clear operational definition, so that its occurrence or absence can be judged at a given point in time. 
 In forming such an operationally definition, is useful to distinguish between behaviors that are events, where each occurrence is of negligible duration, versus behaviors that are states, where individual episodes of behavior have positive duration \citep{Altmann1974observational}. 
 The primary characteristic of an event behavior is its incidence, or frequency of occurrence per time unit. 
-In contrast, a state behavior has two primary characteristics: incidence, which is the frequency (per unit time) with which new episodes of the behavior begin and prevalence, which is the proportion of time that the behavior occurs. Given an operationally defined behavior, measurements of its characteristics are obtained by recording data while observing the behavior (either in person, or by video-recording) for a specified length of time. 
+In contrast, a state behavior has two primary characteristics: incidence, which is the frequency (per unit time) with which new episodes of the behavior begin, and prevalence, which is the proportion of time that the behavior occurs. 
+Given an operationally defined behavior, measurements of its characteristics are obtained by recording data while observing the behavior (either in person, or by video-recording) for a specified length of time. 
 
 There are several different procedures for recording data during direct observation, varying in ease of implementation, the level of detail in the resulting data, and the aspect of behavior to which the resulting measurement corresponds \citep[for surveys of major recording procedures, see][]{Altmann1974observational, Ayres2010dependent, Hartmann1990observational, Primavera1996measurement}. 
 The most intensive procedure is continuous recording (sometimes called duration recording or real-time recording), in which the observer records the time at which each behavioral episode begins and ends.
-Data from continuous recording is very rich, in that it permits direct estimation of prevalence, incidence, and further aspects of the pattern of behavior; continuous recording data can also be subjected to more sophisticated forms of modeling \citep[e.g.,][]{Bakeman2011sequential, Haccou1992statistical}. 
+Data from continuous recording is very rich, in that it permits direct estimation of prevalence and incidence and can also be subjected to more sophisticated forms of modeling \citep[e.g.,][]{Bakeman2011sequential, Haccou1992statistical}. 
 However, less effort-intensive data collection methods are often required, particularly for use in clinical and applied research settings. 
 
 Other commonly used systems for collecting behavioral data do not capture a complete record of the behavior during an observation session, but rather involve making observations only intermittently. 
@@ -96,14 +97,14 @@ Using partial interval recording (PIR, also known as one-zero sampling, modified
 Using whole interval recording (WIR), an interval is scored as a one only if the behavior occurs for the entire duration of the interval. 
 In some PIR and WIR systems, a small length of time is left between each interval so that the observer does not have to maintain continuous attention. 
 
-In many applications, the interval-by-interval data generated by these recording systems is summarized by the proportion of intervals scored as a one. 
-Often, only this summary proportion is used for later analysis, where it is interpreted as a measure of prevalence. 
-However, whether it is reasonable to reduce the data to a summary proportion depends on which recording system is used to collect the data. 
+The interval-by-interval data generated by these recording systems is often summarized by the proportion of intervals scored as a one. 
+Typically, only this summary proportion is used for later analysis, where it is interpreted as a measure of prevalence. 
+However, whether it is reasonable to reduce the data to a summary proportion depends on which recording system was used to collect it. 
 
-Under quite general modeling assumptions, the proportion of MTS intervals is an unbiased estimate of prevalence \citep{Rogosa1991statistical}. 
+Under quite general circumstances, the proportion of MTS intervals is an unbiased estimate of prevalence \citep{Rogosa1991statistical}. 
 Thus, reducing the data to the summary proportion is entirely reasonable if the investigator's interest is solely in the prevalence of the behavior. 
-The drawback of doing so is that simple summaries of MTS data do not provide any measure of the behavior's incidence. 
-Even if not of substantive interest, an estimates of incidence is needed in order to assess the magnitude of measurement error in the prevalence estimate. 
+The drawback of doing so is that one is left without any measure of the behavior's incidence. 
+Even if not of substantive interest, an estimate of incidence is needed in order to assess the magnitude of measurement error in the prevalence estimate. 
 
 \citet[see also \citealp{Griffin1983parametric}]{Brown1977estimation} described a method for estimating both prevalence and incidence from MTS data. 
 Their approach was to first posit a stochastic process for the underlying pattern of behavior as perceived by the observer, or what is often termed the behavior stream. 
@@ -111,11 +112,12 @@ The particular model they considered was an Alternating Poisson Process, which i
 Brown and colleagues showed that if the behavior stream is generated by such a process, then interval-by-interval MTS scores follow a discrete-time Markov chain, from which closed-form expressions for the maximum likelihood estimators of prevalence and incidence can be derived.
 
 Unlike MTS, PIR and WIR systems do not produce clearly interpretable summary measurements. 
-Rather, the PIR summary proportion systematically over-estimates prevalence and the WIR summary proportion systematically under-estimates prevalence; in both cases, the extent of the bias depends on characteristics of the behavior as well as operational features of the recording system \citep{Kraemer1979one, Rogosa1991statistical}, making the construct interpretation of such data quite difficult. 
-Consequently, methodologists have long argued against the use of PIR and WIR systems \citep[cf.]{Altmann1974observational, Mann1991time, Lane2014using}. \todo[color=green!40]{What is "cf." intended to convey here?}
+Rather, the PIR summary proportion systematically over-estimates prevalence and the WIR summary proportion systematically under-estimates prevalence. 
+With either system, the extent of the bias depends on characteristics of the behavior as well as operational features of the recording system \citep{Kraemer1979one, Rogosa1991statistical}, making the construct interpretation of such data quite difficult. 
+Consequently, methodologists have long argued against the use of PIR and WIR systems \citep{Altmann1974observational, Mann1991time, Lane2014using}.
 Despite such objections, the systems remain in common use, particularly as part of behavioral time series designs and single-case research \citep{Rapp2007interval, Mudford2009continuous, Lane2014using}. 
 
-Little previous research has considered methods of analyzing PIR and WIR data beyond using the summary proportion.
+Little previous research has considered methods of analyzing PIR and WIR data beyond simply using the summary proportion.
 For PIR data, \citet{Altmann1970estimating} proposed a transformation of the summary proportion as an estimate of incidence, motivated by a model in which behavioral episodes follow a Poisson process. While this model applies well to event behaviors, it is not a suitable description of state behaviors, where individual episodes have non-negligible duration. 
 \citet{Suen1986post, Suen1989analyzing} have proposed a method for obtaining estimates of prevalence and incidence from PIR data, provided that the behavior stream conforms to certain conditions. 
 However, their proposed procedure is not motivated by any explicit data-generating process, and later simulation studies reported that the method produces badly biased estimates \citep[sec. 5.2]{Rogosa1991statistical}. 
@@ -124,10 +126,9 @@ These methods are useful for analysis of summarized PIR data, as would be availa
 Other methods of analysis, involving fully specified data-generating models for the interval-by-interval scores, are therefore of interest.
 
 This paper examines models for PIR and WIR data, from which principled estimates of prevalence and incidence can be obtained. 
-Following \citet{Brown1977estimation}, we use an Alternating Poisson Process for the underlying behavior stream to derive a model for the interval-by-interval scores. 
+Following \citet{Brown1977estimation}, we model the underlying behavior stream using an Alternating Poisson Process and then derive a model for the interval-by-interval scores. 
 Under this model, maximum likelihood estimates for prevalence and incidence can be obtained using conventional numerical techniques (although they do not have closed-form expression). 
 To remedy some problems with the maximum likelihood estimators, we introduce penalized likelihood estimators that have better operating characteristics and that can be tailored to express prior information about the behavioral parameters.
-\todo{We use a parametric bootstrap procedure for obtaining interval estimates.} 
 We also describe a novel procedure for intermittent recording of a behavior that entails combining MTS and interval recording methods and that can be used to obtain more efficient estimators of prevalence and incidence.
 
 \section{Alternating Poisson Process models}
@@ -138,7 +139,7 @@ The model applies to state behaviors, where the behavior is either occurring or 
 The stream of a state behavior can be described in terms of two components: sequentially ordered, non-overlapping episodes of behavior, which we will call event durations, and spans of time in between episodes, which we will call interim times. 
 Let $\{Z(t), 0 \leq t\}$ denote the state of the behavior stream over the course of an observation session, where $Z(t) = 1$ indicates that an event is occurring at time $t$ and $Z(t) = 0$ otherwise.
 
-The Alternating Poisson Process makes several further assumptions. 
+The Alternating Poisson Process makes several assumptions about how the behavior stream is generated. 
 Specifically, it is assumed that event durations and interim times are mutually independent, random quantities, that the event durations follow an exponential distribution with mean $\mu > 0$, and that the interim times follow an exponential distribution with mean $\lambda > 0$. 
 Under the model, the prevalence of the behavior is equal to the ratio of $\mu$ to the sum of $\mu$ and $\lambda$ and the incidence of the behavior is equal to the reciprocal of the sum of $\mu$ and $\lambda$. 
 We will denote prevalence by $\phi$, where $0 < \phi < 1$, and incidence by $\zeta$, where $\zeta > 0$. Finally, it is assumed that the process is in equilibrium, with $\Pr\left(Y(0) = 1\right) = \phi$. 
@@ -183,7 +184,7 @@ l_{MTS}(\phi, \zeta) &= n_{01} \log \phi + n_{10} \log\left(1 - \phi\right) \\
 & \qquad \qquad \qquad \qquad \qquad \qquad + n_{11}\log\left[\phi + \left(1 - \phi\right)\exp\left(\frac{-\zeta c}{\phi (1 - \phi)}\right)\right].
 \end{aligned}
 \end{equation}
-\citet{Brown1977estimation} provided closed-form expressions for the maximum likelihood estimates (MLEs) for $\phi$ and $\zeta$ based on this model. Let $\hat{p}_0 = n_{01}/ \left(n_{00} + n_{01}\right)$ and $\hat{p}_1 = n_{11} / \left(n_{10} + n_{11}\right)$. The MLE for $\zeta$ exists only when $\hat{p}_0 < \hat{p}_1$. 
+\citet{Brown1977estimation} provided closed-form expressions for the maximum likelihood estimators (MLEs) for $\phi$ and $\zeta$ based on this model. Let $\hat{p}_0 = n_{01}/ \left(n_{00} + n_{01}\right)$ and $\hat{p}_1 = n_{11} / \left(n_{10} + n_{11}\right)$. The MLE for $\zeta$ exists only when $\hat{p}_0 < \hat{p}_1$. 
 When this condition holds, the MLEs for $\phi$ and $\zeta$ are given by 
 \begin{equation}
 \label{eq:MTS_mle}
@@ -250,7 +251,7 @@ The probability that the MLEs are undefined or fall outside of the parameter spa
 In order for the estimates to fall strictly within the parameter space, both a 0-1 transition and a 1-0 transition must be observed, so that $\hat{p}_0 > 0$, $\hat{p}_1 < 1$. Table \ref{tab:MTS_zeta_valid} reports the proportion of \Sexpr{iterations} simulated samples in which $0 < \hat\phi_{MTS} < 1$ and $0 < \hat\zeta_{MTS} < \infty$, with $K = \Sexpr{K}$ and $\zeta$ scaled in terms of the interval length. 
 Values of $\phi > 0.5$ are omitted because the behavior of the MTS estimators is symmetric about $\phi = 0.5$. 
 The proportion of estimates falling within the parameter space decreases as prevalence becomes more extreme and as incidence becomes very infrequent or very frequent. 
-The high proportion of samples in which the estimate of incidence is undefined represents a drawback to the use of maximum likelihood based on MTS data.
+The high proportion of samples in which the estimate of incidence is undefined represents a drawback to the use of maximum likelihood estimation based on MTS data.
 
 \subsection{Partial Interval Recording}
 \label{subsec:PIR}
@@ -293,7 +294,7 @@ The log-likelihood of $\phi$ and $\zeta$, given observed PIR data $u_1,...,u_K$,
 \label{eq:PIR_loglik}
 l_{PIR}\left(\phi,\zeta\right) = \sum_{k=1}^K & u_k \ln\left[1 - (1 - \psi_k)\exp\left( \frac{-\zeta c}{1 - \phi}\right)\right]  + (1 - u_k)\left[\ln\left(1 - \psi_k \right) - \frac{\zeta c}{1 - \phi}\right].
 \end{align}
-MLEs $\hat\phi_{PIR}, \hat\zeta_{PIR}$ are obtained by maximizing $l_{PIR}$ using numerical techniques. 
+The MLEs, denoted by $\hat\phi_{PIR}$ and $\hat\zeta_{PIR}$, are the values that maximize $l_{PIR}$. 
 Because the conditional probabilities $\psi_1,...,\psi_K$ are defined recursively, it is cumbersome and computationally expensive to evaluate the score function corresponding to this likelihood. 
 The simulation study reported in a later section therefore uses the Nelder-Mead algorithm \citep{Nelder1965simplex}, which does not require evaluation of the score function.
 
@@ -361,11 +362,11 @@ Table \ref{tab:PIR_ests_valid} reports the proportion of \Sexpr{iterations} simu
 Because we use numerical maximization, the results of the maximization routine are never precisely on the borders of the parameter space. 
 We therefore use boundaries of $|\logit \ \hat\phi_{PIR}| < \Sexpr{threshold}$ and $|\log \hat\zeta_{PIR}| < \Sexpr{threshold}$ to define the edges of the parameter space. 
 The proportion of estimates falling within the parameter space is highest for moderate values of prevalence and incidence ($0.2 \leq \phi \leq 0.5$ and $0.1 \leq \zeta \leq 0.25$), decreases as prevalence becomes more extreme, and decreases as incidence becomes either less frequent (less than once per ten intervals) or more frequent (more than once per four intervals).  
-Unlike the MTS estimators, the pattern of boundary estimates is asymmetric because PIR tends to reach ceiling levels when prevalence is large. 
+Unlike the MTS estimators, the pattern of boundary estimates is asymmetric with respect to $\phi$ because PIR tends to reach ceiling levels when prevalence is large. 
 
 In addition to returning estimates that are on the edges of the parameter space, the MLEs based on PIR data have the further disadvantage of being somewhat sensitive to initialization values. 
 The likelihood surface becomes very flat when the PIR scores are near ceiling or floor levels, making it difficult to numerically identify the maximum. 
-For the implementation of the estimators in the accompanying R package, the consequence is that drastically different estimates can be returned depending on the initialization values of the algorithm. 
+The consequence is that different estimates can be returned depending on the initialization values of the algorithm. 
 Together with the possibility of obtaining estimates on the edges of the parameter space, the numerical instability of the MLEs motivates our investigation of alternative estimators that incorporate penalty functions.  
 
 \subsection{Whole Interval Recording}
@@ -394,18 +395,18 @@ The equivalence of the two system implies that estimates of prevalence and incid
 \label{subsec:AIR}
 
 Thus far, we have considered conventional and widely used procedures for intermittent, systematic direct observation procedures. 
-We now describe a novel recording procedure that might provide more accurate estimates of both prevalence and incidence. 
+We now describe a novel recording procedure that can provide more accurate estimates of the behavioral parameters. 
 The method, which we call augmented interval recording, involves using MTS, PIR, and WIR systems on each interval. 
 To the best of our knowledge, this procedures has not been previously described in the literature on systematic direct observation of behavior. 
 
 Just as with PIR or WIR, suppose that the observation session is divided into $K$ intervals and that the first $c$ seconds of the interval are devoted to observation while the remaining $d$ seconds are devoted to recording or resting; interval $k$ therefore begins at time $t_k = (k - 1)(c + d)$. 
 
 Consider an observer who uses the combination of MTS, PIR, and WIR scoring rules for each interval during an observation session. 
-Doing so requires that the observer record sufficient data so that the values of the MTS, PIR, and WIR variables ($X_{k-1},U_k,W_k$) for each interval. 
+Doing so requires that the observer record sufficient data so that the values of the MTS, PIR, and WIR variables ($X_{k-1},U_k,W_k$) can be determined for each interval. 
 Figure \ref{fig:questions} depicts the sequence of questions to be answered during interval $k$ in order to completely determine these values. 
-For each interval, the observer begins by noting the presence or absence of the behavior at time $t_k$ and recording the MTS score. 
-If the behavior is present ($X_{k-1} = 1$), then the partial interval record is also determined ($U_k = 1$), and it only remains to determine whether the behavior occurs for the duration of the interval ($W_k = 1$) or ends before the start of the next interval ($W_k = 0$). 
-Similarly, if the behavior is absent at the start of the interval ($X_{k-1} = 0$), then the whole interval record is also determined ($W_k = 0$), and it only remains to determine whether a behavioral event begins before the start of the next interval ($U_k = 1$) or is absent for the entire interval ($U_k = 0$). 
+For each interval, the observer first notes the presence or absence of the behavior at time $t_k$ and records the MTS score. 
+If the behavior is present ($X_{k-1} = 1$), then the partial interval record is also determined ($U_k = 1$), and it only remains to determine whether the behavior occurs for the duration of the interval (in which case $W_k = 1$) or ends before time $t_k + c$ (in which case $W_k = 0$). 
+Similarly, if the behavior is absent at the start of the interval ($X_{k-1} = 0$), then the whole interval record is also determined ($W_k = 0$), and it only remains to determine whether a behavioral event begins before time $t_k + c$ (in which case $U_k = 1$) or is absent for the entire interval (in which case $U_k = 0$). 
 
 \begin{figure}[hbtp]
 \centering
@@ -421,7 +422,7 @@ Thus, for a fixed interval length, simultaneous use of all three methods entails
 Furthermore, using longer time-intervals with fewer intervals per observation period would mitigate the effort required.
 
 Under the assumptions of the Alternating Poisson Process, the data generated by the AIR system can be modeled using a discrete-time Markov Chain, from which estimates of prevalence and incidence can be obtained. 
-The Markov property of the Alternating Poisson Process implies that the joint distribution can be written as
+The Markov property of the Alternating Poisson Process implies that the joint distribution of the measurements can be written as
 \begin{multline}
 \Pr\left(X_0=x_0,X_1=x_1,U_1 = u_1, W_1 = w_1,..., X_K=x_K, U_K = u_K, W_K = w_K \right) \\ = \Pr\left(X_0 = x_0\right) \prod_{k=1}^K \Pr\left(X_k = x_k, U_k = u_k, W_k = w_k | X_{k-1} = x_{k-1}\right). 
 \end{multline}
@@ -451,11 +452,11 @@ As with PIR data, the MLEs $\hat\phi_{AIR}, \hat\zeta_{AIR}$ are obtained by max
 The previous section has illustrated that maximum likelihood estimates derived from MTS data or from interval recording data have undesirable operating characteristics when based on a moderate sample size of $K = 40$ intervals. 
 In this section, we consider the use of penalized likelihood estimators (PLEs) to stabilize the behavior of the estimators and improve their performance in moderately sized samples. 
 PLEs are derived by maximizing the sum of the log likelihood and a penalty term that depends on the parameters. 
-Penalized likelihood estimation has been applied to an array of statistical problems where maximum likelihood methods break down, such as estimation of logistic regression coefficients in small samples \citep{Galindo-Garre2004bayesian, Gelman2008weakly}, estimation of correlation structure in high-dimensional multivariate regression models \citep{Warton2008penalized}, and estimation of variance components in multi-level models when the number of highest-level units is small \citep{Chung2012non-degenerate}. 
+Penalized likelihood estimation has been applied to an array of statistical problems where maximum likelihood methods tend to break down, such as estimation of logistic regression coefficients in small samples \citep{Galindo-Garre2004bayesian, Gelman2008weakly}, estimation of correlation structure in high-dimensional multivariate regression models \citep{Warton2008penalized}, and estimation of variance components in multi-level models when the number of highest-level units is small \citep{Chung2012non-degenerate}. 
 
-PLEs can be derived from a Bayesian perspective, by assigning a prior distribution to the model parameters and taking the posterior mode (given the prior and the data) as a point estimator \citep{Chung2012non-degenerate}. 
-The penalty function is thus equivalent to the log of the prior distribution. 
-An advantage of PLEs is that they provide a convenient and coherent way to incorporate into the estimation process prior information about the behavior. 
+PLEs can be derived from a Bayesian perspective, by assigning a prior distribution for the model parameters and taking the posterior mode (given the prior and the data) as a point estimator \citep{Chung2012non-degenerate}. 
+In this framework, the penalty function is equivalent to the log of the prior distribution. 
+An advantage of PLEs is that they provide a convenient and coherent way to incorporate prior information about the behavior into the estimation process. 
 
 In most research contexts, we expect that prior knowledge about characteristics of the behavior will be more readily expressed in terms of the average event duration ($\mu$) and average interim time ($\lambda$). 
 We therefore consider a class of priors in which $\mu$ and $\lambda$ follow independent gamma distributions, with \[
@@ -467,7 +468,7 @@ Specifically, when $\theta_\mu = \theta_\lambda = \theta$, it follows that \[
 \phi \sim Beta\left(\alpha_\mu, \alpha_\lambda \right), \qquad \zeta \sim Gamma^{-1}\left(\alpha_\mu + \alpha_\lambda, \frac{1}{c\theta} \right) \]
 and that $\phi$ is independent of $\zeta$. 
 
-The penalty function implied by these priors depends on how they are parameterized (i.e., based on priors for $\mu, \lambda$ or priors for $\phi, \zeta$). We recommend using the $\left(\mu,\lambda\right)$ parameterization because it reduces to zero when $\alpha_\mu = \alpha_\lambda = 1$ and $\theta_\mu = \theta_\lambda = \infty$, making the PLEs equivalent to the MLEs.
+The penalty function implied by these priors depends on how they are parameterized (i.e., based on priors for $\mu, \lambda$ or on priors for $\phi, \zeta$). We recommend using the $\left(\mu,\lambda\right)$ parameterization because it reduces to zero when $\alpha_\mu = \alpha_\lambda = 1$ and $\theta_\mu = \theta_\lambda = \infty$, making the PLEs equivalent to the MLEs.
 With this parameterization, the penalty function has the form 
 \begin{equation}
 p\left(\phi, \zeta\right) = \left(\alpha_\mu - 1\right) \log \left(\phi\right) + \left(\alpha_\lambda - 1\right) \log \left(1 - \phi\right) - \left(\alpha_\mu + \alpha_\lambda - 2\right) \log\left(\zeta\right) - \frac{\frac{\phi}{\theta_\mu} + \frac{1-\phi}{\theta_\lambda}}{c \zeta}.
@@ -494,18 +495,18 @@ shape <- x$root
 @
 
 In some research contexts, one may have fairly strong prior knowledge about certain behavioral characteristics, which can be used to inform the choice of hyperparameters. 
-For example, prior experience with a class of behavior may suggest that it is unlikely for the average event duration to be more than two intervals in length, and that the most likely value for the average event duration is $\frac{1}{2}$ an interval length. 
+For example, prior experience with a class of behavior may suggest that it is implausible that the average event duration is more than two intervals in length, and that the most likely value for the average event duration is $\frac{1}{2}$ an interval length. 
 This suggests choosing $\alpha_\mu = 3$ and $\theta_\mu = \frac{1}{4}$, so that the prior mode of $\mu$ is $\left(\alpha_\mu - 1\right) c \theta_\mu = \frac{c}{2}$ and $\Pr(\mu > 2c) < 0.02$.
 Absent strong prior information about $\lambda$, one might use the default hyperparameters suggested above, taking $\alpha_\lambda = \Sexpr{alpha_default}, \theta_\lambda = \Sexpr{theta_default}$. 
 
 \section{Finite-sample performance}
 
-We noted in a previous section that maximum likelihood estimates derived from MTS or PIR data are not always well-defined, even when the number of intervals is moderate. 
-To remedy this problem, we have proposed the use of penalized likelihood estimates that are always well-defined and numerically stable. 
+We noted in a previous section that maximum likelihood estimators derived from MTS or PIR data are not always well-defined, even when the number of intervals is moderate. 
+To remedy this problem, we have proposed the use of penalized likelihood estimators that are always well-defined and numerically stable. 
 These approaches to estimation should produce equivalent results when based on very long observation sessions with many intervals of data, but they may differ when the number of intervals is more limited. 
 
 Both maximum likelihood and penalized likelihood estimation represent alternatives to the standard method of summarizing intermittent behavioral observation data, which is to use the summary proportion of intervals with behavior. 
-For MTS data, the summary proportion is an unbiased estimate of prevalence under a very broad class of data-generating models \citep{Rogosa1991statistical}; however, the summary proportion may be less efficient\todo[color=green!40]{re: Our e-mail discussion earlier, should this be "accurate"?} than the PLE or MLE for prevalence under the Alternating Poisson Process model. 
+For MTS data, the summary proportion is an unbiased estimate of prevalence under a very broad class of data-generating models \citep{Rogosa1991statistical}; however, the summary proportion may be less efficient than the PLE or MLE for prevalence under the Alternating Poisson Process model. 
 For PIR data, the summary proportion is biased as an estimate of prevalence \citep{Rogosa1991statistical}, while likelihood-based methods provide approximately unbiased estimates for sufficiently long observation sessions. 
 Still, for a fixed sample size, the variability of the likelihood-based estimates may be worse than the bias in the summary proportion. It is therefore important to compare the accuracy of all of these estimators.
 
@@ -532,8 +533,9 @@ $\zeta$ & Incidence & 10 & 0.05 & 0.05 & 0.50 \\
 
 Table \ref{tb:simulation_design} summarizes the simulation design.
 We simulated data based on three different recording systems: MTS, PIR, and AIR; WIR was omitted because it is equivalent to using PIR for the absence of the behavior.
-For MTS and PIR, we used $c = 1, d = 0$ and varied the length of the observation session from 10 to 150 intervals. 
+We varied the length of the observation session from 10 to 150 intervals. 
 This range spans a variety of situations in which intermittent behavioral observation recording might be used, from a quick observation in a classroom where the observer needs to capture the behaviors of several children to an intensive observation of a single child over the course of an entire class period. 
+For MTS and PIR, we used $c = 1, d = 0$, so that the number of intervals equals the session length $K$. 
 To provide for a fair comparison with the conventional recording systems, we simulated AIR data using $K / 2$ intervals of length $c = 2$ (i.e., twice as long as those for MTS or PIR). 
 We varied the true prevalence of the behavior stream across nearly its entire possible range. 
 Because $c = 1$ for MTS and PIR, incidence is scaled in terms of the length of an interval; for example, $\zeta = 0.1$ corresponds to an incidence of one new behavioral episode per ten intervals.
@@ -542,19 +544,19 @@ We varied incidence  between $\zeta = .05$ (one new behavior per 20 intervals) a
 We implemented the simulations using the ARPobservation package \citep{Pustejovsky2014ARPobservation} for the R statistical computing environment \citep{RCoreTeam2014}. 
 For each combination of parameter values ($\phi,\zeta,K$) and recording system, we generated 10000 behavior streams of length $K$ from an Alternating Poisson Process, then simulated data based on the specified recording system. 
 For each string of simulated data, we calculated the summary proportion of intervals and then found the MLEs and PLEs using numerical maximization. 
-For the PLEs, we used the default priors of $\alpha_\mu = \alpha_\lambda = 1.5$ and $\theta_\mu = \theta_\lambda = 10$.  
+For the PLEs, we used default priors of $\alpha_\mu = \alpha_\lambda = 1.5$ and $\theta_\mu = \theta_\lambda = 10$. 
 
-Depending on the research context, an analyst using these estimators might want to use the natural parameterization of $\phi$ and $\zeta$ or the transformed parameterization of $\logit(\phi)$ and $\log(\zeta)$, where $\logit(x) = \log(x) - \log (1 - x)$. 
+Depending on the research context, an analyst might want to use estimates in the the natural parameterization of $\phi$ and $\zeta$ or in the transformed parameterization of $\logit(\phi)$ and $\log(\zeta)$, where $\logit(x) = \log(x) - \log (1 - x)$. 
 The latter parameterization puts the scores on a scale from $-\infty$ to $\infty$, and so might be preferred by an analyst seeking to fit a linear model. 
 Consequently, we studied each research question using both parameterizations. 
 To address the first research question, we examined the root mean-squared error (RMSE) of the prevalence estimates and the relatively RMSE of the incidence estimates; we focused on relative RMSE, defined as $\E\left[\left(\hat\zeta - \zeta\right)^2\right] / \zeta$, because incidence is a rate. 
 In the transformed parameterization, we examined the RMSE of $\logit(\phi)$ and $\log(\zeta)$.  
 
-In addressing the second research question, regarding required minimum sample sizes to obtain approximately unbiased estimates, we used rather liberal criteria for bias. 
+To address the second research question, regarding required minimum sample sizes to obtain approximately unbiased estimates, we used rather liberal criteria for bias. 
 We believe that doing so is appropriate given the lack of alternative methods, particularly for estimating incidence. 
 Our criteria for ``approximate unbiasedness'' are defined as follows. 
 For prevalence, we used absolute bias in $\hat\phi$ of less than 0.03 and absolute bias in $\logit(\hat\phi)$ of less than 0.05. 
-For incidence, we used absolute relative bias in $\hat\zeta$ of less than 0.10 and absolute bias in $\log(\hat\zeta)$ of less than 0.10. While the criteria for incidence may seem especially liberal, in practical terms estimates that biased might still be of interest. If the true incidence of a behavior indicates that behavior is occurring on average once every 20 intervals ($\zeta = 0.05c$), then an estimator with a relative bias of as much as 0.10 could return an estimate that indicates the behavior is happening between approximately once every 18 and once every 22 intervals on average. If the true incidence of the behavior indicates that the behavior is occurring once every 2 intervals on average ($\zeta = 0.50c$), then an estimator with a relative bias of as much as 0.10 could return an estimate suggesting that the behavior occurs between once every 1.8 and once every 2.2 intervals on average. \todo[color=green!40]{Are we also (implicitly) arguing that prevalence estimates that are within 3-5 percentage points (not sure precisely how to characterize the logit bias) are still practically of interest?} 
+For incidence, we used absolute relative bias in $\hat\zeta$ of less than 0.10 and absolute bias in $\log(\hat\zeta)$ of less than 0.10. While the criteria for incidence may seem especially liberal, in practical terms, estimators that have 10\% bias could still be informative, particularly in contexts where interest is in large differences or large changes in behavior.
 
 <<prepare_sim_results, include=FALSE>>=
 
@@ -633,10 +635,10 @@ ggplot(subset(results, proc == "MTS" & K %in% seq(30,150,30) & stat %in% c("phi"
 Figure \ref{fig:MTS_RMSE} illustrates the distribution of RMSE of the MLEs, PLEs, and summary proportions based on MTS data, for varying levels of $K$; each row of graphs corresponds to a different parameter. 
 Given that the MTS proportions are known to be unbiased estimates of prevalence, those estimates provide a point of reference for the accuracy of the MLEs and PLEs. 
 Across all levels of $K$, the MLEs of $\phi$ have comparable RMSEs to the MTS proportions. 
-However, the MLEs perform notably worse in terms of $logit(\phi)$ until $K = 120$ or more, a very large number of intervals.
-Across the range of $K$, the PLEs of $\phi$ and $logit(\phi)$ have RMSE comparable to or smaller than the MTS proportions. 
+However, the MLEs perform notably worse in terms of $\logit(\phi)$ until $K = 120$ or more, which is a fairly large number of intervals.
+Across the range of $K$, the PLEs of $\phi$ and $\logit(\phi)$ have RMSE comparable to or smaller than the MTS proportions. 
 In terms of both $\zeta$ and $log(\zeta)$, the MLEs perform considerably worse than the PLEs across all levels of $K$. 
-However, the PLEs for $\zeta$ still have rather large relative RMSE (and similarly, the PLEs for $\log(\zeta)$ have large RMSE) for some parts of the parameter space. The PLEs for $\zeta$ perform poorly when incidence is very low, or when the prevalence is either very high or very low and incidence is moderate to high.\todo[color=green!40]{I added this line at your request, but it's essentially repeating the description in the paragraph below.}
+However, the PLEs for $\zeta$ still have rather large relative RMSE (and similarly, the PLEs for $\log(\zeta)$ have large RMSE) for some parts of the parameter space. 
 
 <<MTS_sample_size, fig.width = 10, fig.height = 8, fig.pos = "tb", fig.cap="Minimum number of MTS intervals required to obtain PLEs with absolute bias less than given criteria.">>=
 
@@ -661,11 +663,9 @@ grid.draw(grob)
 
 Figure \ref{fig:MTS_sample_size} illustrates the minimum value of $K$ required to obtain PLEs with low bias. 
 In terms of $\phi$ and $\logit(\phi)$, the estimator requires at most 40 intervals when the behavior is not too infrequent (i.e., $\zeta \geq 0.1 c$).
-Even when $\zeta$ drops to $0.05 c$, low-bias estimates of $logit(\phi)$ can be obtained when $K \geq 60$. 
+Even when $\zeta$ drops to $0.05 c$, low-bias estimates of $\logit(\phi)$ can be obtained when $K \geq 60$. 
 In terms of $\zeta$ and $\log(\zeta)$, low-bias estimates can be obtained when $K$ is at least 80 so long as the behavior has moderate prevalence ($0.30 \leq \phi \leq 0.70$) and incidence that is neither infrequent nor very frequent ($0.10 \leq \zeta \leq 0.45$). 
-However, larger samples are required to obtain good incidence estimates when the behavior has more extreme prevalence and high incidence, or when the behavior has very low incidence. 
-
-Despite its limitations, there appears to be very little practical drawback to using the PLEs in place of the MTS proportion estimates. Unless the behavior is happening very infrequently, the PLE provides comparable estimates of prevalence. Even when the approximately unbiased estimates of incidence are difficult to obtain, the estimates of prevalence are nearly always still approximately unbiased. If an applied researcher is careful and aware of those instances where incidence estimates may not be trustworthy, we would argue that the PLE is superior to other known methods of obtaining MTS estimates.
+Larger samples are required to obtain good incidence estimates when the behavior has more extreme prevalence and high incidence, or when the behavior has very low incidence. 
 
 \subsection{Results: PIR}
 
@@ -684,11 +684,11 @@ ggplot(subset(results, proc == "PIR" & K %in% seq(30,150,30) & stat %in% c("phi"
 Figure \ref{fig:PIR_RMSE} illustrates the distribution of RMSE of the MLEs, PLEs, and summary proportions based on PIR data, across varying levels of $K$ and for each parameterization. 
 In contrast to MTS, the PIR summary proportion performs quite poorly as an estimate of prevalence. 
 For prevalence, the PLE performs notably better than both the MLE and the summary proportions across the entire range of $K$, in terms of both the natural parameterization and the transformed parameterization. 
-For incidence, the PLEs once again provide more accurate estimates than the MLEs, in both parameterizations. The RMSE (and relative RMSE) of the PLEs can still be relatively large in any case where very large sample sizes are required for unbiased estimates.
+For incidence, the PLEs once again provide more accurate estimates than the MLEs, in both parameterizations. However, the RMSE (and relative RMSE) of the PLEs is still relatively large in certain parts of the parameter space.
 
-Figure \ref{fig:PIR_sample_size} illustrates the minimum value of $K$ required for the PLEs based on PIR data to have low bias. Estimates of prevalence require a moderate number of intervals ($K \geq 70$) and estimates of the natural parameterization of incidence require a large number of intervals ($K \geq $100) to obtain approximately unbiased estimates in even a restricted range. Approximately unbiased estimates can be found when prevalence is known to be relatively low ($0.15 \leq \phi \leq 0.30$) and incidence is moderate to low ($\zeta \leq 0.30c$), or incidence is low ($\zeta \leq 0.15c$) and prevalence is moderate to low ($.15 \leq \phi \leq 0.60$). Approximately unbiased estimates for the natural parameterization of $\zeta$ can still be obtained slightly outside these bounds, and approximately unbiased estimates for the natural parameterization of $\phi$ slightly farther still. Unbiased estimates for $log(\zeta)$ can only be found when the number of intervals is high($K \geq 100$), prevalence is moderate to low ($.10 \leq \phi \leq 0.70$) and incidence is very low ($\zeta \leq 0.10c$).
+Figure \ref{fig:PIR_sample_size} illustrates the minimum value of $K$ required for the PLEs based on PIR data to have low bias. Estimates of prevalence require a moderate number of intervals ($K \geq 70$) and estimates of the natural parameterization of incidence require a large number of intervals ($K \geq $100) to obtain low-bias estimates, even in a restricted part of the parameter space. Approximately unbiased estimates can be found when prevalence is known to be relatively low ($0.15 \leq \phi \leq 0.30$) and incidence is moderate ($\zeta \leq 0.30c$), or when prevalence is moderate ($0.15 \leq \phi \leq 0.60$) and incidence is low ($\zeta \leq 0.15c$). Low-bias estimates for the natural parameterization of $\zeta$ can still be obtained slightly outside these bounds, and approximately unbiased estimates for the natural parameterization of $\phi$ slightly farther still. Low-bias estimates for $log(\zeta)$ can only be found when the number of intervals is high($K \geq 100$), prevalence is low or moderate ($.10 \leq \phi \leq 0.70$) and incidence is low ($\zeta \leq 0.10c$).
 
-While these ranges are restrictive, returning to Figure \ref{fig:PIR_RMSE} makes clear that our method is superior to the only other summary method in use. In general, PIR is only appropriate for observing behaviors with moderate to low prevalence and moderate to low incidence. Our estimator works reasonably well in three of the four parameterizations, and no other method can offer even a biased estimate of log incidence. A researcher who only uses PIR when it is appropriate for the behavior of interest can make quite effective use of our PLEs as long as they are careful to restrict their investigation to the three parameterizations where approximately unbiased estimates are reasonably obtained.
+While these ranges are restrictive, returning to Figure \ref{fig:PIR_RMSE} makes clear that the PLE are superior to the only alternative method in use. These estimators works reasonably well in three of the four parameterizations, and no other method can offer even a biased estimate of log incidence. In general, PIR is only appropriate for observing behaviors with moderate to low prevalence and moderate to low incidence. A researcher who only uses PIR when it is appropriate for the behavior of interest can make quite effective use of the PLEs as long as they are careful to attend to the potential for bias.
 
 <<PIR_sample_size, fig.width = 10, fig.height = 8, fig.pos = "tb", fig.cap="Minimum number of PIR intervals required to obtain PLEs with absolute bias less than given criteria.">>=
 
@@ -712,7 +712,7 @@ grid.draw(grob)
 @
 
 \subsection{Results: AIR}
-Figure \ref{fig:AIR_RMSE} displays the RMSEs for the MLEs and PLEs for AIR data across a range of $K$ for each parameterization. The MLEs perform reasonably well at a moderate number of intervals ($K = 60$) for all parameterizations but $logit(\phi)$. The RMSEs at a very large number of intervals ($K \geq 120$) for $logit(\phi)$ are much smaller than when the number of intervals is small to moderate, if still somewhat large. For both estimates of prevalence and incidence the PLEs are always at least as accurate as the MLEs, and often considerably more accurate when the the number of intervals is moderate to small ($K \leq 60$).
+Figure \ref{fig:AIR_RMSE} displays the RMSEs for the MLEs and PLEs for AIR data across a range of $K$ for each parameterization. The MLEs perform reasonably well at a moderate number of intervals ($K = 60$) for all parameterizations but $\logit(\phi)$. For both estimates of prevalence and incidence the PLEs are always at least as accurate as the MLEs, and often considerably more accurate when the the number of intervals is moderate to small ($K \leq 60$).
 
 <<AIR_RMSE, warning = FALSE, fig.width = 10, fig.height = 7, fig.pos = "tb", fig.cap="Distribution of root mean-squared error of MLEs and PLEs based on AIR data, across range of $0.05 \\leq \\phi \\leq 0.95$ and $0.05 \\leq \\zeta \\leq 0.50$. Values above 1.5 are not displayed. For $\\zeta$, the root mean-squared error is relative to the true value.">>=
 
@@ -726,7 +726,8 @@ ggplot(subset(results, proc == "AIR" & K %in% seq(30,150,30) & stat %in% c("phi"
 
 @
 
-Figure \ref{fig:Method_RMSE} displays the RMSEs for the PLEs for each of the recording methods and each of the parameterizations. For estimates of prevalence, both AIR and MTS are have superior accuracy to PIR. In general, the mean RMSE for MTS is slightly lower than AIR, but the ranges of the distributions are similar. For estimates of incidence, AIR is superior to both MTS and PIR, and MTS is superior to PIR. Even at a large number of intervals ($K \geq 120$), the RMSE and relative RMSE can range to very near to or above 1 respectively for both MTS and PIR. In contrast, while the AIR RMSEs cannot be called small, the range of the distributions is notably lower and also much narrower.
+Figure \ref{fig:Method_RMSE} displays the RMSEs for the PLEs for each of the recording methods and each of the parameterizations. For estimation of prevalence, both AIR and MTS are have superior accuracy to PIR. In general, the RMSE for MTS is slightly lower than AIR, but the ranges of the distributions are similar. For estimation of incidence, AIR provides much greater accuracy than MTS or PIR, particularly for moderate or large session lengths. Although MTS is superior to PIR, the RMSE and relative RMSE based on these methods is still fairly large in absolute terms, even for long observation sessions ($K \geq 120$).
+
 <<Method_RMSE, fig.width = 10, fig.height = 7, fig.cap="Distribution of root mean-squared error of PLE estimates based on AIR, MTS, and PIR data, across range of $0.05 \\leq \\phi \\leq 0.95$ and $0.05 \\leq \\zeta \\leq 0.50$. Values above 1.5 are not displayed. For zeta, the root mean-squared error for is relative to the true value.">>=
 
 ggplot(subset(results, estimator == "PLE" & K %in% seq(30,150,30) & stat %in% c("phi","logit(phi)","zeta","log(zeta)")),
@@ -740,9 +741,10 @@ ggplot(subset(results, estimator == "PLE" & K %in% seq(30,150,30) & stat %in% c(
 
 @
 
-Figure \ref{fig:AIR_sample_size} illustrates the minimum value of $K$ required for the PLEs based on AIR data to have low bias. For both of the natural parameterizations, as long as the incidence is not extremely low ($\zeta \geq 0.10c$), approximately unbiased estimates can be obtained at a very reasonable number of intervals ($K \geq 40$). For $logit(\phi)$, as long as prevalence is neither very low nor very high ($0.25 \leq \phi \leq 0.75$), approximately unbiased estimates can be obtained across the entire range of incidence. Even those portions of the parameter space requiring a large number of intervals ($80 \leq K \leq 100$) are relatively small for all three parameterizations. For $log(\zeta)$, only a moderate number of intervals ($K \leq 50$) is required to obtain approximately unbiased estimates across the entire range of the parameter space.
+Figure \ref{fig:AIR_sample_size} illustrates the minimum session length required for the PLEs based on AIR data to have low bias. For both of the natural parameterizations, as long as the incidence is not extremely low ($\zeta \geq 0.10c$), approximately unbiased estimates can be obtained even when the session length is moderate ($K \geq 40$). For $\logit(\phi)$, as long as prevalence is neither very low nor very high ($0.25 \leq \phi \leq 0.75$), approximately unbiased estimates can be obtained across the entire range of incidence. Furthermore, the portions of the parameter space requiring a longer session length ($80 \leq K \leq 100$) are relatively limited. For $\log(\zeta)$, only a moderate session length ($K \leq 50$) is required to obtain low-bias estimates across the entire range of the parameter space.
 
-In general, the AIR method performs very well at a moderate number of intervals. If a researcher was interested in the natural parameterization of both prevalence and incidence and a behavior they expected to see no less frequently than about once every 7 intervals on average ($\zeta \geq 0.15c$), they would never need to use more than a small number of intervals ($K = 30$) to obtain unbiased estimates. While it is true that MTS PLEs do require a slightly smaller number of intervals to obtain unbiased estimates of prevalence in a given area of the parameter space, the estimates of incidence when using AIR require many fewer intervals and have such superior RMSEs that any researcher interested in estimates of incidence should strongly consider AIR. For what seems a modest increase in effort, a researcher can see serious gains in terms of accurate, approximately unbiased estimates of both prevalence and incidence.
+In general, the AIR method performs very well at a moderate number of intervals. If a researcher was interested in the natural parameterization of both prevalence and incidence and a behavior that occurs with moderate incidence ($\zeta \geq 0.15c$), they could obtain low-bias estimates with sessions as short as $K = 30$. Although the MTS PLEs provide slightly more accurate estimates of prevalence for a given session length, the the estimates of incidence based on AIR are much more accurate. Furthermore, the advantages of using AIR could be further increased by using intervals shorter than $c = 2$. Thus, the theoretical advantages of this novel recording procedure warrant further investigation of its practical feasibility.
+
 <<AIR_sample_size, fig.width = 10, fig.height = 8, fig.pos = "tb", fig.cap="Minimum observation session length required to obtain PLEs based on AIR data with absolute bias less than given criteria.">>=
 
 d <- ggplot(subset(SS_min, proc == "AIR" & estimator == "PLE"),
@@ -786,7 +788,7 @@ MTmeans <- ddply(MTS, .variables= "Clip", summarize, benchmark = mean(Prevalence
 
 @
 
-This section demonstrates the use of the PLEs with empirical behavioral observation data. The data are drawn from \citet{Johnson2014}. 
+This section demonstrates the use of the PLEs with empirical behavioral observation data drawn from a generalizability study conducted by \citet{Johnson2014}. 
 In this study, trained raters watched six scripted, pre-recorded, ten-minute videos of a classroom during a lesson. 
 The script outlined when students in the classroom were to act academically engaged or to act disruptively. 
 For each video, academic engagement behavior was coded using three different recording systems: MTS, PIR, and WIR. 
@@ -794,7 +796,7 @@ All three systems used 15 s intervals, yielding a total of 40 intervals per scor
 Each video clip was independently coded by ten different raters using each of the recording systems. 
 
 The goal of our analysis is to estimate the prevalence and incidence of the behavior observed in each video clip, using the data from each of the three recording systems. 
-Because each video was scored separately using each system, comparing the PLEs obtained from each type of data allows us to characterize the relative strengths and weaknesses of the observation recording methods. The fact that each clip is scored by multiple raters also allows us to observe a source of measurement error that the Alternating Poisson Process model does capture: ``inter-rater'' error, due the human observers not perfectly following the scoring procedure or not perceiving the behavior stream with perfect accuracy.
+Because each video was scored separately using each system, comparing the PLEs obtained from each type of data allows us to characterize the relative strengths and weaknesses of the observation recording methods. The fact that each clip is scored by multiple raters captures a source of measurement error that the Alternating Poisson Process model does take into account: ``inter-rater'' error, due the human observers not perfectly following the scoring procedure or not perceiving the behavior stream with perfect accuracy.
 
 <<summary_prop, fig.width = 8, fig.height = 5, fig.pos = "tb", fig.cap="MTS, PIR, and WIR summary proportions for each rater, by clip. Horizontal dashed lines correspond to the average MTS summary proportions.">>=
 
@@ -876,8 +878,9 @@ The MTS confidence intervals cover the benchmark prevalence estimate in \Sexpr{s
 The PLEs based on PIR and WIR are in roughly in the same range as the estimates based on MTS data. 
 Thus, on a gross level, the PLEs appear to correct the over- or under-estimation of prevalence in the summary proportions. 
 The confidence intervals based on PIR data cover the benchmark prevalence estimate in \Sexpr{sum(covered$PIR)} out of the 60 total records, with most of the discrepancies occurring in clip A, where many of the the PIR records are at ceiling. 
-Similarly, the confidence intervals based on WIR data cover the benchmark prevalence estimate in \Sexpr{sum(covered$WIR)} out of 60 records. 
-However, the PIR and WIR estimates are generally considerably less precise than the MTS estimates, with much wider confidence intervals. The mean width of the MTS CIs is \Sexpr{round(mean_widths[1,2], 3)}, whereas the mean widths of the PIR and WIR CIs are \Sexpr{round(mean_widths[2,2], 3)} and \Sexpr{round(mean_widths[3,2], 3)} respectively.
+The confidence intervals based on WIR data cover the benchmark prevalence estimate in \Sexpr{sum(covered$WIR)} out of 60 records. 
+However, the PIR and WIR estimates are less precise than the MTS estimates, with slightly wider confidence intervals. 
+The mean width of the MTS CIs is \Sexpr{round(mean_widths[1,2], 3)}, whereas the mean widths of the PIR and WIR CIs are \Sexpr{round(mean_widths[2,2], 3)} and \Sexpr{round(mean_widths[3,2], 3)} respectively.
 
 <<johnson_zeta_est, fig.width = 8, fig.height = 5.5, fig.pos = "tb", fig.cap="PLE estimates of incidence versus proportion of intervals with behavior, for each recording system and each rater. Vertical whisker bars correspond to 95\\% confidence intervals for incidence, obtained using a parametric bootstrapping procedure.">>=
 
@@ -898,29 +901,30 @@ ggplot(phi, aes(x = Prevalence, y = est, ymin = CI_L, ymax = CI_U,
 Figure \ref{fig:johnson_zeta_est} displays the penalized likelihood estimates of incidence for each rater and each clip, again plotted against the raw proportion of intervals. Note that the vertical axis of this plot is on the log scale. 
 In clips A through E, the estimates of the incidence of academic engagement are very high, suggesting that the student cycled rapidly between episodes of engagement and disruption.
 However, based on the simulation evidence presented in the previous section, we do not have great confidence in these estimates.
-For the moderate sample size of $K = 40$, none of the recording methods provide reasonable estimates of incidence for behaviors with high prevalence ($\phi > 0.5$) and high incidence ($\zeta > 0.5$). In contrast, the estimates of incidence in clip F are more moderate, suggesting bouts of engagement occurring about every 4 to 7 intervals, probably sustained for a moderate period of time based on the prevalence estimates. While the PIR and WIR estimates for Clip F are probably not trustworthy, many of the MTS estimates might be approximately unbiased. In contrast to the prevalence CIs, the 
+For the moderate sample size of $K = 40$, none of the recording methods provide reasonable estimates of incidence for behaviors with high prevalence ($\phi > 0.5$) and high incidence ($\zeta > 0.5$). In clip F, the estimates of incidence are more moderate, suggesting bouts of engagement occurring about every 4 to 8 intervals (1 to 2 min). While the PIR and WIR estimates for Clip F are probably not trustworthy, simulation evidence suggests that the MTS estimates might have relatively low bias. 
+
 Unfortunately, we do not have any benchmark estimate of the true incidence of academic engagement in each of the clips. 
 Lacking a credible point of comparison, we cannot directly evaluate the accuracy of the incidence estimates. 
-We note only that the estimates from all three systems appear to be in rough agreement. However, we do know that the MTS PLEs have the closest agreement to the MTS proportion estimates, that the CIs for the MTS prevalence estimates are generally tighter, and can compare figure \ref{fig:MTS_sample_size} and figure \ref{fig:PIR_sample_size} to see that MTS general requires fewer intervals for approximately unbiased estimates. If we had to provide a general recommendation of one of the three more "traditional" methods of interval recording, MTS recording using the PLEs appears to be the better choice. \todo[color=green!40]{I know this moderately contradicts your previous point about general agreement but it seems to me that the evidence has sort of stacked up in favor of MTS if we're ignoring AIR for the moment}
-\todo[inline]{General discussion points?}
+However, the MTS PLEs have the closest agreement to the MTS proportion estimates and the CIs for the MTS prevalence estimates are generally tighter. 
+Furthermore, the simulation results from Figures \ref{fig:MTS_sample_size} \ref{fig:PIR_sample_size} indicates that MTS generally requires fewer intervals for low-bias estimates. 
+Taken together, this evidence suggests that MTS is the best choice among the three conventional intermittent recording procedures. 
 
 \section{Discussion}
 \label{sec:discussion}
 
-In this paper, we have considered how to estimate the prevalence and incidence of a state behavior from data collected using conventional intermittent observation recording systems, including momentary time sampling, partial interval recording, and whole interval recording. Following earlier work by \citet{Brown1977estimation} on MTS, we used an Alternating Poisson Process to model the behavior stream as perceived by the observer, from which models for PIR, WIR, and AIR could be derived. For estimating the model parameters, simulation evidence indicated that penalized likelihood methods with generic, weak priors generally outperformed maximum likelihood methods--often dramatically so. For PIR data, penalized likelihood estimates of prevalence provided much more accurate estimates than the naiv\"e summary proportion, which is currently widely used.
+In this paper, we have considered how to estimate the prevalence and incidence of a state behavior from data collected using conventional intermittent observation recording systems, including momentary time sampling, partial interval recording, and whole interval recording. Following earlier work by \citet{Brown1977estimation} on MTS, we used an Alternating Poisson Process to model the behavior stream as perceived by the observer, from which models for PIR and WIR data can be derived. For estimating the model parameters, simulation evidence indicated that penalized likelihood methods with generic, weak priors generally outperformed maximum likelihood methods--often dramatically so. For PIR data, penalized likelihood estimates of prevalence provided much more accurate estimates than the naiv\"e summary proportion, which is currently widely used.
 
 We have also described a novel recording procedure, augmented interval recording, that involves combining MTS, PIR, and WIR. For a given period of observation, and using intervals twice the length of other procedures, AIR provides estimates of prevalence that are only slightly less accurate than estimates based on MTS, while also providing estimates of incidence that are substantially more accurate than estimates based on any other procedure. Of course, at present these advantages are only theoretical. To determine whether AIR offers any advantage in practice, its feasibility in real-life research contexts will need to be assessed.  
 
-Across all of the recording procedures that we have considered, the foremost limitation of the models and estimation techniques that we have studied is the strength of the assumptions entailed by the Alternating Poisson Process model for the behavior stream. The model posits that the individual episodes of behavior and spans of time in between episodes are exponentially distributed. Whether these distributional assumptions are reasonable--and for what classes of behavior--is an important question requiring further empirical research. Addressing it will likely require measuring the behavior of a large sample of participants using intensive, continuous recording techniques. 
-Another related avenue of further research is to examine the extent to which the proposed estimation techniques are robust to violations of the distributional assumptions (e.g., assuming that event durations follow a gamma distribution that has lower variance than the exponential). It may well be that the robustness of the PLEs depends on which system is used to record the data, and whether prevalence or incidence is of primary interest.
+Across all of the recording procedures that we have considered, the foremost limitation of the proposed models and estimation techniques is the strength of the assumptions entailed by the Alternating Poisson Process model for the behavior stream. The model posits that the individual episodes of behavior and spans of time in between episodes are exponentially distributed. Whether these distributional assumptions are reasonable--and for what classes of behavior--is an important question requiring further empirical research. Addressing it will likely require measuring the behavior of a large sample of participants using intensive, continuous recording techniques. 
+Another related avenue of further research is to examine the extent to which the proposed estimation techniques are robust to violations of the distributional assumptions (e.g., assuming that event durations follow a gamma distribution that has lower variance than the exponential). 
+It may well be that the robustness of the PLEs depends on which system is used to record the data, and whether prevalence or incidence is of primary interest.
 
-Several other limitations of these models should also be acknowledged. Our approach has treated the recording procedures themselves as essentially mechanical procedures that can be applied without human error, yet in practice the procedures are not perfectly reliable. Indeed, the data from \citet{Johnson2014} displayed a surprisingly high level of inter-rater variability. The model we have considered could be seen as implicitly accommodating rater error by allowing that the Alternating Poisson Process describes the observer's \textit{perception} of the behavior stream, rather than the true behavior stream. How to extend the model in order to more explicitly account for human error in the recording process remains an open question for further research.
+Several other limitations of these models should also be acknowledged. Our approach has treated the recording procedures themselves as essentially mechanical procedures that can be applied without human error, yet in practice the procedures are not perfectly reliable--as evidenced by the high level of inter-rater variability in the \citet{Johnson2014} data. Arguably, the model we have considered could be interpretted as implicitly accommodating rater error by allowing that the Alternating Poisson Process describes the observer's \textit{perception} of the behavior stream, rather than the true behavior stream. However, a more explicit approach to accounting for human error in the recording process would be more useful. How to extend the model in this respect remains an open question for further research.
 
 Another limitation of the models is that they are limited to describing measurement error from a single observation session. In practice, systematic behavioral observation data is often collected on a single participant across many sessions (as in a single-case study) or across many participants (as in a between-subjects experiment). In either setting, it would be useful to embed the measurement model that we have proposed in a generalized linear modeling framework, which could be used to describe changes in prevalence and incidence across time, or in a random-effects framework, which could be used to describe between-subjects variation in the characteristics of behavior streams.
 
-Despite these limitations, the models and estimation methods that we have proposed remain useful. For MTS data, penalized likelihood provides a means to estimate incidence as well as to assess the extent of measurement error in the estimate of prevalence. For PIR data, the penalized likelihood estimates of prevalence represent an improvement over the current standard approach, which is to simply ignore the bias in the summary proportion. 
-
-Though not the focus of the present paper, the models that we have described can also be applied to develop better psychometric guidance for behavioral observation data.\todo{Discuss Lane \& Ledford (2014) and related work.} Through further mathematical analysis or though computer simulation, the models that we have presented could be used to study how choices regarding recording procedures, interval lengths, rest times, and observation session lengths influence the precision of behavioral measurements. Guidance regarding these aspects of study design would be useful to applied researchers designing single-case experiments or between-subjects trials.
+Despite these limitations, the models and estimation methods that we have proposed are nonetheless useful. For MTS data, penalized likelihood provides a means to estimate incidence as well as to assess the extent of measurement error in the estimate of prevalence. For PIR data, the penalized likelihood estimates of prevalence represent an improvement over the current standard approach, which is to simply ignore the bias in the summary proportion. Though not the focus of the present paper, the models that we have described can also be applied to develop better psychometric guidance for behavioral observation data. Through further mathematical analysis or though computer simulation, the models that we have presented could be used to study how choices regarding recording procedures, interval lengths, rest times, and observation session lengths influence the precision of behavioral measurements. Guidance regarding these aspects of study design would be useful to applied researchers designing single-case experiments or between-subjects trials.
 
 \bibliographystyle{apacite}
 \bibliography{\bibfile}
