@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.1.2)  21 MAR 2015 13:05
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  23 MAR 2015 14:21
 entering extended mode
 **PIR-APP.tex
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.tex
@@ -6,10 +6,10 @@ LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
 croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
-lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+lician, german, german-x-2012-05-30, greek, gujarati, hindi, hungarian, iceland
 ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
  lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
-german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
@@ -32,7 +32,7 @@ File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\etoolbox\etoolbox.sty
 Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\misc\etex.sty"
@@ -146,7 +146,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen111
 \Gin@req@width=\dimen112
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\booktabs\booktabs.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\booktabs\booktabs.sty
 Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \heavyrulewidth=\dimen113
 \lightrulewidth=\dimen114
@@ -166,8 +166,8 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@lastruleclass=\count96
 \@thisrulewidth=\dimen125
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\threeparttable\threeparttable.sty
-"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\threeparttable\threepart
+table.sty
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box26
 )
@@ -181,10 +181,11 @@ Package: threeparttable 2003/06/13  v 3.0
 \e@level@four@skip=\skip50
 \b@level@five@skip=\skip51
 \e@level@five@skip=\skip52
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption.sty"
+
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption.sty
 Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\caption3.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen126
@@ -214,7 +215,7 @@ LaTeX Info: Redefining \bm on input line 204.
 )
 \c@appendix=\count99
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fancyhdr\fancyhdr.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\fancyhdr\fancyhdr.sty
 \fancy@headwidth=\skip56
 \f@ncyO@elh=\skip57
 \f@ncyO@erh=\skip58
@@ -225,7 +226,7 @@ LaTeX Info: Redefining \bm on input line 204.
 \f@ncyO@olf=\skip63
 \f@ncyO@orf=\skip64
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\endfloat\endfloat.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\endfloat\endfloat.sty
 Package: endfloat 2011/12/25 v2.5d LaTeX2e package puts figures and tables at e
 nd (jdm)
 \c@posttable=\count100
@@ -262,7 +263,7 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\alltt.sty"
 Package: alltt 1997/06/16 v2.0g defines alltt environment
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\apacite\apacite.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\apacite\apacite.sty
 Package: apacite 2013/07/21 v6.03 APA citation
 \c@BibCnt=\count105
 \bibleftmargin=\skip66
@@ -271,7 +272,7 @@ Package: apacite 2013/07/21 v6.03 APA citation
 \bibitemsep=\skip69
 \biblabelsep=\skip70
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip71
 \bibsep=\skip72
@@ -370,7 +371,7 @@ LaTeX Info: Redefining \em on input line 420.
 LaTeX Info: The control sequence `\[' is already robust on input line 471.
 LaTeX Info: The control sequence `\]' is already robust on input line 472.
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\caption\subcaption.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\subcaption.sty
 Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 \c@subfigure=\count120
 \c@subtable=\count121
@@ -386,7 +387,7 @@ Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\multirow\multirow.sty"
 \bigstrutjot=\dimen148
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\rotating\rotating.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\rotating\rotating.sty
 Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
@@ -431,7 +432,7 @@ LaTeX Info: Redefining \addtolength on input line 77.
 Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
 ))
 changes-option 'draft'
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\xcolor\xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
@@ -765,7 +766,7 @@ File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.0 (rcs-revision 1.7)
 )
 \c@@todonotes@numberoftodonotes=\count152
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\upquote\upquote.sty"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\upquote\upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 
@@ -910,7 +911,7 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count153
 \scratchdimen=\dimen200
@@ -932,13 +933,13 @@ Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@maskedRefs=\count159
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\apacite\english.apc"
+(C:\Users\jep2963\AppData\Roaming\MiKTeX\2.9\tex\latex\apacite\english.apc
 File: english.apc 2013/07/21 v6.03 apacite language file
 LaTeX Info: Redefining \BPBI on input line 129.
 LaTeX Info: Redefining \BHBI on input line 130.
 )
-ABD: EveryShipout initializing macros [1{C:/ProgramData/MiKTeX/2.9/pdftex/confi
-g/pdftex.map}
+ABD: EveryShipout initializing macros [1{C:/Users/jep2963/AppData/Local/MiKTeX/
+2.9/pdftex/config/pdftex.map}
 
 ] [2] [3] [4] [5] [6]
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 176.
@@ -986,7 +987,7 @@ Overfull \hbox (17.85037pt too wide) in paragraph at lines 293--293
 []  
  []
 
-[11] [12] [13] <AIR_flowchart.pdf, id=60, 722.7pt x 542.025pt>
+[11] [12] [13] <AIR_flowchart.pdf, id=59, 722.7pt x 542.025pt>
 File: AIR_flowchart.pdf Graphic file (type pdf)
 
 <use AIR_flowchart.pdf>
@@ -997,7 +998,7 @@ Package pdftex.def Info: AIR_flowchart.pdf used on input line 383.
 
 Package xcolor Warning: Incompatible color definition on input line 523.
 
-<fig/MTS_RMSE.pdf, id=98, 722.7pt x 505.89pt>
+<fig/MTS_RMSE.pdf, id=97, 722.7pt x 505.89pt>
 File: fig/MTS_RMSE.pdf Graphic file (type pdf)
  <use fig/MTS_RMSE.pdf>
 Package pdftex.def Info: fig/MTS_RMSE.pdf used on input line 526.
@@ -1006,7 +1007,7 @@ Package pdftex.def Info: fig/MTS_RMSE.pdf used on input line 526.
 
 Package xcolor Warning: Incompatible color definition on input line 545.
 
-<fig/MTS_sample_size.pdf, id=99, 722.7pt x 578.16pt>
+<fig/MTS_sample_size.pdf, id=98, 722.7pt x 578.16pt>
 File: fig/MTS_sample_size.pdf Graphic file (type pdf)
 
 <use fig/MTS_sample_size.pdf>
@@ -1016,7 +1017,7 @@ Package pdftex.def Info: fig/MTS_sample_size.pdf used on input line 548.
 
 Package xcolor Warning: Incompatible color definition on input line 567.
 
-<fig/PIR_RMSE.pdf, id=103, 722.7pt x 505.89pt>
+<fig/PIR_RMSE.pdf, id=102, 722.7pt x 505.89pt>
 File: fig/PIR_RMSE.pdf Graphic file (type pdf)
  <use fig/PIR_RMSE.pdf>
 Package pdftex.def Info: fig/PIR_RMSE.pdf used on input line 570.
@@ -1027,7 +1028,7 @@ nts/R/PIR-APP/fig/PIR_RMSE.pdf>]
 
 Package xcolor Warning: Incompatible color definition on input line 590.
 
-<fig/PIR_sample_size.pdf, id=135, 722.7pt x 578.16pt>
+<fig/PIR_sample_size.pdf, id=134, 722.7pt x 578.16pt>
 File: fig/PIR_sample_size.pdf Graphic file (type pdf)
 
 <use fig/PIR_sample_size.pdf>
@@ -1037,7 +1038,7 @@ Package pdftex.def Info: fig/PIR_sample_size.pdf used on input line 593.
 
 Package xcolor Warning: Incompatible color definition on input line 607.
 
-<fig/AIR_RMSE.pdf, id=136, 722.7pt x 505.89pt>
+<fig/AIR_RMSE.pdf, id=135, 722.7pt x 505.89pt>
 File: fig/AIR_RMSE.pdf Graphic file (type pdf)
  <use fig/AIR_RMSE.pdf>
 Package pdftex.def Info: fig/AIR_RMSE.pdf used on input line 610.
@@ -1050,7 +1051,7 @@ Package xcolor Warning: Incompatible color definition on input line 623.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `htb') on input line 623.
 
-<fig/Method_RMSE.pdf, id=137, 722.7pt x 505.89pt>
+<fig/Method_RMSE.pdf, id=136, 722.7pt x 505.89pt>
 File: fig/Method_RMSE.pdf Graphic file (type pdf)
  <use fig/Method_RMSE.pdf>
 Package pdftex.def Info: fig/Method_RMSE.pdf used on input line 626.
@@ -1060,7 +1061,7 @@ Package pdftex.def Info: fig/Method_RMSE.pdf used on input line 626.
 
 Package xcolor Warning: Incompatible color definition on input line 641.
 
-<fig/AIR_sample_size.pdf, id=153, 722.7pt x 578.16pt>
+<fig/AIR_sample_size.pdf, id=152, 722.7pt x 578.16pt>
 File: fig/AIR_sample_size.pdf Graphic file (type pdf)
 
 <use fig/AIR_sample_size.pdf>
@@ -1071,7 +1072,7 @@ Package pdftex.def Info: fig/AIR_sample_size.pdf used on input line 644.
 
 Package xcolor Warning: Incompatible color definition on input line 670.
 
-<fig/summary_prop.pdf, id=172, 578.16pt x 361.35pt>
+<fig/summary_prop.pdf, id=171, 578.16pt x 361.35pt>
 File: fig/summary_prop.pdf Graphic file (type pdf)
  <use fig/summary_prop.pdf>
 Package pdftex.def Info: fig/summary_prop.pdf used on input line 673.
@@ -1081,7 +1082,7 @@ Package pdftex.def Info: fig/summary_prop.pdf used on input line 673.
 
 Package xcolor Warning: Incompatible color definition on input line 691.
 
-<fig/johnson_phi_est.pdf, id=185, 578.16pt x 397.485pt>
+<fig/johnson_phi_est.pdf, id=184, 578.16pt x 397.485pt>
 File: fig/johnson_phi_est.pdf Graphic file (type pdf)
 
 <use fig/johnson_phi_est.pdf>
@@ -1092,7 +1093,7 @@ Package pdftex.def Info: fig/johnson_phi_est.pdf used on input line 694.
 
 Package xcolor Warning: Incompatible color definition on input line 717.
 
-<fig/johnson_zeta_est.pdf, id=204, 578.16pt x 397.485pt>
+<fig/johnson_zeta_est.pdf, id=203, 578.16pt x 397.485pt>
 File: fig/johnson_zeta_est.pdf Graphic file (type pdf)
 
 <use fig/johnson_zeta_est.pdf>
@@ -1118,13 +1119,13 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 (C:\Users\jep2963\Documents\R\PIR-APP\PIR-APP.aux) ) 
 Here is how much of TeX's memory you used:
- 17619 strings out of 493921
- 325416 string characters out of 3144871
- 371172 words of memory out of 3000000
- 20492 multiletter control sequences out of 15000+200000
+ 17557 strings out of 493921
+ 324458 string characters out of 3144871
+ 370091 words of memory out of 3000000
+ 20430 multiletter control sequences out of 15000+200000
  52959 words of font info for 50 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 62i,12n,76p,1157b,707s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,12n,56p,1157b,459s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiK
 TeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/e
 nc/dvips/lm/lm-rm.enc}{C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-
@@ -1141,9 +1142,9 @@ TeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
 ts/type1/public/lm/lmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pu
 blic/lm/lmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmsy
 8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt12.pfb>
-Output written on PIR-APP.pdf (45 pages, 647750 bytes).
+Output written on PIR-APP.pdf (45 pages, 635098 bytes).
 PDF statistics:
- 303 PDF objects out of 1000 (max. 8388607)
+ 301 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  74 words of extra memory for PDF output out of 10000 (max. 10000000)
 

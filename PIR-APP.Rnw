@@ -146,7 +146,7 @@ We will denote prevalence by $\phi$, where $0 < \phi < 1$, and incidence by $\ze
 This assumption implies that there is a constant marginal probability of observing an event at any given point in time.
 
 The Alternating Poisson Process is a special case of a continuous time Markov chain, and thus has the Markov property that the future evolution of the behavior depends only on the current state, but not on the past history of the behavior. 
-More precisely, the probability that a behavior will be occurring $t$ seconds into the future is independent of the state of the behavior for $0 \leq r < s$: \todo[color=green!40]{What r stands for in this inequality (and below as well) is a little bit opaque to me. Might just be something I need explained to me}
+More precisely, the probability that a behavior will be occurring $t$ seconds into the future is independent of the state of the behavior for $0 \leq r < s$: 
 \begin{equation}
 \label{eq:Markov}
 \Pr\left[Z(s + t) = 1 \left| Z(s) = a, Z(r): 0 \leq r < s \right.\right] = \Pr\left[ Z(s + t) = 1 \left| Z(s) = a \right.\right]
