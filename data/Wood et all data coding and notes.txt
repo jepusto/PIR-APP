@@ -1,0 +1,14 @@
+Coding:
+There are columns for Classroom ID, Child ID, Measurement Type and u1-u67
+
+For Child ID, I assumed the number in parenthesis was the child ID. If none was given (sometimes a description was used) I numbered them in sequential order a they appeared in the document, starting with 1, and being certain that each child within a classroom had a unique ID (i.e. there was more than one child with ID #1, but not more than one #1 in a classroom). Missing data in a response string were coded with a ".", and any intervals after the observation was complete were coded with a -1 for ease of extracting the valid responses later. For instance, an observation with 60 intervals would be followed by seven instances of "-1".
+
+
+Notes:
+On 124-6-1 ID #1 (lime green shirt) there's definite rater error there with disagreement about which interval the missing data was in
+
+I assumed the last two in 133-6-1 were the same individual despite being described differently "big sister" and "black t-shirt" because all other data was paired
+
+On 75-4-1 #13 there is some disagreement on interval 48 - the WIR has a missing while the PIR has a 1 - perhaps there was five seconds of on-camera time that allowed them to mark the interval as having the behavior whereas there was some uncertainty about off-camera behavior for WIR?
+
+On 102-4-2 #4 I marked interval 22 as missing because it had been erased and changed but i couldn't tell which was the original and which was the replacement
