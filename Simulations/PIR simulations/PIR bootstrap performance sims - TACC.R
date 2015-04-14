@@ -1,6 +1,6 @@
 rm(list = ls())
 
-load("MTS sample size sims BS.Rdata")
+load("PIR sample size sims BS.Rdata")
 phiquant <- subset(results, stat == "phi")
 zetaquant <- subset(results, stat == "zeta")
 names(phiquant)[8:14] <- paste0("p", names(phiquant)[8:14])
@@ -108,7 +108,9 @@ theta <- c(10, Inf)
 set.seed(20150317)
 
 params <- expand.grid(phi = phi, zeta = zeta, K_intervals = K_intervals, k_priors = k_priors, theta = theta)
+
 params <- subset(params, (k_priors == 1 & theta == Inf) | (k_priors == 1.5 & theta == 10))
+params <- params[sample(nrow(params)),]
 params$seed <- round(runif(nrow(params)) * 2^30)
 nrow(params)
 
@@ -141,8 +143,10 @@ clusterEvalQ(cluster, library(fields))
 clusterEvalQ(cluster, library(compiler))
 clusterEvalQ(cluster, enableJIT(3))
 
-system.time(results <- mdply(params, .fun = runSim, iterations = 10000, c = 1, rest_length = 0, .parallel = TRUE))
+system.time(BSresults <- mdply(params, .fun = runSim, iterations = 10000, c = 1, rest_length = 0, .parallel = TRUE))
 stopCluster(cluster)
 
-save(results, file = "PIR sample size sims.Rdata")
+save(BSresults, file = "PIR sample size sims.Rdata")
+
+
 
