@@ -146,7 +146,7 @@ clusterEvalQ(cluster, enableJIT(3))
 system.time(BSresults <- mdply(params, .fun = runSim, iterations = 10000, c = 1, rest_length = 0, .parallel = TRUE))
 stopCluster(cluster)
 
-save(BSresults, file = "PIR sample size sims.Rdata")
+save(BSresults, file = "PIR bootstrap results.Rdata")
 
 
 

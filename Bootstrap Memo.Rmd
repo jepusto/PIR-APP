@@ -1,0 +1,174 @@
+---
+title: "MLE and PLE parametric bootstrapped confidence interval performance"
+author: "Daniel M. Swan"
+date: "Monday, April 13, 2015"
+output: pdf_document
+---
+
+This document reviews the performance of the parametric bootstrapped confidence intervals of the MLE and PLEs in the AERA conference paper.
+
+#Confidence Interval Performance Criteria
+
+For the purposes of this document I will be using the same criteria as we used in Pustejovsky and Swan (2015). For a nominal 95% confidence interval with 10,000 bootstrap replicates, 94-96% will is interpreted as accurate, 92.5-97.5% as acceptable, and rates outside those ranges are poor. The conditions of the bootstrap simuation are the same as those in Table 3 of Pustejovsky, Swan & Johnson (2015). 
+
+
+#MTS - MLE and PLE
+
+```{r, echo = FALSE}
+#MTS data prep
+library(ggplot2)
+library(plyr)
+
+load("Simulations/MTS simulations/MTS bootstrap performance.Rdata")
+
+MTS_results <- BSresults
+
+coverage_smoother <- function(results){
+  pcoverage_model <- loess(pcoverage ~ phi + zeta, data = results, span = 0.25)
+  zcoverage_model <- loess(zcoverage ~ phi + zeta, data = results, span = 0.25)
+  pcoverage_smooth <- predict(pcoverage_model, newdata = results)
+  zcoverage_smooth <- predict(zcoverage_model, newdata = results)
+  
+  return(cbind(results, pcoverage_smooth, zcoverage_smooth))
+}
+
+MTS_coverage <- ddply(MTS_results, .fun = coverage_smoother, .(K_intervals, k_priors, theta))
+MTS_coverage2 <- MTS_coverage
+MTS_coverage2$phi <- 1 - MTS_coverage2$phi
+MTS_coverage <- rbind(MTS_coverage, MTS_coverage2)
+MTS_coverage$pcoverage_smooth <- ifelse(MTS_coverage$pcoverage_smooth > 1, 1, MTS_coverage$pcoverage_smooth)
+
+breaks_coverage <- c(0, 0.925, 0.94, 0.96, 0.975, 1)
+labels_coverage <- c("0-92.5%", "92.5-94%", "94-96%", "96-97.5%", "97.5-100%")
+MTS_coverage$pcoverage_cut <- cut(MTS_coverage$pcoverage, breaks = breaks_coverage,
+                              labels = labels_coverage, include.lowest = TRUE)
+MTS_coverage$pcoverage_cut_smooth <- cut(MTS_coverage$pcoverage_smooth, breaks = breaks_coverage,
+                                     labels = labels_coverage, include.lowest = TRUE)
+
+MTS_coverage$zcoverage_smooth <- ifelse(MTS_coverage$zcoverage_smooth > 1, 1, MTS_coverage$zcoverage_smooth)
+
+MTS_coverage$zcoverage_cut <- cut(MTS_coverage$zcoverage, breaks = breaks_coverage,
+                              labels = labels_coverage, include.lowest = TRUE)
+MTS_coverage$zcoverage_cut_smooth <- cut(MTS_coverage$zcoverage_smooth, breaks = breaks_coverage,
+                                     labels = labels_coverage, include.lowest = TRUE)
+```
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = pcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(MTS_coverage, theta == Inf & K_intervals >= 50)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
+```
+
+The first figure displays the results of the MTS MLE confidence intervals for prevalence. Plots with K < 50 are excluded because the entire parameter space has poor coverage. To get even acceptable confidence intervals in even a modest portion of the parameter space requires a very large number of intervals, (K >= 100). In that range or above, acceptable confidence intervals can be found when prevalence is neither very high nor very low (0.20 <= phi <= 0.80) and incidence that is neither high nor low (0.15c <= zeta <= .25c). To get accurate results in even a very small portion of the parameter space requires a still larger number of intervals (K >= 130). At K >= 130, acceptable to accurate confidence intervals can be found in a slightly larger range, 0.10 <= phi <= 0.90 and 0.15c <= zeta <= 0.35c.
+
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = pcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(MTS_coverage, theta == 10)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+```
+
+The second figure displays the results of the MTS PLE confidence interval for prevalence. Accurate confidence intervals can be obtained for a modest portion of the parameter space when the number of intervals is as low as K >= 50. Accurate CIs can be obtained when incidence is moderate to high (0.25c >= zeta) and prevalence is neither very high nor very low (0.15 <= phi <= 0.85). At a very large number of intervals, K > 130, accurate confidence intervals can be obtained across nearly the entire parameter space as long as incidence is not too low, 0.15c >= zeta and 0.10 <= phi <= 0.90.
+
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = zcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(MTS_coverage, theta == Inf & K_intervals >= 40)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+```
+
+The third figure displays the results of the MTS MLE confidence intervals for incidence. Plots for K < 40 are excluded because all or nearly all of the parameter space has poor coverage when the number of intervals are that low. A moderately large number of intervals are required to have at least acceptable coverage in a small portion of the parameter space. At K = 70, at least acceptable perfromance can be found when incidence is neither high nor low (0.15c <= zeta <= 0.35c) and prevalence is moderate (0.30 <= phi <= 0.70). At K = 120, accurate confidence intervals can be found in a slightly larger portion of the parameter space, 0.15c <= zeta <= 0.40c and 0.25 <= phi <= 0.75.
+
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = zcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(MTS_coverage, theta == 10)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+```
+
+The fourth dislays the results of the MTS PLE confidence intervals for incidence. A moderately large number of intervals (K = 80) is required for at least acceptable confidence intervals in a large portion of the parameter space. When incidence is neither very high nor very low (0.05c <= zeta <= 0.45c) and prevalence is moderate (0.25 <= phi <= 0.75) at least acceptable confidence intervals can be obtained. Unlike the other three, increasing the number of intervals past this point does not appreciably increase the portion of the parameter space where acceptable or accurate confidence intervals may be obtained.
+
+#AIR - MLE and PLE
+
+```{r, echo = FALSE}
+load("Simulations/AIR simulations/AIR bootstrap performance.Rdata")
+
+AIR_results <- BSresults
+
+AIRcoverage <- ddply(AIR_results, .fun = coverage_smoother, .(K_intervals, k_priors, theta))
+
+AIRcoverage2 <- AIRcoverage
+AIRcoverage2$phi <- 1- AIRcoverage2$phi
+AIRcoverage <- rbind(AIRcoverage, AIRcoverage2)
+
+AIRcoverage$pcoverage_smooth <- ifelse(AIRcoverage$pcoverage_smooth > 1, 1, AIRcoverage$pcoverage_smooth)
+
+AIRcoverage$pcoverage_cut <- cut(AIRcoverage$pcoverage, breaks = breaks_coverage,
+                              labels = labels_coverage, include.lowest = TRUE)
+AIRcoverage$pcoverage_cut_smooth <- cut(AIRcoverage$pcoverage_smooth, breaks = breaks_coverage,
+                                     labels = labels_coverage, include.lowest = TRUE)
+
+AIRcoverage$zcoverage_smooth <- ifelse(AIRcoverage$zcoverage_smooth > 1, 1, AIRcoverage$zcoverage_smooth)
+
+AIRcoverage$zcoverage_cut <- cut(AIRcoverage$zcoverage, breaks = breaks_coverage,
+                              labels = labels_coverage, include.lowest = TRUE)
+AIRcoverage$zcoverage_cut_smooth <- cut(AIRcoverage$zcoverage_smooth, breaks = breaks_coverage,
+                                     labels = labels_coverage, include.lowest = TRUE)
+```
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = pcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(AIRcoverage, theta == Inf & K_intervals >= 30)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+```
+The fifth figure displays the performance of the AIR MLE confidence interval for prevalence. Plots of K < 30 are not displayed due to poor performance across the entire parameter space. 
+
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = pcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(AIRcoverage, theta == 10)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+```
+
+
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = zcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(AIRcoverage, theta == Inf)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1))
+```
