@@ -58,13 +58,15 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
       data = subset(MTS_coverage, theta == Inf & K_intervals >= 50)) +
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
-  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
   scale_color_brewer(type = "seq") + 
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
 
-The first figure displays the results of the MTS MLE confidence intervals for prevalence. Plots with K < 50 are excluded because the entire parameter space has poor coverage. To get even acceptable confidence intervals in even a modest portion of the parameter space requires a very large number of intervals, (K >= 100). In that range or above, acceptable confidence intervals can be found when prevalence is neither very high nor very low (0.20 <= phi <= 0.80) and incidence that is neither high nor low (0.15c <= zeta <= .25c). To get accurate results in even a very small portion of the parameter space requires a still larger number of intervals (K >= 130). At K >= 130, acceptable to accurate confidence intervals can be found in a slightly larger range, 0.10 <= phi <= 0.90 and 0.15c <= zeta <= 0.35c.
+The first figure displays the results of the MTS MLE confidence intervals for prevalence.Plots with K < 50 are excluded because the entire parameter space has poor coverage. One thing to note is that at K =  110, the results are somewhat anomolous. I have no clear sense of why that might be. More general results follow.
+
+To get even acceptable confidence intervals in even a modest portion of the parameter space requires a very large number of intervals, (K >= 90). In that range or above, acceptably liberal confidence intervals can be found when prevalence spans most of the possible values (0.10 <= phi <= 0.90) and incidence that is neither high nor low (0.15c <= zeta <= .25c). To get accurate results in even a very small portion of the parameter space requires a still larger number of intervals (K >= 130). At K >= 130, acceptable to accurate confidence intervals can be found across the same range of prevalence (0.10 <= phi <= 0.90) and a slightly wider range of incidence (0.15c <= zeta <= 0.35c).
 
 ```{r, echo = FALSE}
 qplot(phi, zeta, fill = pcoverage_cut_smooth, 
@@ -72,13 +74,14 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
       data = subset(MTS_coverage, theta == 10)) +
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
-  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
   scale_color_brewer(type = "seq") + 
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
-  theme(axis.text.x = element_text(angle=45, hjust = 1))
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
 
-The second figure displays the results of the MTS PLE confidence interval for prevalence. Accurate confidence intervals can be obtained for a modest portion of the parameter space when the number of intervals is as low as K >= 50. Accurate CIs can be obtained when incidence is moderate to high (0.25c >= zeta) and prevalence is neither very high nor very low (0.15 <= phi <= 0.85). At a very large number of intervals, K > 130, accurate confidence intervals can be obtained across nearly the entire parameter space as long as incidence is not too low, 0.15c >= zeta and 0.10 <= phi <= 0.90.
+The second figure displays the results of the MTS PLE confidence interval for prevalence. Accurate confidence intervals can be obtained for a modest portion of the parameter space when the number of intervals is as low as K = 50. Accurate CIs can be obtained when incidence is moderate to high (0.30c >= zeta) and prevalence is neither very high nor very low (0.10 <= phi <= 0.90). At a very large number of intervals, K > 130, accurate confidence intervals can be obtained across nearly the entire parameter space as long as incidence is not too low (0.20c >= zeta) dropping even lower (0.10c >= zeta) as the number of intervals rises to K = 150.
+
 
 ```{r, echo = FALSE}
 qplot(phi, zeta, fill = zcoverage_cut_smooth, 
@@ -86,13 +89,13 @@ qplot(phi, zeta, fill = zcoverage_cut_smooth,
       data = subset(MTS_coverage, theta == Inf & K_intervals >= 40)) +
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
-  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
   scale_color_brewer(type = "seq") + 
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
-  theme(axis.text.x = element_text(angle=45, hjust = 1))
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
 
-The third figure displays the results of the MTS MLE confidence intervals for incidence. Plots for K < 40 are excluded because all or nearly all of the parameter space has poor coverage when the number of intervals are that low. A moderately large number of intervals are required to have at least acceptable coverage in a small portion of the parameter space. At K = 70, at least acceptable perfromance can be found when incidence is neither high nor low (0.15c <= zeta <= 0.35c) and prevalence is moderate (0.30 <= phi <= 0.70). At K = 120, accurate confidence intervals can be found in a slightly larger portion of the parameter space, 0.15c <= zeta <= 0.40c and 0.25 <= phi <= 0.75.
+The third figure displays the results of the MTS MLE confidence intervals for incidence. Plots for K < 40 are excluded because all or nearly all of the parameter space has poor coverage when the number of intervals are that low. A moderately large number of intervals are required to have at least acceptable coverage in a small portion of the parameter space. At K = 70, at least acceptable performance can be obtained when incidence is neither high nor very low (0.10c <= zeta <= 0.30c) and prevalence is moderate (0.25 <= phi <= 0.75). At K = 110, accurate confidence intervals can be found in the same portion of the parameter space, with that area increasing slightly in both prevalence and incidence as the value of K increases.
 
 ```{r, echo = FALSE}
 qplot(phi, zeta, fill = zcoverage_cut_smooth, 
@@ -100,13 +103,13 @@ qplot(phi, zeta, fill = zcoverage_cut_smooth,
       data = subset(MTS_coverage, theta == 10)) +
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
-  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
   scale_color_brewer(type = "seq") + 
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
-  theme(axis.text.x = element_text(angle=45, hjust = 1))
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
 
-The fourth dislays the results of the MTS PLE confidence intervals for incidence. A moderately large number of intervals (K = 80) is required for at least acceptable confidence intervals in a large portion of the parameter space. When incidence is neither very high nor very low (0.05c <= zeta <= 0.45c) and prevalence is moderate (0.25 <= phi <= 0.75) at least acceptable confidence intervals can be obtained. Unlike the other three, increasing the number of intervals past this point does not appreciably increase the portion of the parameter space where acceptable or accurate confidence intervals may be obtained.
+The fourth figure dislays the results of the MTS PLE confidence intervals for incidence. A modest number of intervals (K = 40) is required for at least acceptable confidence intervals in a relatively small portion of the parameter space. When prevalence is moderate (0.30 <= phi <= 0.70) and incidence is moderate (0.25c <= zeta <= 0.40), at least acceptable confidence intervals may be obtained.  A moderately large number of intervals (K = 80) is required for accurate confidence intervals in a modest portion of the parameter space. When incidence is moderate to high (0.25c <= zeta) and prevalence is moderate (0.30 <= phi <= 0.70) at least acceptable confidence intervals can be obtained. As the number of of intervals increases, the range of incidence that accurate confidence intervals can be obtained increases, while the range of prevalence decreases very slightly.
 
 #AIR - MLE and PLE
 
@@ -141,12 +144,12 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
       data = subset(AIRcoverage, theta == Inf & K_intervals >= 30)) +
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
-  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
   scale_color_brewer(type = "seq") + 
   labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
-  theme(axis.text.x = element_text(angle=45, hjust = 1))
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
-The fifth figure displays the performance of the AIR MLE confidence interval for prevalence. Plots of K < 30 are not displayed due to poor performance across the entire parameter space. 
+The fifth figure displays the performance of the AIR MLE confidence interval for prevalence. Plots of K < 30 are not displayed due to poor performance across the entire parameter space. A modest number of intervals (K = 40) is required for acceptable but liberal performance to be obtained in a small portion of the parameter space. When incidence is not low (0.20c <= zeta) and prevalence is in a very central range (0.35 <= phi <= 0.65), acceptable perfomance can be obtained. At K = 65, acceptably liberal to accurate performance can be obtained in a much larger area. This performance can be obtained when prevalence is neither high nor low (0.25 <= phi <= 0.75) and incidence is not very low (0.15c <= zeta). The area where acceptably liberal to accurate estimates can be obtained grows slightly as the number of intervals increases.
 
 ```{r, echo = FALSE}
 qplot(phi, zeta, fill = pcoverage_cut_smooth, 
@@ -154,12 +157,13 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
       data = subset(AIRcoverage, theta == 10)) +
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
-  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
   scale_color_brewer(type = "seq") + 
   labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
-  theme(axis.text.x = element_text(angle=45, hjust = 1))
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
 
+The sixth figure displays the performance of the AIR PLE confidence interval for prevalence. The entire range of plots is displayed in order to show the very odd behavior of the estimator. At the smallest number of intervals (K = 5), it is possible to obtain acceptable performance across a wide range, but the behavior isn't stable until K = 20, and is most easily characterized at K = 25. At this relatively small number of intervals, at least acceptable coverage can be obtained for the entire range of prevalence when incidence is not small (0.25c <= zeta). However, as the number of intervals rises the estimator performs inconsistently at the very extreme edges of prevalence, so in practical terms the safe range of prevalence at K >= 25 is 0.10 <= phi <= 0.90. As the number of intervals rises to K >= 60, accurate coverage (with some small instances of merely acceptable coverage) may nearly always be obtained when incidence is at least moderate (0.30c <= zeta) and prevalence is not at the very edges (0.10 <= phi <= 0.90).
 
 ```{r, echo = FALSE}
 qplot(phi, zeta, fill = zcoverage_cut_smooth, 
@@ -167,8 +171,103 @@ qplot(phi, zeta, fill = zcoverage_cut_smooth,
       data = subset(AIRcoverage, theta == Inf)) +
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
-  scale_x_continuous(breaks=seq(0, 1, .2)) +
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
   scale_color_brewer(type = "seq") + 
   labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
-  theme(axis.text.x = element_text(angle=45, hjust = 1))
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
+ 
+The seventh figure displays the performance of the AIR MLE confidence interval for incidence. At acceptably liberal to accurate coverage can be obtained when K = 25, when incidence is not very high (0.40c >= zeta) and the range of prevalence is neither very high nor very low (0.15 <= phi <= .85). Accurate confidence intervals can be obtained in a large range of the parameter space when K = 55, incidence is moderate to very low (0.10c <= zeta <= 0.35c) and prevalence is not very high or very low (0.20 <= phi <= 0.80)
+
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = zcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(AIRcoverage, theta == 10)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
+```
+
+The eigth figure displays the performance of the AIR PLE confidence interval for incidence. At K = 30, at least acceptable coverage can be obtained when incidence is not very low (0.10c <= zeta) and prevalence is not at the extreme of the possible range (0.10 <= phi <= 0.90). At K = 55, accurate coverage can be obtained nearly all of the time (with only very occasionally acceptable coveage) in the same range. When K = 75, accurate coverage is obtained in the whole range of prevalence except when incidence is very low (0.05c >= zeta), and even at very low incidence, coverage is acceptably conservative.
+
+#PIR - MLE and PLE
+
+```{r, echo = FALSE}
+load("Simulations/PIR simulations/PIR bootstrap results.Rdata")
+
+PIR_results <- BSresults
+PIR_coverage <- ddply(PIR_results, .fun = coverage_smoother, .(K_intervals, k_priors, theta))
+
+PIR_coverage$pcoverage_smooth <- ifelse(PIR_coverage$pcoverage_smooth > 1, 1, PIR_coverage$pcoverage_smooth)
+PIR_coverage$pcoverage_smooth <- ifelse(PIR_coverage$pcoverage_smooth < 0, 0, PIR_coverage$pcoverage_smooth)
+PIR_coverage$pcoverage_cut <- cut(PIR_coverage$pcoverage, breaks = breaks_coverage,
+                              labels = labels_coverage, include.lowest = TRUE)
+PIR_coverage$pcoverage_cut_smooth <- cut(PIR_coverage$pcoverage_smooth, breaks = breaks_coverage,
+                                     labels = labels_coverage, include.lowest = TRUE)
+
+PIR_coverage$zcoverage_smooth <- ifelse(PIR_coverage$zcoverage_smooth > 1, 1, PIR_coverage$zcoverage_smooth)
+PIR_coverage$zcoverage_smooth <- ifelse(PIR_coverage$zcoverage_smooth < 0, 0, PIR_coverage$zcoverage_smooth)
+
+PIR_coverage$zcoverage_cut <- cut(PIR_coverage$zcoverage, breaks = breaks_coverage,
+                              labels = labels_coverage, include.lowest = TRUE)
+PIR_coverage$zcoverage_cut_smooth <- cut(PIR_coverage$zcoverage_smooth, breaks = breaks_coverage,
+                                     labels = labels_coverage, include.lowest = TRUE)
+```
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = pcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(PIR_coverage, theta == Inf)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
+```
+
+The ninth figure displays the performance of the PIR MLE confidence interval for prevalence. A modest number of intervals is required to get accurate results in a small portion of the parameter space. When K = 50, prevalence is low (0.10 <= phi <= 0.30) and incidence is moderate to high (0.25c <= zeta). At a large number of intervals (K = 100), accurate confidence intervals can be obtained either when incidence is moderate (0.25c <= zeta <= 0.35) and prevalence is low to moderate (0.15 <= phi <= 0.55) or when prevalence remains relatively low (0.25 <= phi <= 0.45) and incendence is moderate to high (0.25 <= zeta)
+
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = pcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(PIR_coverage, theta == 10)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
+```
+
+The tenth figure displays the performance of the PIR PLE confidence interval for prevalence. At a moderately large number of intervals (K = 80) at least acceptable confidence intervals can be obtained when prevalence is not high or very low (0.05 <= phi <= 0.75) and incidence is low to moderate (0.10c <= zeta <= 0.25). When the number of intervals is very large (K = 120), accurate confidence intervals can nearly always be obtained a large proportion of a restricted range of either incidene or prevalence. Accurate estimates can nearly always be obtained when prevalence is moderate (0.25 <= phi <= 0.45) and incidence is neithr very low nor very high (0.10c <= zeta <= 0.40c), or when incidence is moderate (0.15c <= 0.35c) and prevalence is low to moderately high (0.15 <= phi <= 0.60).
+
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = zcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(PIR_coverage, theta == Inf & K_intervals >= 90)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
+```
+
+The eleventh figure displays the performance of the PIR MLE confidence interval for incidence. A very large number of intervals is required for even acceptably liberal coverage in a small portion of the parameter space. When K = 130, at very high values of incidence (0.40c <= zeta) acceptable performance can be obtained when prevalence is not more than moderate (0.50 <= phi). In addition, when the range of prevalence is restricted to a central value (0.35 <= phi <= 0.50), acceptable performance can be obtained as long as incidence is not small (0.20c <= zeta). For accurate confidence intervals, the number of K intervals required is unknown but presumably very, very large.
+
+```{r, echo = FALSE}
+qplot(phi, zeta, fill = zcoverage_cut_smooth, 
+      geom = "tile",
+      data = subset(PIR_coverage, theta == 10)) +
+  facet_wrap(~K_intervals, scales = "free_y") +
+  scale_y_continuous(breaks=seq(.1, .50, .1)) + 
+  scale_x_continuous(breaks=seq(.1, 1, .1)) +
+  scale_color_brewer(type = "seq") + 
+  labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
+  theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
+```
+
+The twelfth figure displays the performance of the PIR PLE confidence interval for incidence. It...does not appear to work at all? Possibly an error. We'll have to think this over.
