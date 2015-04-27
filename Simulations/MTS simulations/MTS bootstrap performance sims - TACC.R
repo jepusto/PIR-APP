@@ -102,7 +102,7 @@ runSim <- function(phi, zeta, K_intervals, c, k_priors, theta, iterations, seed 
 #-------------------------------------
 
 K_intervals <- seq(10, 150, 10)
-phi <- seq(.05, .50, .05)
+phi <- seq(.05, 1, .05)
 zeta <- seq(.05, .50, .05)
 k_priors <- c(1, 1.5)
 theta <- c(10, Inf)
@@ -110,6 +110,7 @@ set.seed(20150316)
 
 params <- expand.grid(phi = phi, zeta = zeta, K_intervals = K_intervals, k_priors = k_priors, theta = theta)
 params <- subset(params, (k_priors == 1 & theta == Inf) | (k_priors == 1.5 & theta == 10))
+params <- params[sample(nrow(params)),]
 params$seed <- round(runif(nrow(params)) * 2^30)
 nrow(params)
 
@@ -138,7 +139,7 @@ clusterEvalQ(cluster, library(compiler))
 clusterEvalQ(cluster, enableJIT(3))
 clusterExport(cluster, source_func) 
 
-system.time(BSresults <- mdply(params, .fun = runSim, iterations = 10000, c = 1, .parallel = TRUE))
+system.time(BSresults2 <- mdply(params, .fun = runSim, iterations = 10000, c = 1, .parallel = TRUE))
 stopCluster(cluster)
 
-save(results, file = "MTS bootstrap performance.Rdata")
+save(BSresults2, file = "MTS bootstrap performance2.Rdata")

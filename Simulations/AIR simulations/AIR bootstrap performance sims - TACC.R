@@ -101,7 +101,7 @@ runSim <- function(phi, zeta, K_intervals, c, k_priors, theta, iterations, seed 
 library(plyr)
 
 K_intervals <- seq(5, 75, 5)
-phi <- seq(.05, .50, .05)
+phi <- seq(.05, 1, .05)
 zeta <- seq(.05, .50, .05)
 k_priors <- c(1, 1.5)
 theta <- c(10, Inf)
@@ -140,5 +140,5 @@ clusterExport(cluster, source_func)
 system.time(BSresults <- mdply(params, .fun = runSim, iterations = 10000, c = 2, .parallel = TRUE))
 stopCluster(cluster)
 
-save(results, file = "AIR bootstrap performance.Rdata")
+save(BSresults, file = "AIR bootstrap performance.Rdata")
 
