@@ -173,7 +173,7 @@ The expected information for $K_M$ intervals of MTS data is given by
 \label{eq:MTS_Info}
 \begin{aligned}
 \info^{M}_{\phi\phi} &= K_M \left[1 - \exp\left(-\rho c_M\right)\right]\left[ \frac{1 - \phi}{\phi \left[1 - p_0(c_M)\right]} + \frac{\phi}{(1 - \phi)p_1(c_M)}\right] \\ 
-\info^{M}_{\phi\rho} &= K_M \frac{c_M (1 - 2 \phi)\exp(- 2 \rho c_M)}{\left[1 - p_0(c_M)\right]p_1(c_M)}\\
+\info^{M}_{\phi\rho} &= K_M c_M \exp(-  \rho c_M) \left(\frac{1 - \phi}{1 - p_0(c_M)} - \frac{\phi}{p_1(c_M)}\right)\\
 \info^{M}_{\rho\rho} &= K_M \frac{\phi(1 - \phi)c_M^2 \exp(-2\rho c_M)}{1 - \exp(-\rho c_M)}\left[\frac{1}{1 - p_0(c_M)} + \frac{1}{p_1(c_M)}\right]
 \end{aligned}
 \end{equation}

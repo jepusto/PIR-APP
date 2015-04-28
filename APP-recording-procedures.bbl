@@ -113,33 +113,6 @@ Brown%
 }{%
 Brown%
 \ \protect \BOthers {.}}{%
-{\protect \APACyear {1975}}%
-}]{%
-Brown1975estimation}
-\APACinsertmetastar {%
-Brown1975estimation}%
-\begin{APACrefauthors}%
-Brown, M.%
-, Solomon, H.%
-\BCBL {}\ \BBA {} Stephens, M\BPBI A.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYearMonthDay{1975}{}{}.
-\newblock
-\APACrefbtitle {{Estimation of parameters of zero-one processes}.} {{Estimation
-  of parameters of zero-one processes}.}
-\newblock
-Stanford, CA.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Brown%
-, Solomon%
-\BCBL {}\ \BBA {} Stephens%
-}{%
-Brown%
-\ \protect \BOthers {.}}{%
 {\protect \APACyear {1977}}%
 }]{%
 Brown1977estimation}
