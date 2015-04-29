@@ -228,30 +228,6 @@ Hartmann, D\BPBI P.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Johnson%
-}{%
-Johnson%
-}{%
-{\protect \APACyear {2014}}%
-}]{%
-Johnson2014}
-\APACinsertmetastar {%
-Johnson2014}%
-\begin{APACrefauthors}%
-Johnson, A\BPBI H.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYear{2014}.
-\unskip\
-\newblock
-\APACrefbtitle {{Reliability of Data Derived from Time Sampling Methods with
-  Multiple Observation Targets}} {{Reliability of Data Derived from Time
-  Sampling Methods with Multiple Observation Targets}}\ \APACtypeAddressSchool
-  {Doctoral Dissertation}{}{}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
 Kazdin%
 }{%
 Kazdin%
