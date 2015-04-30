@@ -283,9 +283,9 @@ For each interval, the observer first notes the presence or absence of the behav
 If the behavior is present ($X_{k-1} = 1$), then the partial interval record is also determined ($U_k = 1$), and it only remains to determine whether the behavior occurs for the duration of the interval (in which case $W_k = 1$) or ends before time $t_k + c$ (in which case $W_k = 0$). 
 Similarly, if the behavior is absent at the start of the interval ($X_{k-1} = 0$), then the whole interval record is also determined ($W_k = 0$), and it only remains to determine whether a behavioral event begins before time $t_k + c$ (in which case $U_k = 1$) or is absent for the entire interval (in which case $U_k = 0$). 
 
-\begin{figure}[hbtp]
+\begin{figure}[tbp]
 \centering
-\includegraphics[clip=true, trim= 0 240 150 00, width=0.8\linewidth]{AIR_flowchart.pdf}
+\includegraphics[clip=true, trim= 0 240 150 00, width=0.8\linewidth]{ppt/AIR_flowchart.pdf}
 \caption{Procedure for combining MTS and interval recording}
 \label{fig:questions}
 \end{figure}  
