@@ -1,3 +1,16 @@
+The expected information matrix is defined as the negative expectation of the Hessian of the log-likelihood $l_{MTS}$, with unique entries $\info^{M}_{\phi\phi}$, $\info^{M}_{\phi\rho} = \info^{M}_{\rho\phi}$, and $\info^{M}_{\rho\rho}$.
+The expected information for $K$ intervals of MTS data is given by  
+\begin{equation}
+\label{eq:MTS_Info}
+\begin{aligned}
+\info^{M}_{\phi\phi} &= K \left[1 - \exp\left(-\rho c\right)\right]\left[ \frac{1 - \phi}{\phi \left[1 - p_0(c)\right]} + \frac{\phi}{(1 - \phi)p_1(c)}\right] \\ 
+\info^{M}_{\phi\rho} &= K c \exp(-  \rho c) \left(\frac{1 - \phi}{1 - p_0(c)} - \frac{\phi}{p_1(c)}\right)\\
+\info^{M}_{\rho\rho} &= K \frac{\phi(1 - \phi)c^2 \exp(-2\rho c)}{1 - \exp(-\rho c)}\left[\frac{1}{1 - p_0(c)} + \frac{1}{p_1(c)}\right].
+\end{aligned}
+\end{equation}
+In a later section, the expected information matrix for this model will be used to compare the precision of the MLEs based on MTS data to the corresponding MLEs based on other recording procedures. 
+
+Furthermore, the expected information for WIR data is the mirror image of the expected information for PIR data, reflected about $\phi = 0.5$. 
 
 In some contexts, the researcher may have prior knowledge about one or more characteristics of the behavior stream; for instance, it may be known that the average event duration is unlikely to be more than 15 s. 
 
