@@ -81,6 +81,29 @@ Bakeman, R.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Billingsley%
+}{%
+Billingsley%
+}{%
+{\protect \APACyear {1961}}%
+}]{%
+Billingsley1961statistical}
+\APACinsertmetastar {%
+Billingsley1961statistical}%
+\begin{APACrefauthors}%
+Billingsley, P.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1961}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Statistical methods in Markov chains}} {{Statistical
+  methods in Markov chains}}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{The Annals of Mathematical Statistics}{32}{1}{12--40}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Bornstein%
 }{%
 Bornstein%
@@ -225,30 +248,6 @@ Hartmann, D\BPBI P.%
   (\PrintOrdinal{2nd}\ \BEd, \BPGS\ 107--138).
 \newblock
 \APACaddressPublisher{New York, NY}{Plenum Press}.
-\PrintBackRefs{\CurrentBib}
-
-\bibitem [\protect \citeauthoryear {%
-Johnson%
-}{%
-Johnson%
-}{%
-{\protect \APACyear {2014}}%
-}]{%
-Johnson2014}
-\APACinsertmetastar {%
-Johnson2014}%
-\begin{APACrefauthors}%
-Johnson, A\BPBI H.%
-\end{APACrefauthors}%
-\unskip\
-\newblock
-\APACrefYear{2014}.
-\unskip\
-\newblock
-\APACrefbtitle {{Reliability of Data Derived from Time Sampling Methods with
-  Multiple Observation Targets}} {{Reliability of Data Derived from Time
-  Sampling Methods with Multiple Observation Targets}}\ \APACtypeAddressSchool
-  {Doctoral Dissertation}{}{}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

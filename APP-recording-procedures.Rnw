@@ -230,9 +230,9 @@ Let $\hat\phi_{PIR}$ and $\hat\zeta_{PIR}$ denote the maximum likelihood estimat
 
 Although the log-likelihood in Equation (\ref{eq:PIR_loglik}) is useful for computing the maximum likelihood estimators, it is otherwise rather difficult to analyze. 
 A different representation of the data reveals the fact that the model is a discrete-time Markov Chain process, which facilitates computation of the Fisher information. 
-Let the random variable $V_0$ represent the state of this process immediately prior to the start of the observation session, and define $V_k = \left(V_{k-1} + 1\right) U_k$. 
+Let the random variable $V_0$ represent the state of this process immediately prior to the start of the observation session, and define $V_k = \left(V_{k-1} + 1\right) U_k$ for $k=1,...,K$. 
 (Note that the PIR interval data can be recovered from this representation by taking $U_k = I(V_k - V_{k-1} > 0)$.) 
-Observe that if there is no behavior during interval $k-1$, so $U_{k-1} = 0$ and $V_{k-1} = 0$, then $\psi_k$ is independent of the data from any previous intervals. 
+Observe that if there is no behavior during interval $k-1$, then $\psi_k$ does not depend on the data from any previous intervals. 
 More generally, $\psi_k$ depends only on the number of preceding intervals in which a behavior occurred.
 It follows that 
 \[
@@ -246,6 +246,9 @@ and $\Pr\left(V_k = 0 | V_{k-1} = v\right) = 1 - \pi_{v,v+1}$,
 where \[
 f(q) = \frac{q p_1(c + d) + (1 - q)\left[p_0(c + d) - p_0(d)\exp(-\rho\phi c)\right]}{1 - (1 - q)\exp(-\rho \phi c)} \]
 and $\stackrel{v}{\circ} f$ denotes the $v$-fold recursion of $f$.
+
+\todo[inline]{Comment on expected information for PIR}
+
 
 \subsection{Whole Interval Recording}
 \label{sec:WIR}
@@ -272,9 +275,9 @@ The equivalence of the two system implies that estimates of prevalence and incid
 \section{Augmented interval recording}
 \label{sec:AIR}
 
-Thus far, I have considered conventional and widely used procedures for intermittent, systematic direct observation procedures. 
-I now describe a novel recording procedure that can potentially provide more efficient estimates of the behavioral parameters. 
-The method, which I will call augmented interval recording, involves using MTS, PIR, and WIR systems on each interval. 
+Thus far, I have considered three conventional and widely used procedures for intermittent, systematic direct observation procedures---MTS, PIR, and WIR. 
+These three procedures are closely related, and the logical dependencies between the scoring rules suggest that it might be both feasible and useful to use them in combination. 
+To the extent that each scoring rule captures different information about the behavior stream, then combining all three might procedure more efficient estimates of the behavioral parameters. Thus, I now consider a novel recording procedure, which I will call augmented interval recording, that involves applying all three scoring rules simultaneously to each interval in the observation session.
 To the best of my knowledge, this procedures has not been previously described in the literature on systematic direct observation of behavior. 
 
 Just as with PIR or WIR, suppose that the observation session is divided into $K$ intervals and that the first $c$ seconds of the interval are devoted to observation while the remaining $d$ seconds are devoted to recording or resting; interval $k$ therefore begins at time $t_k = (k - 1)(c + d)$. 
@@ -293,10 +296,10 @@ Similarly, if the behavior is absent at the start of the interval ($X_{k-1} = 0$
 \label{fig:questions}
 \end{figure}  
 
-The AIR procedure requires only marginally more effort on the part of the observer than an interval recording method used alone. 
+The AIR procedure might require only marginally more effort on the part of the observer than an interval recording method used alone. 
 One measure of effort is the level of sustained attention required on the part of the observer. Because the sustained attention needed for interval recording also entails the attention needed for momentary time sampling, the additional effort is minimal in this respect.
 Another measure of effort is the amount of data that must be recorded during the observation period. Because $W_k = 0$ is implied when $X_{k-1} = 0$ and $U_k = 1$ is implied when $X_{k-1} = 1$, AIR requires twice as much data as one of the single methods (rather than three times as much, as might be supposed). 
-Thus, for a fixed interval length, simultaneous use of all three methods entails at most twice as much effort as interval recording alone. 
+Thus, for a fixed interval length, simultaneous use of all three methods would entail at most twice as much effort as interval recording alone. 
 Furthermore, using longer time-intervals with fewer intervals per observation period would mitigate the effort required. 
 
 \begin{figure}[tbp]
@@ -306,7 +309,7 @@ Furthermore, using longer time-intervals with fewer intervals per observation pe
 \label{fig:AIR_transitions}
 \end{figure} 
 
-Under the assumptions of the Alternating Poisson Process, the data generated by the AIR system can be modeled using a discrete-time Markov Chain, from which estimates of prevalence and incidence can be obtained. 
+Under the assumptions of the Alternating Poisson Process, the data generated by the AIR system can be modeled using a 6-state discrete-time Markov Chain, from which estimates of prevalence and incidence can be obtained. 
 The Markov property of the Alternating Poisson Process implies that the joint distribution of the measurements can be written as
 \begin{multline}
 \Pr\left(X_0=x_0,X_1=x_1,U_1 = u_1, W_1 = w_1,..., X_K=x_K, U_K = u_K, W_K = w_K \right) \\ = \Pr\left(X_0 = x_0\right) \prod_{k=1}^{K} \Pr\left(X_k = x_k, U_k = u_k, W_k = w_k | X_{k-1} = x_{k-1}\right). 
@@ -315,9 +318,9 @@ Denote the transition probabilities $\Pr\left(X_k = b, U_k = c, W_k = d | X_{k-1
 Conditional on $X_0$, the log-likelihood of the observed AIR data is given by
 \begin{equation}
 \label{eq:AIR_loglik}
-l_{AIR}\left(\phi,\zeta\right) = \sum_{a=0}^1 \sum_{b=0}^1 \sum_{c=0}^1 \sum_{d=0}^1 m_{a|bcd} \log \pi_{a|bcd}
+l_{AIR}\left(\phi,\zeta\right) = \sum_{a,b,c,d} m_{a|bcd} \log \pi_{a|bcd}
 \end{equation}
-where
+where 
 \begin{align*}
 \pi_{0|000} &= \left[1 - p_0(d)\right]\exp\left(-\rho\phi c\right) \\
 \pi_{0|010} &= 1 - p_0(c + d) - \left[1 - p_0(d)\right]\exp\left(-\rho\phi c\right) \\
@@ -326,13 +329,14 @@ where
 \pi_{1|010} &= 1 - p_1(c + d) - \left[1 - p_1(d)\right]\exp\left[-\rho(1 - \phi) c\right] \\
 \pi_{1|011} &= \left[1 - p_1(d)\right]\exp\left[-\rho(1 - \phi) c\right] \\
 \pi_{1|110} &= p_1(c + d) - p_1(d) \exp\left[-\rho(1 - \phi) c\right] \\
-\pi_{1|111} &= p_1(d)\exp\left[-\rho(1 - \phi) c\right]
+\pi_{1|111} &= p_1(d)\exp\left[-\rho(1 - \phi) c\right],
 \end{align*}
-and the remaining transition probabilities are all equal to zero. 
+the remaining transition probabilities are all equal to zero, and the sum is taken over the terms with strictly positive transition probabilities. 
 See Appendix \ref{app:AIR_derivation} for the derivation of these quantities. 
 Figure \ref{fig:AIR_transitions} depicts the transition diagram for this process.
 As with PIR data, the MLEs $\hat\phi_{AIR}, \hat\zeta_{AIR}$ are obtained by maximizing $l_{AIR}$ using numerical optimization techniques. 
 
+\todo[inline]{Comment on expected information for AIR}
 
 \section{Intermittent transition recording}
 \label{sec:ITR}
@@ -361,9 +365,26 @@ Despite these limitations, the models and estimation methods that we have propos
 \section{Fisher information matrix for MTS model}
 \label{app:MTS_derivation}
 
-For an ergodic discrete-time Markov chain with state space $\mathcal{S}$, 
+The Fisher information for the MTS model and other models can be calculated using some general results on structurally parameterized discrete-time Markov chains. Consider a stationary and ergodic Markov chain with finite state-space $\mathcal{S}$, transition probabilities $\pi_{ab}$ for $a,b \in \mathcal{S}$, and equilibrium distribution $\tilde\pi_a$ for $a \in \mathcal{S}$. Suppose that the transition probabilities are functions of a vector-valued parameter $\boldsymbol\theta$. Under some regularity conditions, the Fisher information is then given by
+\begin{equation}
+\label{eq:Fisher_Info}
+\mathbf{\info}_{\boldsymbol\theta} = K \sum_{a,b \in \mathcal{S}} \frac{\tilde\pi_a}{\pi_{ab}}\frac{\partial \pi_{ab}}{\partial \boldsymbol\theta}\frac{\partial \pi_{ab}}{\partial \boldsymbol\theta'},
+\end{equation}
+where the sum is taken over the transition probabilities that are strictly positive \citet{Billingsley1961statistical}.\todo{Does the same hold for countably infinite state spaces?}
+Thus, the Fisher information for a given model can be calculated from the transition 
+probabilities, derivatives of the transition probabilities, and equilibrium distribution.
 
-To derive the Fisher information matrix for the MTS model and the other models, 
+For the MTS model, the state space is $\{0,1\}$, the equilibrium distribution is given by $\tilde\pi_0 = 1 - \phi, \tilde\pi_1 = \phi$, and the derivatives of the transition probabilities with respect to $\phi$ and $\rho$ are 
+\begin{align*}
+\frac{\partial \pi_{00}}{\partial \phi} &= -\left[1 - \exp(-\rho c)\right] 
+& \frac{\partial \pi_{00}}{\partial \rho} &= -\phi c \exp(-\rho c) \\
+\frac{\partial \pi_{01}}{\partial \phi} &= 1 - \exp(-\rho c) 
+& \frac{\partial \pi_{01}}{\partial \rho} &= \phi c \exp(-\rho c) \\
+\frac{\partial \pi_{10}}{\partial \phi} &= -\left[1 - \exp(-\rho c)\right]
+& \frac{\partial \pi_{10}}{\partial \rho} &= \left(1 - \phi\right) c \exp(-\rho c) \\
+\frac{\partial \pi_{11}}{\partial \phi} &= 1 - \exp(-\rho c)
+& \frac{\partial \pi_{11}}{\partial \rho} &= -\left(1 - \phi\right) c \exp(-\rho c).
+\end{align*}
 
 \section{Derivation of PIR model}
 \label{app:PIR_derivation}
