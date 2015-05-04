@@ -1,39 +1,39 @@
-library(plyr)
-library(ARPobservation)
-rm(list=ls())
-source("R/PIR-APP.R")
-
-
-BSS_vcov <- function(phi, zeta, c_M) {
-  p0 <- p_0(c_M, phi, zeta)
-  p1 <- p_1(c_M, phi, zeta)
-  G_mat <- matrix(c((1 - p1) / (p0 + 1 - p1)^2, 1 / (c_M * (p1 - p0)), -p0 / (p0 + 1 - p1)^2, -1 / (c_M * (p1 - p0))), 2, 2)
-  Sigma_mat <- diag(c(p0 * (1 - p0) / (1 - phi), p1 * (1 - p1) / phi))
-  G_mat %*% Sigma_mat %*% t(G_mat)
-}
+#------------------------------------------------------
+# Momentary time sampling 
+#------------------------------------------------------
 
 MTS_info <- function(phi, zeta, c_M) {
   rho <- zeta / (phi * (1 - phi))
+  erc <- exp(-rho * c_M)
   p0 <- p_0(c_M, phi, zeta)
   p1 <- p_1(c_M, phi, zeta)
-  I_phiphi <- (1 - exp(-rho * c_M)) * ((1 - phi) / (phi * (1 - p0)) + phi / ((1 - phi) * p1))
-  I_phirho <- c_M * exp(-rho * c_M) * ((1 - phi) / (1 - p0) - phi / p1)
-  I_rhorho <- phi * (1 - phi) * c_M^2 * exp(-2 * rho * c_M) * (1 + exp(-rho * c_M)) / ((1 - exp(-rho * c_M)) * (1 - p0) * p1)
-  matrix(c(I_phiphi, I_phirho, I_phirho, I_rhorho), 2, 2)
+  eq_pi <- rep(c(1 - phi, phi), each = 2) / c(1 - p0, p0, 1 - p1, p1)
+  dpi_dphi <- c(erc - 1, 1 - erc, erc - 1, 1 - erc)
+  dpi_drho <- c(-phi * c_M * erc, phi * c_M * erc, (1 - phi) * c_M * erc, -(1 - phi) * c_M * erc)
+  info <- rbind(dpi_dphi, dpi_drho) %*% (eq_pi * cbind(dpi_dphi, dpi_drho))
+  rownames(info) <- colnames(info) <- c("phi","rho")
+  info
 }
 
 
-phi <- 0.2
-zeta <- 0.1
-stream_length <- 10000
-c_M <- 2
 
-MTS_dat <- r_MTS(n=5000, mu = phi / zeta, lambda = (1 - phi) / zeta, stream_length = stream_length, 
-                 F_event = F_exp(), F_interim = F_exp(), interval_length = c_M, summarize = FALSE)
+AIR_info <- function(phi, zeta, c_A, d_A) {
+  rho <- zeta / (phi * (1 - phi))
+  p0d <- p_0(c_A, phi, zeta)
+  p1d <- p_0(c_A, phi, zeta)
+  p0cd <- p_0(c_A + d_A, phi, zeta)
+  p1cd <- p_1(c_A + d_A, phi, zeta)
+  erpc <- exp(-rho * phi * c_A)
+  erqc <- exp(-rho * (1 - phi) * c_A)
+  pi_trans <- c((1 - p0d) * erpc, p0d * erpc, 1 - p0cd - (1 - p0d) * erpc, p0cd - p0d * erpc,
+                1 - p1cd - (1 - p1d) * erqc, p1cd - p1d * erqc, (1 - p1d) * erqc, p1d * erqc)
+  eq_pi <- rep(c(1 - phi, phi), each = 4) / pi_trans
+  
+  dpi_dphi <- c()
+  dpi_drho <- c()
+  info <- rbind(dpi_dphi, dpi_drho) %*% (eq_pi * cbind(dpi_dphi, dpi_drho))
+  rownames(info) <- colnames(info) <- c("phi","rho")
+  info
+}
 
-ests <- adply(MTS_dat, .margins = 1, .fun = MTSmle, c = c_M, transform = "exp")[,-1]
-ests$rho <- with(ests, zeta / (phi * (1 - phi)))
-ests$zeta <- NULL
-cov(ests) * stream_length / c_M
-chol2inv(chol(MTS_info(phi, zeta, c_M)))
-BSS_vcov(phi, zeta, c_M)
+
