@@ -40,7 +40,7 @@ MTS_coverage$pcoverage_smooth <- ifelse(MTS_coverage$pcoverage_smooth > 1, 1, MT
 
 breaks_coverage <- c(0, 0.925, 0.94, 0.96, 0.975, 1)
 labels_coverage <- c("0-92.5%", "92.5-94%", "94-96%", "96-97.5%", "97.5-100%")
-coverage_colors <- c("0-92.5%" = "pink", "92.5-94%" = "yellow" , "94-96%" = "green", "96-97.5%" = "blue", "97.5-100%" = "purple")
+coverage_colors <- c("0-92.5%" = "#FF69B4", "92.5-94%" = "#DAA520" , "94-96%" = "#008000", "96-97.5%" = "#0000FF", "97.5-100%" = "#FF0000")
 MTS_coverage$pcoverage_cut <- cut(MTS_coverage$pcoverage, breaks = breaks_coverage,
                               labels = labels_coverage, include.lowest = TRUE)
 MTS_coverage$pcoverage_cut_smooth <- cut(MTS_coverage$pcoverage_smooth, breaks = breaks_coverage,
@@ -60,7 +60,7 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) + 
+  scale_fill_manual(values = coverage_colors) + 
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -76,7 +76,7 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -91,8 +91,8 @@ qplot(phi, zeta, fill = zcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
+  scale_fill_manual(values = coverage_colors) +
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
 
@@ -105,7 +105,7 @@ qplot(phi, zeta, fill = zcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -146,7 +146,7 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -159,7 +159,7 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -173,7 +173,7 @@ qplot(phi, zeta, fill = zcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -187,7 +187,7 @@ qplot(phi, zeta, fill = zcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "Coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -224,7 +224,7 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -238,7 +238,7 @@ qplot(phi, zeta, fill = pcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -252,7 +252,7 @@ qplot(phi, zeta, fill = zcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
@@ -266,7 +266,7 @@ qplot(phi, zeta, fill = zcoverage_cut_smooth,
   facet_wrap(~K_intervals, scales = "free_y") +
   scale_y_continuous(breaks=seq(.1, .50, .1)) + 
   scale_x_continuous(breaks=seq(.1, 1, .1)) +
-  scale_color_manual(values = coverage_colors) +
+  scale_fill_manual(values = coverage_colors) +
   labs(x = "Prevalence", y = "Incidence", fill = "MTS_coverage") + theme_bw()+ 
   theme(axis.text.x = element_text(angle=45, hjust = 1), legend.position = "top")
 ```
