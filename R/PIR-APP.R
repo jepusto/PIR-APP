@@ -172,6 +172,23 @@ MTSbootstrap <- function(X, c, penalty_func = NULL,
   data.frame(parm = names(ests), est = ests, sd = std_devs, CI_L = CIs[1,], CI_U = CIs[2,], row.names = NULL)
 }
 
+#------------------------------------------------------
+# Expected information for MTS
+#------------------------------------------------------
+
+MTS_info <- function(phi, zeta, c) {
+  rho <- zeta / (phi * (1 - phi))
+  erc <- exp(-rho * c)
+  p0 <- p_0(c, phi, zeta)
+  p1 <- p_1(c, phi, zeta)
+  eq_pi <- rep(c(1 - phi, phi), each = 2) / c(1 - p0, p0, 1 - p1, p1)
+  dpi_dphi <- c(erc - 1, 1 - erc, erc - 1, 1 - erc)
+  dpi_drho <- c(-phi * c * erc, phi * c * erc, (1 - phi) * c * erc, -(1 - phi) * c * erc)
+  info <- rbind(dpi_dphi, dpi_drho) %*% (eq_pi * cbind(dpi_dphi, dpi_drho))
+  rownames(info) <- colnames(info) <- c("phi","rho")
+  info
+}
+
 #---------------------------------------
 # log-likelihood function for PIR
 #---------------------------------------
@@ -357,3 +374,59 @@ AIRmle <- function(XUW, c, d, penalty_func = NULL,
   param_trans(results$par, transform = transform)
   
 }
+
+#------------------------------------------------------
+# Expected information for AIR
+#------------------------------------------------------
+
+AIR_dpi <- function(phi, zeta, c, d) {
+  
+  rho <- zeta / (phi * (1 - phi))
+  p0_d <- p_0(d, phi, zeta)
+  p0_cd <- p_0(c + d, phi, zeta)
+  exp_lambda <- exp(- rho * phi * c)
+  
+  p1_d <- p_1(d, phi, zeta)
+  p1_cd <- p_1(c + d, phi, zeta)
+  exp_mu <- exp(- rho * (1 - phi) * c)
+  Tpi <- AIR_pi(phi, zeta, c, d)
+  exp_rd <- exp(-rho * d)
+  exp_rcd <- exp(-rho * (c + d))
+  
+  dphi <- c(pi_0000 = -rho * c * Tpi[[1]] - exp_lambda * p0_d / phi, pi_1000 = NA, 
+            pi_0100 = -rho * c * Tpi[[3]] + exp_lambda * p0_d / phi, pi_1100 = NA,
+            pi_0010 = -p0_cd / phi + rho * c * Tpi[[1]] + exp_lambda * p0_d / phi, 
+                pi_1010 = -p0_cd / phi - rho * c * Tpi[[14]] + exp_mu * p0_d / phi, 
+            pi_0110 = p0_cd / phi + rho * c * Tpi[[3]] - exp_lambda * p0_d / phi, 
+                pi_1110 = p0_cd / phi - rho * c * Tpi[[16]] - exp_mu * p0_d / phi, 
+            pi_0001 = NA, pi_1001 = NA, 
+            pi_0101 = NA, pi_1101 = NA,
+            pi_0011 = NA, pi_1011 = rho * c * Tpi[[14]] - exp_mu * p0_d / phi, 
+            pi_0111 = NA, pi_1111 = rho * c * Tpi[[16]] + exp_mu * p0_d / phi)
+  
+  drho <- c(pi_0000 = -phi * (c * Tpi[[1]] + d * exp_rd * exp_lambda), pi_1000 = NA, 
+            pi_0100 = -phi * (c * Tpi[[3]] + d * exp_rd * exp_lambda), pi_1100 = NA,
+            pi_0010 = phi * (-(c + d) * exp_rcd + c * Tpi[[1]] + d * exp_rd * exp_lambda), 
+                pi_1010 = (1 - phi) * ((c + d) * exp_rcd + c * Tpi[[14]] - d * exp_rd * exp_mu), 
+            pi_0110 = phi * ((c + d) * exp_rcd + c * Tpi[[3]] - d * exp_rd * exp_lambda), 
+                pi_1110 = (1 - phi) * (-(c + d) * exp_rcd + c * Tpi[[16]] + d *exp_rd * exp_mu), 
+            pi_0001 = NA, pi_1001 = NA, 
+            pi_0101 = NA, pi_1101 = NA,
+            pi_0011 = NA, pi_1011 = -(1 - phi) * (c * Tpi[[14]] - d * exp_rd * exp_mu), 
+            pi_0111 = NA, pi_1111 = (1 - phi) * (c * Tpi[[16]] + d * exp_rd * exp_mu))
+  
+  cbind(dphi, drho)
+  
+}
+
+AIR_info <- function(phi, zeta, c, d) {
+  Tpi <- AIR_pi(phi, zeta, c, d)
+  eq_pi <- rep(c(1 - phi, phi), times = 8) / ifelse(Tpi == 0, Inf, Tpi)
+  dpi <- AIR_dpi(phi, zeta, c, d)
+  ind <- c(1,3,5,7,6,8,14,16)
+  info <- t(dpi[ind,]) %*% (eq_pi[ind] * dpi[ind,])
+  rownames(info) <- colnames(info) <- c("phi","rho")
+  info
+}
+
+

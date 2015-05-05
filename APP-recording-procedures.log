@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  4 MAY 2015 13:55
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.5)  5 MAY 2015 16:42
 entering extended mode
 **APP-recording-procedures.tex
 (C:\Users\jep2963\Documents\R\PIR-APP\APP-recording-procedures.tex
@@ -982,7 +982,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 149.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [5] [6]
-<ppt/MTS_transitions.pdf, id=31, 722.7pt x 542.025pt>
+<ppt/MTS_transitions.pdf, id=33, 722.7pt x 542.025pt>
 File: ppt/MTS_transitions.pdf Graphic file (type pdf)
 
 <use ppt/MTS_transitions.pdf>
@@ -1015,17 +1015,17 @@ s/jep2963/Documents/R/PIR-APP/ppt/AIR_transitions.pdf>] [15]
 Package natbib Warning: Citation `Johnson2014' on page 16 undefined on input li
 ne 391.
 
-[16] [17] (C:\Users\jep2963\Documents\R\PIR-APP\APP-recording-procedures.bbl
-[18] [19
+[16] (C:\Users\jep2963\Documents\R\PIR-APP\APP-recording-procedures.bbl
+[17] [18
 
-]) [20] [21
+]) [19] [20
 
-] [22
+] [21
 
-] [23] [24
+] [22] [23
 
 ]
-AED endfloat: Processing end Figures and Tables [25]
+AED endfloat: Processing end Figures and Tables [24]
 
 Package natbib Warning: There were undefined citations.
 
@@ -1034,7 +1034,7 @@ Package natbib Warning: There were undefined citations.
 Here is how much of TeX's memory you used:
  17456 strings out of 493921
  322562 string characters out of 3144871
- 363956 words of memory out of 3000000
+ 363957 words of memory out of 3000000
  20343 multiletter control sequences out of 15000+200000
  44109 words of font info for 47 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -1056,9 +1056,9 @@ gram Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Program Files (x
 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
 ype1/public/lm/lmsy6.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
 lm/lmsy8.pfb>
-Output written on APP-recording-procedures.pdf (25 pages, 1222307 bytes).
+Output written on APP-recording-procedures.pdf (24 pages, 1224805 bytes).
 PDF statistics:
- 226 PDF objects out of 1000 (max. 8388607)
+ 222 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  57 words of extra memory for PDF output out of 10000 (max. 10000000)
 

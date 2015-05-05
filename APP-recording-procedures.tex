@@ -172,8 +172,8 @@ Let $p_a(t)$ denote the conditional probability that an event will be occurring 
 These conditional probabilities can be expressed as follows:
 \begin{equation}
 \begin{aligned}
-p_0(t) &= \Pr(Z(t) = 1 | Z(0) = 0) = \phi \left[1 - \exp\left(-\rho t\right)\right] \\
-p_1(t) &= \Pr(Z(t) = 1 | Z(0) = 1) = \phi + (1 - \phi) \exp\left(-\rho t\right)
+p_0(t) &= \Pr(Z(t) = 1 | Z(0) = 0) = \phi \left[1 - e^{-\rho t}\right] \\
+p_1(t) &= \Pr(Z(t) = 1 | Z(0) = 1) = \phi + (1 - \phi) e^{-\rho t}
 \end{aligned}
 \end{equation}
 \citep[Eq. 6.17]{Kulkarni2010modeling}.
@@ -198,9 +198,9 @@ Conditioning on $X_0$, the log-likelihood of MTS data is then given by \begin{eq
 \begin{aligned}
 \label{eq:MTS_loglik}
 l_{MTS}(\phi, \rho) &= n_{01} \log \phi + n_{10} \log\left(1 - \phi\right) \\
-& \qquad \qquad + \left(n_{01} + n_{10}\right) \log \left[1 - \exp\left(-\rho c\right)\right] \\
-& \qquad \qquad \qquad \qquad + n_{00} \log\left[1 - \phi + \phi \exp\left(-\rho c\right)\right]\\
-& \qquad \qquad \qquad \qquad \qquad \qquad + n_{11}\log\left[\phi + \left(1 - \phi\right)\exp\left(-\rho c \right)\right].
+& \qquad \qquad + \left(n_{01} + n_{10}\right) \log \left[1 - e^{-\rho c}\right] \\
+& \qquad \qquad \qquad \qquad + n_{00} \log\left[1 - \phi + \phi e^{-\rho c}\right]\\
+& \qquad \qquad \qquad \qquad \qquad \qquad + n_{11}\log\left[\phi + \left(1 - \phi\right)e^{-\rho c}\right].
 \end{aligned}
 \end{equation}
 \citet{Brown1977estimation} provided closed-form expressions for the maximum likelihood estimators (MLEs) for $\phi$ and $\rho$ based on this model. Let $\hat{p}_0 = n_{01}/ \left(n_{00} + n_{01}\right)$ and $\hat{p}_1 = n_{11} / \left(n_{10} + n_{11}\right)$. The MLE for $\rho$ exists only when $\hat{p}_0 < \hat{p}_1$. 
@@ -234,26 +234,26 @@ Let $\psi_1 = \phi$, which follows from the assumption that the process is in eq
 \label{eq:psi_k}
 \begin{aligned}
 \psi_k &= \Pr\left[ Z(t_k) = 1 \left| U_1,...,U_{k-1}\right.\right] \\
- &= \left[\frac{\psi_{k-1} p_1(c + d) + (1 - \psi_{k-1}) \left[p_0(c + d) - p_0(d) \exp\left(- \rho \phi c\right)\right]}{1 - (1 - \psi_{k-1})\exp\left( - \rho \phi c \right)}\right]^{u_{k-1}} \left[p_0(d)\right]^{(1 - u_{k-1})}.
+ &= \left[\frac{\psi_{k-1} p_1(c + d) + (1 - \psi_{k-1}) \left[p_0(c + d) - p_0(d) e^{- \rho \phi c}\right]}{1 - (1 - \psi_{k-1}) e^{- \rho \phi c }}\right]^{u_{k-1}} \left[p_0(d)\right]^{(1 - u_{k-1})}.
 \end{aligned}
 \end{equation}
 Note that $Z(t_k) = 1$ implies that $U_k = 1$ with certainty, while 
-\[ \Pr\left(U_k = 1\left| Z(t_k) = 0\right.\right) = 1 - \exp\left(- \rho \phi c\right).\]
+\[ \Pr\left(U_k = 1\left| Z(t_k) = 0\right.\right) = 1 - e^{- \rho \phi c}.\]
 It follows from the Markov property of the Alternating Poisson Process that 
 \begin{align*}
 \Pr\left(U_k = 1 \left| U_1,...,U_{k-1}\right.\right) &= \psi_k \Pr\left(U_k = 1 \left| Z(t_k) = 1)\right.\right)  + (1 - \psi_k)\Pr\left(U_k = 1 \left| Z(t_k) = 0)\right.\right) \\
-&= 1 - (1 - \psi_k)\exp\left(- \rho \phi c\right).
+&= 1 - (1 - \psi_k)e^{- \rho \phi c}.
 \end{align*}
 The joint distribution of $U_1,...,U_K$ can therefore be expressed as 
 \begin{multline}
 \label{eq:PIR_joint}
 \Pr\left(U_1 =u_1,...,U_K = u_K\right) = \Pr\left(U_1=u_1\right) \prod_{k=2}^{K}\Pr\left(U_k=u_k \left| U_1,...,U_{k-1}\right.\right)  \\
-= \prod_{k=1}^{K} \left[1 - (1 - \psi_k)\exp\left(- \rho \phi c\right) \right]^{u_k} \left[(1 - \psi_k)\exp\left(- \rho \phi c\right)\right]^{(1 - u_k)}.
+= \prod_{k=1}^{K} \left[1 - (1 - \psi_k)e^{- \rho \phi c} \right]^{u_k} \left[(1 - \psi_k) e^{- \rho \phi c}\right]^{(1 - u_k)}.
 \end{multline}
 The log-likelihood of $\phi$ and $\zeta$, given observed PIR data $u_1,...,u_K$, is thus
 \begin{align}
 \label{eq:PIR_loglik}
-l_{PIR}\left(\phi,\zeta\right) = \sum_{k=1}^{K} & u_k \ln\left[1 - (1 - \psi_k)\exp\left(- \rho \phi c\right)\right]  + (1 - u_k)\left[\ln\left(1 - \psi_k \right) - \rho \phi c\right].
+l_{PIR}\left(\phi,\zeta\right) = \sum_{k=1}^{K} & u_k \ln\left[1 - (1 - \psi_k)e^{- \rho \phi c}\right]  + (1 - u_k)\left[\ln\left(1 - \psi_k \right) - \rho \phi c\right].
 \end{align}
 Let $\hat\phi_{PIR}$ and $\hat\zeta_{PIR}$ denote the maximum likelihood estimators based on PIR data, defined as the values that maximize $l_{PIR}$. Unlike with MTS data, the estimators based on PIR data do not have closed-form expressions, but can be found using a numerical optimization algorithm. 
 
@@ -277,10 +277,10 @@ for $a \in \left\{ 0, v + 1 \right\}$.
 Thus, $V_1,...,V_{K}$ follow a discrete-time Markov Chain process on the non-negative integers. 
 Figure \ref{fig:PIR_transitions} depicts the transition diagram for this process.
 The transition probabilities are given by 
-\[ \Pr\left(V_k = v + 1 | V_{k-1} = v\right) = \pi_{v,v+1} = 1 - \left[1 - \stackrel{v}{\circ} f\left(p_0(d)\right)\right] \exp\left(- \rho \phi c\right) \]
+\[ \Pr\left(V_k = v + 1 | V_{k-1} = v\right) = \pi_{v,v+1} = 1 - \left[1 - \stackrel{v}{\circ} f\left(p_0(d)\right)\right] e^{- \rho \phi c} \]
 and $\Pr\left(V_k = 0 | V_{k-1} = v\right) = 1 - \pi_{v,v+1}$, 
 where \[
-f(q) = \frac{q p_1(c + d) + (1 - q)\left[p_0(c + d) - p_0(d)\exp(-\rho\phi c)\right]}{1 - (1 - q)\exp(-\rho \phi c)} \]
+f(q) = \frac{q p_1(c + d) + (1 - q)\left[p_0(c + d) - p_0(d) e^{- \rho \phi c}\right]}{1 - (1 - q)e^{- \rho \phi c}} \]
 and $\stackrel{v}{\circ} f$ denotes the $v$-fold recursion of $f$.
 
 \todo[inline]{Comment on expected information for PIR}
@@ -358,14 +358,14 @@ l_{AIR}\left(\phi,\zeta\right) = \sum_{a,b,c,d} m_{a|bcd} \log \pi_{a|bcd}
 \end{equation}
 where 
 \begin{align*}
-\pi_{0|000} &= \left[1 - p_0(d)\right]\exp\left(-\rho\phi c\right) \\
-\pi_{0|010} &= 1 - p_0(c + d) - \left[1 - p_0(d)\right]\exp\left(-\rho\phi c\right) \\
-\pi_{0|100} &= p_0(d)\exp\left(-\rho\phi c\right) \\
-\pi_{0|110} &= p_0(c + d) - p_0(d) \exp\left(-\rho\phi c\right) \\
-\pi_{1|010} &= 1 - p_1(c + d) - \left[1 - p_1(d)\right]\exp\left[-\rho(1 - \phi) c\right] \\
-\pi_{1|011} &= \left[1 - p_1(d)\right]\exp\left[-\rho(1 - \phi) c\right] \\
-\pi_{1|110} &= p_1(c + d) - p_1(d) \exp\left[-\rho(1 - \phi) c\right] \\
-\pi_{1|111} &= p_1(d)\exp\left[-\rho(1 - \phi) c\right],
+\pi_{0|000} &= \left[1 - p_0(d)\right]e^{-\rho \phi c} \\
+\pi_{0|100} &= p_0(d)e^{-\rho \phi c} \\
+\pi_{0|010} &= 1 - p_0(c + d) - \left[1 - p_0(d)\right] e^{-\rho \phi c} \\
+\pi_{0|110} &= p_0(c + d) - p_0(d) e^{-\rho \phi c} \\
+\pi_{1|010} &= 1 - p_1(c + d) - \left[1 - p_1(d)\right] e^{- \rho (1 -\phi) c} \\
+\pi_{1|110} &= p_1(c + d) - p_1(d) e^{- \rho (1 -\phi) c} \\
+\pi_{1|011} &= \left[1 - p_1(d)\right] e^{- \rho (1 -\phi) c} \\
+\pi_{1|111} &= p_1(d) e^{- \rho (1 -\phi) c},
 \end{align*}
 the remaining transition probabilities are all equal to zero, and the sum is taken over the terms with strictly positive transition probabilities. 
 See Appendix \ref{app:AIR_derivation} for the derivation of these quantities. 
@@ -433,7 +433,7 @@ This appendix provides a derivation of Expression (\ref{eq:psi_k}) in terms of t
 The conditional probabilities of $Z(t_k) = 1, U_{k-1} = 1$ given $Z(t_{k-1})$ are:
 \begin{align*}
 \Pr\left(Z(t_k) = 1, U_{k-1} = 1 \left| Z(t_{k-1}) = 1 \right.\right) &= p_1(c + d) \\
-\Pr\left(Z(t_k) = 1, U_{k-1} = 1 \left| Z(t_{k-1}) = 0 \right.\right) &= p_0(c + d) - p_0(d) \exp\left(-\rho\phi c\right).
+\Pr\left(Z(t_k) = 1, U_{k-1} = 1 \left| Z(t_{k-1}) = 0 \right.\right) &= p_0(c + d) - p_0(d) e^{-\rho \phi c}.
 \end{align*}
 \end{lemma}
 
@@ -443,8 +443,8 @@ Observe that \[
 and \begin{align*}
 \Pr &\left(Z(t_k) = 1, U_{k-1} = 1 \left| Z(t_{k-1}) = 0 \right.\right) \\
 & \qquad \qquad = \int_0^{c} p_1(c - t) \rho \phi \exp\left(-\rho\phi t\right) dt \\
-& \qquad \qquad  = \phi \left[ 1 - \exp\left(- \rho (c + d)\right) - \exp\left(-\rho\phi c\right) + \exp\left(- \rho (\phi c + d)\right)\right] \\
-& \qquad \qquad = p_0(c + d) - p_0(d) \exp\left(-\rho\phi c\right).
+& \qquad \qquad  = \phi \left[ 1 - \exp\left(- \rho (c + d)\right) - e^{-\rho \phi c} + \exp\left(- \rho (\phi c + d)\right)\right] \\
+& \qquad \qquad = p_0(c + d) - p_0(d) e^{-\rho \phi c}.
 \end{align*}
 \end{proof}
 
@@ -456,12 +456,12 @@ It follows from the Markov property that
 \end{multline*}
 Next, Lemma \ref{lemma1} implies that \begin{multline*}
 \Pr\left(Z(t_k) = 1, U_{k-1} = 1 \left| U_1,...,U_{k-2} \right.\right) \\
-= \psi_{k-1} p_1(c + d) + (1 - \psi_{k-1}) \left[p_0(c + d) - p_0(d) \exp\left(-\rho\phi c\right)\right].
+= \psi_{k-1} p_1(c + d) + (1 - \psi_{k-1}) \left[p_0(c + d) - p_0(d) e^{-\rho \phi c}\right].
 \end{multline*}
 It therefore follows that 
 \begin{multline*}
 \Pr\left(Z(t_k) = 1 \left| U_1 = u_1,...,U_{k-2} = u_{k-2}, U_{k-1} = 1 \right.\right) \\
-= \frac{\psi_{k-1} p_1(c + d) + (1 - \psi_{k-1}) \left[p_0(c + d) - p_0(d) \exp\left(-\rho\phi c\right)\right]}{1 - (1 - \psi_{k-1})\exp\left(-\rho\phi c\right)}.
+= \frac{\psi_{k-1} p_1(c + d) + (1 - \psi_{k-1}) \left[p_0(c + d) - p_0(d) e^{-\rho \phi c}\right]}{1 - (1 - \psi_{k-1})e^{-\rho \phi c}}.
 \end{multline*}
 Thus, $\psi_k$ can be written as a function of $\psi_{k-1}$ and $u_{k-1}$, as given in (\ref{eq:psi_k}).
 
@@ -476,35 +476,50 @@ This appendix provides a derivation of the transition probabilities for the AIR 
 \label{lemma2}
 The conditional probability of $Z(t_k) = 1, W_{k-1} = 0$ given that $Z(t_{k-1}) = 1$ is
 \[
-\Pr\left(Z(t_k) = 1, W_{k-1} = 0 \left| Z(t_{k-1}) = 1 \right.\right) = p_1(c + d) - p_1(d) \exp\left(-\rho(1 - \phi)c\right). \]
+\Pr\left(Z(t_k) = 1, W_{k-1} = 0 \left| Z(t_{k-1}) = 1 \right.\right) = p_1(c + d) - p_1(d) e^{-\rho (1 - \phi) c}. \]
 \end{lemma}
 
 Turning to the eight remaining transition probabilities, note that
 \begin{align*}
 \pi_{0|100} &= \Pr\left(X_k = 1, U_k = 0 | X_{k-1} = 0\right) \\
 &= \Pr\left(X_k = 1 | Z(t_k + c) = 0\right) \Pr\left(U_k = 0 | X_{k-1} = 0\right) \\
-&= p_0(d)\exp\left(-\rho \phi c\right).
+&= p_0(d)e^{-\rho \phi c}.
 \end{align*}
 Similarly,
 \begin{align*}
-\pi_{0|000} &= \Pr\left(X_k = 0, U_k = 0 | X_{k-1} = 0\right) = \left[1 - p_0(d)\right]\exp\left(-\rho \phi c\right) \\
-\pi_{1|111} &= \Pr\left(X_k = 1, W_k = 1 | X_{k-1} = 1\right) = p_1(d)\exp\left(-\rho(1 - \phi)c\right) \\
-\pi_{1|011} &= \Pr\left(X_k = 0, W_k = 1 | X_{k-1} = 1\right) = \left[1 - p_1(d)\right]\exp\left(-\rho(1 - \phi)c\right).
+\pi_{0|000} &= \Pr\left(X_k = 0, U_k = 0 | X_{k-1} = 0\right) = \left[1 - p_0(d)\right]e^{-\rho \phi c} \\
+\pi_{1|111} &= \Pr\left(X_k = 1, W_k = 1 | X_{k-1} = 1\right) = p_1(d)e^{-\rho (1 - \phi) c} \\
+\pi_{1|011} &= \Pr\left(X_k = 0, W_k = 1 | X_{k-1} = 1\right) = \left[1 - p_1(d)\right]e^{-\rho (1 - \phi) c}.
 \end{align*}
 Next, it follows from Lemmas \ref{lemma1} and \ref{lemma2} that
 \begin{align*}
-\pi_{0|110} &= \Pr\left(X_k = 1, U_k = 1 | X_{k-1} = 0\right) = p_0(c + d) - p_0(d) \exp\left(-\rho \phi c\right) \\
-\pi_{1|110} &= \Pr\left(X_k = 1, W_k = 0 | X_{k-1} = 1\right) = p_1(c + d) - p_1(d) \exp\left(-\rho(1 - \phi)c\right).
+\pi_{0|110} &= \Pr\left(X_k = 1, U_k = 1 | X_{k-1} = 0\right) = p_0(c + d) - p_0(d) e^{-\rho \phi c} \\
+\pi_{1|110} &= \Pr\left(X_k = 1, W_k = 0 | X_{k-1} = 1\right) = p_1(c + d) - p_1(d) e^{-\rho (1 - \phi) c}.
 \end{align*}
 The two remaining transition probabilities can be obtained by subtraction:
 \begin{align*}
-\pi_{0|010} &= 1 - \pi_{0|000} - \pi_{0|100} - \pi_{0|110} = 1 - p_0(c + d) - \left[1 - p_0(d)\right]\exp\left(-\rho \phi c\right) \\
-\pi_{1|010} &= 1 - \pi_{1|011} - \pi_{1|110} - \pi_{1|111} = 1 - p_1(c + d) - \left[1 - p_1(d)\right]\exp\left(-\rho(1 - \phi)c\right).
+\pi_{0|010} &= 1 - \pi_{0|000} - \pi_{0|100} - \pi_{0|110} = 1 - p_0(c + d) - \left[1 - p_0(d)\right]e^{-\rho \phi c} \\
+\pi_{1|010} &= 1 - \pi_{1|011} - \pi_{1|110} - \pi_{1|111} = 1 - p_1(c + d) - \left[1 - p_1(d)\right]e^{-\rho (1 - \phi) c}.
 \end{align*}
 
-The information matrix for the AIR model can be derived using Billingsley's formula. The equilibrium probability that $X_k = 1$ is $\phi$, by which it follows that the equilibrium distribution of the states is given by \[
-\Pr(X_k = b, U_k = c, W_k = d) = (1 - \phi) \pi_{0|bcd} + \phi \phi_{1|bcd}, \]
-for $b,c,d = 0,1$. The derivatives of the transition probabilities with respect to $\phi$ and $\rho$ are as follows:
+The information matrix for the AIR model can be calculated from Equation (\ref{eq:Fisher_Info}), with equilibrium probabilities $\Pr(X_k = 0) = 1 - \phi$ and $\Pr(X_k = 1) = \phi$.
+The derivatives of the transition probabilities with respect to $\phi$ and $\rho$ are as follows:
 \begin{align*}
+\frac{\partial \pi_{0|000}}{\partial \phi} &= -\rho c \pi_{0|000} - e^{-\rho \phi c} \left(1 - e^{-\rho d}\right)  \\
+\frac{\partial \pi_{0|100}}{\partial \phi} &= -\rho c \pi_{0|100} + e^{-\rho \phi c} \left(1 - e^{-\rho d}\right) \\
+\frac{\partial \pi_{0|010}}{\partial \phi} &= - \left(1 - e^{-\rho(c + d)}\right) + \rho c \pi_{0|000} + e^{-\rho \phi c} \left(1 - e^{-\rho d}\right) \\
+\frac{\partial \pi_{0|110}}{\partial \phi} &= \left(1 - e^{-\rho(c + d)}\right) + \rho c \pi_{0|100} - e^{-\rho \phi c} \left(1 - e^{-\rho d}\right) \\
+\frac{\partial \pi_{1|010}}{\partial \phi} &= - \left(1 - e^{-\rho(c + d)}\right) - \rho c \pi_{1|011} + e^{-\rho (1 - \phi) c} \left(1 - e^{-\rho d}\right) \\
+\frac{\partial \pi_{1|110}}{\partial \phi} &= \left(1 - e^{-\rho(c + d)}\right) - \rho c \pi_{1|111} - e^{-\rho (1 - \phi) c} \left(1 - e^{-\rho d}\right) \\
+\frac{\partial \pi_{1|011}}{\partial \phi} &= \rho c \pi_{1|011} - e^{-\rho (1 - \phi) c} \left(1 - e^{-\rho d}\right) \\
+\frac{\partial \pi_{1|111}}{\partial \phi} &= \rho c \pi_{1|111} + e^{-\rho (1 - \phi) c} \left(1 - e^{-\rho d}\right) \\
+\frac{\partial \pi_{0|000}}{\partial \rho} &= -\phi c \pi_{0|000} - \phi d e^{-\rho(\phi c + d)} \\
+\frac{\partial \pi_{0|100}}{\partial \rho} &= -\phi c \pi_{0|100} + \phi d e^{-\rho(\phi c + d)} \\
+\frac{\partial \pi_{0|010}}{\partial \rho} &= -\phi(c + d)e^{-\rho(c + d)} + \phi c \pi_{0|000} + \phi d e^{-\rho(\phi c + d)} \\
+\frac{\partial \pi_{0|110}}{\partial \rho} &= \phi(c + d)e^{-\rho(c + d)} + \phi c \pi_{0|000} - \phi d e^{-\rho(\phi c + d)} \\
+\frac{\partial \pi_{1|010}}{\partial \rho} &= (1 - \phi)(c + d) e^{-\rho(c + d)} + (1 - \phi) c \phi_{1|011} - (1 - \phi)d e^{-\rho[(1 - \phi)c + d]} \\
+\frac{\partial \pi_{1|110}}{\partial \rho} &= -(1 - \phi)(c + d) e^{-\rho(c + d)} + (1 - \phi) c \phi_{1|111} + (1 - \phi)d e^{-\rho[(1 - \phi)c + d]} \\
+\frac{\partial \pi_{1|011}}{\partial \rho} &= -(1 - \phi) c \phi_{1|011} + (1 - \phi)d e^{-\rho[(1 - \phi)c + d]} \\
+\frac{\partial \pi_{1|111}}{\partial \rho} &= -(1 - \phi) c \phi_{1|111} - (1 - \phi)d e^{-\rho[(1 - \phi)c + d]}
 \end{align*}
 \end{document}
