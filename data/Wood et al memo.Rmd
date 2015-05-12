@@ -9,12 +9,12 @@ output: pdf_document
 library(ARPobservation)
 library(ggplot2)
 library(plyr)
+library(Pusto)
 source("../R/PIR-APP.R")
-source("../R/parallel setup.R")
 wood <- read.csv("Wood et al data.csv", na.strings = ".", stringsAsFactors = FALSE)
 ```
 
-```{r bootstrap, echo = FALSE, cache = TRUE, warning = FALSE}
+```{r bootstrap, echo = FALSE, cache = TRUE, warning = FALSE, message = FALSE}
 source_func <- ls()
 cluster <- start_parallel(source_func)
 clusterEvalQ(cluster, library(ARPobservation))
