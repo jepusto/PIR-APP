@@ -15,6 +15,10 @@ wood <- read.csv("Wood et al data.csv", na.strings = ".", stringsAsFactors = FAL
 ```
 
 ```{r bootstrap, echo = FALSE, cache = TRUE, warning = FALSE}
+source_func <- ls()
+cluster <- start_parallel(source_func)
+clusterEvalQ(cluster, library(ARPobservation))
+
 PIR_wrap <- function(data_line, c = 1, d = 0, k_prior = 1, theta_prior = Inf){
   
   U <- data_line[4:70]
@@ -23,7 +27,7 @@ PIR_wrap <- function(data_line, c = 1, d = 0, k_prior = 1, theta_prior = Inf){
   results <- PIRbootstrap(U = U, c = c, d = d, coding = data_line[3], 
          penalty_func = Beta_Gamma(k_mu = k_prior, k_lambda = k_prior, 
                                    theta_mu = theta_prior, 
-                                   theta_lambda = theta_prior), transform = "exp", iterations = 10)
+                                   theta_lambda = theta_prior), transform = "exp", iterations = 5000)
   
   summary <- mean(U)
   
@@ -32,9 +36,11 @@ PIR_wrap <- function(data_line, c = 1, d = 0, k_prior = 1, theta_prior = Inf){
 }
 
 
-mle <- adply(wood, 1, PIR_wrap)
+mle <- adply(wood, 1, PIR_wrap, .parallel = TRUE)
 
-ple <- adply(wood, 1, PIR_wrap, k_prior = 1.5, theta_prior = 10)
+ple <- adply(wood, 1, PIR_wrap, k_prior = 1.5, theta_prior = 10, .parallel = TRUE)
+
+stopCluster(cluster)
 
 mle$estimator <- "mle"
 ple$estimator <- "ple"
@@ -103,3 +109,7 @@ qplot(summary, est, ymin = CI_L, ymax = CI_U, color = factor(Measurement.Type),
 ```
 
 The fourth plot contains the PLES for incidence plotted against the summary proportion. Once again, the pattern appears similar to the MLEs, although the general trend seems to be that the estimates of incidence are slightly higher than with the MLEs. The at-floor estimates are also no longer at floor. Perhaps the slight increase in the estimates counteracts the slight downward push in the prevalence estimates?
+
+#Conclusions
+
+In the case of this data, the PLEs do seem to work slightly better for the edge cases, but without an unbiased estimate of incidence it's difficult to say which estimates are more accurate. We have our own simulation data that suggests the PLE, but now that I've done this it occurs to me that we haven't done anything to see if there's any part of the parameter space where the MLE performs better than the PLE. For the most part, even with a large number of bootstraps, the confidence intervals remain quite wide.
