@@ -1,0 +1,105 @@
+---
+title: "Wood et al Data Memo"
+author: "Daniel M. Swan"
+date: "Monday, May 11, 2015"
+output: pdf_document
+---
+
+```{r setup, echo=FALSE, fig.width = 7, fig.height = 7}
+library(ARPobservation)
+library(ggplot2)
+library(plyr)
+source("../R/PIR-APP.R")
+source("../R/parallel setup.R")
+wood <- read.csv("Wood et al data.csv", na.strings = ".", stringsAsFactors = FALSE)
+```
+
+```{r bootstrap, echo = FALSE, cache = TRUE, warning = FALSE}
+PIR_wrap <- function(data_line, c = 1, d = 0, k_prior = 1, theta_prior = Inf){
+  
+  U <- data_line[4:70]
+  U <- as.numeric(U[(U == 1|U == 0) & !is.na(U)])
+  
+  results <- PIRbootstrap(U = U, c = c, d = d, coding = data_line[3], 
+         penalty_func = Beta_Gamma(k_mu = k_prior, k_lambda = k_prior, 
+                                   theta_mu = theta_prior, 
+                                   theta_lambda = theta_prior), transform = "exp", iterations = 10)
+  
+  summary <- mean(U)
+  
+  results$summary <- summary
+  results
+}
+
+
+mle <- adply(wood, 1, PIR_wrap)
+
+ple <- adply(wood, 1, PIR_wrap, k_prior = 1.5, theta_prior = 10)
+
+mle$estimator <- "mle"
+ple$estimator <- "ple"
+
+wood <- rbind(mle, ple)
+```
+
+This document contains a brief memo on the MLE and PLE for PIR and WIR data as applied to a subset of the data from Wood, Hojnoski, Laracy, and Olson (2015).
+
+#Data and Analysis
+
+The authors provided us with scans of the original hard copies of interval data for 16 of the 24 participants in the study. Two coders transcribed the data to a spreadsheet independently. After checking for agreement, the single disagreement on a single interval for one record was checked against the scanned records and corrected. For the purposes of this analysis, any missing intervals in the middle of the recording were simply discarded and we treated only those intervals containing data as the "complete" record without any missingness in the intervals.
+
+#Prevalence
+
+```{r phi_mle, echo=FALSE}
+qplot(summary, est, ymin = CI_L, ymax = CI_U, color = factor(Measurement.Type), 
+      geom = "pointrange",
+      main = "Prevalence MLE by Proportion of Intervals",
+      xlab = "Proportion",
+      ylab = "Prevalence",
+      data = subset(wood, parm == "phi" & estimator == "mle")) +
+  theme_bw()+
+  theme(legend.position = "top", legend.title = element_blank())
+```
+
+The first plot contains the MLEs for prevalence plotted against the proportion of intervals given a score of "1", or the "summary" estimate. The summary WIR estimates are generally lower than the PIR estimates, consistent with the fact that WIR tends to underestimate prevalence and PIR tends to overestimate prevalence. As when we applied this data to another dataset, the PIR estimates of prevalence are generally slightly lower than WIR estimaates. When summary proportion is fairly high, above about 0.95 for PIR and as low as 0.75 for WIR, and then estimates automatically go to the ceiling of prevalence. In addition, the difference between the two is slightly more extreme than it was in other datasets - probably a byproduce of the modified PIR used in Wood et al (2015). Potentially the MLE may be over-correcting for the slightly reduced upward bias in the modified PIR estimates.
+
+```{r phi_ple, echo=FALSE}
+qplot(summary, est, ymin = CI_L, ymax = CI_U, color = factor(Measurement.Type), 
+      geom = "pointrange",
+      main = "Prevalence PLE by Proportion of Intervals Containing Behavior",
+      xlab = "Proportion",
+      ylab = "Prevalence",
+      data = subset(wood, parm == "phi" & estimator == "ple"))+
+  theme_bw()+
+  theme(legend.title = element_blank(), legend.position = "top")
+```
+
+The second plot contains the PLES for prevalence plotted once again against the summary proportion. The general pattern is similar, although the WIR and PIR appear to be slightly closer together, but still farther apart than was observed in other datasets. In contrast to the MLEs, no ceiling effect is observed
+
+#Incidence
+
+```{r zeta_mle, echo=FALSE}
+qplot(summary, est, ymin = CI_L, ymax = CI_U, color = factor(Measurement.Type),
+      geom = "pointrange",
+      main = "Incidence MLE by Proportion of Intervals Containing Behavior",
+      xlab = "Proportion",
+      ylab = "Prevalence",
+      data = subset(wood, parm == "zeta" & estimator == "mle"))+
+  theme_bw()+
+  theme(legend.title = element_blank(), legend.position = "top")
+```
+
+The third plot contains the MLEs for incidence plotted against the summary proportion. Here it's slightly more difficult to judge the relationship of the two, but it appears that WIR has slightly higher estimates of incidence. Perhaps due to the fact that WIR is more likely to have a larger number of discrete chains of intervals scored as  1, suggesting more discrete events? I'm not familiar enough with the math to comment further. Also of note - the PIR estimates that were at ceiling have at-floor estimates of incidence.
+
+```{r zeta_ple, echo=FALSE}
+qplot(summary, est, ymin = CI_L, ymax = CI_U, color = factor(Measurement.Type),
+      geom = "pointrange",
+      main = "Incidence PLE by Proportion of Intervals Containing Behavior",
+      xlab = "Proportion",
+      ylab = "Prevalence",
+      data = subset(wood, parm == "zeta" & estimator == "ple"))+
+  theme_bw()+
+  theme(legend.title = element_blank(), legend.position = "top")
+```
+
+The fourth plot contains the PLES for incidence plotted against the summary proportion. Once again, the pattern appears similar to the MLEs, although the general trend seems to be that the estimates of incidence are slightly higher than with the MLEs. The at-floor estimates are also no longer at floor. Perhaps the slight increase in the estimates counteracts the slight downward push in the prevalence estimates?
