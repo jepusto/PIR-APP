@@ -5,20 +5,20 @@ date: "Monday, May 11, 2015"
 output: pdf_document
 ---
 
-```{r setup, echo=FALSE, fig.width = 7, fig.height = 7}
+```{r setup, echo=FALSE, fig.width = 7, fig.height = 7, message = FALSE}
 library(ARPobservation)
 library(ggplot2)
 library(plyr)
 library(knitr)
 #source("R/PIR-APP.R")
-#source("R/parallel setup.R")
 #wood <- read.csv("data/Wood et al data.csv", na.strings = ".", stringsAsFactors = FALSE)
+# library(Pusto)
 source("../R/PIR-APP.R")
 source("../R/parallel setup.R")
 wood <- read.csv("Wood et al data.csv", na.strings = ".", stringsAsFactors = FALSE)
 ```
 
-```{r bootstrap, echo = FALSE, cache = TRUE, warning = FALSE}
+```{r bootstrap, echo = FALSE, cache = TRUE, warning = FALSE, message = FALSE}
 PIR_wrap <- function(data_line, c = 1, d = 0, k_prior = 1, theta_prior = Inf){
   
   U <- data_line[4:70]
@@ -27,7 +27,7 @@ PIR_wrap <- function(data_line, c = 1, d = 0, k_prior = 1, theta_prior = Inf){
   results <- PIRbootstrap(U = U, c = c, d = d, coding = data_line[3], 
          penalty_func = Beta_Gamma(k_mu = k_prior, k_lambda = k_prior, 
                                    theta_mu = theta_prior, 
-                                   theta_lambda = theta_prior), transform = "exp", iterations = 100)
+                                   theta_lambda = theta_prior), transform = "exp", iterations = 101)
   
   summary <- mean(U)
   
@@ -36,9 +36,8 @@ PIR_wrap <- function(data_line, c = 1, d = 0, k_prior = 1, theta_prior = Inf){
 }
 
 source_func <- ls()
-cluster <- start_parallel(source_func)
+invisible(cluster <- start_parallel(source_func))
 invisible(clusterEvalQ(cluster, library(ARPobservation)))
-
 
 ple <- adply(wood, 1, PIR_wrap, k_prior = 1.5, theta_prior = 10, .parallel = TRUE)
 
