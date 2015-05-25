@@ -5,3 +5,4 @@ plyr
 foreach
 iterators
 doParallel
+knitr
