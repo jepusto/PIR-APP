@@ -27,7 +27,7 @@ PIR_wrap <- function(data_line, c = 1, d = 0, k_prior = 1, theta_prior = Inf){
   results <- PIRbootstrap(U = U, c = c, d = d, coding = data_line[3], 
          penalty_func = Beta_Gamma(k_mu = k_prior, k_lambda = k_prior, 
                                    theta_mu = theta_prior, 
-                                   theta_lambda = theta_prior), transform = "exp", iterations = 101)
+                                   theta_lambda = theta_prior), transform = "exp", iterations = 5000)
   
   summary <- mean(U)
   
@@ -61,6 +61,8 @@ names(PIR)[5:9] <- paste0("PIR", names(PIR[5:9]))
 names(WIR)[5:9] <- paste0("WIR", names(WIR[5:9]))
 
 ple_wide <- merge(PIR[,-3],WIR[,-3])
+
+save(ple, file = "Wood PLE.RData")
 ```
 
 This document contains a brief memo on the penalized likelihood estimator (PLE) for PIR and WIR data that we have been developing as applied to a subset of the data from Wood, Hojnoski, Laracy, and Olson (2015). All of the confidence intervals are obtained via a parametric bootstrap procedure.
@@ -139,7 +141,7 @@ qplot(CDR, est, ymin = CI_L, ymax = CI_U, color = Measurement.Type,
       theme_bw()
 ```
 
-The third plot displays the PLE estimates of prevalence from both PIR and WIR plotted against the continuous duration recording proportion. The vertical bars overlaid on the points represents the parametric bootstrapped confidence intervals. We can use this as a benchmark for the bias of our estimates. The grey line is a line through $x = y$, where all of the points would lie if there was perfect agreement between CDR and the other observation methods. This line also allows for easy assessment of whether or not the confidence interval provides coverage of the "true" value. The PIR data appears to be an underestimate of prevalence, while the WIR data is an overestimate, although to a lesser degree. ***The WIR CIs also generally cover the CDR proportion (coverage = `r WIRcovered`) whereas the PIR CIs coverage is slightly lower (coverage = `r PIRcovered`).*** 
+The third plot displays the PLE estimates of prevalence from both PIR and WIR plotted against the continuous duration recording proportion. The vertical bars overlaid on the points represents the parametric bootstrapped confidence intervals. We can use this as a benchmark for the bias of our estimates. The grey line is a line through $x = y$, where all of the points would lie if there was perfect agreement between CDR and the other observation methods. This line also allows for easy assessment of whether or not the confidence interval provides coverage of the "true" value. The PIR data appears to be an underestimate of prevalence, while the WIR data is an overestimate, although to a lesser degree. The WIR CIs also generally cover the CDR proportion (coverage = `r round(WIRcovered, digits =2)`) whereas the PIR CIs coverage is slightly lower (coverage = `r round(PIRcovered, digits = 2)`).
 
 ```{r PIR_CDR, echo=FALSE}
 # qplot(CDR, PIRest, ymin = PIRCI_L, ymax = PIRCI_U, 
@@ -173,12 +175,15 @@ The fourth plot displays measurement error relative to the CDR value of prevalen
 
 ```{r mse, echo = FALSE}
 phi$sq_error <- with(phi, (phiest - CDR)^2)
+phi$sq_errorMTS <- with(phi, (MTS - CDR)^2)
 phi$sq_errorSum <- with(phi, (summary - CDR)^2)
-mean_sq_error <- ddply(phi, .(Measurement.Type), summarize, MSE = sum(sq_error)/16, MSEsum = sum(sq_errorSum)/16)
-kable(mean_sq_error, col.names = c("Measurement Type", "PLE", "Summary"), caption = "Error", digits = 4)
+mean_sq_error <- ddply(phi, .(Measurement.Type), summarize, MSE = sum(sq_error)/16, MSEMTS = sum(sq_errorMTS)/16, MSEsum = sum(sq_errorSum)/16)
+kable(mean_sq_error, col.names = c("Measurement Type", "PLE", "MTS", "Summary"), caption = "Error", digits = 4)
 ```
 
-Table 1 contains the value of the "mean squared error" of both the PLEs and the summary measurements. In this case we define "mean squared error" as $\frac{\sum_{i = 1}^{n} (\hat\theta - CDR)^2}{n}$, where $\hat\theta$ is a given estimate of prevalence. The error for PIR PLE is about twice that of the summary measurement, while the error for WIR PLE is very small compared to the summary measurement. This may be an issue of the model not accounting for the slightly different method of PIR used in this data, whereas our model is correct for the WIR data.
+Table 1 contains the value of the "mean squared error" of the three interval recording procedures. In this case we define "mean squared error" as $\frac{\sum_{i = 1}^{n} (\hat\theta - CDR)^2}{n}$, where $\hat\theta$ is a given estimate of prevalence. The error for PIR PLE is about twice that of the summary measurement, while the error for WIR PLE is very small compared to the summary measurement. The MTS error is roughly equivalant to the WIR error, which is excellent considering that MTS estimates are generally considered to be "unbiased" under very minimal assumptions. The discrepancey between PIR and WIR error is probably an issue of the model not accounting for the slightly different method of PIR used in this data, whereas our model is appropriately specified for the WIR data.
+
+****** `r #here for formatting reasons`
 
 ```{r prev_cor, echo = FALSE, fig.align = 'left', warning = FALSE}
 Tcors <- ddply(ple[ple$parm == "phi",], .(Measurement.Type), summarize,
@@ -257,12 +262,13 @@ inc2 + geom_point() +
 #          geom_errorbar()+
         labs(title = "PIR and WIR estimates of incidence",
         x= "WIR", y = "PIR") +
+        geom_abline(slope = 1, intercept = 0)+
         coord_cartesian(xlim = c(0,.75), ylim = c(0,.50))+
         theme_bw()
 ```
-The fifth plot and sixth plots display the PIR and WIR estimates of incidence displayed against one another. The third plot also displays the CIS for incidence. Both plots have been provided because the tight clustering of incidence can make it difficult to interpret the third plot. The values of incidence have been scaled on a per-interval basis. That is to say, if the estimate of incidence is 0.25 we have on average one quarter of a behavior per interval, or about one new behavior every four intervals on average. This second value is easily calculated from the first - if we denote incidence as $\zeta$ then the average number of intervals per new behavior is simply $1/\zeta$.
+The fifth plot and sixth plots display the PIR and WIR estimates of incidence displayed against one another. The third plot also displays the CIS for incidence. Both plots have been provided because the tight clustering of incidence can make it difficult to interpret the fifth plot. The values of incidence have been scaled on a per-interval basis. That is to say, if the estimate of incidence is 0.25 we have on average one quarter of a behavior per interval, or about one new behavior every four intervals on average. This second value is easily calculated from the first - if we denote incidence as $\zeta$ then the average number of intervals per new behavior is simply $1/\zeta$.
 
-The values of incidence from PIR and WIR seem to match each other more closely than prevalence, although there are some points where the differences are notable. ***The CIS for incidence are very wide, much like the CIs for prevalence.*** Unlike prevalence, we have no direct estimates of incidence to compare our estimates to, so it is difficult to characterize which of the two types of observation procedures best estimate the "true" value based on the data alone.
+As with prevalence, the general pattern is that the PIR estimates are lower than the WIR estimates, as well as having some even more extreme deviations than prevalence. Unlike prevalence, we have no direct estimates of incidence to compare our estimates to, so it is difficult to characterize which of the two types of observation procedures best estimate the "true" value based on the data alone.
 
 #Conclusions
 
