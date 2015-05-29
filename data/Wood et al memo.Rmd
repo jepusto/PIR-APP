@@ -67,15 +67,19 @@ save(ple, file = "Wood PLE.RData")
 
 This document contains a brief memo on the penalized likelihood estimator (PLE) for PIR and WIR data that we have been developing as applied to a subset of the data from Wood, Hojnoski, Laracy, and Olson (2015). All of the confidence intervals are obtained via a parametric bootstrap procedure.
 
+Continuous duration recording (CDR) is the ideal method for direct observation of behavior, because it provides unbiased estimate of prevalence and incidence. Prevalence we define as the true proportion of time the behavior occurs, and incidence we define as the rate at which new behaviors occur. However, because of the amount of sustained effort it requires of the observer, CDR is not commonly used in field settings. More frequently, some form of interval recording procedure is used. Partial interval recording (PIR), whole interval recording (WIR), and momentary time sampling (MTS) are three common, well known methods used in direct observation of behavior. Partial interval recording slices up each observation session into a number of equal-length intervals -- for instance a 15 minute observation session might be cut into 45 20-second intervals. Any interval containing the behavior, no matter how brief the behavior, is scored as 1 and any interval with no instance of the behavior is scored as a 0. Whole interval recording is similar, except that an interval must contain the behavior for its whole length to be scored a 1 and is otherwise scored a 0. Momemtary time sampling, instead of measuring the presence or absence of the behavior within the interval, measures the presence or absence of the behavior at the "moment"" at beginning and end of each interval. Once again, presence of the behavior gives that moment a score of 1 and the absence gives that moment a score of 0.  
+
+The problem with these three methods is that PIR, WIR, and MTS as they are traditionally employed only allow for a single parameter to be estimated. This is typically a "summary" estimate, the proportion of intervals scored as having the behavior of interest present. When trying to summarize any "state" behavior - that is any behavior with a discrete length rather than one that occurs instantaneously - we are interested in characterizing both prevalence and incidence. In the case of PIR and WIR, the summary measure is often treated as an estimate of prevalence. In reality the summary proportion is a combination of both prevalence and incidence, with PIR overestimating and WIR underestimating prevalence. In the case of MTS, the summary proportion is an unbiased estimate of prevalence under very weak assumptions, but we are still left without any estimate of incidence. Both parameters are necessarily of interest, as a behavior with high prevalence and low incidence is very different from one with high prevalence and high incidence. In the case of high prevalence and low incidence, you might have a child who is actively engaged in learning for a large proportion of the time with only a very small number of instances where they are off task. In the case of high prevalence and high incidence, you have a child who is "engaged" for short bouts, but also has many instances of off-task behavior. These very different scenarios likely lead to very different learning outcomes, yet with only an estimate of prevalence we might characterize these two scenarios as being very similar. Our PLE method is an attempt to give researchers who wish to continue utilizing interval recording procedures a method of estimating both prevalence and incidence.
+.
 #Data and Analysis
 
-We were provided with scans of the original hard copies of interval data for 16 of the 24 participants in the study. Two coders transcribed the data to a spreadsheet independently], and then the data was checked for agreement. For the purposes of this analysis, any missing intervals in the middle of the recording were simply discarded and we treated only those intervals containing data as the "complete" record without accounting for missingness in our model.
+The original data for Wood et al (2015) came from 13 video-taped sessions of 24 target student participants, with between one and four children captured by each video. The first author coded the sessions using PIR, WIR, and MTS. A senior graduate student coded the videos using continuous duration recording, so that the first authors' coding would not be influenced by knowledge of the "true" value of prevalence. The authors employed a variant of PIR sometimes seen in the direct observation literature that we refer to as fractional interval recording (FIR). In FIR, rather than marking any interval containing the target behavior a 1, the behavior must take last some pre-determined proportion of the interval to be considered present in the interval. In the case of the Wood et al (2015) data, the behavior needed to last for at least 5 seconds, or 1/3 of the interval, to be considered present in the interval. The FIR data from the paper does not precisely conform to the model used in our PIR PLEs, but this allows us to examine the performance of the PLEs when the model is slightly mis-specified and compare it to the data from when the model is correctly specified by comparing it to the WIR data.
+
+We were provided with scans of the original hard copies of interval level-data for 16 of the 24 participants in the study. Two coders transcribed the data to a spreadsheet independently, and then the data was checked for agreement. For the purposes of this analysis, any missing intervals in the middle of the recording were simply discarded and we treated only those intervals containing data as the "complete" record without accounting for missingness in our model.
 
 In order to compare the estimates to a "true" metric, we hand-transcribed the continuous duration recording values of prevalence from Table 1 of Wood et al (2015) -- along with the MTS values, teacher Ratings, and expert ratings -- by matching the summary values of both PIR and WIR to the other estimates in the table. Both the CDR and MTS values are displayed in this document as proportions rather than percentages to conform to the convention we typically use.
 
-#Prevalence and Incidence
-
-When trying to summarize any "state" behavior - that is any behavior with a discrete length rather than one that occurs instantaneously - we are interested in characterizing the behavior in two ways, prevalence and incidence. Prevalence we define as the true proportion of time the behavior occurs. Incidence we define as the rate at which new behaviors occur. Both parameters are necessarily of interest, as a behavior with high prevalence and low incidence is very different from one with high prevalence and high incidence. In the first case, you might have a child who is actively engaged in learning for a large proportion of the time with only a very small number of instances where they are off task. In the second case you have a child who is "engaged" for short bouts, but also has many instances of off-task behavior. 
+#Prevalence and Incidence 
 
 ```{r prep,echo=FALSE}
 phi <- ple[ple$parm == "phi",]
@@ -128,7 +132,7 @@ WIRcovered <- with(WIR[WIR$parm == "phi",],sum(WIRCI_L <= CDR & WIRCI_U >= CDR)/
 The second plot displays the PLE estimates of prevalence from PIR and WIR plotted against one another. The grey line is a line that passes through $x = y$, where the points would lay if the agreement between the PIR and WIR observations was exact. The plot suggests that the PIR estimates of prevalence are generally lower than the WIR estimates. It is possible that this is attributable to the fact that the PIR used in Wood et al (2015) was a modified version. Putting a minimum on the length of time required for a behavior to "count" as having occurred likely reduced the overall upward bias on prevalence, bias that we attempt to account for in our model.
 
 
-```{r PIRWIRCDR, echo = FALSE}
+```{r PIRWIRCDR, echo = FALSE, fig.height = 8}
 qplot(CDR, est, ymin = CI_L, ymax = CI_U, color = Measurement.Type,
       position = position_jitter(w = .05),
       geom = "pointrange",
@@ -138,29 +142,12 @@ qplot(CDR, est, ymin = CI_L, ymax = CI_U, color = Measurement.Type,
       data = subset(ple, parm == "phi"))+
       geom_abline(slope = 1, intercept = 0, color = "grey")+
       coord_cartesian(xlim = c(0.5,1), ylim = c(0,1))+
-      theme_bw()
+      theme_bw()+
+      theme(legend.position = "none")+
+      facet_wrap(~Measurement.Type, nrow = 2)
 ```
 
 The third plot displays the PLE estimates of prevalence from both PIR and WIR plotted against the continuous duration recording proportion. The vertical bars overlaid on the points represents the parametric bootstrapped confidence intervals. We can use this as a benchmark for the bias of our estimates. The grey line is a line through $x = y$, where all of the points would lie if there was perfect agreement between CDR and the other observation methods. This line also allows for easy assessment of whether or not the confidence interval provides coverage of the "true" value. The PIR data appears to be an underestimate of prevalence, while the WIR data is an overestimate, although to a lesser degree. The WIR CIs also generally cover the CDR proportion (coverage = `r round(WIRcovered, digits =2)`) whereas the PIR CIs coverage is slightly lower (coverage = `r round(PIRcovered, digits = 2)`).
-
-```{r PIR_CDR, echo=FALSE}
-# qplot(CDR, PIRest, ymin = PIRCI_L, ymax = PIRCI_U, 
-#       geom = "pointrange",
-#       main = "PIR estimate plotted against CDR proportion",
-#       xlab = "CDR",
-#       ylab = "PIR",
-#       data = subset(ple_wide, parm == "phi"))+
-#   theme_bw()
-```
-```{r WIR_CDR, echo = FALSE}
-# qplot(CDR, WIRest, ymin = WIRCI_L, ymax = WIRCI_U, 
-#       geom = "pointrange",
-#       main = "WIR estimate plotted against CDR proportion",
-#       xlab = "CDR",
-#       ylab = "PIR",
-#       data = subset(ple_wide, parm == "phi"))+
-#   theme_bw()
-```
 
 ```{r meas_error, echo = FALSE}
 phi$error <- with(phi, (CDR - phiest)/CDR)
@@ -178,14 +165,17 @@ phi$sq_error <- with(phi, (phiest - CDR)^2)
 phi$sq_errorMTS <- with(phi, (MTS - CDR)^2)
 phi$sq_errorSum <- with(phi, (summary - CDR)^2)
 mean_sq_error <- ddply(phi, .(Measurement.Type), summarize, MSE = sum(sq_error)/16, MSEMTS = sum(sq_errorMTS)/16, MSEsum = sum(sq_errorSum)/16)
-kable(mean_sq_error, col.names = c("Measurement Type", "PLE", "MTS", "Summary"), caption = "Error", digits = 4)
+mse <- mean_sq_error[c(1,2,4)]
+mse <- rbind(mse, c("MTS", "-", mean_sq_error[1,3]))
+mse[1:2,2] <- round(as.numeric(mse[1:2,2]), digits = 4)
+mse[,3] <- round(as.numeric(mse[,3]), digits = 4)
+kable(mse, col.names = c("Measurement Type", "PLE", "Summary"), caption = "Error", digits = 4)
 ```
 
 Table 1 contains the value of the "mean squared error" of the three interval recording procedures. In this case we define "mean squared error" as $\frac{\sum_{i = 1}^{n} (\hat\theta - CDR)^2}{n}$, where $\hat\theta$ is a given estimate of prevalence. The error for PIR PLE is about twice that of the summary measurement, while the error for WIR PLE is very small compared to the summary measurement. The MTS error is roughly equivalant to the WIR error, which is excellent considering that MTS estimates are generally considered to be "unbiased" under very minimal assumptions. The discrepancey between PIR and WIR error is probably an issue of the model not accounting for the slightly different method of PIR used in this data, whereas our model is appropriately specified for the WIR data.
 
-****** `r #here for formatting reasons`
-
 ```{r prev_cor, echo = FALSE, fig.align = 'left', warning = FALSE}
+library(reshape2)
 Tcors <- ddply(ple[ple$parm == "phi",], .(Measurement.Type), summarize,
                Summary_cor = cor(summary, Teacher, method = "spearman"),
                MTS_cor = cor(MTS, Teacher, method = "spearman"),
@@ -196,6 +186,17 @@ Tcors <- ddply(ple[ple$parm == "phi",], .(Measurement.Type), summarize,
                CDR_p = cor.test(CDR, Teacher, method = "spearman")$p.value,
                Est_p = cor.test(est, Teacher, method = "spearman")$p.value)
 
+Tcors_melt <- melt(Tcors, measure.vars = 2:9, id.vars = 1)
+Tcors_melt <- Tcors_melt[c(1:3,5,7:11,13,15:16),]
+Tcors_melt$Measurement.Type <- c("PIR", "WIR", "MTS", "CDR", "PIR", "WIR")
+Tcors_melt$variable <- c("Summary", "Summary", "Summary", "Summary", "PLE", "PLE",
+                         "Summary_p", "Summary_p", "Summary_p", "Summary_p",
+                         "PLE_p", "PLE_p")
+Tcors_table <- dcast(Tcors_melt, Measurement.Type ~ variable)
+Tcors_table[,2:5] <- round(Tcors_table[, 2:5], digits = 2)
+Tcors_table[1:2,2:3] <- "-"
+Tcors_table <- Tcors_table[c(3,4,2,1),]
+
 Ecors <- ddply(ple[ple$parm == "phi",], .(Measurement.Type), summarize,
                Summary_cor = cor(summary, Expert.Rater, method = "spearman"),
                MTS_cor = cor(MTS, Expert.Rater, method = "spearman"),
@@ -205,32 +206,28 @@ Ecors <- ddply(ple[ple$parm == "phi",], .(Measurement.Type), summarize,
                MTS_p = cor.test(MTS, Expert.Rater, method = "spearman")$p.value,
                CDR_p = cor.test(CDR, Expert.Rater, method = "spearman")$p.value,
                Est_p = cor.test(est, Expert.Rater, method = "spearman")$p.value)
-Tcors <- within(Tcors,{
-  Est <- paste0(as.character(round(Est_cor, digits = 2)), ", p = ", as.character(round(Est_p, digits = 2)))
-  CDR <- paste0(as.character(round(CDR_cor, digits = 2)), ", p = ", as.character(round(CDR_p, digits = 2)))
-  MTS <- paste0(as.character(round(MTS_cor, digits = 2)), ", p = ", as.character(round(MTS_p, digits = 2)))
-  summary <- paste0(as.character(round(Summary_cor, digits = 2)), ", p = ", as.character(round(Summary_p, digits = 2)))
-})[,-(2:9)]
 
-Ecors <- within(Ecors,{
-  Est <- paste0(as.character(round(Est_cor, digits = 2)), ", p = ", as.character(round(Est_p, digits = 2)))
-  CDR <- paste0(as.character(round(CDR_cor, digits = 2)), ", p < .01 ")
-  MTS <- paste0(as.character(round(MTS_cor, digits = 2)), ", p < .01")
-  summary <- paste0(as.character(round(Summary_cor, digits = 2)), ", p = ", as.character(round(Summary_p, digits = 2)))
-})[,-(2:9)]
-# cors[,2] <- paste0(as.character(round(cors[,2], digits = 2)), ", p > .05")
-# cors[,3] <- paste0(as.character(round(cors[,3], digits = 2)), ", p < .05")
+Ecors_melt <- melt(Ecors, measure.vars = 2:9, id.vars = 1)
+Ecors_melt <- Ecors_melt[c(1:3,5,7:11,13,15:16),]
+Ecors_melt$Measurement.Type <- c("PIR", "WIR", "MTS", "CDR", "PIR", "WIR")
+Ecors_melt$variable <- c("Summary", "Summary", "Summary", "Summary", "PLE", "PLE",
+                         "Summary_p", "Summary_p", "Summary_p", "Summary_p",
+                         "PLE_p", "PLE_p")
+Ecors_table <- dcast(Ecors_melt, Measurement.Type ~ variable)
+Ecors_table[,2:5] <- round(Ecors_table[, 2:5], digits = 2)
+Ecors_table[1:2,2:3] <- "-"
+Ecors_table <- Ecors_table[c(3,4,2,1),]
 
-kable(Tcors, 
-        col.names = c("Observational Method", "Summary Value", "MTS", "CDR", "PLE"), 
-      caption = "Spearman's Rho - Teacher Ratings", digits = 2)
+kable(Tcors_table, 
+        col.names = c("Observational Method", "PLE", "p-value", "Summary", "p-value"), 
+      caption = "Spearman's Rho - Teacher Ratings")
 
-kable(Ecors, 
-       col.names = c("Observational Method", "Summary Value", "MTS", "CDR", "PLE"), 
-      caption = "Spearman's Rho - Expert Ratings", digits = 2)
+kable(Ecors_table, 
+       col.names = c("Observational Method", "PLE", "p-value", "Summary", "p-value"), 
+      caption = "Spearman's Rho - Expert Ratings")
 ```
 
-Tables 2 and 3 display the correlation between the different estimates of prevalence and the Teacher and Expert ratings, respectively. This table excludes those 8 observations that were not included in the data we were provided. In the case of the Teachers, none of these correlations are significant. In the case of the Experts, all of them are. The correlations between the PLEs and the expert ratings are slighly, although only modestly, worse than the other methods (except for being comprable to the summary in the case of PIR). However, this is does not necessarily point to a disadvantage in the PLEs. When offering a global assessment of any state behavior, that assessment is likely to depend on both the prevalence and the incidence. A child who is engaged most of the time with few instances of being off task is likely to have a very different learning experience than a child who is engaged a large proportion of the time but also has many instances where they are off task or distracted. Ignoring incidence ignores an important component in state behaviors.
+Tables 2 and 3 display the correlation between the different estimates of prevalence and the Teacher and Expert ratings as well as the estimated p-value for each correlation. This table excludes those 8 observations that were not included in the data we were provided. In the case of the Teachers, none of these correlations are significant. In the case of the Experts, all of them are. The correlations between the PLEs and the expert ratings are slighly, although only modestly, worse than the other methods (except for being comprable to the summary in the case of PIR). However, this is does not necessarily point to a disadvantage in the PLEs. When offering a global assessment of any state behavior, that assessment is likely to depend on both the prevalence and the incidence. A child who is engaged most of the time with few instances of being off task is likely to have a very different learning experience than a child who is engaged a large proportion of the time but also has many instances where they are off task or distracted. Ignoring incidence ignores an important component in state behaviors.
 
 #Incidence
 
@@ -273,4 +270,6 @@ As with prevalence, the general pattern is that the PIR estimates are lower than
 #Conclusions
 
 Generally speaking, it appears that the WIR estimates for prevalence are better than the PIR estimates for prevalence. The plot of measurement error suggests that there these estimates are biased neither systematically upward nor downward. In addition, the magnitude of the bias is much lower, suggesting that our PLE reduces the bias in the WIR estimates considerably. The mean squared error estimate also suggests that the WIR estimates are the better of the two in this case. While the agreement between the expert raters and the WIR estimates of prevalence is not as high as we might like, that correlation ignores the important of incidence in characterizing a state behavior like academic engagement.
+
+In addition, the results of our analysis suggests that the PLEs may be sensitive to model mispecification when the PIR model is used with FIR data. Further investigation of the impact of the fractional method on PLE estimates appears warranted. 
 
