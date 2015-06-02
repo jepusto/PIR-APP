@@ -2,8 +2,5 @@ base
 ARPobservation
 ggplot2
 plyr
-foreach
-iterators
-doParallel
 knitr
 Pusto
