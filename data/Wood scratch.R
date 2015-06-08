@@ -40,6 +40,12 @@ ple <- merge(ple, cdr)
 PIR <- subset(ple, Measurement.Type == "PIR")
 WIR <- subset(ple, Measurement.Type == "WIR")
 
+PIR[(PIR$parm == "phi"),]
+WIR[WIR$parm == "phi",]
+
+length(PIR$summary)
+length(PIR$parm == "phi")
+
 names(PIR)[5:9] <- paste0("PIR", names(PIR[5:9]))
 names(WIR)[5:9] <- paste0("WIR", names(WIR[5:9]))
 
